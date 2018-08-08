@@ -1,0 +1,8 @@
+{
+  "name": "FalconScoutApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "pro_id": "c77a1897"
+}
