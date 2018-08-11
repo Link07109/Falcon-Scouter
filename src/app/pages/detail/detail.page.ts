@@ -11,6 +11,7 @@ import { Match } from '../../models/match.interface';
 })
 export class DetailPage implements OnInit {
   public match: Observable<Match>;
+  public team;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -18,8 +19,8 @@ export class DetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const team = this.route.snapshot.paramMap.get('number').split(' ')[0];
+    this.team = this.route.snapshot.paramMap.get('number').split(' ')[0];
     const matchNumber = this.route.snapshot.paramMap.get('number').split(' ')[1];
-    this.match = this.firestoreService.getMatchDetail(team, matchNumber).valueChanges();
+    this.match = this.firestoreService.getMatchDetail(this.team, matchNumber).valueChanges();
   }
 }

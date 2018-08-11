@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../services/data/firestore.service';
+import { Team } from '../../models/team.interface';
 
 @Component({
   selector: 'app-teams',
@@ -7,29 +8,36 @@ import { FirestoreService } from '../../services/data/firestore.service';
   styleUrls: ['./teams.page.scss'],
 })
 export class TeamsPage implements OnInit {
-  public teamList;
+  private teamCollectionObservable;
+  public firestoreDataArray = new Array<Team>();
+  private filteredArray: Array<Team>;
 
   constructor(private firestoreService: FirestoreService) { }
 
-  // search filter method
-  // getItems(ev) {
-  //   // Reset items back to all of the items
-  //   // this.initializeItems();
+  getItems(ev) {
+    this.filteredArray = this.firestoreDataArray;
+    const val = ev.target.value;
 
-  //   // set val to the value of the ev target
-  //   const val = ev.target.value;
+    if (val && val.trim() !== '') {
+      this.filteredArray = this.firestoreDataArray.filter((item) => {
+        return item.teamNumber.startsWith(val); // could also use .contains() if necessary
+      });
+    }
+  }
 
-  //   // if the value is an empty string don't filter the items
-  //   if (val && val.trim() !== '') {
-  //     this.teamList = this.teamList.filter((item) => {
-  //       return (item.teamNumber.indexOf(val) > -1);
-  //     });
-  //   }
-  // }
+  initializeArray() {
+    this.teamCollectionObservable.subscribe(data => {
+      data.forEach(doc => {
+        this.firestoreDataArray.push(doc);
+      });
+    });
+  }
 
   // ionViewDidLoad() {
   ngOnInit() {
-    this.teamList = this.firestoreService.getTeamList().valueChanges();
+    this.teamCollectionObservable = this.firestoreService.getTeamList().valueChanges();
+    this.initializeArray();
+    this.filteredArray = this.firestoreDataArray;
   }
 
 }

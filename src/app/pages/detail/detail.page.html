@@ -7,32 +7,237 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>  
-  <p>Scout Name: {{ (match | async)?.scoutName }}</p>
+<ion-content padding>
+
   <hr/>
-  <p>Auto Run: {{ (match | async)?.autoRun }}</p>
+  <ion-grid>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Team
+            <br/> Number</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ team }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Starting
+            <br/> Position</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.startingPosition }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Scout
+            <br/> Name</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.scoutName }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Auto
+            <br/> Run</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.autoRun }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Auto
+            <br/> Switch</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.autoSwitch }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Auto
+            <br/> Switch
+            <br/> Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.autoSwitchCubes }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Auto
+            <br/> Scale</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.autoScale }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Auto
+            <br/> Scale
+            <br/> Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.autoScaleCubes }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Switch
+            <br/>Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.cubesSwitch }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Switch
+            <br/> Failed
+            <br/>Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.failedSwitch }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Scale
+            <br/>Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.cubesScale }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Scale
+            <br/> Failed
+            <br/>Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.failedScale }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Exchange
+            <br/>Cubes</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.cubesExchange }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Climb</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.climb }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Cards</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.cards }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row nowrap>
+      <ion-col>
+        <ion-card>
+          <ion-card-content title>Comments</ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col comment>
+        <ion-card>
+          <ion-card-content>{{ (match | async)?.comments }}</ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
   <hr/>
-  <p>Auto Switch: {{ (match | async)?.autoSwitch }}</p>
-  <hr/>
-  <p>Auto Switch Cubes: {{ (match | async)?.autoSwitchCubes }}</p>
-  <hr/>
-  <p>Auto Scale: {{ (match | async)?.autoScale }}</p>
-  <hr/>
-  <p>Auto Scale Cubes: {{ (match | async)?.autoScaleCubes }}</p>
-  <hr/>
-  <p>Switch Cubes: {{ (match | async)?.switchCubes }}</p>
-  <hr/>
-  <p>Switch Failed Cubes: {{ (match | async)?.switchFailedCubes }}</p>
-  <hr/>
-  <p>Scale Cubes: {{ (match | async)?.scaleCubes }}</p>
-  <hr/>
-  <p>Scale Failed Cubes: {{ (match | async)?.scaleFailedCubes }}</p>
-  <hr/>
-  <p>Exchange Cubes: {{ (match | async)?.exchangeCubes }}</p>
-  <hr/>
-  <p>Climb: {{ (match | async)?.climb }}</p>
-  <hr/>
-  <p>Cards: {{ (match | async)?.cards }}</p>
-  <hr/>
-  <p>Comments: {{ (match | async)?.comments }}</p>
+
 </ion-content>

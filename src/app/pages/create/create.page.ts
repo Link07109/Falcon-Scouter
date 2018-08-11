@@ -13,11 +13,11 @@ import { Router } from '../../../../node_modules/@angular/router';
 export class CreatePage implements OnInit {
   public autoSwitchCubes = 0;
   public autoScaleCubes = 0;
-  public switchCubes = 0;
-  public switchFailedCubes = 0;
-  public scaleCubes = 0;
-  public scaleFailedCubes = 0;
-  public exchangeCubes = 0;
+  public cubesSwitch = 0;
+  public failedSwitch = 0;
+  public cubesScale = 0;
+  public failedScale = 0;
+  public cubesExchange = 0;
   public createMatchForm: FormGroup;
   public listOfTeams = new Array;
   public listOfTeamsInMatch = new Array;
@@ -65,8 +65,8 @@ export class CreatePage implements OnInit {
 
     this.firestoreService
       .createMatch(teamNumber, matchNumber, scoutName, startingPosition, autoRun, autoSwitch,
-        this.autoSwitchCubes, autoScale, this.autoScaleCubes, this.switchCubes, this.switchFailedCubes,
-        this.scaleCubes, this.scaleFailedCubes, this.exchangeCubes, climb, cards, comments)
+        this.autoSwitchCubes, autoScale, this.autoScaleCubes, this.cubesSwitch, this.failedSwitch,
+        this.cubesScale, this.failedScale, this.cubesExchange, climb, cards, comments)
       .then(() => {
         loading.dismiss().then(() => {
           // dont do this - make it refresh the page somehow instead
@@ -125,52 +125,52 @@ export class CreatePage implements OnInit {
   }
 
   addCubesSwitch() {
-    this.switchCubes++;
+    this.cubesSwitch++;
   }
 
   removeCubesSwitch() {
-    if (this.switchCubes > 0) {
-      this.switchCubes--;
+    if (this.cubesSwitch > 0) {
+      this.cubesSwitch--;
     }
   }
 
   addCubesFailedSwitch() {
-    this.switchFailedCubes++;
+    this.failedSwitch++;
   }
 
   removeCubesFailedSwitch() {
-    if (this.switchFailedCubes > 0) {
-      this.switchFailedCubes--;
+    if (this.failedSwitch > 0) {
+      this.failedSwitch--;
     }
   }
 
   addCubesScale() {
-    this.scaleCubes++;
+    this.cubesScale++;
   }
 
   removeCubesScale() {
-    if (this.scaleCubes > 0) {
-      this.scaleCubes--;
+    if (this.cubesScale > 0) {
+      this.cubesScale--;
     }
   }
 
   addCubesFailedScale() {
-    this.scaleFailedCubes++;
+    this.failedScale++;
   }
 
   removeCubesFailedScale() {
-    if (this.scaleFailedCubes > 0) {
-      this.scaleFailedCubes--;
+    if (this.failedScale > 0) {
+      this.failedScale--;
     }
   }
 
   addCubesExchange() {
-    this.exchangeCubes++;
+    this.cubesExchange++;
   }
 
   removeCubesExchange() {
-    if (this.exchangeCubes > 0) {
-      this.exchangeCubes--;
+    if (this.cubesExchange > 0) {
+      this.cubesExchange--;
     }
   }
 

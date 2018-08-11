@@ -8,11 +8,11 @@ export interface Match {
     autoSwitchCubes: number;
     autoScale: boolean;
     autoScaleCubes: number;
-    switchCubes: number;
-    switchFailedCubes: number;
-    scaleCubes: number;
-    scaleFailedCubes: number;
-    exchangeCubes: number;
+    cubesSwitch: number;
+    failedSwitch: number;
+    cubesScale: number;
+    failedScale: number;
+    cubesExchange: number;
     climb: string;
     cards: string;
     comments: string;

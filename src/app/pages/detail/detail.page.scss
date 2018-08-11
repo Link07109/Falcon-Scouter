@@ -1,0 +1,47 @@
+ion-card {
+    padding: 0 !important;
+    margin: 0px !important;
+    margin-right: 30px !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+}
+
+ion-card-content[title] {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 10px !important;
+    padding-right: 20px !important;
+    font-size: 10pt;
+    font-weight: 700;
+}
+
+ion-card-content {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 10px !important;
+    padding-right: 20px !important;
+    font-size: 10pt;
+    font-size: 10pt;
+}
+
+ion-col {
+    padding: 1px !important;
+    min-width: 31% !important;    
+    min-height: 48px !important;
+}
+
+ion-col[comment] {
+    padding: 1px !important;
+    min-width: 69% !important;    
+    min-height: 48px !important;
+}
+
+p {
+    padding-left: 10px;
+    font-size: 10pt;
+}
+
+b {
+    font-size: 10pt;
+}
+

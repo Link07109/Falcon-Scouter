@@ -1,24 +1,16 @@
-<ion-header>
+<ion-header style="padding-bottom: 80px">
   <ion-toolbar>
     <ion-title>All Teams</ion-title>
-    <ion-buttons slot="start">
-      <ion-button menuToggle icon-only>
-        <ion-icon name='menu'></ion-icon>
-      </ion-button>
-    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button routerLink="/create">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   </ion-toolbar>
-</ion-header>
 
-<ion-content padding>
+  <ion-searchbar (ionInput)="getItems($event)" style="z-index: 2" placeholder="Type to search..."></ion-searchbar>
 
-  <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
-
+  <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll; padding-top: 110px; z-index: -1">
     <ion-grid>
       <ion-row nowrap>
         <ion-col>
@@ -91,8 +83,17 @@
           </ion-card>
         </ion-col>
       </ion-row>
+    </ion-grid>
+  </ion-scroll>
+  
+</ion-header>
+
+<ion-content padding>
+  <ion-scroll scrollX="true" style="white-space: nowrap; overflow: scroll">
+
+    <ion-grid>
       <!-- create a row for each team -->
-      <ion-row nowrap *ngFor="let team of teamList | async" routerLink="/matches/{{team.teamNumber}}">
+      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{team.teamNumber}}">
         <ion-col>
           <b>
             {{ team.teamNumber }}

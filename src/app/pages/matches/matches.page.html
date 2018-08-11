@@ -25,6 +25,12 @@
           </ion-card>
         </ion-col>
         <ion-col>
+            <ion-card>
+              <ion-card-content>Starting
+                <br/> Position</ion-card-content>
+            </ion-card>
+          </ion-col>
+        <ion-col>
           <ion-card>
             <ion-card-content>Auto
               <br/> Run</ion-card-content>
@@ -114,6 +120,13 @@
           </ion-card>
         </ion-col>
         <ion-col>
+            <ion-card>
+              <ion-card-content>
+                {{ match.startingPosition }}
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.autoRun }}
@@ -151,35 +164,35 @@
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.switchCubes }}
+              {{ match.cubesSwitch }}
           </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.switchFailedCubes }}
+              {{ match.failedSwitch }}
           </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.scaleCubes }}
+              {{ match.cubesScale }}
           </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.scaleFailedCubes }}
+              {{ match.failedScale }}
           </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.exchangeCubes }}
+              {{ match.cubesExchange }}
           </ion-card-content>
           </ion-card>
         </ion-col>
