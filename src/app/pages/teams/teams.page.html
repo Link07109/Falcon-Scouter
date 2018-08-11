@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>All Teams</ion-title>
+    <ion-buttons slot="start">
+      <ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/create">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
+
+    <ion-grid>
+      <ion-row nowrap>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Team</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Auto
+              <br/> Run%</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Auto
+              <br/> Switch%</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Auto
+              <br/> Switch
+              <br/> Cubes</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Auto
+              <br/> Scale%</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Auto
+              <br/> Scale
+              <br/> Cubes</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Switch</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Switch
+              <br/> Failed</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Scale</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Scale
+              <br/> Failed</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Exchange</ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>Climb%</ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <!-- create a row for each team -->
+      <ion-row nowrap *ngFor="let team of teamList | async" routerLink="/matches/{{team.teamNumber}}">
+        <ion-col>
+          <b>
+            {{ team.teamNumber }}
+          </b>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.autoRunPercent }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.autoSwitchPercent }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgAutoSwitchCubes }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.autoScalePercent }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgAutoScaleCubes }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgSwitchCubess }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgSwitchFailedCubes }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgScaleCubes }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgScaleFailedCubes }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.avgExchangeCubes }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ team.climbPercent }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <hr />
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-scroll>
+
+</ion-content>

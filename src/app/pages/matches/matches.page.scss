@@ -1,0 +1,32 @@
+ion-card {
+    padding: 0 !important;
+    margin: 0px !important;
+    margin-right: 30px !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+}
+
+ion-card-content {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+    padding-left: 10px !important;
+    padding-right: 20px !important;
+    font-size: 10pt;
+}
+
+ion-col {
+    padding: 1px !important;
+    min-width: 100px !important;    
+    min-height: 33px !important;
+}
+
+ion-col[comment] {
+    padding: 1px !important;
+    min-width: 1000px !important;    
+    min-height: 33px !important;
+}
+
+p, b {
+    font-size: 10pt;
+}
+

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Match {{ (match | async)?.matchNumber }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>  
+  <p>Scout Name: {{ (match | async)?.scoutName }}</p>
+  <hr/>
+  <p>Auto Run: {{ (match | async)?.autoRun }}</p>
+  <hr/>
+  <p>Auto Switch: {{ (match | async)?.autoSwitch }}</p>
+  <hr/>
+  <p>Auto Switch Cubes: {{ (match | async)?.autoSwitchCubes }}</p>
+  <hr/>
+  <p>Auto Scale: {{ (match | async)?.autoScale }}</p>
+  <hr/>
+  <p>Auto Scale Cubes: {{ (match | async)?.autoScaleCubes }}</p>
+  <hr/>
+  <p>Switch Cubes: {{ (match | async)?.switchCubes }}</p>
+  <hr/>
+  <p>Switch Failed Cubes: {{ (match | async)?.switchFailedCubes }}</p>
+  <hr/>
+  <p>Scale Cubes: {{ (match | async)?.scaleCubes }}</p>
+  <hr/>
+  <p>Scale Failed Cubes: {{ (match | async)?.scaleFailedCubes }}</p>
+  <hr/>
+  <p>Exchange Cubes: {{ (match | async)?.exchangeCubes }}</p>
+  <hr/>
+  <p>Climb: {{ (match | async)?.climb }}</p>
+  <hr/>
+  <p>Cards: {{ (match | async)?.cards }}</p>
+  <hr/>
+  <p>Comments: {{ (match | async)?.comments }}</p>
+</ion-content>

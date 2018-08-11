@@ -1,0 +1,34 @@
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Welcome!</ion-title>
+    </ion-toolbar> 
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-slides pager>
+      <!-- Content Slides -->
+      <ion-slide *ngFor="let slide of slides">
+        <ion-card>
+            <img [src]="slide.image"/>
+            <br/>
+            <h2 [innerHTML]="slide.title"></h2>
+            <p [innerHTML]="slide.description"></p>
+            <br/>
+        </ion-card>        
+      </ion-slide>
+  
+      <!-- Button Slide -->
+      <ion-slide>
+        <!-- <img src="../assets/imgs/logo.png"/>-->
+        <h2>Ready to begin?</h2>
+        <hr/>
+        <ion-button large clear icon-end color="primary" routerLink="/teams">
+          Start Scouting
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-button>      
+      </ion-slide>
+    </ion-slides>
+  
+  </ion-content>
+  
