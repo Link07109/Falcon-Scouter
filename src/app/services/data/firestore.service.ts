@@ -20,19 +20,19 @@ export class FirestoreService {
     autoSwitchCubes: number,
     autoScale: boolean,
     autoScaleCubes: number,
-    switchCubes: number,
-    switchFailedCubes: number,
-    scaleCubes: number,
-    scaleFailedCubes: number,
-    exchangeCubes: number,
+    cubesSwitch: number,
+    failedSwitch: number,
+    cubesScale: number,
+    failedScale: number,
+    cubesExchange: number,
     climb: string,
     cards: string,
     comments: string
   ): Promise<void> {
     return this.firestore.doc(`teams/${teamNumber}/matches/${matchNumber}`).set({
       teamNumber, matchNumber, scoutName, startingPosition, autoRun, autoSwitch,
-      autoSwitchCubes, autoScale, autoScaleCubes, switchCubes, switchFailedCubes,
-      scaleCubes, scaleFailedCubes, exchangeCubes, climb, cards, comments
+      autoSwitchCubes, autoScale, autoScaleCubes, cubesSwitch, failedSwitch,
+      cubesScale, failedScale, cubesExchange, climb, cards, comments
     });
   }
 
