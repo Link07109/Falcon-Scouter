@@ -20,6 +20,11 @@ ion-col {
     min-height: 33px !important;
 }
 
+ion-scroll {
+    white-space: nowrap;
+    overflow: scroll;
+}
+
 p, b {
     font-size: 10pt;
 }

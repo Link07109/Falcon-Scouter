@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'detail/:number', loadChildren: './pages/detail/detail.module#DetailPageModule' },
   { path: 'teams', loadChildren: './pages/teams/teams.module#TeamsPageModule' },
   { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
+  { path: 'dash', loadChildren: './pages/dash/dash.module#DashPageModule' },
+  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
 ];
 
 @NgModule({

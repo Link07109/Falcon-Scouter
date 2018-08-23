@@ -38,6 +38,8 @@ export class FirestoreService {
 
   getTeamList(): AngularFirestoreCollection<Team> {
     return this.firestore.collection(`teams`);
+    // add a collection for each of next year's events
+    // 2019NCWAK, 2019NCASH, 2019NCCMP
   }
 
   getMatchList(teamNumber: any): AngularFirestoreCollection<Match> {

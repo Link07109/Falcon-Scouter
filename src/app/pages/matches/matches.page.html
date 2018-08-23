@@ -4,6 +4,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button routerLink="/help">
+          <ion-icon slot="icon-only" name="help"></ion-icon>
+        </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,90 +18,9 @@
 
     <ion-grid>
       <ion-row nowrap>
-        <ion-col>
+        <ion-col *ngFor="let stat of stats">
           <ion-card>
-            <ion-card-content>Match</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Scout
-              <br/> Name</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-            <ion-card>
-              <ion-card-content>Starting
-                <br/> Position</ion-card-content>
-            </ion-card>
-          </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Auto
-              <br/> Run</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Auto
-              <br/> Switch</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Auto
-              <br/> Switch
-              <br/> Cubes</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Auto
-              <br/> Scale</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Auto
-              <br/> Scale
-              <br/> Cubes</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Switch</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Switch
-              <br/> Failed</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Scale</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Scale
-              <br/> Failed</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Exchange</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Climb</ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>Cards</ion-card-content>
+            <ion-card-content [innerHTML]="stat"></ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col comment>
@@ -105,8 +29,8 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <!-- create a row for each team -->
-      <ion-row nowrap *ngFor="let match of matchList | async" routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
+      <!-- create a row for each match -->
+      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async" routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
         <ion-col>
           <b>
             {{ match.matchNumber }}
@@ -120,101 +44,101 @@
           </ion-card>
         </ion-col>
         <ion-col>
-            <ion-card>
-              <ion-card-content>
-                {{ match.startingPosition }}
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
+          <ion-card>
+            <ion-card-content>
+              {{ match.startingPosition }}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.autoRun }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.autoSwitch }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.autoSwitchCubes }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.autoScale }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.autoScaleCubes }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.cubesSwitch }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.failedSwitch }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.cubesScale }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.failedScale }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.cubesExchange }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.climb }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
               {{ match.cards }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col comment>
           <ion-card>
             <ion-card-content>
               {{ match.comments }}
-          </ion-card-content>
+            </ion-card-content>
           </ion-card>
         </ion-col>
         <hr />

@@ -1,0 +1,128 @@
+<ion-header>
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/help">
+        <ion-icon slot="icon-only" name="help"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-button style="width: 100%" routerLink="/teams">
+    Scout
+  </ion-button>
+  <p>
+    key:<br/> qm = qualification matches<br/> qf = quarter finals<br/> sf = semi finals<br/> f = finals
+  </p>
+
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for team..."></ion-searchbar>
+
+  <!-- <ion-card>
+      <ion-card-content>
+        <ion-label>
+          <b>
+            Example of Match Data to Send To Drive Team?
+          </b>
+        </ion-label>
+        <ion-label>
+          <b>
+            Gadget Girls:
+          </b>
+        </ion-label>
+        Gadget Girls<br/>
+        <ion-label>
+          <b>
+            Team Firewall:
+          </b>
+        </ion-label>
+        (Auto) Auto Run: 100% Auto Switch: 0% Auto Scale: 0%<br/> (Teleop) Scale: 33%, Switch: 0%<br/> (Endgame) Climb: Parks<br/>
+        <ion-label>
+          <b>
+            Techno-Wolves:
+          </b>
+        </ion-label>
+        (Auto) Very inconsistent on baseline<br/> (Teleop) Don’t do switch or scale well, focus on exchange<br/>
+        <ion-label>
+          <b>
+            JoCo Robos:
+          </b>
+        </ion-label>
+        (Auto) 50% baseline crossing<br/> (Teleop) Have done nothing for most of their matches<br/>
+        <ion-label>
+          <b>
+            Apollo:
+          </b>
+        </ion-label>
+        No show for more than half of matches<br/> (Teleop) Max of 1 cube in switch <br/> (Auto) 50% baseline crossing<br/>
+      </ion-card-content>
+    </ion-card> -->
+
+  <ion-card *ngFor="let match of matchCollectionObservable | async">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>
+              <h1>
+                <i><b>#{{ match.match_number }}</b></i>
+              </h1>
+            </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-label>
+              <h1>
+                <i style="float: right; margin-right: 5px">{{ match.comp_level }}</i>
+              </h1>
+            </ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h1 style="float: left; color:blue; font-family: 'Kanit', sans-serif;">
+              Blue Alliance
+            </h1>
+          </ion-col>
+          <ion-col>
+            <h1 style="float: right; color:crimson; font-family: 'Kanit', sans-serif;">
+              Red Alliance
+            </h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-list>
+              <ion-item style="color:blue" *ngFor="let team of match.alliances.blue.team_keys">
+                {{ team.substring(3) }}
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <br>
+              </ion-item>
+              <ion-item>
+                <b style="display: inline-block; width: 70px; padding: 10px 15px;">
+                  VS.
+                </b>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item style="color:crimson; text-align: center" *ngFor="let team of match.alliances.red.team_keys">
+                {{ team.substring(3) }}
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

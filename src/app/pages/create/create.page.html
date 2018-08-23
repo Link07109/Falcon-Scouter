@@ -3,6 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button routerLink="/help">
+          <ion-icon slot="icon-only" name="help"></ion-icon>
+        </ion-button>
+    </ion-buttons>
     <ion-title>Match Scouting Form</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -46,10 +51,10 @@
             <ion-label>Team Number</ion-label>
             <ion-select formControlName="teamNumber">
               <!-- shows every team in the current event -->
-              <!-- <ion-select-option *ngFor="let team of listOfTeams" [value]="team">{{ team }}</ion-select-option> -->
+              <ion-select-option *ngFor="let team of listOfTeams" [value]="team">{{ team }}</ion-select-option>
 
               <!-- shows every team in the match number given -->
-              <ion-select-option *ngFor="let team of listOfTeamsInMatch" [value]="team">{{ team }}</ion-select-option>
+              <!-- <ion-select-option *ngFor="let team of listOfTeamsInMatch" [value]="team">{{ team }}</ion-select-option> -->
             </ion-select>
           </ion-col>
         </ion-row>

@@ -45,8 +45,8 @@ export class CreatePage implements OnInit {
   }
 
   ngOnInit() {
-    // this.putTeamsInSelect('2018gal');
-    this.putTeamsInSelectByMatch('2018gal', 'qm', 12); // 12 will be replaced with the matchNumber
+    this.putTeamsInSelect('2018gal');
+    // this.putTeamsInSelectByMatch('2018gal', 'qm', 12); // 12 will be replaced with the matchNumber
   }
 
   async createMatch() {
@@ -75,6 +75,9 @@ export class CreatePage implements OnInit {
       }, error => {
         console.error(error);
       });
+    this.blueAllianceService.postDataToSpreadsheet('1o-y1iQ12cWgQ-3NxnNig9buxYptjNzNLkRrIFBMZoq8', teamNumber, matchNumber,
+      scoutName, startingPosition, autoRun, autoSwitch, this.autoSwitchCubes, autoScale, this.autoScaleCubes, this.cubesSwitch,
+      this.failedSwitch, this.cubesScale, this.failedScale, this.cubesExchange, climb, cards, comments).subscribe();
 
     return await loading.present();
   }

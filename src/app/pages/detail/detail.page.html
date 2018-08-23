@@ -3,15 +3,17 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button routerLink="/help">
+          <ion-icon slot="icon-only" name="help"></ion-icon>
+        </ion-button>
+    </ion-buttons>
     <ion-title>Match {{ (match | async)?.matchNumber }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
-  <hr/>
+<ion-content>
   <ion-grid>
-
     <ion-row nowrap>
       <ion-col>
         <ion-card>
@@ -236,8 +238,5 @@
         </ion-card>
       </ion-col>
     </ion-row>
-
   </ion-grid>
-  <hr/>
-
 </ion-content>

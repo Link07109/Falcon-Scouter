@@ -3,30 +3,34 @@ Ionic remake of the original android scouting app used by FRC 5190 during the FI
 
 - Uses Cloud Firestore for the storage of all scouting data.
 - Uses The Blue Alliance's v3 HTTP API for retrieval of event and team specific information such as the teams competing and their ccwm.
+- Uses Google Scripts for adding scouting data to an external spreadsheet.
 
 ## Usage
-- Instructions:
-  - Setting up the app
-    - Create file `src/app/credentials.ts`. This will house our Firebase and TBA keys.
-    - Firebase config
-        - Go to https://console.firebase.google.com/u/0/ and create a new project - name it whatever you want.
-        - Click on "Add Firebase to your web app" and copy the config into the `src/app/credentials.ts` file.    
-    - TBA v3 HTTP API key
-        - Go to https://www.thebluealliance.com/account and add a new Read API Key called "X-TBA-Auth-Key" and copy it's value into the `src/app/credentials.ts` file.
-    - Make sure you name the consts in your `src/app/credentials.ts` file like so: 
+- Installing Ionic
+  - Intructions for installing ionic can be found here: https://ionicframework.com/docs/intro/installation/
+
+- Setting up the app
+  - Run `npm i` while in the root directory to install all the node dependencies.
+  - Create file `src/app/credentials.ts` to house our Firebase and TBA keys.
+  - Firebase config
+      - Go to https://console.firebase.google.com/u/0/ and create a new project - name it whatever you want.
+      - Click on "Add Firebase to your web app" and copy the config into the `src/app/credentials.ts` file.    
+  - TBA v3 HTTP API key
+      - Go to https://www.thebluealliance.com/account and add a new Read API Key called "X-TBA-Auth-Key" and copy it's value into the `src/app/credentials.ts` file.
+  - Make sure you name the consts in your `src/app/credentials.ts` file like so: 
     ```
     export const xTBAauthKey = 'your-tba-api-key-goes-here';
 
     export const firebaseConfig = {
-        // firebase config info goes here
+        // firebase config info goes in here
     };
     ```
 
-  - Running the app
-    - Running it in-brower
-      - Open a terminal window in the root directory and run `ionic serve`.
-    - Running it on a device
-      - Intructions for running ionic apps on devices can be found here: https://ionicframework.com/docs/intro/deploying/ 
+- Running the app
+  - Running it in a brower
+    - Open a terminal window in the root directory and run `ionic serve --lab`.
+  - Running it on a device
+    - Intructions for running ionic apps on devices can be found here: https://ionicframework.com/docs/intro/deploying/ 
 
 ## Screenshots
 

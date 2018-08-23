@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
+import { statNames } from '../../consts';
 
 @Component({
   selector: 'app-matches',
@@ -8,8 +9,11 @@ import { FirestoreService } from '../../services/data/firestore.service';
   styleUrls: ['matches.page.scss'],
 })
 export class MatchesPage implements OnInit {
-  public matchList;
+  public matchCollectionObservable;
   public teamNumber: string;
+  // public filteredArray = new Array<Match>();
+
+  public stats = statNames;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -19,7 +23,7 @@ export class MatchesPage implements OnInit {
   // ionViewDidLoad() {
   ngOnInit() {
     this.teamNumber = this.route.snapshot.paramMap.get('teamNumber');
-    this.matchList = this.firestoreService.getMatchList(`${this.teamNumber}`).valueChanges();
+    this.matchCollectionObservable = this.firestoreService.getMatchList(this.teamNumber).valueChanges();
   }
 
 }
