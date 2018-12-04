@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
   { path: 'dash', loadChildren: './pages/dash/dash.module#DashPageModule' },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
+  { path: 'picks', loadChildren: './pages/picks/picks.module#PicksPageModule' },
+  { path: 'form_builder', loadChildren: './pages/form-builder/form-builder.module#FormBuilderPageModule' },
 ];
 
 @NgModule({

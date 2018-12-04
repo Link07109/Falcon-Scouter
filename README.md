@@ -1,9 +1,11 @@
 # FalconScoutApp
 Ionic remake of the original android scouting app used by FRC 5190 during the FIRST Power Up season.
 
+## Features
 - Uses Cloud Firestore for the storage of all scouting data.
 - Uses The Blue Alliance's v3 HTTP API for retrieval of event and team specific information such as the teams competing and their ccwm.
-- Uses Google Scripts for adding scouting data to an external spreadsheet.
+- Uses Google Apps Scripts for adding scouting data to an external Google Sheets page.
+- Uses Infragistics' Ignite UI for Angular for detailed graphs and filterable, pagable grids.
 
 ## Usage
 - Installing Ionic
@@ -29,12 +31,12 @@ Ionic remake of the original android scouting app used by FRC 5190 during the FI
 - Running the app
   - Running it in a brower
     - Open a terminal window in the root directory and run `ionic serve --lab`.
-  - Running it on a device
-    - Intructions for running ionic apps on devices can be found here: https://ionicframework.com/docs/intro/deploying/ 
+  - Running it on a physical device
+    - Intructions for running ionic apps on physical devices can be found here: https://ionicframework.com/docs/intro/deploying/ 
 
-## Screenshots
+<!-- ## Screenshots
 
 ![scouting form 1/2](https://user-images.githubusercontent.com/25257426/43988744-edfc4bd4-9d09-11e8-9864-8dc4bc4308fd.png)
 ![scouting form 2/2](https://user-images.githubusercontent.com/25257426/43988747-f0144ea8-9d09-11e8-8a01-31dc83bab095.png)
 ![teams page](https://user-images.githubusercontent.com/25257426/43988766-8c992ce4-9d0a-11e8-8a7a-dcf44a4e15e1.png)
-![details page](https://user-images.githubusercontent.com/25257426/43996957-879e5cd6-9d9c-11e8-925f-3b3ba010f6f2.png)
+![details page](https://user-images.githubusercontent.com/25257426/43996957-879e5cd6-9d9c-11e8-925f-3b3ba010f6f2.png) -->

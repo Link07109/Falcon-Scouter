@@ -3,6 +3,7 @@ import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { Observable } from 'rxjs';
 import { Match } from '../../models/match.interface';
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-dash',
@@ -15,12 +16,11 @@ export class DashPage implements OnInit {
   public matchKys: Match;
 
   constructor(
-    private blueAllianceService: BlueAllianceService,
-    private firestoreService: FirestoreService
+    private blueAllianceService: BlueAllianceService
   ) { }
 
   ngOnInit() {
-    this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, '2018gal');
+    this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, currentEvent);
   }
 
   getItems(ev) {
@@ -28,7 +28,7 @@ export class DashPage implements OnInit {
 
     if (val && val.trim() !== '') {
       this.team = `frc${val}`;
-      this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, '2018gal');
+      this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, currentEvent);
     }
   }
 

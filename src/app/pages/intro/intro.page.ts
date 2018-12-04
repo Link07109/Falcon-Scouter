@@ -9,13 +9,14 @@ export class IntroPage implements OnInit {
 
   slides = [
     {
-      title: 'FalconScoutApp',
+      // title: 'FalconScoutApp',
+      title: '',
       description: 'A complete rewrite using Ionic of the original Java scouting app used by FRC Team 5190 during FIRST Power Up.',
     },
-    {
-      title: 'Page 2 title',
-      description: 'Page 2 description',
-    }
+    // {
+    //   title: 'Page 2 title',
+    //   description: 'Page 2 description',
+    // }
   ];
 
   constructor() { }

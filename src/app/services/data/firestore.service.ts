@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Match } from '../../models/match.interface';
-import { Team } from '../../models/team.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,44 +9,37 @@ export class FirestoreService {
 
   constructor(public firestore: AngularFirestore) { }
 
-  createMatch(
-    teamNumber: number,
-    matchNumber: number,
-    scoutName: string,
-    startingPosition: string,
-    autoRun: boolean,
-    autoSwitch: boolean,
-    autoSwitchCubes: number,
-    autoScale: boolean,
-    autoScaleCubes: number,
-    cubesSwitch: number,
-    failedSwitch: number,
-    cubesScale: number,
-    failedScale: number,
-    cubesExchange: number,
-    climb: string,
-    cards: string,
-    comments: string
-  ): Promise<void> {
-    return this.firestore.doc(`teams/${teamNumber}/matches/${matchNumber}`).set({
-      teamNumber, matchNumber, scoutName, startingPosition, autoRun, autoSwitch,
-      autoSwitchCubes, autoScale, autoScaleCubes, cubesSwitch, failedSwitch,
-      cubesScale, failedScale, cubesExchange, climb, cards, comments
-    });
+  createMatch(event: string, match: Match): Promise<void> {
+    return this.firestore.doc(`events/${event}/teams/${match.teamNumber}/matches/${match.matchNumber}`)
+      .set(match);
   }
 
-  getTeamList(): AngularFirestoreCollection<Team> {
+  getTeamList(event: string): AngularFirestoreCollection {
+    // return this.firestore.collection(`events/${event}/teams`);
     return this.firestore.collection(`teams`);
-    // add a collection for each of next year's events
-    // 2019NCWAK, 2019NCASH, 2019NCCMP
   }
 
-  getMatchList(teamNumber: any): AngularFirestoreCollection<Match> {
+  getMatchList(event: string, teamNumber: any): AngularFirestoreCollection<Match> {
+    // return this.firestore.collection(`events/${event}/teams/${teamNumber}/matches`);
     return this.firestore.collection(`teams/${teamNumber}/matches`);
   }
 
-  getMatchDetail(teamNumber: any, matchNumber: any): AngularFirestoreDocument<Match> {
+  getMatchDetail(event: string, teamNumber: any, matchNumber: any): AngularFirestoreDocument<Match> {
+    // return this.firestore.doc(`events/${event}/teams/${teamNumber}/matches/${matchNumber}`);
     return this.firestore.doc(`teams/${teamNumber}/matches/${matchNumber}`);
+  }
+
+
+  saveScoutingTemplate(templateName: string, html: string) {
+    return this.firestore.doc(`templates/${templateName}`).set({ name: templateName, templateHTML: html });
+  }
+
+  getScoutingTemplate(templateName: string) {
+    return this.firestore.doc(`templates/${templateName}`);
+  }
+
+  getAllScoutingTemplates() {
+    return this.firestore.collection(`templates`);
   }
 
 }

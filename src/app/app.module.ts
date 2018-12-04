@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,6 +14,8 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { firebaseConfig } from './credentials';
 import { BlueAllianceService } from './services/data/blue-alliance.service';
 import { HttpModule } from '@angular/http';
+import { IgxCategoryChartModule } from 'igniteui-angular-charts/ES5/igx-category-chart-module';
+// import { IgxGridModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,10 +23,12 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    // IgxGridModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
-    HttpModule
+    HttpModule,
+    IgxCategoryChartModule
   ],
   providers: [
     StatusBar,

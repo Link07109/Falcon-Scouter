@@ -4,204 +4,202 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-        <ion-button routerLink="/help">
-          <ion-icon slot="icon-only" name="help"></ion-icon>
-        </ion-button>
+      <ion-button routerLink="/help">
+        <ion-icon slot="icon-only" name="help"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title>Match Scouting Form</ion-title>
+    <ion-title text-center>Match Scouting Form</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+  <!-- <ion-button (click)="showScoutingTemplate()">Load Scouting Template</ion-button>
+  <div [innerHTML]="templateHTML"></div> -->
+
   <form [formGroup]="createMatchForm" (submit)="createMatch()">
-    <!-- Info -->
-    <ion-card>
-      <br />
-      <b>Info</b>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label>Scout Name</ion-label>
-            <ion-input formControlName="scoutName" type="text" placeholder="Your name"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-label>Robot Starting Position</ion-label>
-            <ion-select formControlName="startingPosition">
-              <!-- Red Alliance -->
-              <ion-select-option value="Red 1" selected="true">Red 1</ion-select-option>
-              <ion-select-option value="Red 2">Red 2</ion-select-option>
-              <ion-select-option value="Red 3">Red 3</ion-select-option>
-
-              <!-- Blue Alliance -->
-              <ion-select-option value="Blue 1">Blue 1</ion-select-option>
-              <ion-select-option value="Blue 2">Blue 2</ion-select-option>
-              <ion-select-option value="Blue 3">Blue 3</ion-select-option>
-            </ion-select>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-label floating>Match Number</ion-label>
-            <!-- this goes up by 1 every time the form gets submitted, but can be overriden -->
-            <ion-input formControlName="matchNumber" type="text" placeholder="1"></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-label>Team Number</ion-label>
-            <ion-select formControlName="teamNumber">
-              <!-- shows every team in the current event -->
-              <ion-select-option *ngFor="let team of listOfTeams" [value]="team">{{ team }}</ion-select-option>
-
-              <!-- shows every team in the match number given -->
-              <!-- <ion-select-option *ngFor="let team of listOfTeamsInMatch" [value]="team">{{ team }}</ion-select-option> -->
-            </ion-select>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <br />
-    </ion-card>
-
-
-    <!-- Autonomous -->
-    <ion-card>
-      <br />
-      <b>Autonomous</b>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <p>Auto Run?
-              <ion-toggle formControlName="autoRun"></ion-toggle>
-            </p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <p>Auto Switch?
-              <ion-toggle formControlName="autoSwitch"></ion-toggle>
-            </p>
-          </ion-col>
-          <ion-col>
-            Auto Cubes in Switch
-            <br />
-            <p>{{ autoSwitchCubes }}
-              <ion-button round (click)="removeCubesAutoSwitch()">-</ion-button>
-              <ion-button round (click)="addCubesAutoSwitch()">+</ion-button>
-            </p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            Auto Scale?
-            <ion-toggle formControlName="autoScale"></ion-toggle>
-          </ion-col>
-          <ion-col>
-            Auto Cubes in Scale
-            <br />
-            <p>{{ autoScaleCubes }}
-              <ion-button round (click)="removeCubesAutoScale()">-</ion-button>
-              <ion-button round (click)="addCubesAutoScale()">+</ion-button>
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-
-
-    <!-- Tele-Operated -->
-    <ion-card>
-      <br />
-      <b>Tele-Operated</b>
-      <br /><br />
-
-      <!-- Cube Buttons -->
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            Cubes in Switch
-            <br />
-            <p>{{ cubesSwitch }}
-              <ion-button round (click)="removeCubesSwitch()">-</ion-button>
-              <ion-button round (click)="addCubesSwitch()">+</ion-button>
-            </p>
-          </ion-col>
-          <ion-col>
-            Failed Cubes in Switch
-            <br />
-            <p>{{ failedSwitch }}
-              <ion-button round (click)="removeCubesFailedSwitch()">-</ion-button>
-              <ion-button round (click)="addCubesFailedSwitch()">+</ion-button>
-            </p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            Cubes in Scale
-            <br />
-            <p>{{ cubesScale }}
-              <ion-button round (click)="removeCubesScale()">-</ion-button>
-              <ion-button round (click)="addCubesScale()">+</ion-button>
-            </p>
-          </ion-col>
-          <ion-col>
-            Failed Cubes in Scale
-            <br />
-            <p>{{ failedScale }}
-              <ion-button round (click)="removeCubesFailedScale()">-</ion-button>
-              <ion-button round (click)="addCubesFailedScale()">+</ion-button>
-            </p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            Cubes in Exchange
-            <br />
-            <p>{{ cubesExchange }}
-              <ion-button round (click)="removeCubesExchange()">-</ion-button>
-              <ion-button round (click)="addCubesExchange()">+</ion-button>
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-
-
-    <!-- End Game -->
-    <ion-card>
-      <br />
-      <b>End Game</b>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-label>Climbed?</ion-label>
-            <ion-select formControlName="climb">
-              <ion-select-option value="None" selected="true">None</ion-select-option>
-              <ion-select-option value="Parked">Parked</ion-select-option>
-              <ion-select-option value="Climbed">Climbed</ion-select-option>
-            </ion-select>
-          </ion-col>
-          <ion-col>
-            <ion-label>Cards?</ion-label>
-            <ion-select formControlName="cards">
-              <ion-select-option value="None" selected="true">None</ion-select-option>
-              <ion-select-option value="Yellow Card">Yellow Card</ion-select-option>
-              <ion-select-option value="Red Card">Red Card</ion-select-option>
-            </ion-select>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-label floating>Additional Comments?</ion-label>
-            <ion-input formControlName="comments" type="text" placeholder="Comments"></ion-input>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-
-    <!-- Submit Button -->
-    <ion-button large style="margin-left: 33%; width: 33%" type="submit" [disabled]="!createMatchForm.valid">Submit</ion-button>
-
-  </form>
+      <!-- Info -->
+      <ion-card>
+        <br />
+        <b>Info</b>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Scout Name</ion-label>
+              <ion-input formControlName="scoutName" type="text" placeholder="Your name"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label>Robot Starting Position</ion-label>
+              <ion-select formControlName="startingPosition">
+                <!-- Red Alliance -->
+                <ion-select-option value="Red 1" selected="true">Red 1</ion-select-option>
+                <ion-select-option value="Red 2">Red 2</ion-select-option>
+                <ion-select-option value="Red 3">Red 3</ion-select-option>
+                <!-- Blue Alliance -->
+                <ion-select-option value="Blue 1">Blue 1</ion-select-option>
+                <ion-select-option value="Blue 2">Blue 2</ion-select-option>
+                <ion-select-option value="Blue 3">Blue 3</ion-select-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label floating>Match Number</ion-label>
+              <!-- make this number be however many documents there are in firestore -->
+              <ion-input formControlName="matchNumber" type="text" placeholder="1"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label>Team Number</ion-label>
+              <ion-select formControlName="teamNumber">
+                <ion-select-option *ngFor="let team of listOfTeams" [value]="team">{{ team }}</ion-select-option>
+                <!-- <ion-select-option *ngFor="let team of thorTeams" [value]="team.teamNumber">{{ team.teamNumber }}</ion-select-option> -->
+              </ion-select>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <br />
+      </ion-card>
+  
+      <!-- Autonomous -->
+      <ion-card>
+        <br />
+        <b>Autonomous</b>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <p>Auto Run?
+                <ion-toggle formControlName="autoRun"></ion-toggle>
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p>Auto Switch?
+                <ion-toggle formControlName="autoSwitch"></ion-toggle>
+              </p>
+            </ion-col>
+            <ion-col>
+              Auto Cubes in Switch
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('autoSwitchCubes')">-</ion-button>
+                <p [innerHTML]="autoSwitchCubes"></p>
+                <ion-button (click)="addCubes('autoSwitchCubes')">+</ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Auto Scale?
+              <ion-toggle formControlName="autoScale"></ion-toggle>
+            </ion-col>
+            <ion-col>
+              Auto Cubes in Scale
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('autoScaleCubes')">-</ion-button>
+                {{ autoScaleCubes }}
+                <ion-button (click)="addCubes('autoScaleCubes')">+</ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  
+      <!-- Tele-Operated -->
+      <ion-card>
+        <br />
+        <b>Tele-Operated</b>
+        <br /><br />
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              Cubes in Switch
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('cubesSwitch')">-</ion-button>
+                <h1 [innerHTML]="cubesSwitch"></h1>
+                <ion-button (click)="addCubes('cubesSwitch')">+</ion-button>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              Failed Cubes in Switch
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('failedSwitch')">-</ion-button>
+                <p [innerHTML]="failedSwitch"></p>
+                <ion-button (click)="addCubes('failedSwitch')">+</ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Cubes in Scale
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('cubesScale')">-</ion-button>
+                {{ cubesScale }}
+                <ion-button (click)="addCubes('cubesScale')">+</ion-button>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              Failed Cubes in Scale
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('failedScale')">-</ion-button>
+                {{ failedScale }}
+                <ion-button (click)="addCubes('failedScale')">+</ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              Cubes in Exchange
+              <br />
+              <ion-item>
+                <ion-button (click)="removeCubes('cubesExchange')">-</ion-button>
+                {{ cubesExchange }}
+                <ion-button (click)="addCubes('cubesExchange')">+</ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  
+      <!-- End Game -->
+      <ion-card>
+        <br />
+        <b>End Game</b>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-label>Climbed?</ion-label>
+              <ion-select formControlName="climb">
+                <ion-select-option value="None" selected="true">None</ion-select-option>
+                <ion-select-option value="Parked">Parked</ion-select-option>
+                <ion-select-option value="Climbed">Climbed</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col>
+              <ion-label>Cards?</ion-label>
+              <ion-select formControlName="cards">
+                <ion-select-option value="None" selected="true">None</ion-select-option>
+                <ion-select-option value="Yellow Card">Yellow Card</ion-select-option>
+                <ion-select-option value="Red Card">Red Card</ion-select-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label floating>Additional Comments?</ion-label>
+              <ion-input formControlName="comments" style="height: 50px" type="text" placeholder="Comments"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+  
+      <!-- <ion-button style="margin-left: 33%; width: 33%" type="reset">Reset</ion-button> -->
+      <ion-button style="margin-left: 33%; width: 33%" type="submit" [disabled]="!createMatchForm.valid">Submit</ion-button>
+    </form>
+  
 </ion-content>

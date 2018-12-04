@@ -1,6 +1,6 @@
 <ion-header style="padding-bottom: 80px">
   <ion-toolbar>
-    <ion-title>All Teams</ion-title>
+    <ion-title text-center>All Teams</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,6 +10,9 @@
       </ion-button>
       <ion-button routerLink="/create">
         <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/form_builder">
+        <ion-icon slot="icon-only" name="albums"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -31,95 +34,18 @@
 </ion-header>
 
 <ion-content padding>
+
   <ion-scroll scrollX="true">
+      <!-- <ion-button (click)="depresso()"></ion-button> -->
     <ion-grid>
-      <!-- create a row for each team -->
       <ion-row nowrap *ngFor="let team of teamCollectionObservable | async" routerLink="/matches/{{team.teamNumber}}">
         <ion-col>
           <b>
             {{ team.teamNumber }}
           </b>
         </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.autoRunPercent }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.autoSwitchPercent }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgAutoSwitchCubes }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.autoScalePercent }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgAutoScaleCubes }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgSwitchCubess }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgSwitchFailedCubes }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgScaleCubes }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgScaleFailedCubes }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.avgExchangeCubes }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              {{ team.climbPercent }}
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <hr />
+        <!-- <ion-col *ngFor="let teamm of averageMatchData(team.teamNumber)" [innerHTML]="teamm.teamNumber"></ion-col> -->
       </ion-row>
     </ion-grid>
   </ion-scroll>
-
 </ion-content>

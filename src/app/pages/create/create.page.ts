@@ -4,6 +4,9 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import { Router } from '../../../../node_modules/@angular/router';
+import { Match } from '../../models/match.interface';
+import { DomSanitizer } from '@angular/platform-browser';
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-create',
@@ -11,6 +14,7 @@ import { Router } from '../../../../node_modules/@angular/router';
   styleUrls: ['./create.page.scss'],
 })
 export class CreatePage implements OnInit {
+
   public autoSwitchCubes = 0;
   public autoScaleCubes = 0;
   public cubesSwitch = 0;
@@ -18,11 +22,15 @@ export class CreatePage implements OnInit {
   public cubesScale = 0;
   public failedScale = 0;
   public cubesExchange = 0;
+
+  public templateHTML;
+  public matchNumber: number;
   public createMatchForm: FormGroup;
-  public listOfTeams = new Array;
-  public listOfTeamsInMatch = new Array;
+  public listOfTeams = [];
+  public listOfTeamsInMatch = [];
 
   constructor(
+    public kms: DomSanitizer,
     public router: Router,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -45,41 +53,56 @@ export class CreatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.putTeamsInSelect('2018gal');
-    // this.putTeamsInSelectByMatch('2018gal', 'qm', 12); // 12 will be replaced with the matchNumber
+    // this.putTeamsInSelect('2018gal');
+    // this.putTeamsInSelectByMatch(currentEvent, 'qm', 1); // this.matchNumber
+    // this.setMatchNumber();
   }
 
   async createMatch() {
     const loading = await this.loadingCtrl.create();
 
-    const teamNumber = this.createMatchForm.value.teamNumber;
-    const matchNumber = this.createMatchForm.value.matchNumber;
-    const scoutName = this.createMatchForm.value.scoutName;
-    const startingPosition = this.createMatchForm.value.startingPosition;
-    const autoRun = this.createMatchForm.value.autoRun;
-    const autoSwitch = this.createMatchForm.value.autoSwitch;
-    const autoScale = this.createMatchForm.value.autoScale;
-    const climb = this.createMatchForm.value.climb;
-    const cards = this.createMatchForm.value.cards;
-    const comments = this.createMatchForm.value.comments;
+    const match: Match = {
+      teamNumber: this.createMatchForm.value.teamNumber,
+      matchNumber: this.createMatchForm.value.matchNumber,
+      scoutName: this.createMatchForm.value.scoutName,
+      startingPosition: this.createMatchForm.value.startingPosition,
+      autoRun: this.createMatchForm.value.autoRun,
+      autoSwitch: this.createMatchForm.value.autoSwitch,
+      autoSwitchCubes: this.autoSwitchCubes,
+      autoScale: this.createMatchForm.value.autoScale,
+      autoScaleCubes: this.autoScaleCubes,
+      cubesSwitch: this.cubesSwitch,
+      failedSwitch: this.failedSwitch,
+      cubesScale: this.cubesScale,
+      failedScale: this.failedScale,
+      cubesExchange: this.cubesExchange,
+      climb: this.createMatchForm.value.climb,
+      cards: this.createMatchForm.value.cards,
+      comments: this.createMatchForm.value.comments
+    };
 
-    this.firestoreService
-      .createMatch(teamNumber, matchNumber, scoutName, startingPosition, autoRun, autoSwitch,
-        this.autoSwitchCubes, autoScale, this.autoScaleCubes, this.cubesSwitch, this.failedSwitch,
-        this.cubesScale, this.failedScale, this.cubesExchange, climb, cards, comments)
-      .then(() => {
-        loading.dismiss().then(() => {
-          // dont do this - make it refresh the page somehow instead
-          this.router.navigateByUrl('teams');
-        });
-      }, error => {
-        console.error(error);
+    this.firestoreService.createMatch(currentEvent, match).then(() => {
+      loading.dismiss().then(() => {
+        // make it refresh the page instead of doing this
+        this.router.navigateByUrl('teams');
       });
-    this.blueAllianceService.postDataToSpreadsheet('1o-y1iQ12cWgQ-3NxnNig9buxYptjNzNLkRrIFBMZoq8', teamNumber, matchNumber,
-      scoutName, startingPosition, autoRun, autoSwitch, this.autoSwitchCubes, autoScale, this.autoScaleCubes, this.cubesSwitch,
-      this.failedSwitch, this.cubesScale, this.failedScale, this.cubesExchange, climb, cards, comments).subscribe();
+    }, error => {
+      console.error(error);
+    });
+
+    this.blueAllianceService.postDataToSpreadsheet('1o-y1iQ12cWgQ-3NxnNig9buxYptjNzNLkRrIFBMZoq8', match).subscribe();
 
     return await loading.present();
+  }
+
+  setMatchNumber() {
+    // this.matchNumber = this.firestoreService.countFirestoreDocuments();
+  }
+
+  showScoutingTemplate() {
+    this.firestoreService.getScoutingTemplate('idfk').valueChanges().subscribe(data => {
+      this.templateHTML = this.kms.bypassSecurityTrustHtml(data['templateHTML']);
+    });
   }
 
   putTeamsInSelect(eventKey: string) {
@@ -94,86 +117,86 @@ export class CreatePage implements OnInit {
     const matchKey = eventKey + '_' + compLevel + matchNumber;
     this.blueAllianceService.getMatch(matchKey).subscribe(data => {
 
-      data.alliances.red.team_keys.forEach(teamKey => {
-        this.listOfTeamsInMatch.push(teamKey.substring(3));
+      const alliances = [data.alliances.red.team_keys, data.alliances.blue.team_keys];
+      alliances.forEach(alliance => {
+        alliance.forEach(teamKey => {
+          this.listOfTeamsInMatch.push(teamKey.substring(3));
+        });
       });
 
-      data.alliances.blue.team_keys.forEach(teamKey => {
-        this.listOfTeamsInMatch.push(teamKey.substring(3));
-      });
+      // gay way
+      // data.alliances.red.team_keys.forEach(teamKey => {
+      //   this.listOfTeamsInMatch.push(teamKey.substring(3));
+      // });
+      // data.alliances.blue.team_keys.forEach(teamKey => {
+      //   this.listOfTeamsInMatch.push(teamKey.substring(3));
+      // });
 
     });
   }
 
-  // find a way to make all of these into a multipurpose function or something
-  // this is the way i did it before in the android app and its so cancer
-  addCubesAutoSwitch() {
-    this.autoSwitchCubes++;
-  }
+  // this is still gay
+  addCubes(varToChange) {
+    switch (varToChange) {
+      case 'autoScaleCubes':
+        this.autoScaleCubes++;
+        break;
 
-  removeCubesAutoSwitch() {
-    if (this.autoSwitchCubes > 0) {
-      this.autoSwitchCubes--;
+      case 'autoSwitchCubes':
+        this.autoSwitchCubes++;
+        break;
+
+      case 'cubesSwitch':
+        this.cubesSwitch++;
+        break;
+
+      case 'failedSwitch':
+        this.failedSwitch++;
+        break;
+
+      case 'cubesScale':
+        this.cubesScale++;
+        break;
+
+      case 'failedScale':
+        this.failedScale++;
+        break;
+
+      case 'cubesExchange':
+        this.cubesExchange++;
+        break;
     }
   }
 
-  addCubesAutoScale() {
-    this.autoScaleCubes++;
-  }
+  removeCubes(varToChange) {
+    switch (varToChange) {
+      case 'autoScaleCubes':
+        if (this.autoScaleCubes > 0) { this.autoScaleCubes--; }
+        break;
 
-  removeCubesAutoScale() {
-    if (this.autoScaleCubes > 0) {
-      this.autoScaleCubes--;
-    }
-  }
+      case 'autoSwitchCubes':
+        if (this.autoSwitchCubes > 0) { this.autoSwitchCubes--; }
+        break;
 
-  addCubesSwitch() {
-    this.cubesSwitch++;
-  }
+      case 'cubesSwitch':
+        if (this.cubesSwitch > 0) { this.cubesSwitch--; }
+        break;
 
-  removeCubesSwitch() {
-    if (this.cubesSwitch > 0) {
-      this.cubesSwitch--;
-    }
-  }
+      case 'failedSwitch':
+        if (this.failedSwitch > 0) { this.failedSwitch--; }
+        break;
 
-  addCubesFailedSwitch() {
-    this.failedSwitch++;
-  }
+      case 'cubesScale':
+        if (this.cubesScale > 0) { this.cubesScale--; }
+        break;
 
-  removeCubesFailedSwitch() {
-    if (this.failedSwitch > 0) {
-      this.failedSwitch--;
-    }
-  }
+      case 'failedScale':
+        if (this.failedScale > 0) { this.failedScale--; }
+        break;
 
-  addCubesScale() {
-    this.cubesScale++;
-  }
-
-  removeCubesScale() {
-    if (this.cubesScale > 0) {
-      this.cubesScale--;
-    }
-  }
-
-  addCubesFailedScale() {
-    this.failedScale++;
-  }
-
-  removeCubesFailedScale() {
-    if (this.failedScale > 0) {
-      this.failedScale--;
-    }
-  }
-
-  addCubesExchange() {
-    this.cubesExchange++;
-  }
-
-  removeCubesExchange() {
-    if (this.cubesExchange > 0) {
-      this.cubesExchange--;
+      case 'cubesExchange':
+        if (this.cubesExchange > 0) { this.cubesExchange--; }
+        break;
     }
   }
 

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IgxCategoryChartModule } from 'igniteui-angular-charts/ES5/igx-category-chart-module';
 
 import { MatchesPage } from './matches.page';
 
@@ -11,6 +12,7 @@ import { MatchesPage } from './matches.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    IgxCategoryChartModule,
     RouterModule.forChild([
       {
         path: '',

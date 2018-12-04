@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { Observable } from 'rxjs';
 import { Match } from '../../models/match.interface';
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-detail',
@@ -21,6 +22,6 @@ export class DetailPage implements OnInit {
   ngOnInit() {
     this.team = this.route.snapshot.paramMap.get('number').split(' ')[0];
     const matchNumber = this.route.snapshot.paramMap.get('number').split(' ')[1];
-    this.match = this.firestoreService.getMatchDetail(this.team, matchNumber).valueChanges();
+    this.match = this.firestoreService.getMatchDetail(currentEvent, this.team, matchNumber).valueChanges();
   }
 }
