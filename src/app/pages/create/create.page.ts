@@ -5,7 +5,7 @@ import { FirestoreService } from '../../services/data/firestore.service';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import { Router } from '../../../../node_modules/@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { currentEvent } from '../../consts';
+import { currentEvent } from '../intro/intro.page';
 
 @Component({
   selector: 'app-create',
