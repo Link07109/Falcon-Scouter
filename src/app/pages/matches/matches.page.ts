@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { statNames, modifiedStatNames } from '../../consts';
 import { Team } from '../../models/team.interface';
-import { currentEvent } from '../../consts';
+import { currentEvent } from '../intro/intro.page';
 
 @Component({
   selector: 'app-matches',
@@ -48,7 +48,7 @@ export class MatchesPage implements OnInit {
     this.matchCollectionObservable = this.firestoreService.getMatchList(currentEvent, this.teamNumber).valueChanges();
   }
 
-  fucku() {
+  toggleStats() {
     this.showStats = !this.showStats;
   }
 

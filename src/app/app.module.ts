@@ -15,12 +15,16 @@ import { firebaseConfig } from './credentials';
 import { BlueAllianceService } from './services/data/blue-alliance.service';
 import { HttpModule } from '@angular/http';
 import { IgxCategoryChartModule } from 'igniteui-angular-charts/ES5/igx-category-chart-module';
-// import { IgxGridModule } from 'igniteui-angular';
+import { IgxGridModule } from 'igniteui-angular';
+import { IonicStorageModule } from '@ionic/Storage';
+import { PopoverPageModule } from './pages/popover/popover.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    PopoverPageModule,
+    IonicStorageModule.forRoot(),
     BrowserModule,
     IonicModule.forRoot(),
     // IgxGridModule.forRoot(),

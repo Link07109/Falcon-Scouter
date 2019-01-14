@@ -1,30 +1,15 @@
-<ion-header style="padding-bottom: 80px">
-  <ion-toolbar>
-    <ion-title text-center>All Teams</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/help">
-        <ion-icon slot="icon-only" name="help"></ion-icon>
-      </ion-button>
-      <ion-button routerLink="/create">
-        <ion-icon slot="icon-only" name="add-circle"></ion-icon>
-      </ion-button>
-      <ion-button routerLink="/form_builder">
-        <ion-icon slot="icon-only" name="albums"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+<ion-header color="light" style="padding-bottom: 80px">
+  <ion-toolbar color="light">
+</ion-toolbar>
 
-  <ion-searchbar (ionInput)="getItems($event)" style="z-index: 2" placeholder="Type to search..."></ion-searchbar>
+  <ion-searchbar color="light" (ionInput)="getItems($event)" style="z-index: 2" placeholder="Type to search..."></ion-searchbar>
 
-  <ion-scroll scrollX=”true” style="padding-top: 110px; z-index: -1">
-    <ion-grid>
-      <ion-row nowrap>
-        <ion-col *ngFor="let stat of stats">
-          <ion-card>
-            <ion-card-content [innerHTML]="stat"></ion-card-content>
+  <ion-scroll color="light" scrollX=”true” style="padding-top: 110px; z-index: -1">
+    <ion-grid color="light">
+      <ion-row color="light" nowrap>
+        <ion-col color="light" *ngFor="let stat of stats">
+          <ion-card color="light">
+            <ion-label text-center color="dark" [innerHTML]="stat"></ion-label>
           </ion-card>
         </ion-col>
       </ion-row>
@@ -36,9 +21,8 @@
 <ion-content padding>
 
   <ion-scroll scrollX="true">
-      <!-- <ion-button (click)="depresso()"></ion-button> -->
     <ion-grid>
-      <ion-row nowrap *ngFor="let team of teamCollectionObservable | async" routerLink="/matches/{{team.teamNumber}}">
+      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{team.teamNumber}}">
         <ion-col>
           <b>
             {{ team.teamNumber }}

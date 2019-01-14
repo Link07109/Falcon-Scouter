@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
-import { FirestoreService } from '../../services/data/firestore.service';
-import { Observable } from 'rxjs';
 import { Match } from '../../models/match.interface';
-import { currentEvent } from '../../consts';
+import { currentEvent } from '../intro/intro.page';
 
 @Component({
   selector: 'app-dash',

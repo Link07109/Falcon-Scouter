@@ -18,19 +18,25 @@
       <div>
         <h2 [innerHTML]="slide.title"></h2>
         <p [innerHTML]="slide.description"></p>
-      </div>      
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div>
+        Competition being scouted:<ion-input id="hi" placeholder="Click here to type..."></ion-input>
+      </div>
     </ion-slide>
 
     <!-- Button Slide -->
     <ion-slide>
       <div>
-        <p>Ready to begin?</p>
-        <ion-button large clear icon-end color="primary" routerLink="/dash">
+        <ion-label>Ready to begin?</ion-label>
+        <br>
+        <ion-button large clear icon-end color="primary" (click)="saveComp()" routerLink="/dash">
           Start Scouting
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-button>
       </div>
-
     </ion-slide>
   </ion-slides>
 </ion-content>

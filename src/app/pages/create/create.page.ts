@@ -4,7 +4,6 @@ import { LoadingController, AlertController } from '@ionic/angular';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import { Router } from '../../../../node_modules/@angular/router';
-import { Match } from '../../models/match.interface';
 import { DomSanitizer } from '@angular/platform-browser';
 import { currentEvent } from '../../consts';
 
@@ -15,19 +14,13 @@ import { currentEvent } from '../../consts';
 })
 export class CreatePage implements OnInit {
 
-  public autoSwitchCubes = 0;
-  public autoScaleCubes = 0;
-  public cubesSwitch = 0;
-  public failedSwitch = 0;
-  public cubesScale = 0;
-  public failedScale = 0;
-  public cubesExchange = 0;
-
   public templateHTML;
   public matchNumber: number;
   public createMatchForm: FormGroup;
   public listOfTeams = [];
   public listOfTeamsInMatch = [];
+  someArray2 = []
+  hmm = true
 
   constructor(
     public kms: DomSanitizer,
@@ -36,9 +29,10 @@ export class CreatePage implements OnInit {
     public alertCtrl: AlertController,
     public firestoreService: FirestoreService,
     private blueAllianceService: BlueAllianceService,
-    formBuilder: FormBuilder
+    public alertController: AlertController,
+    FormEditor: FormBuilder
   ) {
-    this.createMatchForm = formBuilder.group({
+    this.createMatchForm = FormEditor.group({
       teamNumber: ['', Validators.required],
       matchNumber: [1, Validators.required],
       scoutName: ['', Validators.required],
@@ -56,53 +50,77 @@ export class CreatePage implements OnInit {
     // this.putTeamsInSelect('2018gal');
     // this.putTeamsInSelectByMatch(currentEvent, 'qm', 1); // this.matchNumber
     // this.setMatchNumber();
+    this.firestoreService.getAllScoutingTemplates().valueChanges().forEach(hi => {
+      hi.forEach(bye => {
+        this.someArray2.push({
+          name: bye['name'],
+          label: bye['name'],
+          type: 'radio',
+          value: bye
+        })
+      })
+    })
   }
 
   async createMatch() {
     const loading = await this.loadingCtrl.create();
 
-    const match: Match = {
-      teamNumber: this.createMatchForm.value.teamNumber,
-      matchNumber: this.createMatchForm.value.matchNumber,
-      scoutName: this.createMatchForm.value.scoutName,
-      startingPosition: this.createMatchForm.value.startingPosition,
-      autoRun: this.createMatchForm.value.autoRun,
-      autoSwitch: this.createMatchForm.value.autoSwitch,
-      autoSwitchCubes: this.autoSwitchCubes,
-      autoScale: this.createMatchForm.value.autoScale,
-      autoScaleCubes: this.autoScaleCubes,
-      cubesSwitch: this.cubesSwitch,
-      failedSwitch: this.failedSwitch,
-      cubesScale: this.cubesScale,
-      failedScale: this.failedScale,
-      cubesExchange: this.cubesExchange,
-      climb: this.createMatchForm.value.climb,
-      cards: this.createMatchForm.value.cards,
-      comments: this.createMatchForm.value.comments
-    };
+    // match = {[stuff]}
+    // this.firestoreService.createMatch(currentEvent, match).then(() => {
+    //   loading.dismiss().then(() => {
+    //     // make it refresh the page instead of doing this
+    //     this.router.navigateByUrl('teams');
+    //   });
+    // }, error => {
+    //   console.error(error);
+    // });
 
-    this.firestoreService.createMatch(currentEvent, match).then(() => {
-      loading.dismiss().then(() => {
-        // make it refresh the page instead of doing this
-        this.router.navigateByUrl('teams');
-      });
-    }, error => {
-      console.error(error);
-    });
-
-    this.blueAllianceService.postDataToSpreadsheet('1o-y1iQ12cWgQ-3NxnNig9buxYptjNzNLkRrIFBMZoq8', match).subscribe();
+    // this.blueAllianceService.postDataToSpreadsheet('1o-y1iQ12cWgQ-3NxnNig9buxYptjNzNLkRrIFBMZoq8', match).subscribe();
 
     return await loading.present();
   }
 
   setMatchNumber() {
+    // set it based on the number of times the submission button has been pressed
+    // have a manual override button next to the label as well that turns it into an input
+
     // this.matchNumber = this.firestoreService.countFirestoreDocuments();
   }
 
-  showScoutingTemplate() {
-    this.firestoreService.getScoutingTemplate('idfk').valueChanges().subscribe(data => {
-      this.templateHTML = this.kms.bypassSecurityTrustHtml(data['templateHTML']);
-    });
+  getVariablesFromHTMLComponenets(templateComponents) {
+    const hi = templateComponents['templateComponents']
+
+    console.log(hi)
+    hi.forEach(thing => {
+      console.log(thing.labelName)
+      console.log(document.getElementById(thing.labelName))
+    })
+  }
+
+  async showScoutingTemplate() {
+    const alert = await this.alertController.create({
+      header: 'Choose a template',
+      inputs: this.someArray2,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Ok',
+          handler: (data: string) => {
+            this.someArray2 = []
+            this.hmm = false
+            this.templateHTML = this.kms.bypassSecurityTrustHtml(data['templateHTML'])
+            this.getVariablesFromHTMLComponenets(data)
+          }
+        }
+      ]
+    })
+    await alert.present()
   }
 
   putTeamsInSelect(eventKey: string) {
@@ -124,80 +142,7 @@ export class CreatePage implements OnInit {
         });
       });
 
-      // gay way
-      // data.alliances.red.team_keys.forEach(teamKey => {
-      //   this.listOfTeamsInMatch.push(teamKey.substring(3));
-      // });
-      // data.alliances.blue.team_keys.forEach(teamKey => {
-      //   this.listOfTeamsInMatch.push(teamKey.substring(3));
-      // });
-
     });
-  }
-
-  // this is still gay
-  addCubes(varToChange) {
-    switch (varToChange) {
-      case 'autoScaleCubes':
-        this.autoScaleCubes++;
-        break;
-
-      case 'autoSwitchCubes':
-        this.autoSwitchCubes++;
-        break;
-
-      case 'cubesSwitch':
-        this.cubesSwitch++;
-        break;
-
-      case 'failedSwitch':
-        this.failedSwitch++;
-        break;
-
-      case 'cubesScale':
-        this.cubesScale++;
-        break;
-
-      case 'failedScale':
-        this.failedScale++;
-        break;
-
-      case 'cubesExchange':
-        this.cubesExchange++;
-        break;
-    }
-  }
-
-  removeCubes(varToChange) {
-    switch (varToChange) {
-      case 'autoScaleCubes':
-        if (this.autoScaleCubes > 0) { this.autoScaleCubes--; }
-        break;
-
-      case 'autoSwitchCubes':
-        if (this.autoSwitchCubes > 0) { this.autoSwitchCubes--; }
-        break;
-
-      case 'cubesSwitch':
-        if (this.cubesSwitch > 0) { this.cubesSwitch--; }
-        break;
-
-      case 'failedSwitch':
-        if (this.failedSwitch > 0) { this.failedSwitch--; }
-        break;
-
-      case 'cubesScale':
-        if (this.cubesScale > 0) { this.cubesScale--; }
-        break;
-
-      case 'failedScale':
-        if (this.failedScale > 0) { this.failedScale--; }
-        break;
-
-      case 'cubesExchange':
-        if (this.cubesExchange > 0) { this.cubesExchange--; }
-        break;
-    }
   }
 
 }

@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormBuilderPage } from './form-builder.page';
+import { FormEditorPage } from './form-editor.page';
 
-describe('FormBuilderPage', () => {
-  let component: FormBuilderPage;
-  let fixture: ComponentFixture<FormBuilderPage>;
+describe('FormEditorPage', () => {
+  let component: FormEditorPage;
+  let fixture: ComponentFixture<FormEditorPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormBuilderPage ],
+      declarations: [ FormEditorPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormBuilderPage);
+    fixture = TestBed.createComponent(FormEditorPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,3 @@
-export const currentEvent = '2018nccmp';
-// 2019NCWAK, 2019NCASH, 2019NCCMP
-
 export const statNames = [
     'Match',
     'Scout<br/>Name',

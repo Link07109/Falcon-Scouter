@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'dash', loadChildren: './pages/dash/dash.module#DashPageModule' },
   { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
   { path: 'picks', loadChildren: './pages/picks/picks.module#PicksPageModule' },
-  { path: 'form_builder', loadChildren: './pages/form-builder/form-builder.module#FormBuilderPageModule' },
+  { path: 'form_editor', loadChildren: './pages/form-editor/form-editor.module#FormEditorPageModule' },
+  { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
 ];
 
 @NgModule({

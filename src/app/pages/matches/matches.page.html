@@ -1,13 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title text-center>Matches</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
 <ion-content padding>
 
   <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
     <ion-button (click)="showPitData()">
       show pit data
     </ion-button>
-    
+
     <!-- <igx-grid #grid1 id="grid1" [data]="data" [autoGenerate]="true"></igx-grid> -->
 
-    <ion-button (click)="fucku()">
+    <ion-button (click)="toggleStats()">
       Toggle Match Stats
     </ion-button>
 
@@ -16,12 +25,12 @@
       <ion-row nowrap>
         <ion-col *ngFor="let stat of stats">
           <ion-card>
-            <ion-card-content [innerHTML]="stat"></ion-card-content>
+            <ion-label text-center color="dark" [innerHTML]="stat"></ion-label>
           </ion-card>
         </ion-col>
         <ion-col comment>
           <ion-card>
-            <ion-card-content>Comments</ion-card-content>
+            <ion-label color="dark">Comments</ion-label>
           </ion-card>
         </ion-col>
       </ion-row>
@@ -36,105 +45,105 @@
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.scoutName }}
+              <ion-label color="dark">{{ match.scoutName }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.startingPosition }}
+              <ion-label color="dark">{{ match.startingPosition }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.autoRun }}
+              <ion-label color="dark">{{ match.autoRun }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.autoSwitch }}
+              <ion-label color="dark">{{ match.autoSwitch }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.autoSwitchCubes }}
+              <ion-label color="dark">{{ match.autoSwitchCubes }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.autoScale }}
+              <ion-label color="dark">{{ match.autoScale }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.autoScaleCubes }}
+              <ion-label color="dark">{{ match.autoScaleCubes }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.cubesSwitch }}
+              <ion-label color="dark">{{ match.cubesSwitch }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.failedSwitch }}
+              <ion-label color="dark">{{ match.failedSwitch }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.cubesScale }}
+              <ion-label color="dark">{{ match.cubesScale }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.failedScale }}
+              <ion-label color="dark">{{ match.failedScale }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.cubesExchange }}
+              <ion-label color="dark">{{ match.cubesExchange }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.climb }}
+              <ion-label color="dark">{{ match.climb }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              {{ match.cards }}
+              <ion-label color="dark">{{ match.cards }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col comment>
           <ion-card>
             <ion-card-content>
-              {{ match.comments }}
+              <ion-label color="dark">{{ match.comments }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -148,8 +157,7 @@
     </ion-button>
 
     <ion-grid *ngIf="showTeamAverages">
-      <igx-category-chart      
-        [dataSource]="data" width="375px" height="450px">
+      <igx-category-chart [dataSource]="data" width="375px" height="450px">
       </igx-category-chart>
     </ion-grid>
 

@@ -30,8 +30,8 @@ export class FirestoreService {
   }
 
 
-  saveScoutingTemplate(templateName: string, html: string) {
-    return this.firestore.doc(`templates/${templateName}`).set({ name: templateName, templateHTML: html });
+  saveScoutingTemplate(templateName: string, html: string, templateComponents: any[]) {
+    return this.firestore.doc(`templates/${templateName}`).set({ name: templateName, templateHTML: html, templateComponents: templateComponents });
   }
 
   getScoutingTemplate(templateName: string) {

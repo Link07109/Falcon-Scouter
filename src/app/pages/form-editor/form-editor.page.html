@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title text-center>Form Editor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-grid *ngIf="!hasChosenTemplate">
+    <ion-row>
+      <ion-col>
+        <ion-card (click)="die()">
+          <ion-card-content text-center>
+            <ion-icon color="dark" name="add"></ion-icon>
+            <br />
+            <ion-label color="dark">New Template</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col *ngFor="let template of templatesArray">
+        <ion-card (click)="loadHTML(template)">
+          <ion-card-content>
+            <ion-label color="dark" [innerHTML]="template.name"></ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div [innerHTML]="templateHTML" *ngIf="hasChosenTemplate"></div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="hasChosenTemplate">
+    <!-- Add -->
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <!-- Selector -->
+      <ion-fab-button (click)=selectorAlert() data-desc="Add item selector">
+        <ion-icon name="buffer"></ion-icon>
+      </ion-fab-button>
+
+      <!-- Checkbox -->
+      <ion-fab-button (click)="createComponent('checkbox')" data-desc="Add checkbox">
+        <ion-icon name="checkbox"></ion-icon>
+      </ion-fab-button>
+
+      <!-- <ion-fab-button (click)="createElement('<app-counter></app-counter>');"> -->
+      <!-- Counter -->
+      <ion-fab-button (click)="createComponent('counter', '<ion-button>-</ion-button><ion-button>+</ion-button>')" data-desc="Counter">
+        <ion-icon name="chatbubbles"></ion-icon>
+      </ion-fab-button>
+
+      <!-- Button -->
+      <ion-fab-button (click)="createComponent('button')" data-desc="Add button">
+        <ion-icon name="albums"></ion-icon>
+      </ion-fab-button>
+
+      <!-- Input -->
+      <ion-fab-button (click)="createComponent('input')" data-desc="Add input">
+        <ion-icon name="clipboard"></ion-icon>
+      </ion-fab-button>
+
+      <!-- Header -->
+      <ion-fab-button (click)="createComponent('input')" data-desc="Add header">
+        <ion-icon name="list"></ion-icon>
+      </ion-fab-button>
+
+      <!-- Card -->
+      <ion-fab-button (click)="createComponent('card')" data-desc="Add card">
+        <ion-icon name="card"></ion-icon>
+      </ion-fab-button>
+
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="hasChosenTemplate">
+    <ion-fab-button (click)="save()">
+      <ion-icon name="save"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card>
+    <ion-list>
+      <ion-reorder-group id="divID" *ngIf="hasChosenTemplate">
+        <!-- <div ></div> -->
+      </ion-reorder-group>
+    </ion-list>
+  </ion-card>
+</ion-content>
