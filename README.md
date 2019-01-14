@@ -2,14 +2,14 @@
 Ionic remake of the original android scouting app used by FRC 5190 during the FIRST Power Up season.
 
 ## Features
-- Uses Cloud Firestore for the storage of all scouting data.
-- Uses The Blue Alliance's v3 HTTP API for retrieval of event and team specific information such as the teams competing and their ccwm.
-- Uses Google Apps Scripts for adding scouting data to an external Google Sheets page.
-- Uses Infragistics' Ignite UI for Angular for detailed graphs and filterable, pagable grids.
+- Uses `Cloud Firestore` for the storage of all scouting data.
+- Uses `The Blue Alliance v3 HTTP API` for retrieval of event and team specific information such as the teams competing and their ccwm.
+- Uses `Google Apps Scripts` for adding scouting data to an external Google Sheets page.
+- Uses `Infragistics Ignite UI for Angular` for detailed graphs and filterable, pagable grids.
 
 ## Usage
 - Installing Ionic
-  - Intructions for installing ionic can be found here: https://ionicframework.com/docs/intro/installation/
+  - Intructions for installing ionic can be found here: https://beta.ionicframework.com/docs/installation/cli
 
 - Setting up the app
   - Run `npm i` while in the root directory to install all the node dependencies.

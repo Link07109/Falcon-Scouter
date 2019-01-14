@@ -4,15 +4,11 @@ import { Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-import { TeamsPage } from "./pages/teams/teams.page";
-import { FormEditorPage } from "./pages/form-editor/form-editor.page";
-
 import { ThemeService } from './services/theme.service';
 
 import { PopoverPage, selectedTheme } from './pages/popover/popover.page';
 
 import { timer } from 'rxjs';
-import { IntroPage } from './pages/intro/intro.page';
 
 @Component({
   selector: 'app-root',
@@ -20,13 +16,17 @@ import { IntroPage } from './pages/intro/intro.page';
 })
 export class AppComponent {
 
-  timerr = timer(0, 1000)
+  timerr = timer(0, 750)
   currentTheme = ''
 
   pages = [
-    { title: 'Teams Page', component: TeamsPage },
-    { title: 'Form Builder Page', component: FormEditorPage },
-    { title: 'Intro Page', component: IntroPage },
+    { title: 'Intro', link: '/intro' },
+    { title: 'Dashboard', link: '/dash' },
+    { title: 'Teams', link: '/teams' },
+    { title: 'Create', link: '/create' },
+    { title: 'Form Editor', link: '/form_editor' },
+    { title: 'Help', link: '/help' },
+    { title: 'Picks', link: '/picks' },
   ];
 
   themesHMM = {

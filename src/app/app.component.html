@@ -3,6 +3,7 @@
     <ion-toolbar>
       <ion-title text-center>FalconScoutApp</ion-title> <!-- put name of each page here -->
       <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
         <ion-back-button></ion-back-button>
         <ion-button routerLink="/help">
           <ion-icon slot="icon-only" name="help"></ion-icon>
@@ -27,8 +28,8 @@
       <ion-toolbar>
         <img src="../assets/imgs/FalconLogoWhiteMaroon.png">
         <ion-list>
-          <ion-item *ngFor="let page of pages" routerLink="/intro">
-            <h4>{{page.title}}</h4>
+          <ion-item *ngFor="let page of pages" routerLink="{{ page.link }}">
+            <h4>{{ page.title }}</h4>
           </ion-item>
         </ion-list>
       </ion-toolbar>
