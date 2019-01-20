@@ -1,20 +1,14 @@
 <ion-app>
   <ion-header>
     <ion-toolbar>
-      <ion-title text-center>FalconScoutApp</ion-title> <!-- put name of each page here -->
+      <ion-title>FalconScoutApp</ion-title> <!-- put name of each page here -->
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
-        <ion-back-button></ion-back-button>
-        <ion-button routerLink="/help">
-          <ion-icon slot="icon-only" name="help"></ion-icon>
-        </ion-button>
+        <!-- <ion-back-button></ion-back-button> -->
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button routerLink="/create">
-          <ion-icon slot="icon-only" name="add-circle"></ion-icon>
-        </ion-button>
         <ion-button routerLink="/form_editor">
-          <ion-icon slot="icon-only" name="albums"></ion-icon>
+          <ion-icon slot="icon-only" name="flask"></ion-icon>
         </ion-button>
         <ion-button (click)="presentPopover($event)">
           <ion-icon slot="icon-only" name="more"></ion-icon>
@@ -29,7 +23,8 @@
         <img src="../assets/imgs/FalconLogoWhiteMaroon.png">
         <ion-list>
           <ion-item *ngFor="let page of pages" routerLink="{{ page.link }}">
-            <h4>{{ page.title }}</h4>
+            <ion-icon name="{{ page.icon }}"></ion-icon>
+            <ion-label color="dark">{{ page.title }}</ion-label>
           </ion-item>
         </ion-list>
       </ion-toolbar>

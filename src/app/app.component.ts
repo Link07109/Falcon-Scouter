@@ -20,13 +20,12 @@ export class AppComponent {
   currentTheme = ''
 
   pages = [
-    { title: 'Intro', link: '/intro' },
-    { title: 'Dashboard', link: '/dash' },
-    { title: 'Teams', link: '/teams' },
-    { title: 'Create', link: '/create' },
-    { title: 'Form Editor', link: '/form_editor' },
-    { title: 'Help', link: '/help' },
-    { title: 'Picks', link: '/picks' },
+    { icon: 'image', title: 'Intro', link: '/intro' },
+    { icon: 'bookmarks', title: 'Dashboard', link: '/dash' },
+    { icon: 'filing', title: 'Teams', link: '/teams' },
+    { icon: 'flask', title: 'Form Editor', link: '/form_editor' },
+    { icon: 'list', title: 'Picks', link: '/picks' },
+    { icon: 'help', title: 'Help', link: '/help' },
   ];
 
   themesHMM = {
@@ -40,19 +39,19 @@ export class AppComponent {
     },
     dusk: {
       primary: '#5d5e60',
-      secondary: '#513B56',
+      secondary: '#5DD39E',
       tertiary: '#348AA7',
       dark: '#ffffff',
-      medium: '#5DD39E',
+      medium: '#513B56',
       light: '#2b2727'
     },
     nether: {
       primary: '#8f6593',
-      secondary: '#cdcdcd',
-      tertiary: '#e3e4db',
-      dark: '#aea4bf',
+      secondary: '#aea4bf',
+      tertiary: '#cdcdcd',
+      dark: '#e3e4db',
       medium: '#BCE784',
-      light: '#3b252c'
+      light: '#6e4552'
     }
   }
 

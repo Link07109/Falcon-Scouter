@@ -8,30 +8,45 @@
 </ion-header>
 
 <ion-content padding>
-  
-  <ion-grid *ngIf="!hasChosenTemplate">
-    <ion-row>
-      <ion-col>
-        <ion-card (click)="die()">
-          <ion-card-content text-center>
-            <ion-icon color="dark" name="add"></ion-icon>
-            <br />
-            <ion-label color="dark">New Template</ion-label>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
 
-      <ion-col *ngFor="let template of templatesArray">
-        <ion-card (click)="loadHTML(template)">
-          <ion-card-content>
-            <ion-label color="dark" [innerHTML]="template.name"></ion-label>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-list *ngIf="!hasChosenTemplate">
 
-  <div [innerHTML]="templateHTML" *ngIf="hasChosenTemplate"></div>
+    <!-- <ion-list radio-group>
+      <ion-list-header>
+        Silence Phone
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label color="dark">Always</ion-label>
+        <ion-radio value="always" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark">Only while phone is locked</ion-label>
+        <ion-radio value="locked"></ion-radio>
+      </ion-item>
+    </ion-list> -->
+
+    <ion-card ion-item (click)="die()">
+      <ion-item>
+        <ion-icon name="brush" item-start color="dark"></ion-icon>
+        <ion-label text-center color="dark">Create Template</ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-item *ngFor="let template of templatesArray">
+      <ion-card>
+        <ion-item>
+          <ion-icon name="flask" item-start color="dark"></ion-icon>
+          <ion-label text-center color="dark" (click)="loadHTML(template)" [innerHTML]="template.name"></ion-label>
+          <ion-button outline item-end (click)="TODO()">Edit</ion-button>
+        </ion-item>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-card>
+    <ion-list [innerHTML]="templateHTML" *ngIf="hasChosenTemplate">
+    </ion-list>
+  </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="hasChosenTemplate">
     <!-- Add -->
@@ -42,7 +57,7 @@
     <ion-fab-list side="top">
       <!-- Selector -->
       <ion-fab-button (click)=selectorAlert() data-desc="Add item selector">
-        <ion-icon name="buffer"></ion-icon>
+        <ion-icon name="options"></ion-icon>
       </ion-fab-button>
 
       <!-- Checkbox -->
@@ -50,9 +65,15 @@
         <ion-icon name="checkbox"></ion-icon>
       </ion-fab-button>
 
-      <!-- <ion-fab-button (click)="createElement('<app-counter></app-counter>');"> -->
+      <!-- Toggle -->
+      <ion-fab-button (click)="createComponent('toggle')" data-desc="Add toggle">
+        <ion-icon name="switch"></ion-icon>
+      </ion-fab-button>
+
       <!-- Counter -->
-      <ion-fab-button (click)="createComponent('counter', '<ion-button>-</ion-button><ion-button>+</ion-button>')" data-desc="Counter">
+      <!-- <ion-fab-button (click)="createElement('<app-counter></app-counter>')"> -->
+      <ion-fab-button (click)="createComponent('counter', '<ion-button color=`secondary`>-</ion-button><ion-button color=`secondary`>+</ion-button>')"
+        data-desc=" Add counter">
         <ion-icon name="chatbubbles"></ion-icon>
       </ion-fab-button>
 
@@ -67,14 +88,9 @@
       </ion-fab-button>
 
       <!-- Header -->
-      <ion-fab-button (click)="createComponent('input')" data-desc="Add header">
+      <!-- <ion-fab-button (click)="createComponent('input')" data-desc="Add header">
         <ion-icon name="list"></ion-icon>
-      </ion-fab-button>
-
-      <!-- Card -->
-      <ion-fab-button (click)="createComponent('card')" data-desc="Add card">
-        <ion-icon name="card"></ion-icon>
-      </ion-fab-button>
+      </ion-fab-button> -->
 
     </ion-fab-list>
   </ion-fab>
@@ -88,7 +104,6 @@
   <ion-card>
     <ion-list>
       <ion-reorder-group id="divID" *ngIf="hasChosenTemplate">
-        <!-- <div ></div> -->
       </ion-reorder-group>
     </ion-list>
   </ion-card>

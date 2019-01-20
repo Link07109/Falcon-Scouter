@@ -14,7 +14,6 @@ export class FormEditorPage implements OnInit {
   private templateName
   public templatesArray = []
   templateComponents = []
-  jhtml = []
   public templateHTML
   public hasChosenTemplate = false
 
@@ -22,14 +21,7 @@ export class FormEditorPage implements OnInit {
     public kms: DomSanitizer,
     private firestoreService: FirestoreService,
     public alertController: AlertController,
-  ) {
-    // reorderGroup.addEventListener('ionItemReorder', (ev) => {
-    //   console.log(`Moving item from ${ev.detail.from} to ${ev.detail.to}`);
-    
-    //   this.dataList = reorderArray(this.dataList, ev.detail.from, ev.detail.to);
-    //   ev.detail.complete();
-    // });
-  }
+  ) {  }
 
   ngOnInit() {
     this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges();
@@ -51,7 +43,7 @@ export class FormEditorPage implements OnInit {
 
   createElement(html) {
     const elem = document.createElement('ion-item-sliding');
-    elem.innerHTML = `<ion-item>` + html + `</ion-item><ion-item-options side="start"><button ion-button (click)="delete(item)">Delete</button></ion-item-options>`;
+    elem.innerHTML = html + `<ion-item-options side="start"><button ion-button (click)="delete(item)">Delete</button></ion-item-options>`;
     if (elem.childNodes.length > 0) {
       document.getElementById('divID').appendChild(elem);
       return elem.childNodes[0];
@@ -115,19 +107,11 @@ export class FormEditorPage implements OnInit {
             const html = data['labelName'] + `<ion-select id="${data['labelName']}">${stringg}</ion-select>`
             this.createElement(html)
             this.templateComponents.push(data)
-            //this.jhtml.push(html)
           }
         }
       ]
     });
     await alert.present();
-  }
-
-  reorderArray(array, startingIndex, endingIndex) {
-    let temp = 0
-    temp = array[startingIndex]
-    array[startingIndex].index = array[endingIndex]
-    array[endingIndex].index = temp
   }
 
   async createComponent(componentName, html = '') {
@@ -157,10 +141,9 @@ export class FormEditorPage implements OnInit {
             } else {
               prefix = data['labelName']
             }
-            html = `${prefix}<ion-${componentName} id="${data['labelName']}"}>${html}</ion-${componentName}>`
+            html = `<ion-item><ion-label color="dark">${prefix}</ion-label><ion-${componentName} color="secondary" id="${data['labelName']}"}>${html}</ion-${componentName}></ion-item>`
             this.createElement(html)
             this.templateComponents.push(data)
-            //this.jhtml.push(html)
           }
         }
       ]
