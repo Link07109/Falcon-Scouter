@@ -36,7 +36,7 @@ p {
   position: relative;
   background: url("../../../assets/imgs/scrollingbgfalcon.png") no-repeat transparent;
   background-size: cover;
-  height: 45%;
+  height: 60%;
   z-index: 1;
   background-repeat: repeat-x;
   animation: animatedBackground 40s linear infinite;
@@ -69,7 +69,7 @@ p {
 }
 
 .splash-intro {
-  font-size: 22px;
+  font-size: 5vh;
   font-weight: bold;
   max-width: 80%;
   margin: auto;
