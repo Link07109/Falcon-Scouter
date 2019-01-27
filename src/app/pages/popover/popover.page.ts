@@ -10,12 +10,12 @@ export var selectedTheme = ''
 export class PopoverPage implements OnInit {
 
   themes = [
-    'rain',
-    'dusk',
-    'nether',
-    'autumn',
-    'night',
-    'neon',
+    'Rain',
+    'Dusk',
+    'Nether',
+    'Autumn',
+    'Night',
+    'Neon',
   ]
 
   constructor() { }

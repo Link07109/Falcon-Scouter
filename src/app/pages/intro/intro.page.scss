@@ -1,83 +1,77 @@
 .toolbar-background {
-    background: transparent;
-    border-color: transparent;
+  background: transparent;
+  border-color: transparent;
 }
 
 .slide-zoom {
-    height: 100%;
+  height: 100%;
 }
 
 .slide-title {
-    margin-top: 2.8rem;
+  margin-top: 2.8rem;
 }
 
 .slide-image {
-    min-height: 80%;
-    max-width: 70%;
-    margin: 36px 0;
-    padding-left: 30%;
+  min-height: 80%;
+  max-width: 70%;
+  margin: 36px 0;
+  padding-left: 30%;
 }
 
-ion-slide {
-    min-height: 170px;
+.slides, .slides-ios {
+  max-height: 100% !important;
 }
 
 b {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 p {
-    padding: 0 40px;
-    font-size: 14px;
-    line-height: 1.5;
+  padding: 0 40px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-    .splash-bg {
-      position: relative;
-      background: url('../../../assets/imgs/scrollingbgfalcon.png') no-repeat transparent;
-      background-size: cover;
-      height: 45%;
-      z-index: 1;
-      background-repeat: repeat-x;
-      animation: animatedBackground 40s linear infinite;
-    }
-  
-    @keyframes animatedBackground {
-      from { background-position: 0 0; }
-      to { background-position: 100% 0; }
-    }
-  
-    .splash-info {
-      position: relative;
-      z-index: 2;
-      margin-top: -64px;
-      text-align: center;
-    }
-    .splash-logo {
-      margin: auto;
-      background: url('../../../assets/imgs/FalconLogoWhiteMaroon.png') repeat transparent;
-      border-radius: 50%;
-      border: 2px white dashed; //outset //inset //dashed
-      background-size: 100%;
-      width: 128px;
-      height: 128px;
-    }
-    .splash-intro {
-      font-size: 22px;
-      font-weight: bold;
-      max-width: 80%;
-      margin: auto;
-      margin-top: 5%
-    }
-    ion-button.login {
-      margin-top: 25px;
-      background-color: white;
-      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
-      color: #333;
-  
-      &.activated {
-        background-color: rgb(220, 220, 220);
-      }
-    }
-  
-  
+.splash-bg {
+  position: relative;
+  background: url("../../../assets/imgs/scrollingbgfalcon.png") no-repeat transparent;
+  background-size: cover;
+  height: 45%;
+  z-index: 1;
+  background-repeat: repeat-x;
+  animation: animatedBackground 40s linear infinite;
+}
+
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.splash-info {
+  position: relative;
+  z-index: 2;
+  margin-top: -64px;
+  text-align: center;
+}
+
+.splash-logo {
+  margin: auto;
+  background: url("../../../assets/imgs/FalconLogoWhiteMaroon.png") repeat transparent;
+  border-radius: 50%;
+  border: 2px white dashed;
+  background-size: 100%;
+  width: 128px;
+  height: 128px;
+}
+
+.splash-intro {
+  font-size: 22px;
+  font-weight: bold;
+  max-width: 80%;
+  margin: auto;
+  margin-top: 5%;
+}

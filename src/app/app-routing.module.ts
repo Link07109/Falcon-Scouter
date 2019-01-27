@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'picks', loadChildren: './pages/picks/picks.module#PicksPageModule' },
   { path: 'form_editor', loadChildren: './pages/form-editor/form-editor.module#FormEditorPageModule' },
   { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
+  { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
 ];
 
 @NgModule({

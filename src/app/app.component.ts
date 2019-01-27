@@ -12,7 +12,8 @@ import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
 
@@ -26,6 +27,7 @@ export class AppComponent {
     { icon: 'flask', title: 'Form Editor', link: '/form_editor' },
     { icon: 'list', title: 'Picks', link: '/picks' },
     { icon: 'help', title: 'Help', link: '/help' },
+    { icon: 'settings', title: 'Settings', link: '/settings'}
   ];
 
   themesHMM = {
