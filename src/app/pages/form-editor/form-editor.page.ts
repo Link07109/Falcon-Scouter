@@ -24,40 +24,52 @@ export class FormEditorPage implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges();
-    this.setupArray();
+    this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
+    this.setupArray()
+    const reorderGroup = document.getElementById('reorder')
+    // reorderGroup.disabled = false
   }
 
   setupArray() {
     this.templates.subscribe(data => {
       data.forEach(element => {
-        this.templatesArray.push(element);
-      });
-    });
+        this.templatesArray.push(element)
+      })
+    })
   }
 
   loadHTML(element) {
-    this.templateHTML = this.kms.bypassSecurityTrustHtml(element.templateHTML);
-    this.hasChosenTemplate = true;
+    this.templateHTML = this.kms.bypassSecurityTrustHtml(element.templateHTML)
+    this.hasChosenTemplate = true
   }
 
-  createElement(html) {
-    const elem = document.createElement('ion-item-sliding');
-    elem.innerHTML = html + `<ion-item-options side="start"><button ion-button (click)="delete(item)">Delete</button></ion-item-options>`;
+  deelete(element: HTMLIonItemSlidingElement) {
+    // element.parentNode.removeChild(element)
+    document.getElementById('divID').removeChild(element)
+    console.log(document.getElementById('divID').children)
+  }
+
+  createElement(html, id) {
+    const elem = document.createElement('ion-item-sliding') //  (ionSwipe)="delete({{elem}})"
+    elem.setAttribute('id', id)
+    elem.innerHTML = html + `<ion-item-options side="start"><ion-button (click)='deelete(elem)'>Delete</ion-button></ion-item-options>`
+    // let kms = document.createElement('button')
+    // kms.onclick = {() => this.deelete(elem)}
+    
     if (elem.childNodes.length > 0) {
-      document.getElementById('divID').appendChild(elem);
-      return elem.childNodes[0];
+      document.getElementById('divID').appendChild(elem)
+      return elem.childNodes[0]
     }
   }
 
   die() {
-    this.hasChosenTemplate = true;
+    this.hasChosenTemplate = true
   }
 
   save() {
-    const template = document.getElementById('divID').outerHTML;
+    const template = document.getElementById('divID').outerHTML
     // const template = this.templateHTML
-    this.inputAlert('Save Template', template);
+    this.inputAlert('Save Template', template)
   }
 
   async selectorAlert() {
@@ -97,6 +109,7 @@ export class FormEditorPage implements OnInit {
           text: 'Ok',
           handler: data => {
             let stringg = ''
+            const name = data['labelName']
 
             Object.entries(data).forEach(([key, value]) => {
               console.log(key, value)
@@ -104,8 +117,8 @@ export class FormEditorPage implements OnInit {
               stringg += `<ion-select-option>${value}</ion-select-option>`
             })
 
-            const html = data['labelName'] + `<ion-select id="${data['labelName']}">${stringg}</ion-select>`
-            this.createElement(html)
+            const html = name + `<ion-select id="${name}">${stringg}</ion-select>`
+            this.createElement(html, name)
             this.templateComponents.push(data)
           }
         }
@@ -136,13 +149,15 @@ export class FormEditorPage implements OnInit {
           text: 'Ok',
           handler: data => {
             let prefix = ''
+            const name = data['labelName']
+
             if (componentName == 'button') {
-              html = data['labelName']
+              html = name
             } else {
-              prefix = data['labelName']
+              prefix = name
             }
             html = `<ion-item><ion-label color="dark">${prefix}</ion-label><ion-${componentName} color="secondary" id="${data['labelName']}"}>${html}</ion-${componentName}></ion-item>`
-            this.createElement(html)
+            this.createElement(html, name)
             this.templateComponents.push(data)
           }
         }

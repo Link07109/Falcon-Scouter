@@ -1,21 +1,6 @@
 <ion-header color="light" style="padding-bottom: 80px">
-  <ion-toolbar color="light">
-</ion-toolbar>
-
+  <ion-toolbar color="light"></ion-toolbar>
   <ion-searchbar color="light" (ionInput)="getItems($event)" style="z-index: 2" placeholder="Type to search..."></ion-searchbar>
-
-  <ion-scroll scrollX=”true” style="padding-top: 110px; z-index: -1">
-    <ion-grid>
-      <ion-row nowrap>
-        <ion-col *ngFor="let stat of stats">
-          <ion-card>
-            <ion-label text-center color="dark" [innerHTML]="stat"></ion-label>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-scroll>
-
 </ion-header>
 
 <ion-content padding>

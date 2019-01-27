@@ -30,7 +30,6 @@ p {
     padding: 0 40px;
     font-size: 14px;
     line-height: 1.5;
-    color: #60646B;
 }
 
     .splash-bg {
@@ -56,16 +55,19 @@ p {
     }
     .splash-logo {
       margin: auto;
-      background: url('../../../assets/imgs/appicon.png') repeat transparent;
+      background: url('../../../assets/imgs/FalconLogoWhiteMaroon.png') repeat transparent;
+      border-radius: 50%;
+      border: 2px white dashed; //outset //inset //dashed
       background-size: 100%;
       width: 128px;
       height: 128px;
     }
     .splash-intro {
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
       max-width: 80%;
       margin: auto;
+      margin-top: 5%
     }
     ion-button.login {
       margin-top: 25px;

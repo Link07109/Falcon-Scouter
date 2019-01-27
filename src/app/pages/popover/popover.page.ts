@@ -12,7 +12,10 @@ export class PopoverPage implements OnInit {
   themes = [
     'rain',
     'dusk',
-    'nether'
+    'nether',
+    'autumn',
+    'night',
+    'neon',
   ]
 
   constructor() { }
