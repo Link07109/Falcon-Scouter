@@ -26,7 +26,7 @@ export class FormEditorPage implements OnInit {
   ngOnInit() {
     this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
     this.setupArray()
-    const reorderGroup = document.getElementById('reorder')
+    // const reorderGroup = document.getElementById('reorder')
     // reorderGroup.disabled = false
   }
 
@@ -38,9 +38,22 @@ export class FormEditorPage implements OnInit {
     })
   }
 
-  loadHTML(element) {
+  toggleChosenTemplateBool() {
+    this.hasChosenTemplate = true
+  }
+
+  loadHTMLToEdit(element) {
     this.templateHTML = this.kms.bypassSecurityTrustHtml(element.templateHTML)
     this.hasChosenTemplate = true
+  }
+
+  loadHTMLToUse(element) {
+    console.log('TODO')
+  }
+
+  saveTemplate() {
+    const template = document.getElementById('divID').outerHTML
+    this.inputAlert('Save Template', template)
   }
 
   deelete(element: HTMLIonItemSlidingElement) {
@@ -60,14 +73,43 @@ export class FormEditorPage implements OnInit {
     }
   }
 
-  die() {
-    this.hasChosenTemplate = true
-  }
+  async createComponent(componentName, html = '') {
+    const alert = await this.alertController.create({
+      header: `Create new ${componentName}`,
+      inputs: [
+        {
+          name: 'labelName',
+          type: 'text',
+          placeholder: 'placeholder'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            let prefix = ''
+            const name = data['labelName']
 
-  save() {
-    const template = document.getElementById('divID').outerHTML
-    // const template = this.templateHTML
-    this.inputAlert('Save Template', template)
+            if (componentName == 'button') {
+              html = name
+            } else {
+              prefix = name
+            }
+            html = `<ion-item><ion-label color="dark">${prefix}</ion-label><ion-${componentName} color="secondary" id="${data['labelName']}"}>${html}</ion-${componentName}></ion-item>`
+            this.createElement(html, name)
+            this.templateComponents.push(data)
+          }
+        }
+      ]
+    })
+    await alert.present()
   }
 
   async selectorAlert() {
@@ -121,47 +163,8 @@ export class FormEditorPage implements OnInit {
           }
         }
       ]
-    });
-    await alert.present();
-  }
-
-  async createComponent(componentName, html = '') {
-    const alert = await this.alertController.create({
-      header: `Create new ${componentName}`,
-      inputs: [
-        {
-          name: 'labelName',
-          type: 'text',
-          placeholder: 'placeholder'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Ok',
-          handler: data => {
-            let prefix = ''
-            const name = data['labelName']
-
-            if (componentName == 'button') {
-              html = name
-            } else {
-              prefix = name
-            }
-            html = `<ion-item><ion-label color="dark">${prefix}</ion-label><ion-${componentName} color="secondary" id="${data['labelName']}"}>${html}</ion-${componentName}></ion-item>`
-            this.createElement(html, name)
-            this.templateComponents.push(data)
-          }
-        }
-      ]
-    });
-    await alert.present();
+    })
+    await alert.present()
   }
 
   async inputAlert(title: string, template) {
@@ -185,14 +188,14 @@ export class FormEditorPage implements OnInit {
         {
           text: 'Ok',
           handler: data => {
-            this.templateName = data['Template Name'];
-            this.presentAlert('Template Saved');
-            this.firestoreService.saveScoutingTemplate(this.templateName, template, this.templateComponents);
+            this.templateName = data['Template Name']
+            this.presentAlert('Template Saved')
+            this.firestoreService.saveScoutingTemplate(this.templateName, template, this.templateComponents)
           }
         }
       ]
-    });
-    await alert.present();
+    })
+    await alert.present()
   }
 
   async presentAlert(title: string, message?: string) {
@@ -206,8 +209,8 @@ export class FormEditorPage implements OnInit {
           }
         }
       ]
-    });
-    await alert.present();
+    })
+    await alert.present()
   }
 
 }
