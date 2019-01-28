@@ -36,4 +36,4 @@ Ionic remake of the original android scouting app used by FRC 5190 during the FI
   - Brower through a development server
     - Open a terminal window in the root directory and run `ionic serve --lab`.
   - Physical device
-    - Ionic docs concering running ionic apps on physical devices: https://ionicframework.com/docs/intro/deploying/
+    - Ionic docs concerning running ionic apps on physical devices: https://ionicframework.com/docs/intro/deploying/
