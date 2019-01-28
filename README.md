@@ -3,7 +3,7 @@ Ionic remake of the original android scouting app used by FRC 5190 during the FI
 
 ## About
 - Uses `Cloud Firestore` for the storage of all scouting data.
-- Uses `The Blue Alliance v3 HTTP API` for retrieval of event and team specific information such as the teams competing and their ccwm.
+- Uses `The Blue Alliance v3 HTTP API` for retrieval of event and team specific information.
 - Uses `Google Apps Scripts` for adding scouting data to an external Google Sheets page.
 <!-- - Uses `Infragistics Ignite UI for Angular` for detailed graphs and filterable, pagable grids. -->
 
