@@ -7,10 +7,6 @@
   height: 100%;
 }
 
-.slide-title {
-  margin-top: 2.8rem;
-}
-
 .slide-image {
   min-height: 80%;
   max-width: 70%;
@@ -18,8 +14,8 @@
   padding-left: 30%;
 }
 
-.slides, .slides-ios {
-  max-height: 100% !important;
+.idk {
+  margin-bottom: 10vh;
 }
 
 b {
@@ -36,7 +32,7 @@ p {
   position: relative;
   background: url("../../../assets/imgs/scrollingbgfalcon.png") no-repeat transparent;
   background-size: cover;
-  height: 60%;
+  height: 58%;
   z-index: 1;
   background-repeat: repeat-x;
   animation: animatedBackground 40s linear infinite;
@@ -69,9 +65,10 @@ p {
 }
 
 .splash-intro {
-  font-size: 5vh;
+  font-size: 4vh;
   font-weight: bold;
   max-width: 80%;
   margin: auto;
   margin-top: 5%;
+  margin-bottom: 5%;
 }

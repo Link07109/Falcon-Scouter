@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { xTBAauthKey } from '../../../app/credentials';
-import { Match } from '../../models/match.interface';
+ ;
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class BlueAllianceService {
   constructor(private http: Http) {
   }
 
-  postDataToSpreadsheet(sheetId: string, match: Match) {
+  postDataToSpreadsheet(sheetId: string, match: any) {
     const url = this.sheetsUrl;
     // const json = {
     //   startingPosition: match.startingPosition,

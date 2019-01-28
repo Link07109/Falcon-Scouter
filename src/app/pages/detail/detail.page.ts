@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { Observable } from 'rxjs';
-import { Match } from '../../models/match.interface';
-import { currentEvent } from '../intro/intro.page';
+ ;
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-detail',
@@ -11,7 +11,7 @@ import { currentEvent } from '../intro/intro.page';
   styleUrls: ['./detail.page.scss'],
 })
 export class DetailPage implements OnInit {
-  public match: Observable<Match>;
+  public match: Observable<any>;
   public team;
 
   constructor(

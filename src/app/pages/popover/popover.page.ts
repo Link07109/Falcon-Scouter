@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { themes } from '../../consts';
 
 export var selectedTheme = ''
 
@@ -9,18 +10,14 @@ export var selectedTheme = ''
 })
 export class PopoverPage implements OnInit {
 
-  themes = [
-    'Rain',
-    'Dusk',
-    'Nether',
-    'Autumn',
-    'Night',
-    'Neon',
-  ]
+  themees = []
 
   constructor() { }
 
   ngOnInit() {
+    for (var theme in themes) {
+      this.themees.push(theme)
+    }
   }
 
   changeThisTheme(name: string) {

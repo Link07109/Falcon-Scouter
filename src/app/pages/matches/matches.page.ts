@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { statNames, modifiedStatNames } from '../../consts';
-import { Team } from '../../models/team.interface';
-import { currentEvent } from '../intro/intro.page';
+ ;
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-matches',
@@ -16,7 +16,7 @@ export class MatchesPage implements OnInit {
   public teamNumber: string;
   public showStats = true;
   public showTeamAverages = false;
-  public team: Team;
+  public team: any;
 
   // these values would be the average number for each stat (percentages?) might need two graphs for that :thinking:
   // ability to comparae graphs with other teams would be a nice addition for the future

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
-import { Match } from '../../models/match.interface';
-import { currentEvent } from '../intro/intro.page';
+ ;
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-dash',
@@ -11,7 +11,6 @@ import { currentEvent } from '../intro/intro.page';
 export class DashPage implements OnInit {
   public matchCollectionObservable;
   public team = 'frc5190';
-  public matchKys: Match;
 
   constructor(
     private blueAllianceService: BlueAllianceService

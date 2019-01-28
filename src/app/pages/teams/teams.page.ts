@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../services/data/firestore.service';
-import { Team } from '../../models/team.interface';
+ ;
 import { modifiedStatNames } from '../../consts';
-import { currentEvent } from '../intro/intro.page';
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-teams',
@@ -13,7 +13,7 @@ export class TeamsPage implements OnInit {
   public teamCollectionObservable
   public filteredArray = []
   public kmsAray = []
-  public team: Team
+  public team: any
   public stats = modifiedStatNames
 
   constructor(private firestoreService: FirestoreService) { }

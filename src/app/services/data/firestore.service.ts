@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Match } from '../../models/match.interface';
+ ;
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class FirestoreService {
 
   constructor(public firestore: AngularFirestore) { }
 
-  createMatch(event: string, match: Match): Promise<void> {
+  createMatch(event: string, match: any): Promise<void> {
     return this.firestore.doc(`events/${event}/teams/${match.teamNumber}/matches/${match.matchNumber}`)
       .set(match);
   }
@@ -19,12 +19,12 @@ export class FirestoreService {
     return this.firestore.collection(`teams`);
   }
 
-  getMatchList(event: string, teamNumber: any): AngularFirestoreCollection<Match> {
+  getMatchList(event: string, teamNumber: any): AngularFirestoreCollection<any> {
     // return this.firestore.collection(`events/${event}/teams/${teamNumber}/matches`);
     return this.firestore.collection(`teams/${teamNumber}/matches`);
   }
 
-  getMatchDetail(event: string, teamNumber: any, matchNumber: any): AngularFirestoreDocument<Match> {
+  getMatchDetail(event: string, teamNumber: any, matchNumber: any): AngularFirestoreDocument<any> {
     // return this.firestore.doc(`events/${event}/teams/${teamNumber}/matches/${matchNumber}`);
     return this.firestore.doc(`teams/${teamNumber}/matches/${matchNumber}`);
   }

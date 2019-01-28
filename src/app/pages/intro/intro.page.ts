@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-export var currentEvent = '2018nccmp'
-// 2019NCWAK, 2019NCASH, 2019NCCMP
+import { currentEvent } from '../../consts';
 
 @Component({
   selector: 'app-intro',
@@ -10,19 +8,13 @@ export var currentEvent = '2018nccmp'
 })
 export class IntroPage implements OnInit {
 
-  slides = [
-    {
-      title: '',
-    }
-  ];
-
   constructor() { }
 
   ngOnInit() {
   }
 
   saveComp() {
-    currentEvent = document.getElementById('hi').nodeValue
+    // currentEvent = document.getElementById('hi').nodeValue
     console.log(currentEvent)
   }
 

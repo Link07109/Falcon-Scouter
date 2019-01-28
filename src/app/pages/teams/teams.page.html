@@ -1,6 +1,6 @@
-<ion-header color="light" style="padding-bottom: 80px">
-  <ion-toolbar color="light"></ion-toolbar>
-  <ion-searchbar color="light" (ionInput)="getItems($event)" style="z-index: 2" placeholder="Type to search..."></ion-searchbar>
+<ion-header>
+  <ion-toolbar></ion-toolbar>
+  <ion-searchbar color="light" (ionInput)="getItems($event)" placeholder="Type to search..."></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
@@ -8,13 +8,11 @@
   <ion-scroll scrollX="true">
     <ion-grid>
       <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{team.teamNumber}}">
-        <ion-col>
-          <b>
-            {{ team.teamNumber }}
-          </b>
+        <ion-col text-center>
+          <ion-label>{{ team.teamNumber }}</ion-label>
         </ion-col>
-        <!-- <ion-col *ngFor="let teamm of averageMatchData(team.teamNumber)" [innerHTML]="teamm.teamNumber"></ion-col> -->
       </ion-row>
     </ion-grid>
   </ion-scroll>
+
 </ion-content>

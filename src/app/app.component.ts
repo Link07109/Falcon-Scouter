@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-
 import { Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 import { ThemeService } from './services/theme.service';
-
 import { PopoverPage, selectedTheme } from './pages/popover/popover.page';
-
 import { timer } from 'rxjs';
+import { themes, menuPages } from './consts';
 
 @Component({
   selector: 'app-root',
@@ -20,66 +17,7 @@ export class AppComponent {
   timerr = timer(0, 750)
   currentTheme = ''
 
-  pages = [
-    { icon: 'image', title: 'Intro', link: '/intro' },
-    { icon: 'bookmarks', title: 'Dashboard', link: '/dash' },
-    { icon: 'filing', title: 'Teams', link: '/teams' },
-    { icon: 'flask', title: 'Form Editor', link: '/form_editor' },
-    { icon: 'list', title: 'Picks', link: '/picks' },
-    { icon: 'help', title: 'Help', link: '/help' },
-    { icon: 'settings', title: 'Settings', link: '/settings'}
-  ];
-
-  themesHMM = {
-    rain: {
-      primary: '#95b8d1',
-      secondary: '#333333',
-      tertiary: '#bfc8ad',
-      dark: '#dbcfb0',
-      medium: '#BCE784',
-      light: '#666a86',
-    },
-    dusk: {
-      primary: '#5d5e60',
-      secondary: '#5DD39E',
-      tertiary: '#348AA7',
-      dark: '#ffffff',
-      medium: '#513B56',
-      light: '#2b2727'
-    },
-    nether: {
-      primary: '#8f6593',
-      secondary: '#aea4bf',
-      tertiary: '#cdcdcd',
-      dark: '#e3e4db',
-      medium: '#BCE784',
-      light: '#6e4552'
-    },
-    autumn: {
-      primary: '#F78154',
-      secondary: '#4D9078',
-      tertiary: '#B4436C',
-      light: '#FDE8DF',
-      medium: '#FCD0A2',
-      dark: '#B89876'
-    },
-    night: {
-      primary: '#8CBA80',
-      secondary: '#FCFF6C',
-      tertiary: '#FE5F55',
-      medium: '#BCC2C7',
-      dark: '#F7F7FF',
-      light: '#495867'
-    },
-    neon: {
-      primary: '#39BFBD',
-      secondary: '#4CE0B3',
-      tertiary: '#FF5E79',
-      light: '#F4EDF2',
-      medium: '#B682A5',
-      dark: '#34162A'
-    }
-  }
+  pages = menuPages
 
   constructor(
     private platform: Platform,
@@ -117,8 +55,9 @@ export class AppComponent {
   }
 
   changeThemeHMMM(name) {
-    this.theme.setTheme(this.themesHMM[name])
+    const theme = themes[name]
+    this.theme.setTheme(theme)
     this.currentTheme = name
-    this.statusBar.backgroundColorByHexString(this.themesHMM[name]['primary']);
+    this.statusBar.backgroundColorByHexString(theme['primary']);
   }
 }

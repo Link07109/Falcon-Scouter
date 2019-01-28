@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollY="false">
+<ion-content scroll="false">
 
   <div class="splash-bg"></div>
   <div class="splash-info">
@@ -14,24 +14,19 @@
 
   <ion-slides pager>
     <!-- Content Slides -->
-    <ion-slide *ngFor="let slide of slides">
-      <div>
-        <h2 [innerHTML]="slide.title"></h2>
-        <p [innerHTML]="slide.description"></p>
-      </div>
+    <ion-slide>
     </ion-slide>
 
     <ion-slide>
-      <div>
-        ID of Competition Being Scouted:<ion-input id="hi" placeholder="Click here to type..."></ion-input>
+      <div class="idk">
+        ID of Competition Being Scouted:
+        <ion-input id="hi" placeholder="Click here to type..."></ion-input>
       </div>
     </ion-slide>
 
     <!-- Button Slide -->
     <ion-slide>
-      <div>
-        <ion-label>Ready to begin?</ion-label>
-        <br>
+      <div class="idk">
         <ion-button large clear icon-end color="primary" (click)="saveComp()" routerLink="/dash">
           Start Scouting
           <ion-icon name="arrow-forward"></ion-icon>
@@ -39,4 +34,5 @@
       </div>
     </ion-slide>
   </ion-slides>
+
 </ion-content>
