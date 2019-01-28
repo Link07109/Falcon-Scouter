@@ -1,7 +1,7 @@
 # FalconScoutApp
 Ionic remake of the original android scouting app used by FRC 5190 during the FIRST Power Up season.
 
-## Features
+## About
 - Uses `Cloud Firestore` for the storage of all scouting data.
 - Uses `The Blue Alliance v3 HTTP API` for retrieval of event and team specific information such as the teams competing and their ccwm.
 - Uses `Google Apps Scripts` for adding scouting data to an external Google Sheets page.
@@ -15,7 +15,7 @@ Ionic remake of the original android scouting app used by FRC 5190 during the FI
   - Install node and npm
     - node and npm download: https://www.npmjs.com/get-npm
   - Install Ionic
-    - Ionic docs concerning installing: https://beta.ionicframework.com/docs/installation/cli
+    - Ionic docs concerning installing: https://ionicframework.com/docs/installation/cli
 
 - Setup
   - Run `npm i` while in the root directory to install all the node dependencies.
