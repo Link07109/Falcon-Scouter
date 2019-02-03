@@ -1,18 +1,30 @@
 <ion-header>
   <ion-toolbar></ion-toolbar>
-  <ion-searchbar color="light" (ionInput)="getItems($event)" placeholder="Type to search..."></ion-searchbar>
+  <ion-searchbar color="light" (ionInput)="getItems($event)" placeholder="Search for team..."></ion-searchbar>
 </ion-header>
 
 <ion-content padding>
 
   <ion-scroll scrollX="true">
+
     <ion-grid>
       <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{team.teamNumber}}">
+        <ion-col text-center size="2">
+          <ion-item>
+            <ion-icon name="help-buoy"></ion-icon>
+          </ion-item>
+        </ion-col>
         <ion-col text-center>
-          <ion-label>{{ team.teamNumber }}</ion-label>
+          <ion-item>
+            <ion-label>{{ team.teamNumber }}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col text-center size="8">
+          wlwlwlwl
         </ion-col>
       </ion-row>
     </ion-grid>
+
   </ion-scroll>
 
 </ion-content>

@@ -8,16 +8,16 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list *ngIf="!hasChosenTemplate">
+  <div *ngIf="!hasChosenTemplate">
 
-    <ion-card ion-item (click)="toggleChosenTemplateBool()">
+    <ion-card ion-item (click)="toggleChosenTemplateBool()" color="primary">
       <ion-item>
         <ion-icon name="add" item-start color="dark"></ion-icon>
         <ion-label text-center color="dark">Create Template</ion-label>
       </ion-item>
     </ion-card>
     <ion-item *ngFor="let template of templatesArray">
-      <ion-card>
+      <ion-card color="secondary">
         <ion-item>
           <ion-icon name="create" item-start color="dark"></ion-icon>
           <ion-label text-center color="dark" (click)="loadHTMLToUse(template)" [innerHTML]="template.name"></ion-label>
@@ -25,7 +25,7 @@
         </ion-item>
       </ion-card>
     </ion-item>
-  </ion-list>
+  </div>
 
   <ion-card>
     <ion-list [innerHTML]="templateHTML" *ngIf="hasChosenTemplate">

@@ -16,17 +16,18 @@
 
   <ion-menu>
     <ion-header>
-      <ion-toolbar>
+      
         <img src="../assets/imgs/FalconLogoWhiteMaroon.png" style="height: 25vh; width: 100%">
-        <!-- <ion-list> -->
-        <ion-item text-center *ngFor="let page of pages" routerLink="{{ page.link }}">
-          <ion-icon name="{{ page.icon }}"></ion-icon>
-          <ion-label color="dark">{{ page.title }}</ion-label>
-        </ion-item>
-        <!-- </ion-list> -->
-      </ion-toolbar>
+      
     </ion-header>
+    <ion-content>
+      <ion-item text-start *ngFor="let page of pages" routerLink="{{ page.link }}">
+        <ion-icon name="{{ page.icon }}" style="margin-right: 15%"></ion-icon>
+        <b>{{ page.title }}</b>
+      </ion-item>
+    </ion-content>
   </ion-menu>
+  
   <ion-router-outlet main></ion-router-outlet>
 
 </ion-app>

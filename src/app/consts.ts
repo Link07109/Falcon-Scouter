@@ -8,8 +8,8 @@ export const menuPages = [
   { icon: 'filing', title: 'Teams', link: '/teams' },
   { icon: 'create', title: 'Form Editor', link: '/form_editor' },
   { icon: 'list', title: 'Picks', link: '/picks' },
-  { icon: 'help', title: 'Help', link: '/help' },
-  { icon: 'settings', title: 'Settings', link: '/settings'}
+  { icon: 'settings', title: 'Settings', link: '/settings'},
+  { icon: 'help-circle', title: 'Help', link: '/help' },
 ]
 
 export const themes = {
@@ -31,11 +31,11 @@ export const themes = {
   },
   peach: {
     primary: '#F78154',
-    secondary: '#FDE8DF',
+    secondary: '#FE5F55',
     tertiary: '#4D9078',
     light: '#FCD0A2',
     medium: '#B89876',
-    dark: '#B4436C'
+    dark: '#5d5e60' // FDE8DF
   },
   twilight: {
     primary: '#95b8d1',
@@ -45,14 +45,14 @@ export const themes = {
     dark: '#F7F7FF',
     light: '#495867'
   },
-  neon: {
-    primary: '#39BFBD',
-    secondary: '#4CE0B3',
-    tertiary: '#FF5E79',
-    light: '#F4EDF2',
-    medium: '#B682A5',
-    dark: '#34162A'
-  }
+  // neon: {
+  //   primary: '#39BFBD',
+  //   secondary: '#4CE0B3',
+  //   tertiary: '#FF5E79',
+  //   light: '#F4EDF2',
+  //   medium: '#B682A5',
+  //   dark: '#34162A'
+  // }
 }
 
 export const statNames = [

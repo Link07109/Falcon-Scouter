@@ -18,6 +18,7 @@ export class DashPage implements OnInit {
 
   ngOnInit() {
     this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, currentEvent);
+    console.log(this.blueAllianceService.getImage(5190))
   }
 
   getItems(ev) {

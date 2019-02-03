@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { themes } from '../../consts';
+import { selectedTheme } from '../popover/popover.page';
+import { RadioGroup } from '@ionic/angular';
 
 @Component({
   selector: 'app-settings',
@@ -18,8 +20,11 @@ export class SettingsPage implements OnInit {
     }
   }
 
-  fun() {
-    console.log(document.getElementById('themeSelector').nodeValue)
+  changeThisTheme(name: string) {
+    // selectedTheme = name
+    const hmmmm = document.getElementById("radioGroup")
+    // console.log(hmmmm.value)
+    console.log(hmmmm)
   }
 
 }

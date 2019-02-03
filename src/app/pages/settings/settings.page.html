@@ -5,14 +5,18 @@
 </ion-header>
 
 <ion-content padding>
-  
-  <ion-label (click)="fun()">
-    Current Theme:
-  </ion-label>
-  <ion-select id="themeSelector">
-    <ion-select-option *ngFor="let theme of themees">
-      {{ theme }}
-    </ion-select-option>
-  </ion-select>
+
+  <ion-label>Settings</ion-label>
+
+  <ion-list>
+    <ion-radio-group id="radioGroup">
+      <ion-list-header>Theme</ion-list-header>
+
+      <ion-item *ngFor="let theme of themees">
+        <ion-label>{{theme}}</ion-label>
+        <ion-radio value="{{theme}}"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
 
 </ion-content>

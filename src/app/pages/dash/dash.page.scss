@@ -1,0 +1,16 @@
+.circle {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 50%;
+  font-size: 2vh;
+  color: var(--ion-color-dark);
+  line-height: 6vh;
+  text-align: center;
+  background: var(--ion-color-primary);
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

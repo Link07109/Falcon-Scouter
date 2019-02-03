@@ -32,7 +32,7 @@ import { PopoverPageModule } from './pages/popover/popover.module';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     HttpModule,
-    IgxCategoryChartModule
+    // IgxCategoryChartModule
   ],
   providers: [
     StatusBar,

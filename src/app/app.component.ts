@@ -14,7 +14,7 @@ import { themes, menuPages } from './consts';
 })
 export class AppComponent {
 
-  timerr = timer(0, 750)
+  timerr = timer(0, 100)
   currentTheme = ''
 
   pages = menuPages
