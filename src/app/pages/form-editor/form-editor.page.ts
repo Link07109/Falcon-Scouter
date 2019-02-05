@@ -12,10 +12,10 @@ export class FormEditorPage implements OnInit {
 
   private templates
   private templateName
-  public templatesArray = []
+  templatesArray = []
   templateComponents = []
-  public templateHTML
-  public hasChosenTemplate = false
+  templateHTML
+  hasChosenTemplate = false
 
   constructor(
     public kms: DomSanitizer,

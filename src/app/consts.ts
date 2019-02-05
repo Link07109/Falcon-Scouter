@@ -1,13 +1,16 @@
 
-export var currentEvent = '2018nccmp'
+export var currentEvent = '2018gal'
 // 2019NCWAK, 2019NCASH, 2019NCCMP
 
-export const menuPages = [
+export const primaryMenuPages = [
   { icon: 'home', title: 'Intro', link: '/intro' },
   { icon: 'bookmarks', title: 'Dashboard', link: '/dash' },
   { icon: 'filing', title: 'Teams', link: '/teams' },
   { icon: 'create', title: 'Form Editor', link: '/form_editor' },
   { icon: 'list', title: 'Picks', link: '/picks' },
+]
+
+export const secondaryMenuPages = [
   { icon: 'settings', title: 'Settings', link: '/settings'},
   { icon: 'help-circle', title: 'Help', link: '/help' },
 ]
@@ -45,14 +48,6 @@ export const themes = {
     dark: '#F7F7FF',
     light: '#495867'
   },
-  // neon: {
-  //   primary: '#39BFBD',
-  //   secondary: '#4CE0B3',
-  //   tertiary: '#FF5E79',
-  //   light: '#F4EDF2',
-  //   medium: '#B682A5',
-  //   dark: '#34162A'
-  // }
 }
 
 export const statNames = [

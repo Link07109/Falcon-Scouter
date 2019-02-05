@@ -9,8 +9,10 @@ import { currentEvent } from '../../consts';
   styleUrls: ['./dash.page.scss'],
 })
 export class DashPage implements OnInit {
-  public matchCollectionObservable;
-  public team = 'frc5190';
+
+  matchCollectionObservable
+  team = 'frc5190'
+  curComp = currentEvent
 
   constructor(
     private blueAllianceService: BlueAllianceService

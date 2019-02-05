@@ -5,7 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { PopoverPage, selectedTheme } from './pages/popover/popover.page';
 import { timer } from 'rxjs';
-import { themes, menuPages } from './consts';
+import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,8 @@ export class AppComponent {
   timerr = timer(0, 100)
   currentTheme = ''
 
-  pages = menuPages
+  pages = primaryMenuPages
+  pages2 = secondaryMenuPages
 
   constructor(
     private platform: Platform,

@@ -11,11 +11,12 @@
   <ion-button style="width: 100%" routerLink="/teams">Scout</ion-button>
   <!-- <p>
     key:
-    <br /> QM = qualification matches
-    <br /> QF = quarter finals
-    <br /> SF = semi finals
-    <br /> F = finals
+    <br /> QM = qualification match
+    <br /> QF = quarter final
+    <br /> SF = semi final
+    <br /> F = final
   </p> -->
+  <ion-label text-center>Current Event: <b>{{curComp}}</b></ion-label>
 
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for team..."></ion-searchbar>
 
@@ -25,23 +26,23 @@
 
         <ion-row>
           <ion-col size="2.5">
-            <div class="circle center">{{ match.comp_level.toUpperCase() }}{{ match.match_number }}</div>
+            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }}{{ match.match_number }}</b></div>
           </ion-col>
-          <ion-col>
-            <p style="color:blue">Blue Alliance</p>
-            <ion-item text-center *ngFor="let team of match.alliances.blue.team_keys">
-              <b style="color:blue">{{ team.substring(3) }}</b>
-              <!-- <ion-icon name="help-buoy"></ion-icon> -->
+          <ion-col text-center>
+            <p style="color:blue !important">Blue Alliance</p>
+            <ion-item *ngFor="let team of match.alliances.blue.team_keys">
+              <b routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</b>
+              <ion-icon name="help-buoy"></ion-icon>
             </ion-item>
           </ion-col>
           <ion-col>
-            <h2 class="center">1 - 0</h2>
+            <h2 class="center"><b style="color: green !important">1</b> - 0</h2>
           </ion-col>
-          <ion-col>
-            <p style="color:crimson">Red Alliance</p>
-            <ion-item text-center *ngFor="let team of match.alliances.red.team_keys">
-              <!-- <ion-icon name="help-buoy"></ion-icon> -->
-              <b style="color:crimson">{{ team.substring(3) }}</b>
+          <ion-col text-center>
+            <p style="color:crimson !important">Red Alliance</p>
+            <ion-item *ngFor="let team of match.alliances.red.team_keys">
+              <ion-icon name="help-buoy"></ion-icon>
+              <b routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</b>
             </ion-item>
           </ion-col>
         </ion-row>
