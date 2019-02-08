@@ -1,17 +1,16 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-title>Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-label>Settings</ion-label>
+  <h1 text-center>Settings</h1>
 
   <ion-list>
     <ion-radio-group id="radioGroup">
       <ion-list-header>Theme</ion-list-header>
-
       <ion-item *ngFor="let theme of themees">
         <ion-label>{{theme}}</ion-label>
         <ion-radio value="{{theme}}"></ion-radio>
