@@ -87,7 +87,7 @@
 
   <ion-card>
     <ion-list>
-      <ion-reorder-group id="divID" *ngIf="hasChosenTemplate">
+      <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" id="divID" *ngIf="hasChosenTemplate">
       </ion-reorder-group>
     </ion-list>
   </ion-card>

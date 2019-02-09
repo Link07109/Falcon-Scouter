@@ -16,6 +16,7 @@ export class FormEditorPage implements OnInit {
   templateComponents = []
   templateHTML
   hasChosenTemplate = false
+  items = []
 
   constructor(
     public kms: DomSanitizer,
@@ -26,8 +27,6 @@ export class FormEditorPage implements OnInit {
   ngOnInit() {
     this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
     this.setupArray()
-    // const reorderGroup = document.getElementById('reorder')
-    // reorderGroup.disabled = false
   }
 
   setupArray() {
@@ -65,10 +64,23 @@ export class FormEditorPage implements OnInit {
   createElement(html, id) {
     const elem = document.createElement('ion-item-sliding') //  (ionSwipe)="delete({{elem}})"
     elem.setAttribute('id', id)
-    elem.innerHTML = html + `<ion-item-options side="start"><ion-button (click)='deelete(elem)'>Delete</ion-button></ion-item-options>`
+    elem.innerHTML = `<ion-grid>
+                        <ion-row>
+                          <ion-col>
+                            <ion-reorder style=""></ion-reorder>
+                            <ion-item-options side="start">
+                              <button (click)='deelete(elem)'>Delete</button>
+                            </ion-item-options>
+                          </ion-col>
+                          <ion-col>
+                            ${html}
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>`
     
     if (elem.childNodes.length > 0) {
       document.getElementById('divID').appendChild(elem)
+      this.items.push(elem)
       return elem.childNodes[0]
     }
   }
@@ -152,12 +164,11 @@ export class FormEditorPage implements OnInit {
             const name = data['labelName']
 
             Object.entries(data).forEach(([key, value]) => {
-              console.log(key, value)
-
+              // skip the first one somehow
               stringg += `<ion-select-option>${value}</ion-select-option>`
             })
 
-            const html = name + `<ion-select id="${name}">${stringg}</ion-select>`
+            const html = name + `<ion-item><ion-select id="${name}">${stringg}</ion-select></ion-item>`
             this.createElement(html, name)
             this.templateComponents.push(data)
           }
