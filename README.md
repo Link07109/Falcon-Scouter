@@ -2,9 +2,9 @@
 Ionic remake of the original android scouting app used by FRC 5190 during the FIRST Power Up season.
 
 ## About
-This is FRC Team 5190's custom scouting app for use in competitions. It is made in Ionic 4, which uses web technologies. This means it is completely cross-platform.
+FRC Team 5190's custom scouting app for use in competitions. It is made in Ionic 4, which uses web technologies. This means it is completely cross-platform.
 
-##Features
+## Features
 - Uses `Cloud Firestore` for the storage of all scouting data.
 - Uses `The Blue Alliance v3 HTTP API` for retrieval of event and team specific information.
 - Uses `Google Apps Scripts` for adding scouting data to an external Google Sheets page.
