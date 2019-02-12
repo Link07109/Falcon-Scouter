@@ -8,14 +8,16 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="!hasChosenTemplate">
-
+  <!-- This shows the list of templates from Firestore -->
+  <div *ngIf="!hasChosenTemplate && !useTemplate">
     <ion-card ion-item (click)="toggleChosenTemplateBool()" color="primary">
       <ion-item>
         <ion-icon name="add" item-start color="dark"></ion-icon>
         <ion-label text-center color="dark">Create Template</ion-label>
       </ion-item>
     </ion-card>
+
+    <h2 text-center>All Templates</h2>
     <ion-item *ngFor="let template of templatesArray">
       <ion-card color="secondary">
         <ion-item>
@@ -27,12 +29,8 @@
     </ion-item>
   </div>
 
-  <ion-card>
-    <ion-list [innerHTML]="templateHTML" *ngIf="hasChosenTemplate">
-    </ion-list>
-  </ion-card>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="hasChosenTemplate">
+  <!-- These are the buttons that show up for adding components to forms -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="hasChosenTemplate && !useTemplate">
     <!-- Add -->
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
@@ -56,39 +54,49 @@
 
       <!-- Counter -->
       <!-- <ion-fab-button (click)="createElement('<app-counter></app-counter>')"> -->
-      <ion-fab-button (click)="createComponent('counter', '<ion-button color=`secondary`>-</ion-button><ion-button color=`secondary`>+</ion-button>')"
+      <ion-fab-button
+        (click)="createComponent('counter', '<ion-button color=`secondary`>-</ion-button><ion-button color=`secondary`>+</ion-button>')"
         data-desc=" Add counter">
         <ion-icon name="chatbubbles"></ion-icon>
-      </ion-fab-button>
-
-      <!-- Button -->
-      <ion-fab-button (click)="createComponent('button')" data-desc="Add button">
-        <ion-icon name="albums"></ion-icon>
       </ion-fab-button>
 
       <!-- Input -->
       <ion-fab-button (click)="createComponent('input')" data-desc="Add input">
         <ion-icon name="clipboard"></ion-icon>
       </ion-fab-button>
-
-      <!-- Header -->
-      <!-- <ion-fab-button (click)="createComponent('input')" data-desc="Add header">
-        <ion-icon name="list"></ion-icon>
-      </ion-fab-button> -->
-
     </ion-fab-list>
   </ion-fab>
 
+  <!-- Button for saving templates to Firestore -->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="hasChosenTemplate">
     <ion-fab-button (click)="saveTemplate()">
       <ion-icon name="save"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
+  <!-- This is for editing a new template -->
   <ion-card>
     <ion-list>
       <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" id="divID" *ngIf="hasChosenTemplate">
       </ion-reorder-group>
     </ion-list>
   </ion-card>
+
+  <!-- This is for editing existing templates -->
+  <ion-card>
+    <ion-list>
+      <!-- The difference between this and the one above is that this one doesnt have the divID -->
+      <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" *ngIf="hasChosenTemplate" [innerHTML]="templateHTML">
+      </ion-reorder-group>
+    </ion-list>
+  </ion-card>
+
+  <!-- This is for using existing templates -->
+  <ion-card *ngIf="useTemplate">
+    <ion-card-content [innerHTML]="templateHTML"></ion-card-content>
+    <div text-center>
+      <ion-button (click)="submitData">Submit</ion-button>
+    </div>
+  </ion-card>
+
 </ion-content>

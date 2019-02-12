@@ -8,45 +8,35 @@
 
 <ion-content padding>
 
-  <ion-button style="width: 100%" routerLink="/teams">Scout</ion-button>
-  <!-- <p>
-    key:
-    <br /> QM = qualification match
-    <br /> QF = quarter final
-    <br /> SF = semi final
-    <br /> F = final
-  </p> -->
+  <ion-card text-center color="primary" style="width: 95% !important; height: 4vh !important" routerLink="/teams"><b>Scout</b></ion-card>
   <ion-label text-center>Current Event: <b>{{curComp}}</b></ion-label>
-
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for team..."></ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
   <ion-card>
     <ion-card-content>
       <ion-grid *ngFor="let match of matchCollectionObservable | async">
-
         <ion-row>
-          <ion-col size="2.5">
+          <ion-col text-center size="2.5">
             <div class="circle center"><b>{{ match.comp_level.toUpperCase() }}{{ match.match_number }}</b></div>
           </ion-col>
           <ion-col text-center>
-            <p style="color:blue !important">Blue Alliance</p>
+            <p text-center style="color:blue !important">Blue Alliance</p>
             <ion-item *ngFor="let team of match.alliances.blue.team_keys">
-              <b routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</b>
-              <ion-icon name="help-buoy"></ion-icon>
+              <!-- <b style="color: '{{ (match.winning_alliance == 'red') ? 'var(--ion-color-danger)' : 'var(--ion-color-success)' }}'" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</b> -->
+              <ion-label text-center color="{{ (match.winning_alliance == 'red') ? 'danger' : 'success' }}" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
             </ion-item>
           </ion-col>
           <ion-col>
-            <h2 class="center"><b style="color: green !important">1</b> - 0</h2>
+            <!-- <h2 class="center"><b style="color: green !important">1</b> - 0</h2> -->
+            <h2 text-center class="hmm">{{ (match.winning_alliance == 'red') ? 0 : 1 }} - {{ (match.winning_alliance == 'red') ? 1 : 0 }}</h2>
           </ion-col>
           <ion-col text-center>
-            <p style="color:crimson !important">Red Alliance</p>
+            <p text-center style="color:crimson !important">Red Alliance</p>
             <ion-item *ngFor="let team of match.alliances.red.team_keys">
-              <ion-icon name="help-buoy"></ion-icon>
-              <b routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</b>
+              <ion-label text-center routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
-
       </ion-grid>
     </ion-card-content>
   </ion-card>

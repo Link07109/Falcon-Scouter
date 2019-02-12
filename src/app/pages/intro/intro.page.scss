@@ -1,17 +1,9 @@
 .toolbar-background {
-  background: transparent;
   border-color: transparent;
 }
 
 .slide-zoom {
   height: 100%;
-}
-
-.slide-image {
-  min-height: 80%;
-  max-width: 70%;
-  margin: 36px 0;
-  padding-left: 30%;
 }
 
 .idk {
@@ -32,7 +24,7 @@ p {
   position: relative;
   background: url("../../../assets/imgs/scrollingbgfalcon.png") no-repeat transparent;
   background-size: cover;
-  height: 58%;
+  height: 53%;
   z-index: 1;
   background-repeat: repeat-x;
   animation: animatedBackground 40s linear infinite;

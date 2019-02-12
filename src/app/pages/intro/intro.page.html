@@ -10,25 +10,28 @@
   </div>
 
   <ion-slides pager>
-    <!-- Content Slides -->
     <ion-slide>
-    </ion-slide>
-
-    <ion-slide>
-      <div class="idk">
-        ID of Competition Being Scouted:
-        <ion-input text-start id="hi" placeholder="Click here to type..."></ion-input>
+      <div id="idk">
+        Hi there! Welcome to <b style="color: crimson !important">Falcon Scouter</b>, 5190's custom scouting
+        application!
       </div>
     </ion-slide>
 
-    <!-- Button Slide -->
     <ion-slide>
-      <div class="idk">
-        <ion-button large clear icon-end color="primary" (click)="saveComp()" routerLink="/dash">
-          Start Scouting
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-button>
+      <div id="idk">
+        <ion-label text-start>Current Competition:</ion-label>
+        <ion-input text-start id="hi" placeholder="Scouted Competition ID"></ion-input>
       </div>
     </ion-slide>
   </ion-slides>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar text-center>
+    <ion-button large clear icon-end color="primary" (click)="saveComp()" routerLink="/dash">
+      Start Scouting
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

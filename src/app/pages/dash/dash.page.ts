@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
- ;
 import { currentEvent } from '../../consts';
 
 @Component({
@@ -11,7 +10,9 @@ import { currentEvent } from '../../consts';
 export class DashPage implements OnInit {
 
   matchCollectionObservable
-  team = 'frc5190'
+  socialMediaObservable
+  accountName = ''
+  match
   curComp = currentEvent
 
   constructor(
@@ -19,16 +20,28 @@ export class DashPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, currentEvent);
-    console.log(this.blueAllianceService.getImage(5190))
+    this.matchCollectionObservable = this.blueAllianceService.getEventMatches(currentEvent)
+    this.socialMediaObservable = this.blueAllianceService.getSocialMedia('frc5190')
+
+    this.getSocialMedias()
+  }
+
+  getSocialMedias() {
+    this.socialMediaObservable.forEach(media => {
+      media.forEach(thingy => {
+        if (thingy.type == 'instagram-profile') {
+          this.accountName = thingy.foreign_key
+        }
+      })
+    })
   }
 
   getItems(ev) {
     const val = ev.target.value;
 
     if (val && val.trim() !== '') {
-      this.team = `frc${val}`;
-      this.matchCollectionObservable = this.blueAllianceService.getTeamMatches(this.team, currentEvent);
+      this.match = `qm${val}`
+      // this.matchCollectionObservable = this.matchCollectionObservable.filter
     }
   }
 

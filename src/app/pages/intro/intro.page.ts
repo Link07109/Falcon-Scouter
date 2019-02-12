@@ -15,7 +15,6 @@ export class IntroPage implements OnInit {
 
   saveComp() {
     // currentEvent = document.getElementById('hi').nodeValue
-    console.log(currentEvent)
   }
 
 }

@@ -28,6 +28,16 @@ export class BlueAllianceService {
       .pipe(map(res => res.json()))
   }
 
+  getEventMatches(eventKey: string) {
+    return this.http.get(`${this.baseUrl}/event/${eventKey}/matches/simple?X-TBA-Auth-Key=${xTBAauthKey}`)
+      .pipe(map(res => res.json()))
+  }
+
+  getTeamInformation(teamKey: string) {
+    return this.http.get(`${this.baseUrl}/team/${teamKey}?X-TBA-Auth-Key=${xTBAauthKey}`)
+      .pipe(map(res => res.json()))
+  }
+
   getTeamMatches(teamKey: string, eventKey: string) {
     return this.http.get(`${this.baseUrl}/team/${teamKey}/event/${eventKey}/matches/simple?X-TBA-Auth-Key=${xTBAauthKey}`)
       .pipe(map(res => res.json()))
@@ -39,8 +49,9 @@ export class BlueAllianceService {
       .pipe(map(res => res.json()))
   }
 
-  getImage(teamNumber: number) {
-    return this.http.get(`https://www.thebluealliance.com/team/${teamNumber}/2018`).pipe(map(response => response.json().data))
+  getSocialMedia(teamKey: string) {
+    return this.http.get(`${this.baseUrl}/team/${teamKey}/social_media?X-TBA-Auth-Key=${xTBAauthKey}`)
+      .pipe(map(res => res.json()))
   }
 
 }

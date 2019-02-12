@@ -1,28 +1,31 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title text-center>Matches</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title text-center>Matches</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content padding>
 
   <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
-    <!-- replace this with an image of their robot -->
 
-    <ion-button (click)="showPitData()">
-      show pit data
-    </ion-button>
+    <div style="height: 30%;" text-center>
+      <h2>{{ teamNumber }}</h2>
+      <ion-label>{{ teamName }}</ion-label>
+      <ion-button href="{{ teamWebsite }}">Website</ion-button>
+      <!-- <br />
+      <ion-button>Upload Picture</ion-button> -->
+    </div>
+
+    <div text-center>
+      <ion-button (click)="showPitData()">toggle pit data</ion-button>
+      <ion-button (click)="toggleStats()">toggle match data</ion-button>
+    </div>
 
     <!-- <igx-grid #grid1 id="grid1" [data]="data" [autoGenerate]="true"></igx-grid> -->
 
-    <ion-button (click)="toggleStats()">
-      Toggle Match Stats
-    </ion-button>
-
-    <!-- hidden by default -->
     <ion-grid *ngIf="showStats">
       <ion-row nowrap>
         <ion-col *ngFor="let stat of stats">
@@ -36,14 +39,22 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <!-- create a row for each match -->
-      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async" routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
+
+      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async"
+        routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
         <!-- make this not so cancerous pls kthx -->
         <ion-col>
-          <b>
-            {{ match.matchNumber }}
-          </b>
+          <b>{{ match.matchNumber }}</b>
         </ion-col>
+
+        <!-- <ion-col *ngFor="let stat of matchesArray">
+          <ion-card>
+            <ion-card-content>
+              <ion-label color="dark">{{ stat }}</ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>  -->
+
         <ion-col>
           <ion-card>
             <ion-card-content>
@@ -154,10 +165,6 @@
     </ion-grid>
     <br />
 
-    <ion-button (click)="fuckubutfortheteam()">
-      Toggle Team Averages
-    </ion-button>
-
     <ion-grid *ngIf="showTeamAverages">
       <igx-category-chart [dataSource]="data" width="375px" height="450px">
       </igx-category-chart>
@@ -166,3 +173,14 @@
   </ion-scroll>
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs color="primary">
+      <ion-tab label="Details" icon="person"></ion-tab>
+      <ion-tab label="Matches" icon="list"></ion-tab>
+      <ion-tab label="Data" icon="navigate" (click)="toggleStats()"></ion-tab>
+      <ion-tab label="Averages" icon="bookmarks" (click)="fuckubutfortheteam()"></ion-tab>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

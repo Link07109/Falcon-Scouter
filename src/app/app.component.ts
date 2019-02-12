@@ -59,6 +59,6 @@ export class AppComponent {
     const theme = themes[name]
     this.theme.setTheme(theme)
     this.currentTheme = name
-    this.statusBar.backgroundColorByHexString(theme['primary']);
+    this.statusBar.backgroundColorByHexString(theme['light'])
   }
 }

@@ -14,15 +14,16 @@ export class FormEditorPage implements OnInit {
   private templateName
   templatesArray = []
   templateComponents = []
+  items = []
   templateHTML
   hasChosenTemplate = false
-  items = []
+  useTemplate = false
 
   constructor(
-    public kms: DomSanitizer,
+    public sanitizer: DomSanitizer,
     private firestoreService: FirestoreService,
     public alertController: AlertController,
-  ) {  }
+  ) { }
 
   ngOnInit() {
     this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
@@ -42,16 +43,17 @@ export class FormEditorPage implements OnInit {
   }
 
   loadHTMLToEdit(element) {
-    this.templateHTML = this.kms.bypassSecurityTrustHtml(element.templateHTML)
+    this.templateHTML = this.sanitizer.bypassSecurityTrustHtml(element.templateHTML)
     this.hasChosenTemplate = true
   }
 
   loadHTMLToUse(element) {
-    console.log('TODO')
+    this.templateHTML = this.sanitizer.bypassSecurityTrustHtml(element.templateHTML)
+    this.useTemplate = true
   }
 
   saveTemplate() {
-    const template = document.getElementById('divID').outerHTML
+    const template = document.getElementById('divID').innerHTML // outerHTML
     this.inputAlert('Save Template', template)
   }
 
@@ -63,11 +65,12 @@ export class FormEditorPage implements OnInit {
 
   createElement(html, id) {
     const elem = document.createElement('ion-item-sliding') //  (ionSwipe)="delete({{elem}})"
+    elem.setAttribute('ion-swipe', 'delete(elem)') // ^ idk if this works for that or not
     elem.setAttribute('id', id)
     elem.innerHTML = `<ion-grid>
                         <ion-row>
                           <ion-col>
-                            <ion-reorder style=""></ion-reorder>
+                            <ion-reorder></ion-reorder>
                             <ion-item-options side="start">
                               <button (click)='deelete(elem)'>Delete</button>
                             </ion-item-options>
@@ -77,7 +80,7 @@ export class FormEditorPage implements OnInit {
                           </ion-col>
                         </ion-row>
                       </ion-grid>`
-    
+
     if (elem.childNodes.length > 0) {
       document.getElementById('divID').appendChild(elem)
       this.items.push(elem)
@@ -106,15 +109,12 @@ export class FormEditorPage implements OnInit {
         {
           text: 'Ok',
           handler: data => {
-            let prefix = ''
             const name = data['labelName']
 
-            if (componentName == 'button') {
-              html = name
-            } else {
-              prefix = name
-            }
-            html = `<ion-item><ion-label color="dark">${prefix}</ion-label><ion-${componentName} color="secondary" id="${data['labelName']}"}>${html}</ion-${componentName}></ion-item>`
+            html = `<ion-item>
+                      <ion-label color="dark">${name}</ion-label>
+                      <ion-${componentName} color="secondary" id="${data['labelName']}"}>${html}</ion-${componentName}>
+                    </ion-item>`
             this.createElement(html, name)
             this.templateComponents.push(data)
           }
@@ -164,7 +164,10 @@ export class FormEditorPage implements OnInit {
             const name = data['labelName']
 
             Object.entries(data).forEach(([key, value]) => {
-              // skip the first one somehow
+              // skip the first one, which is just the name of the component
+              if (key == 'labelName') {
+                return
+              }
               stringg += `<ion-select-option>${value}</ion-select-option>`
             })
 
