@@ -9,12 +9,14 @@
 
 <ion-content padding>
 
-  <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
+  
 
     <div style="height: 30%;" text-center>
       <h2>{{ teamNumber }}</h2>
       <ion-label>{{ teamName }}</ion-label>
       <ion-button href="{{ teamWebsite }}">Website</ion-button>
+      
+      <ion-button *ngFor="let social of socialMediaObservable | async">{{ social.type.slice(0, -8) }}</ion-button>
       <!-- <br />
       <ion-button>Upload Picture</ion-button> -->
     </div>
@@ -24,8 +26,16 @@
       <ion-button (click)="toggleStats()">toggle match data</ion-button>
     </div>
 
-    <!-- <igx-grid #grid1 id="grid1" [data]="data" [autoGenerate]="true"></igx-grid> -->
+    <ion-card style="min-height: 10vh !important;" *ngFor="let event of eventsObservable | async">
+      <h2>{{ event.name }}</h2>
+      Start Date: {{ event.start_date }}
+      <br />
+      End Date: {{ event.end_date }}
+    </ion-card>
 
+    <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
+
+    <!-- <igx-grid #grid1 id="grid1" [data]="data" [autoGenerate]="true"></igx-grid> -->
     <ion-grid *ngIf="showStats">
       <ion-row nowrap>
         <ion-col *ngFor="let stat of stats">
@@ -180,7 +190,7 @@
       <ion-tab label="Details" icon="person"></ion-tab>
       <ion-tab label="Matches" icon="list"></ion-tab>
       <ion-tab label="Data" icon="navigate" (click)="toggleStats()"></ion-tab>
-      <ion-tab label="Averages" icon="bookmarks" (click)="fuckubutfortheteam()"></ion-tab>
+      <ion-tab label="Events" icon="bookmarks" (click)="showEvents()"></ion-tab>
     </ion-tabs>
   </ion-toolbar>
 </ion-footer>

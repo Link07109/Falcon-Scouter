@@ -1,24 +1,29 @@
 <ion-app>
-  <ion-header>
-    <ion-toolbar text-center>
-    <b>Falcon Scouter</b> <!-- put name of each page here -->
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-      <!-- <ion-back-button></ion-back-button> -->
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="presentPopover($event)">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+  <ion-header text-center>
+    <ion-toolbar>
+      <b>Falcon Scouter</b> <!-- put name of each page here -->
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+        <ion-button>
+          <ion-icon slot="icon-only" name="square" color="light"></ion-icon>
+        </ion-button>
+        <!-- <ion-back-button></ion-back-button> -->
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="showSearchbar()">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-button>
+        <ion-button (click)="presentPopover($event)">
+          <ion-icon slot="icon-only" name="more"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
   <ion-menu>
     <ion-header style="width: 100%; height: 25vh; background-color: #680a0f">
       <img src="../assets/imgs/FalconLogoWhiteMaroon.png" style="height: 20vh; width: 20vh">
-      <ion-label style="color: white !important; margin-left: 2vh; font-weight: 700; font-size: 1.1em">Falcon Scouter
-      </ion-label>
+      <ion-label style="color: white !important; margin-left: 2vh; font-weight: 700; font-size: 1.1em">Falcon Scouter</ion-label>
     </ion-header>
 
     <ion-content style="--ion-color-base: var(--ion-color-primary) !important;">
@@ -26,14 +31,18 @@
         <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
         <b style="font-size: 1em">{{ page.title }}</b>
       </ion-item>
-
-      <div class="bottomMenu">
-        <ion-item text-start *ngFor="let page of pages2" routerLink="{{ page.link }}">
-          <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
-          <b style="font-size: 1em">{{ page.title }}</b>
-        </ion-item>
-      </div>
     </ion-content>
+
+    <ion-footer>
+      <ion-item (click)="toggleThemeStlye()">
+        <ion-icon name="{{ (currentThemeStyle == 'dark') ? 'sunny' : 'moon'  }}" style="margin-right: 10%"></ion-icon>
+        <b style="font-size: 1em">{{ (currentThemeStyle == 'dark') ? 'Light' : 'Dark'  }} mode</b>
+      </ion-item>
+      <ion-item text-start *ngFor="let page of pages2" routerLink="{{ page.link }}">
+        <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
+        <b style="font-size: 1em">{{ page.title }}</b>
+      </ion-item>
+    </ion-footer>
   </ion-menu>
 
   <ion-router-outlet main></ion-router-outlet>

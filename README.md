@@ -11,7 +11,7 @@ FRC Team 5190's custom scouting app for use in competitions. It is made in Ionic
 <!-- - Uses `Infragistics Ignite UI for Angular` for detailed graphs and filterable, pagable grids. -->
 
 ## For Users
-- Download the APK (for Android) or IPA (for iOS) file on your device from [here](https://github.com/Link07109/FalconScoutApp/releases) and install it.
+Download the APK (for Android) or IPA (for iOS) file on your device from [here](https://github.com/Link07109/FalconScoutApp/releases) and install it.
 
 ## For Developers
 ### Pre-Setup

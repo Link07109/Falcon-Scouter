@@ -9,7 +9,7 @@
 <ion-content padding>
 
   <ion-card text-center color="primary" style="width: 95% !important; height: 4vh !important" routerLink="/teams"><b>Scout</b></ion-card>
-  <ion-label text-center>Current Event: <b>{{curComp}}</b></ion-label>
+  <ion-label text-center>Current Event: <b>{{ curComp }}</b></ion-label>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
   <ion-card>
@@ -29,6 +29,7 @@
           <ion-col>
             <!-- <h2 class="center"><b style="color: green !important">1</b> - 0</h2> -->
             <h2 text-center class="hmm">{{ (match.winning_alliance == 'red') ? 0 : 1 }} - {{ (match.winning_alliance == 'red') ? 1 : 0 }}</h2>
+            <ion-button href="https://www.thebluealliance.com/match/{{ curComp }}_{{ match.comp_level }}{{ match.match_number }}">stats</ion-button>
           </ion-col>
           <ion-col text-center>
             <p text-center style="color:crimson !important">Red Alliance</p>

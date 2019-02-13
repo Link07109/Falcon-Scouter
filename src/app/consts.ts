@@ -1,21 +1,22 @@
+
 export let currentEvent = '2018gal'
 // 2019NCWAK, 2019NCASH, 2019NCCMP
 
 export const primaryMenuPages = [
   { icon: 'home', title: 'Intro', link: '/intro' },
-  { icon: 'bookmarks', title: 'Dashboard', link: '/dash' },
-  { icon: 'filing', title: 'Teams', link: '/teams' },
-  { icon: 'create', title: 'Scouting Forms', link: '/form_editor' },
-  { icon: 'list', title: 'Picks', link: '/picks' },
+  { icon: 'bookmarks', title: 'Matches', link: '/dash' },
+  { icon: 'people', title: 'Teams', link: '/teams' },
+  { icon: 'create', title: 'Scout', link: '/form_editor' },
+  // { icon: 'list', title: 'Alliance Picks', link: '/picks' },
 ]
 
 export const secondaryMenuPages = [
   { icon: 'settings', title: 'Settings', link: '/settings' },
-  { icon: 'help-circle', title: 'Help', link: '/help' },
+  { icon: 'help-circle-outline', title: 'Help', link: '/help' },
 ]
 
 export const themes = {
-  dusk: {
+  dark: {
     primary: '#2b2a2a',
     secondary: '#5DD39E',
     tertiary: '#348AA7',
@@ -23,29 +24,13 @@ export const themes = {
     medium: '#513B56',
     light: '#222222'
   },
-  nether: {
-    primary: '#8f6593',
+  light: {
+    primary: '#cdcdcd',
     secondary: '#aea4bf',
-    tertiary: '#cdcdcd',
-    dark: '#e3e4db',
+    tertiary: '#8f6593',
+    dark: '#6e4552',
     medium: '#BCE784',
-    light: '#6e4552'
-  },
-  // peach: {
-  //   primary: '#F78154',
-  //   secondary: '#FE5F55',
-  //   tertiary: '#4D9078',
-  //   light: '#FCD0A2',
-  //   medium: '#B89876',
-  //   dark: '#5d5e60' // #FDE8DF
-  // },
-  twilight: {
-    primary: '#95b8d1',
-    secondary: '#8CBA80',
-    tertiary: '#FE5F55',
-    medium: '#BCC2C7',
-    dark: '#F7F7FF',
-    light: '#464a4f' // #495867
+    light: '#e3e4db'
   },
 }
 

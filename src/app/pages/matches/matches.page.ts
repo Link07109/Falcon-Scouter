@@ -23,6 +23,8 @@ export class MatchesPage implements OnInit {
   teamName: string
   teamWebsite: string
   averageStats = modifiedStatNames
+  eventsObservable
+  socialMediaObservable
 
   constructor(
     private firestoreService: FirestoreService,
@@ -34,11 +36,21 @@ export class MatchesPage implements OnInit {
   ngOnInit() {
     this.teamNumber = this.route.snapshot.paramMap.get('teamNumber');
     this.matchCollectionObservable = this.firestoreService.getMatchList(currentEvent, this.teamNumber).valueChanges();
-    
+    this.eventsObservable = this.blueAllianceService.getTeamEvents(`frc${this.teamNumber}`, 2018)
+    this.socialMediaObservable = this.blueAllianceService.getSocialMedia(`frc${this.teamNumber}`)
+
+    this.socialMediaObservable.subscribe(social => {
+      console.log(social)
+    })
+
     this.blueAllianceService.getTeamInformation(`frc${this.teamNumber}`).subscribe(data => {
       this.teamName = data.nickname
       this.teamWebsite = data.website
     })
+  }
+
+  showEvents() {
+    console.log('TODO')
   }
 
   // an attempt to make the html less gay

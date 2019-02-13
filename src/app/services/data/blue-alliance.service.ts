@@ -23,7 +23,19 @@ export class BlueAllianceService {
     return this.http.post(url, json);
   }
 
-  getEventTeams(eventKey: string) { // year + event_code
+  // eventKey = year + event_code
+
+  getTeamEvents(teamKey: string, year: number) {
+    return this.http.get(`${this.baseUrl}/team/${teamKey}/events/${year}?X-TBA-Auth-Key=${xTBAauthKey}`)
+      .pipe(map(res => res.json()))
+  }
+
+  getEventInformation(eventKey: string) {
+    return this.http.get(`${this.baseUrl}/event/${eventKey}?X-TBA-Auth-Key=${xTBAauthKey}`)
+      .pipe(map(res => res.json()))
+  }
+
+  getEventTeams(eventKey: string) {
     return this.http.get(`${this.baseUrl}/event/${eventKey}/teams/simple?X-TBA-Auth-Key=${xTBAauthKey}`)
       .pipe(map(res => res.json()))
   }

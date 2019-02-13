@@ -3,8 +3,7 @@ import { Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
-import { PopoverPage, selectedTheme } from './pages/popover/popover.page';
-import { timer } from 'rxjs';
+import { PopoverPage } from './pages/popover/popover.page';
 import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
 
 @Component({
@@ -14,9 +13,7 @@ import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
 })
 export class AppComponent {
 
-  timerr = timer(0, 100)
-  currentTheme = ''
-
+  currentThemeStyle = 'light'
   pages = primaryMenuPages
   pages2 = secondaryMenuPages
 
@@ -28,6 +25,16 @@ export class AppComponent {
     private statusBar: StatusBar
   ) {
     this.initializeApp()
+  }
+
+  toggleThemeStlye() {
+    if (this.currentThemeStyle == 'dark') {
+      this.currentThemeStyle = 'light'
+      this.changeThemeHMMM('light')
+    } else {
+      this.currentThemeStyle = 'dark'
+      this.changeThemeHMMM('dark')
+    }
   }
 
   async presentPopover(ev: any) {
@@ -46,19 +53,11 @@ export class AppComponent {
     });
 
     this.statusBar.overlaysWebView(false)
-
-    this.timerr.subscribe(() => {
-      if (this.currentTheme == selectedTheme) {
-        return
-      }
-      this.changeThemeHMMM(selectedTheme)
-    });
   }
 
   changeThemeHMMM(name) {
     const theme = themes[name]
     this.theme.setTheme(theme)
-    this.currentTheme = name
     this.statusBar.backgroundColorByHexString(theme['light'])
   }
 }
