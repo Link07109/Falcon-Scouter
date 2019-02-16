@@ -1,14 +1,12 @@
 <ion-header>
   <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
-  <ion-toolbar>
-    <ion-title text-center>Dashboard</ion-title>
-  </ion-toolbar>
+  <ion-toolbar></ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-card text-center color="primary" style="width: 95% !important; height: 4vh !important" routerLink="/teams"><b>Scout</b></ion-card>
+  <ion-card text-center color="primary" style="width: 95% !important; height: 4vh !important" routerLink="/teams"><b>View Teams</b></ion-card>
   <ion-label text-center>Current Event: <b>{{ curComp }}</b></ion-label>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
@@ -26,10 +24,10 @@
               <ion-label text-center color="{{ (match.winning_alliance == 'red') ? 'danger' : 'success' }}" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col>
+          <ion-col text-center>
             <!-- <h2 class="center"><b style="color: green !important">1</b> - 0</h2> -->
-            <h2 text-center class="hmm">{{ (match.winning_alliance == 'red') ? 0 : 1 }} - {{ (match.winning_alliance == 'red') ? 1 : 0 }}</h2>
-            <ion-button href="https://www.thebluealliance.com/match/{{ curComp }}_{{ match.comp_level }}{{ match.match_number }}">stats</ion-button>
+            <h2 class="hmm">{{ (match.winning_alliance == 'red') ? 0 : 1 }} - {{ (match.winning_alliance == 'red') ? 1 : 0 }}</h2>
+            <ion-button style="padding-top: 10vh;" href="https://www.thebluealliance.com/match/{{ curComp }}_{{ match.comp_level }}{{ match.match_number }}">Stats</ion-button>
           </ion-col>
           <ion-col text-center>
             <p text-center style="color:crimson !important">Red Alliance</p>

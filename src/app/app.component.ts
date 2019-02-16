@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { PopoverPage } from './pages/popover/popover.page';
 import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,11 @@ import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
 })
 export class AppComponent {
 
-  currentThemeStyle = 'light'
+  currentThemeStyle = ''
   pages = primaryMenuPages
   pages2 = secondaryMenuPages
+  shouldShowSearchbar = false
+  showSplash = false
 
   constructor(
     private platform: Platform,
@@ -28,13 +31,8 @@ export class AppComponent {
   }
 
   toggleThemeStlye() {
-    if (this.currentThemeStyle == 'dark') {
-      this.currentThemeStyle = 'light'
-      this.changeThemeHMMM('light')
-    } else {
-      this.currentThemeStyle = 'dark'
-      this.changeThemeHMMM('dark')
-    }
+    this.currentThemeStyle = (this.currentThemeStyle == 'dark') ? 'light' : 'dark'
+    this.changeThemeHMMM(this.currentThemeStyle)
   }
 
   async presentPopover(ev: any) {
@@ -50,7 +48,14 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault()
       this.splashScreen.hide()
-    });
+
+      timer(3000).subscribe(() => this.showSplash = false)
+    })
+
+    this.theme.getTheme().then((cssText: string) => {
+      this.currentThemeStyle = (cssText.includes('#6e4552')) ? 'light' : 'dark'
+      this.changeThemeHMMM(this.currentThemeStyle)
+    })
 
     this.statusBar.overlaysWebView(false)
   }

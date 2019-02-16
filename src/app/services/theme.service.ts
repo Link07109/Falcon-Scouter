@@ -2,11 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import * as Color from 'color';
 import { Storage } from '@ionic/Storage';
+import { themes } from '../consts';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
+
+  defaults = themes.light
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -15,6 +18,10 @@ export class ThemeService {
     storage.get('theme').then(cssText => {
       this.setGlobalCSS(cssText)
     })
+  }
+
+  getTheme() {
+    return this.storage.get('theme')
   }
 
   setTheme(theme) {
@@ -29,18 +36,6 @@ export class ThemeService {
 
   setGlobalCSS(css: string) {
     this.document.documentElement.style.cssText = css
-  }
-
-  defaults = {
-    primary: '#3880ff',
-    secondary: '#0cd1e8',
-    tertiary: '#7044ff',
-    success: '#10dc60',
-    warning: '#ffce00',
-    danger: '#f04141',
-    dark: '#222428',
-    medium: '#989aa2',
-    light: '#f4f5f8'
   }
 
   CSSTextGenerator(colors) {

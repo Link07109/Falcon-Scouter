@@ -15,9 +15,8 @@ export class MatchesPage implements OnInit {
 
   matchCollectionObservable
   teamNumber: string
-  showStats = false
-  showTeamAverages = false
-  team: any
+  showStats = true
+  showEvents = true
   matchesArray = []
   stats = statNames
   teamName: string
@@ -49,8 +48,12 @@ export class MatchesPage implements OnInit {
     })
   }
 
-  showEvents() {
-    console.log('TODO')
+  toggleMatchData() {
+    this.showStats = !this.showStats
+  }
+
+  toggleEvents() {
+    this.showEvents = ! this.showEvents
   }
 
   // an attempt to make the html less gay
@@ -65,18 +68,6 @@ export class MatchesPage implements OnInit {
         }
       })
     })
-  }
-
-  toggleStats() {
-    this.showStats = !this.showStats;
-  }
-
-  fuckubutfortheteam() {
-    this.showTeamAverages = !this.showTeamAverages;
-  }
-
-  showPitData() {
-    console.log('nothing actually happens here yet');
   }
 
 }

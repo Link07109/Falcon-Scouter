@@ -10,11 +10,6 @@ export class IntroPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  saveComp() {
-    // currentEvent = document.getElementById('hi').nodeValue
-  }
+  ngOnInit() { }
 
 }

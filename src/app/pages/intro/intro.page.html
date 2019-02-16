@@ -9,28 +9,18 @@
     <div class="splash-intro">Falcon Scouter</div>
   </div>
 
-  <ion-slides pager>
-    <ion-slide>
-      <div id="idk">
-        Hi there! Welcome to <b style="color: crimson !important">Falcon Scouter</b>, 5190's custom scouting
-        application!
-      </div>
-    </ion-slide>
-
-    <ion-slide>
-      <div id="idk">
-        <ion-label text-start>Current Competition:</ion-label>
-        <ion-input text-start id="hi" placeholder="Scouted Competition ID"></ion-input>
-      </div>
-    </ion-slide>
-  </ion-slides>
+  <div text-center id="idk">
+    <ion-label>Current Competition:</ion-label>
+    <!-- this input doesnt actually do anything yet -->
+    <ion-input placeholder="Scouted Competition ID"></ion-input>
+  </div>
 
 </ion-content>
 
 <ion-footer>
   <ion-toolbar text-center>
-    <ion-button large clear icon-end color="primary" (click)="saveComp()" routerLink="/dash">
-      Start Scouting
+    <ion-button large clear icon-end color="primary" routerLink="/dash">
+      View Matches
       <ion-icon name="arrow-forward"></ion-icon>
     </ion-button>
   </ion-toolbar>

@@ -9,34 +9,31 @@
 
 <ion-content padding>
 
-  
+  <div style="height: 35%;" text-center>
+    <h2>{{ teamNumber }}</h2>
+    <ion-label>{{ teamName }}</ion-label>
+    <ion-button href="{{ teamWebsite }}">Website</ion-button>
 
-    <div style="height: 30%;" text-center>
-      <h2>{{ teamNumber }}</h2>
-      <ion-label>{{ teamName }}</ion-label>
-      <ion-button href="{{ teamWebsite }}">Website</ion-button>
-      
-      <ion-button *ngFor="let social of socialMediaObservable | async">{{ social.type.slice(0, -8) }}</ion-button>
-      <!-- <br />
-      <ion-button>Upload Picture</ion-button> -->
+    <ion-button href="https://{{ social.type.slice(0, -8) }}.com/{{ social.foreign_key }}"
+      *ngFor="let social of socialMediaObservable | async">{{ social.type.slice(0, -8) }}</ion-button>
+  </div>
+
+  <div text-center>
+    <ion-button>Pit Data</ion-button>
+    <ion-button (click)="toggleMatchData()">Match Data</ion-button>
+    <ion-button (click)="toggleEvents()">Events</ion-button>
+  </div>
+
+  <ion-scroll scroll=”true” style="white-space: nowrap; overflow: scroll; height: 65%; position: relative; bottom: 0;">
+
+    <div *ngIf="showEvents">
+      <ion-card text-center style="min-height: 9vh !important;" *ngFor="let event of eventsObservable | async">
+        <h2>{{ event.name }}</h2>
+        <ion-button href="https://www.thebluealliance.com/event/2018{{ event.event_code }}">View Event</ion-button>
+      </ion-card>
     </div>
 
-    <div text-center>
-      <ion-button (click)="showPitData()">toggle pit data</ion-button>
-      <ion-button (click)="toggleStats()">toggle match data</ion-button>
-    </div>
-
-    <ion-card style="min-height: 10vh !important;" *ngFor="let event of eventsObservable | async">
-      <h2>{{ event.name }}</h2>
-      Start Date: {{ event.start_date }}
-      <br />
-      End Date: {{ event.end_date }}
-    </ion-card>
-
-    <ion-scroll scrollX=”true” style="white-space: nowrap; overflow: scroll">
-
-    <!-- <igx-grid #grid1 id="grid1" [data]="data" [autoGenerate]="true"></igx-grid> -->
-    <ion-grid *ngIf="showStats">
+    <ion-grid *ngIf="showStats" style="position: relative; bottom: 0; min-height: 50vh">
       <ion-row nowrap>
         <ion-col *ngFor="let stat of stats">
           <ion-card>
@@ -50,9 +47,8 @@
         </ion-col>
       </ion-row>
 
-      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async"
-        routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
-        <!-- make this not so cancerous pls kthx -->
+      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async" routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
+
         <ion-col>
           <b>{{ match.matchNumber }}</b>
         </ion-col>
@@ -65,6 +61,7 @@
           </ion-card>
         </ion-col>  -->
 
+        <!-- make this not so cancerous pls kthx -->
         <ion-col>
           <ion-card>
             <ion-card-content>
@@ -173,24 +170,6 @@
         <hr />
       </ion-row>
     </ion-grid>
-    <br />
-
-    <ion-grid *ngIf="showTeamAverages">
-      <igx-category-chart [dataSource]="data" width="375px" height="450px">
-      </igx-category-chart>
-    </ion-grid>
-
   </ion-scroll>
 
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-tabs color="primary">
-      <ion-tab label="Details" icon="person"></ion-tab>
-      <ion-tab label="Matches" icon="list"></ion-tab>
-      <ion-tab label="Data" icon="navigate" (click)="toggleStats()"></ion-tab>
-      <ion-tab label="Events" icon="bookmarks" (click)="showEvents()"></ion-tab>
-    </ion-tabs>
-  </ion-toolbar>
-</ion-footer>

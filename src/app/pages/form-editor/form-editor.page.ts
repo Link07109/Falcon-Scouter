@@ -65,21 +65,22 @@ export class FormEditorPage implements OnInit {
 
   createElement(html, id) {
     const elem = document.createElement('ion-item-sliding') //  (ionSwipe)="delete({{elem}})"
-    elem.setAttribute('ion-swipe', 'delete(elem)') // ^ idk if this works for that or not
     elem.setAttribute('id', id)
-    elem.innerHTML = `<ion-grid>
+    elem.innerHTML = `
+                      <ion-grid>
                         <ion-row>
-                          <ion-col>
+                          <ion-col size="1">
                             <ion-reorder></ion-reorder>
-                            <ion-item-options side="start">
-                              <button (click)='deelete(elem)'>Delete</button>
-                            </ion-item-options>
                           </ion-col>
-                          <ion-col>
+                          <ion-col size="9">
+                            <ion-item-options side="start">
+                              <ion-button (click)='deelete(elem)'>Delete</ion-button>
+                            </ion-item-options>
                             ${html}
                           </ion-col>
                         </ion-row>
-                      </ion-grid>`
+                      </ion-grid>
+                     `
 
     if (elem.childNodes.length > 0) {
       document.getElementById('divID').appendChild(elem)

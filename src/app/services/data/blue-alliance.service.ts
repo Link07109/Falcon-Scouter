@@ -24,6 +24,7 @@ export class BlueAllianceService {
   }
 
   // eventKey = year + event_code
+  // teamKey = frc + team_number
 
   getTeamEvents(teamKey: string, year: number) {
     return this.http.get(`${this.baseUrl}/team/${teamKey}/events/${year}?X-TBA-Auth-Key=${xTBAauthKey}`)
