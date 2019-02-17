@@ -18,7 +18,7 @@ export class AppComponent {
   pages = primaryMenuPages
   pages2 = secondaryMenuPages
   shouldShowSearchbar = false
-  showSplash = false
+  showSplash = true
 
   constructor(
     private platform: Platform,
@@ -64,5 +64,10 @@ export class AppComponent {
     const theme = themes[name]
     this.theme.setTheme(theme)
     this.statusBar.backgroundColorByHexString(theme['light'])
+    if (name == 'dark') {
+      this.statusBar.styleBlackOpaque()
+    } else {
+      this.statusBar.styleDefault()
+    }
   }
 }

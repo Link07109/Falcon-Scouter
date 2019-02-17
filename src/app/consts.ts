@@ -12,7 +12,6 @@ export const primaryMenuPages = [
 
 export const secondaryMenuPages = [
   { icon: 'settings', title: 'Settings', link: '/settings' },
-  { icon: 'help-circle-outline', title: 'Help', link: '/help' },
 ]
 
 export const themes = {

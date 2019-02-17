@@ -2,8 +2,8 @@
 
   <link rel="stylesheet" type="text/css" href="https://loading.io/css/loading.css" />
 
-  <div *ngIf="showSplash" splash>
-    <img src="../assets/imgs/FalconLogoWhiteMaroon.png" ld ld-spin />
+  <div *ngIf="showSplash" class="splash">
+    <img src="../assets/imgs/FalconLogoWhiteMaroon.png" class="ld ld-spin" />
   </div>
 
   <ion-header text-center>
@@ -27,15 +27,15 @@
       </ion-buttons>
     </ion-toolbar>
 
-    <ion-searchbar text-start *ngIf="shouldShowSearchbar" showCancelButton="true"
-      (ionCancel)="shouldShowSearchbar = false" (ionClear)="shouldShowSearchbar = false"></ion-searchbar>
+    <ion-searchbar text-start *ngIf="shouldShowSearchbar" showCancelButton
+      (ionCancel)="shouldShowSearchbar = false" (ionClear)="shouldShowSearchbar = false" ></ion-searchbar>
 
   </ion-header>
 
   <ion-menu>
     <ion-header style="width: 100%; height: 25vh; background-color: #680a0f">
       <img src="../assets/imgs/FalconLogoWhiteMaroon.png" style="height: 20vh; width: 20vh">
-      <ion-label style="color: white !important; margin-left: 2vh; font-weight: 700; font-size: 1.4em">Falcon Scouter</ion-label>
+      <ion-label style="color: white !important; margin-left: 2vh; font-weight: 700; font-size: 1.15em">Falcon Scouter</ion-label>
     </ion-header>
 
     <ion-content style="--ion-color-base: var(--ion-color-primary) !important;">

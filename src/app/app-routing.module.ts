@@ -8,10 +8,8 @@ const routes: Routes = [
   { path: 'teams', loadChildren: './pages/teams/teams.module#TeamsPageModule' },
   { path: 'intro', loadChildren: './pages/intro/intro.module#IntroPageModule' },
   { path: 'dash', loadChildren: './pages/dash/dash.module#DashPageModule' },
-  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' },
   { path: 'picks', loadChildren: './pages/picks/picks.module#PicksPageModule' },
   { path: 'form_editor', loadChildren: './pages/form-editor/form-editor.module#FormEditorPageModule' },
-  { path: 'popover', loadChildren: './pages/popover/popover.module#PopoverPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
 ];
 
