@@ -9,6 +9,10 @@
 
 <ion-content padding>
 
+  <div text-center>
+    <img id="kms" src="{{ image }}" width="100" height="100">
+  </div>
+
   <div style="height: 35%;" text-center>
     <h2>{{ teamNumber }}</h2>
     <ion-label>{{ teamName }}</ion-label>
@@ -47,7 +51,8 @@
         </ion-col>
       </ion-row>
 
-      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async" routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
+      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async"
+        routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
 
         <ion-col>
           <b>{{ match.matchNumber }}</b>

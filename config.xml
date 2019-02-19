@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="frc.team5190.falconscoutapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>FalconScoutApp</name>
-    <description>A complete rewrite using Ionic of the original Java scouting app used by FRC Team 5190 during FIRST Power Up.</description>
+    <name>Falcon Scouter</name>
+    <description>FRC Team 5190's custom scouting app</description>
     <author email="shadowlink46@gmail.com" href="http://somewebsite.com/">Ivan Valadez</author>
     <content src="index.html" />
     <access origin="*" />
@@ -16,11 +16,12 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
-    <preference name="StatusBarBackgroundColor" value="white" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="SplashScreenDelay" value="10000" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" />
