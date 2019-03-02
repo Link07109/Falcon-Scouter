@@ -18,6 +18,7 @@ import {HttpModule} from '@angular/http'
 // import { IgxGridModule } from 'igniteui-angular';
 import {IonicStorageModule} from '@ionic/Storage'
 import {PopoverPageModule} from './pages/popover/popover.module'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import {PopoverPageModule} from './pages/popover/popover.module'
     PopoverPageModule,
     IonicStorageModule.forRoot(),
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(),
     // IgxGridModule.forRoot(),
     AppRoutingModule,

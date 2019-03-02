@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {FirestoreService} from '../../services/data/firestore.service'
 import {currentEvent, modifiedStatNames} from '../../consts'
+import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 
 @Component({
   selector: 'app-teams',
@@ -14,8 +15,10 @@ export class TeamsPage implements OnInit {
   team: any
   stats = modifiedStatNames
   
-  constructor(private firestoreService: FirestoreService) {
-  }
+  constructor(
+    private firestoreService: FirestoreService,
+    private blueAllianceService: BlueAllianceService
+  ) { }
   
   // ionViewDidLoad() {
   ngOnInit() {

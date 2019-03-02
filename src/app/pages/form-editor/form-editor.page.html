@@ -76,7 +76,8 @@
   <!-- This is for editing a new template -->
   <ion-card>
     <ion-list>
-      <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" id="divID" *ngIf="hasChosenTemplate">
+      <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" id="divID"
+        *ngIf="hasChosenTemplate">
       </ion-reorder-group>
     </ion-list>
   </ion-card>
@@ -85,17 +86,336 @@
   <ion-card>
     <ion-list>
       <!-- The difference between this and the one above is that this one doesnt have the divID -->
-      <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" *ngIf="hasChosenTemplate" [innerHTML]="templateHTML">
+      <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" *ngIf="hasChosenTemplate"
+        [innerHTML]="templateHTML">
       </ion-reorder-group>
     </ion-list>
   </ion-card>
 
   <!-- This is for using existing templates -->
-  <ion-card *ngIf="useTemplate">
-    <ion-card-content [innerHTML]="templateHTML"></ion-card-content>
-    <div text-center>
-      <ion-button (click)="submitData">Submit</ion-button>
-    </div>
-  </ion-card>
+
+  <div *ngIf="useTemplate">
+    <h2 text-center>Template Name</h2>
+
+    <ion-card>
+      <form (ngSubmit)="submitData()">
+
+        <ion-card-content>
+          <!-- <div [innerHTML]="templateHTML"></div> -->
+
+          <ion-label>Match Number</ion-label>
+          <ion-input [(ngModel)]="formData.matchNumber" placeholder="Match Number" [ngModelOptions]="{standalone: true}"></ion-input>
+          <!-- name="matchNumber" -->
+          <ion-label>Team Number</ion-label>
+          <ion-input [(ngModel)]="formData.teamNumber" placeholder="Team Number" [ngModelOptions]="{standalone: true}"></ion-input>
+          <!-- name="teamNumber" -->
+          <ion-label>Scout Name</ion-label>
+          <ion-input [(ngModel)]="formData.scoutName" placeholder="Scout Name" [ngModelOptions]="{standalone: true}"></ion-input>
+
+          
+          <ion-item-sliding id="Starting Point" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Starting Point<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.StartingPoint" name="Starting Point"
+                                class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-0" class="hydrated">Left</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-1" class="hydrated">Right</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-2" class="hydrated">Center</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Starting Point" value="Center">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="HAB Level" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> HAB Level<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.HABLevel" name="HAB Level"
+                                class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-3" class="hydrated">1</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-4" class="hydrated">2</ion-select-option> <input
+                                    type="hidden" class="aux-input" name="HAB Level" value="1">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="HAB Line" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options>
+                        <ion-item class="in-list item hydrated item-label">
+                            <ion-label color="dark"
+                                class="sc-ion-label-md-h sc-ion-label-md-s ion-color ion-color-dark hydrated">HAB Line
+                            </ion-label>
+                            <ion-toggle color="secondary" [(ngModel)]="formData.HABLine" name="HAB Line"
+                                class="ion-color ion-color-secondary in-item interactive hydrated toggle-checked"><input
+                                    type="hidden" class="aux-input" name="HAB Line" value="on"></ion-toggle>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="Placed Hatch" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Placed Hatch<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.PlacedHatch" name="Placed Hatch"
+                                class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-6" class="hydrated">None</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-7" class="hydrated">Rocket</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-8" class="hydrated">Cargo</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Placed Hatch" value="None">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="Interference" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Interference<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.Interference" name="Interference"
+                                class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-12" class="hydrated">in rocket path
+                                </ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-13" class="hydrated">in cargo path
+                                </ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-14" class="hydrated">none</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Interference" value="none">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="Plays defense" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options>
+                        <ion-item class="in-list item hydrated item-label">
+                            <ion-label color="dark"
+                                class="sc-ion-label-md-h sc-ion-label-md-s ion-color ion-color-dark hydrated">Plays defense
+                            </ion-label>
+                            <ion-toggle color="secondary" [(ngModel)]="formData.PlaysDefense" name="Plays defense"
+                                class="ion-color ion-color-secondary in-item interactive hydrated toggle-checked"><input
+                                    type="hidden" class="aux-input" name="Plays defense" value="on"></ion-toggle>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-label>Cargo in Ship</ion-label>
+        <ion-button (click)="removeCargoToShip()">-</ion-button>
+        <ion-input [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input>
+        <ion-button (click)="addCargoToShip()">+</ion-button>
+
+        <ion-label>Cargo in L Rocket</ion-label>
+        <ion-button (click)="removeCargoToLRocket()">-</ion-button>
+        <ion-input [(ngModel)]="formData.cargoInLRocket" name="cargoInLRocket" value="{{cargoInLRocket}}"></ion-input>
+        <ion-button (click)="addCargoToLRocket()">+</ion-button>
+
+        <ion-label>Cargo in M Rocket</ion-label>
+        <ion-button (click)="removeCargoToMRocket()">-</ion-button>
+        <ion-input [(ngModel)]="formData.cargoInMRocket" name="cargoInMRocket" value="{{cargoInMRocket}}"></ion-input>
+        <ion-button (click)="addCargoToMRocket()">+</ion-button>
+
+        <ion-label>Cargo in H Rocket</ion-label>
+        <ion-button (click)="removeCargoToHRocket()">-</ion-button>
+        <ion-input [(ngModel)]="formData.cargoInHRocket" name="hcargoInHRocket" value="{{cargoInHRocket}}"></ion-input>
+        <ion-button (click)="addCargoToHRocket()">+</ion-button>
+
+
+        <ion-label>Hatch in Ship</ion-label>
+        <ion-button (click)="removeHatchToShip()">-</ion-button>
+        <ion-input [(ngModel)]="formData.hatchInShip" name="hatchInShip" value="{{hatchInShip}}"></ion-input>
+        <ion-button (click)="addHatchToShip()">+</ion-button>
+
+        <ion-label>Hatch in L Rocket</ion-label>
+        <ion-button (click)="removeHatchToLRocket()">-</ion-button>
+        <ion-input [(ngModel)]="formData.hatchInLRocket" name="hatchInLRocket" value="{{hatchInLRocket}}"></ion-input>
+        <ion-button (click)="addHatchToLRocket()">+</ion-button>
+
+        <ion-label>Hatch in M Rocket</ion-label>
+        <ion-button (click)="removeHatchToMRocket()">-</ion-button>
+        <ion-input [(ngModel)]="formData.hatchInMRocket" name="hatchInMRocket" value="{{hatchInMRocket}}"></ion-input>
+        <ion-button (click)="addHatchToMRocket()">+</ion-button>
+
+        <ion-label>Hatch in H Rocket</ion-label>
+        <ion-button (click)="removeHatchToHRocket()">-</ion-button>
+        <ion-input [(ngModel)]="formData.hatchInHRocket" name="hatchInHRocket" value="{{hatchInHRocket}}"></ion-input>
+        <ion-button (click)="addHatchToHRocket()">+</ion-button>
+        <ion-item-sliding id="Climb" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Climb<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.Climb" name="Climb" class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-22" class="hydrated">Level 1</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-23" class="hydrated">Level 2</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-24" class="hydrated">Level 3</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Climb" value="Level 1">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="Stability" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Stability<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.Stability" name="Stability"
+                                class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-25" class="hydrated">Good</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-26" class="hydrated">Bad</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Stability" value="Good">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="Driver" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Driver<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.Driver" name="Driver" class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-27" class="hydrated">Good</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-28" class="hydrated">Bad</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Driver" value="Good">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+        <ion-item-sliding id="Penalty" class="item-sliding hydrated">
+            <ion-grid class="hydrated">
+                <ion-row class="hydrated">
+                    <ion-col size="1" class="hydrated"
+                        style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-reorder class="hydrated"></ion-reorder>
+                    </ion-col>
+                    <ion-col size="9" class="hydrated"
+                        style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
+                        <ion-item-options side="start" class="item-options-start hydrated">
+                            <ion-button (click)="deelete(elem)" class="button button-md button-solid button-solid-md hydrated"
+                                tappable="" fill="solid">Delete</ion-button>
+                        </ion-item-options> Penalty<ion-item
+                            class="in-list item hydrated item-interactive item-select item-input-has-value">
+                            <ion-select [(ngModel)]="formData.Penalty" [ngModelOptions]="{standalone: true}" name="Penalty" class="select select-md in-item hydrated">
+                                <ion-select-option role="option" id="ion-selopt-30" class="hydrated">None</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-31" class="hydrated">Some</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-32" class="hydrated">A lot</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Penalty" value="None">
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item-sliding>
+          <ion-label>Comments</ion-label>
+          <ion-input [(ngModel)]="formData.comments" placeholder="Comments" name="comments"></ion-input>
+        </ion-card-content>
+
+        <div text-center>
+          <ion-button type="submit">Submit</ion-button>
+        </div>
+      </form>
+    </ion-card>
+  </div>
 
 </ion-content>

@@ -13,7 +13,8 @@
       <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{team.teamNumber}}">
         <ion-col text-center size="2">
           <ion-item>
-            <ion-icon name="help-buoy"></ion-icon>
+            <!-- {{ blueAllianceService.getTeamIcon(team.teamNumber, team.teamNumber) }} -->
+            <!-- <img id="{{team.teamNumber}}" width="5vh" height="5vh"> -->
           </ion-item>
         </ion-col>
         <ion-col text-center>

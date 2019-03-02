@@ -1,13 +1,14 @@
 
-export let currentEvent = '2018gal'
-// 2019NCWAK, 2019NCASH, 2019NCCMP
+export let currentEvent = '2018nccmp'
+// 2019ncwak, 2019ncash, 2019nccmp
+
+export const curYear = 2019
 
 export const primaryMenuPages = [
   { icon: 'home', title: 'Intro', link: '/intro' },
   { icon: 'bookmarks', title: 'Matches', link: '/dash' },
   { icon: 'people', title: 'Teams', link: '/teams' },
   { icon: 'create', title: 'Scout', link: '/form_editor' },
-  // { icon: 'list', title: 'Alliance Picks', link: '/picks' },
 ]
 
 export const secondaryMenuPages = [

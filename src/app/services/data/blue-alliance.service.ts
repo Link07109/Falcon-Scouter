@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { xTBAauthKey } from '../../../app/credentials';
+import * as $ from 'jquery';
+import { curYear } from '../../consts';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +16,25 @@ export class BlueAllianceService {
   constructor(private http: Http) { }
 
   postDataToSpreadsheet(sheetId: string, matchData: any) {
-    const url = this.sheetsUrl
     const json = {
-      data: matchData,
-      id: sheetId
+      id: sheetId,
+      matchData: matchData
     }
 
-    return this.http.post(url, json);
+    return this.http.post(this.sheetsUrl, json)
   }
 
   // eventKey = year + event_code
   // teamKey = frc + team_number
+
+  getTeamIcon(teamNumber: number, imgID: string) {
+    $.get('https://api.allorigins.ml/get?method=raw&url=' + encodeURIComponent(`https://thebluealliance.com/team/${teamNumber}/${curYear}`) + '&callback=?', function (data) {
+      const OOF = $.parseHTML(data)[73]['innerHTML']
+      const OOFindex = OOF.indexOf('data:image/png')
+
+      $(`#${imgID}`).attr('src', OOF.slice(OOFindex, -OOFindex).substring(0, OOF.indexOf('=">') - OOFindex + 1))
+    })
+  }
 
   getTeamEvents(teamKey: string, year: number) {
     return this.http.get(`${this.baseUrl}/team/${teamKey}/events/${year}?X-TBA-Auth-Key=${xTBAauthKey}`)

@@ -9,7 +9,7 @@ export class FirestoreService {
 
   constructor(public firestore: AngularFirestore) { }
 
-  createMatch(event: string, match: any): Promise<void> {
+  createMatch(event: string, match: any) {
     return this.firestore.doc(`events/${event}/teams/${match.teamNumber}/matches/${match.matchNumber}`)
       .set(match);
   }
@@ -30,8 +30,8 @@ export class FirestoreService {
   }
 
 
-  saveScoutingTemplate(templateName: string, html: string, templateComponents: any[]) {
-    return this.firestore.doc(`templates/${templateName}`).set({ name: templateName, templateHTML: html, templateComponents: templateComponents });
+  saveScoutingTemplate(templateName: string, html: string) {
+    return this.firestore.doc(`templates/${templateName}`).set({ name: templateName, templateHTML: html })
   }
 
   getScoutingTemplate(templateName: string) {
