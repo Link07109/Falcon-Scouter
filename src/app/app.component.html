@@ -46,7 +46,7 @@
       <ion-item>
         <ion-icon name="moon" style="margin-right: 10%"></ion-icon>
         <b>Night mode</b>
-        <ion-toggle (ionChange)="toggleThemeStlye()"></ion-toggle>
+        <ion-toggle color="secondary" (ionChange)="toggleThemeStlye()"></ion-toggle>
       </ion-item>
       <ion-item text-start *ngFor="let page of pages2" routerLink="{{ page.link }}">
         <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>

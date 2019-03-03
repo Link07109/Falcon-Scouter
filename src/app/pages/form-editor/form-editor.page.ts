@@ -101,7 +101,7 @@ export class FormEditorPage implements OnInit {
     this.hatchInMRocket -= 1
   }
 
-  removeHatchToRRocket() {
+  removeHatchToHRocket() {
     this.hatchInHRocket -= 1
   }
 

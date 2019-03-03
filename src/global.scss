@@ -28,3 +28,7 @@ ion-toolbar {
   --background: var(--ion-color-light);
   --ion-color-base: var(--ion-color-light) !important;
 }
+
+ion-card {
+  background: var(--ion-color-primary) !important;
+}
