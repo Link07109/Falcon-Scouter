@@ -142,6 +142,7 @@ export class FormEditorPage implements OnInit {
         this.presentAlert('Success!', 'Form data submitted.')
       }, error => {
         console.error(error);
+        // add to a queue if offline and detect when its online -> and then push them all at once with a button somewhere else
       })
 
   }

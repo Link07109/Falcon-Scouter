@@ -8,3 +8,19 @@
     justify-content: center;
     background: #680a0f;
 }
+
+.box {
+    position: absolute;
+    width: calc(6111px / 21);
+    height: 200px;
+    background: url(../assets/imgs/depression.svg);
+    animation: animate 1s steps(21) infinite
+}
+
+@keyframes animate {
+    from {
+        background-position: 6111px;
+    } to {
+        background-position: 0;
+    }
+}
