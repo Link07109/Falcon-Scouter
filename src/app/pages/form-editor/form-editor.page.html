@@ -268,46 +268,89 @@
                 </ion-row>
             </ion-grid>
         </ion-item-sliding>
-        <ion-label>Cargo in Ship</ion-label>
-        <ion-button (click)="removeCargoToShip()">-</ion-button>
-        <ion-input [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input>
-        <ion-button (click)="addCargoToShip()">+</ion-button>
 
-        <ion-label>Cargo in L Rocket</ion-label>
-        <ion-button (click)="removeCargoToLRocket()">-</ion-button>
-        <ion-input [(ngModel)]="formData.cargoInLRocket" name="cargoInLRocket" value="{{cargoInLRocket}}"></ion-input>
-        <ion-button (click)="addCargoToLRocket()">+</ion-button>
+        <!-- Cargo in ship -->
+        <ion-grid>
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Cargo in Ship</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeCargoToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addCargoToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
-        <ion-label>Cargo in M Rocket</ion-label>
-        <ion-button (click)="removeCargoToMRocket()">-</ion-button>
-        <ion-input [(ngModel)]="formData.cargoInMRocket" name="cargoInMRocket" value="{{cargoInMRocket}}"></ion-input>
-        <ion-button (click)="addCargoToMRocket()">+</ion-button>
+        <!-- Cargo in bottom level of rocket -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Cargo in Bottom Level of Rocket</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeCargoToLRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.cargoInLRocket" name="cargoInLRocket" value="{{cargoInLrRocket}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addCargoToLRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
-        <ion-label>Cargo in H Rocket</ion-label>
-        <ion-button (click)="removeCargoToHRocket()">-</ion-button>
-        <ion-input [(ngModel)]="formData.cargoInHRocket" name="hcargoInHRocket" value="{{cargoInHRocket}}"></ion-input>
-        <ion-button (click)="addCargoToHRocket()">+</ion-button>
+        <!-- Cargo in middle level of rocket -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Cargo in Middle Level of Rocket</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeCargoToMRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.cargoInMRocket" name="cargoInMRocket" value="{{cargoInMRocket}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addCargoToMRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
+        <!-- Cargo in top level of rocket -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Cargo in Top Level of Rocket</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.cargoInHRocket" name="cargoInHRocket" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
-        <ion-label>Hatch in Ship</ion-label>
-        <ion-button (click)="removeHatchToShip()">-</ion-button>
-        <ion-input [(ngModel)]="formData.hatchInShip" name="hatchInShip" value="{{hatchInShip}}"></ion-input>
-        <ion-button (click)="addHatchToShip()">+</ion-button>
+        <!-- Hatches in Ship -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Hatch in Ship</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeHatchToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.hatchInShip" name="hatchInShip" value="{{hatchInShip}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addHatchToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
-        <ion-label>Hatch in L Rocket</ion-label>
-        <ion-button (click)="removeHatchToLRocket()">-</ion-button>
-        <ion-input [(ngModel)]="formData.hatchInLRocket" name="hatchInLRocket" value="{{hatchInLRocket}}"></ion-input>
-        <ion-button (click)="addHatchToLRocket()">+</ion-button>
+        <!-- Hatches in Bottom Level of Rocket -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Hatch in Bottom Level of Rocket</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeHatchToLRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.hatchInLRocket" name="hatchInLRocket" value="{{hatchInLRocket}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addHatchToLRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
-        <ion-label>Hatch in M Rocket</ion-label>
-        <ion-button (click)="removeHatchToMRocket()">-</ion-button>
-        <ion-input [(ngModel)]="formData.hatchInMRocket" name="hatchInMRocket" value="{{hatchInMRocket}}"></ion-input>
-        <ion-button (click)="addHatchToMRocket()">+</ion-button>
+        <!-- Hatches in Middle Level of Rocket -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Hatch in Middle Level of Rocket</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeHatchToMRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.hatchInMRocket" name="hatchInMRocket" value="{{hatchInMRocket}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addHatchToMRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
 
-        <ion-label>Hatch in H Rocket</ion-label>
-        <ion-button (click)="removeHatchToHRocket()">-</ion-button>
-        <ion-input [(ngModel)]="formData.hatchInHRocket" name="hatchInHRocket" value="{{hatchInHRocket}}"></ion-input>
-        <ion-button (click)="addHatchToHRocket()">+</ion-button>
+        <!-- Hatches in Top Level of Rocket -->
+            <ion-row text-center=""><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Hatch in Top Level of Rocket</ion-label></ion-row>
+            <ion-row>
+                <ion-col col-5></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="removeHatchToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                <ion-col col-5 text-center="" style="padding: 0px"><ion-input placeholder='0' style="font-size: 1.25em; font-weight: 1000;" [(ngModel)]="formData.hatchInHRocket" name="hatchInHRocket" value="{{hatchInHRocket}}"></ion-input></ion-col>
+                <ion-col col-5 text-center=""><ion-button (click)="addHatchToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                <ion-col col-5></ion-col>
+            </ion-row>
+        </ion-grid>
+        
         <ion-item-sliding id="Climb" class="item-sliding hydrated">
             <ion-grid class="hydrated">
                 <ion-row class="hydrated">
