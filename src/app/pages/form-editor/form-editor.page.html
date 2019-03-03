@@ -308,7 +308,6 @@
                 <ion-input [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input>
                 <ion-button (click)="addCargoToShip()">+</ion-button>
 
-<<<<<<< HEAD
           
           <ion-item-sliding id="Starting Point" class="item-sliding hydrated">
             <ion-grid class="hydrated">
@@ -650,86 +649,6 @@
           <ion-label>Comments</ion-label>
           <ion-input [(ngModel)]="formData.comments" placeholder="Comments" name="comments"></ion-input>
         </ion-card-content>
-=======
-                <ion-label>Cargo in L Rocket</ion-label>
-                <ion-button (click)="removeCargoToLRocket()">-</ion-button>
-                <ion-input [(ngModel)]="formData.cargoInLRocket" name="cargoInLRocket" value="{{cargoInLRocket}}">
-                </ion-input>
-                <ion-button (click)="addCargoToLRocket()">+</ion-button>
-
-                <ion-label>Cargo in M Rocket</ion-label>
-                <ion-button (click)="removeCargoToMRocket()">-</ion-button>
-                <ion-input [(ngModel)]="formData.cargoInMRocket" name="cargoInMRocket" value="{{cargoInMRocket}}">
-                </ion-input>
-                <ion-button (click)="addCargoToMRocket()">+</ion-button>
-
-                <ion-label>Cargo in H Rocket</ion-label>
-                <ion-button (click)="removeCargoToHRocket()">-</ion-button>
-                <ion-input [(ngModel)]="formData.cargoInHRocket" name="hcargoInHRocket" value="{{cargoInHRocket}}">
-                </ion-input>
-                <ion-button (click)="addCargoToHRocket()">+</ion-button>
-
-
-                <ion-label>Hatch in Ship</ion-label>
-                <ion-button (click)="removeHatchToShip()">-</ion-button>
-                <ion-input [(ngModel)]="formData.hatchInShip" name="hatchInShip" value="{{hatchInShip}}"></ion-input>
-                <ion-button (click)="addHatchToShip()">+</ion-button>
-
-                <ion-label>Hatch in L Rocket</ion-label>
-                <ion-button (click)="removeHatchToLRocket()">-</ion-button>
-                <ion-input [(ngModel)]="formData.hatchInLRocket" name="hatchInLRocket" value="{{hatchInLRocket}}">
-                </ion-input>
-                <ion-button (click)="addHatchToLRocket()">+</ion-button>
-
-                <ion-label>Hatch in M Rocket</ion-label>
-                <ion-button (click)="removeHatchToMRocket()">-</ion-button>
-                <ion-input [(ngModel)]="formData.hatchInMRocket" name="hatchInMRocket" value="{{hatchInMRocket}}">
-                </ion-input>
-                <ion-button (click)="addHatchToMRocket()">+</ion-button>
-
-                <ion-label>Hatch in H Rocket</ion-label>
-                <ion-button (click)="removeHatchToHRocket()">-</ion-button>
-                <ion-input [(ngModel)]="formData.hatchInHRocket" name="hatchInHRocket" value="{{hatchInHRocket}}">
-                </ion-input>
-                <ion-button (click)="addHatchToHRocket()">+</ion-button>
-                <ion-item-sliding id="Climb" class="item-sliding hydrated">
-                    <ion-grid class="hydrated">
-                        <ion-row class="hydrated">
-                            <ion-col size="1" class="hydrated"
-                                style="flex: 0 0 calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(1 / var(--ion-grid-columns, 12)) * 100%);">
-                                <ion-reorder class="hydrated"></ion-reorder>
-                            </ion-col>
-                            <ion-col size="9" class="hydrated"
-                                style="flex: 0 0 calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%); max-width: calc(calc(9 / var(--ion-grid-columns, 12)) * 100%);">
-                                <ion-item-options side="start" class="item-options-start hydrated">
-                                    <ion-button (click)="deelete(elem)"
-                                        class="button button-md button-solid button-solid-md hydrated" tappable=""
-                                        fill="solid">Delete</ion-button>
-                                </ion-item-options> Climb<ion-item
-                                    class="in-list item hydrated item-interactive item-select item-input-has-value">
-                                    <ion-select [(ngModel)]="formData.Climb" name="Climb"
-                                        class="select select-md in-item hydrated">
-                                        <ion-select-option role="option" id="ion-selopt-22" class="hydrated">Level 1
-                                        </ion-select-option>
-                                        <ion-select-option role="option" id="ion-selopt-23" class="hydrated">Level 2
-                                        </ion-select-option>
-                                        <ion-select-option role="option" id="ion-selopt-24" class="hydrated">Level 3
-                                        </ion-select-option>
-                                        <input type="hidden" class="aux-input" name="Climb" value="Level 1">
-                                    </ion-select>
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-item-sliding>
-            </ion-card-content>
-        </ion-card>
-
-        <ion-card>
-            <ion-card-content>
-                <!-- <div [innerHTML]="templateHTML"></div> -->
-                <h2 text-center>Post-Game</h2>
->>>>>>> 97ed0f5d3b9cecb3d00dbac6442c47c628502fb5
 
                 <ion-item-sliding id="Stability" class="item-sliding hydrated">
                     <ion-grid class="hydrated">
