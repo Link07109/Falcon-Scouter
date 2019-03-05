@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
-import { statNames, modifiedStatNames, curYear } from '../../consts';
-import { currentEvent } from '../../consts';
+import { statNames, modifiedStatNames } from '../../consts';
+import { currentEvent, curYear } from '../settings/settings.page';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 
 @Component({

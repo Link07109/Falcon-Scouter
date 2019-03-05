@@ -28,33 +28,42 @@
       (ionCancel)="shouldShowSearchbar = false" (ionClear)="shouldShowSearchbar = false" ></ion-searchbar>
 
   </ion-header>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header style="width: 100%; height: 25vh; background-color: #680a0f">
+        <img src="../assets/imgs/icon.png" style="height: 20vh; width: 20vh">
+        <ion-label style="color: white !important; margin-left: 2vh; font-weight: 700; font-size: 1.15em">Falcon Scouter</ion-label>
+      </ion-header>
 
-  <ion-menu>
-    <ion-header style="width: 100%; height: 25vh; background-color: #680a0f">
-      <img src="../assets/imgs/icon.png" style="height: 20vh; width: 20vh">
-      <ion-label style="color: white !important; margin-left: 2vh; font-weight: 700; font-size: 1.15em">Falcon Scouter</ion-label>
-    </ion-header>
+      <ion-content style="--ion-color-base: var(--ion-color-primary) !important;">
+        <ion-menu-toggle auto-hide="false" text-start *ngFor="let page of pages" routerLink="{{ page.link }}">
+          <ion-item>
+            <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
+            <b>{{ page.title }}</b>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-content>
 
-    <ion-content style="--ion-color-base: var(--ion-color-primary) !important;">
-      <ion-item text-start *ngFor="let page of pages" routerLink="{{ page.link }}">
-        <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
-        <b>{{ page.title }}</b>
-      </ion-item>
-    </ion-content>
+      <ion-footer>
+        <ion-item (click)="syncData()">
+          <ion-icon name="refresh" style="margin-right: 10%"></ion-icon>
+          <b>Sync</b>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="moon" style="margin-right: 10%"></ion-icon>
+          <b>Night mode</b>
+          <ion-toggle color="secondary" (ionChange)="toggleThemeStlye()"></ion-toggle>
+        </ion-item>
+        <ion-menu-toggle auto-hide="false" text-start *ngFor="let page of pages2" routerLink="{{ page.link }}">
+          <ion-item>
+            <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
+            <b>{{ page.title }}</b>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-footer>
+    </ion-menu>
 
-    <ion-footer>
-      <ion-item>
-        <ion-icon name="moon" style="margin-right: 10%"></ion-icon>
-        <b>Night mode</b>
-        <ion-toggle color="secondary" (ionChange)="toggleThemeStlye()"></ion-toggle>
-      </ion-item>
-      <ion-item text-start *ngFor="let page of pages2" routerLink="{{ page.link }}">
-        <ion-icon name="{{ page.icon }}" style="margin-right: 10%"></ion-icon>
-        <b>{{ page.title }}</b>
-      </ion-item>
-    </ion-footer>
-  </ion-menu>
-
-  <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
 
 </ion-app>

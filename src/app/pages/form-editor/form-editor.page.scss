@@ -1,13 +1,13 @@
 .kys {
-   margin-left: 33%;
-   width: 33%
+  margin-left: 33%;
+  width: 33%;
 }
 
 ion-fab-button[data-desc] {
   color: var(--ion-color-secondary);
   position: relative;
 }
-  
+
 ion-fab-button[data-desc]::after {
   position: absolute;
   content: attr(data-desc);
@@ -20,6 +20,5 @@ ion-fab-button[data-desc]::after {
   padding: 6px;
   border-radius: 5px;
   color: var(--ion-color-dark);
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
-  

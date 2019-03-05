@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core'
-import {FirestoreService} from '../../services/data/firestore.service'
-import {currentEvent, modifiedStatNames} from '../../consts'
+import { modifiedStatNames} from '../../consts'
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
+import { currentEvent } from '../settings/settings.page';
 
 @Component({
   selector: 'app-teams',
@@ -11,36 +11,34 @@ import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 export class TeamsPage implements OnInit {
   teamCollectionObservable
   filteredArray = []
-  kmsAray = []
+  originalArray = []
   team: any
   stats = modifiedStatNames
   
   constructor(
-    private firestoreService: FirestoreService,
     private blueAllianceService: BlueAllianceService
   ) { }
   
-  // ionViewDidLoad() {
   ngOnInit() {
-    this.teamCollectionObservable = this.firestoreService.getTeamList(currentEvent).valueChanges()
-  
+    this.teamCollectionObservable = this.blueAllianceService.getEventTeams(currentEvent)
+    
     this.teamCollectionObservable.subscribe(element => {
       element.forEach(el => {
-        this.kmsAray.push(el)
+        this.originalArray.push(el)
       })
     })
-    this.filteredArray = this.kmsAray
+    this.filteredArray = this.originalArray
   }
   
   getItems(ev) {
     const val = ev.target.value
     
     if (val && val.trim() !== '') {
-      this.filteredArray = this.kmsAray.filter(item => {
+      this.filteredArray = this.originalArray.filter(item => {
         return item['teamNumber'].startsWith(val) // could also use .contains() if necessary
       })
     } else {
-      this.filteredArray = this.kmsAray
+      this.filteredArray = this.originalArray
     }
   }
   

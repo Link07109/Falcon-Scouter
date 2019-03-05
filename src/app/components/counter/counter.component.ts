@@ -7,19 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CounterComponent implements OnInit {
 
-  number = 0;
+  dataItem = 'idk'
+  number = 0
+  minNumber = 0
+  maxNumber = 8
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   add() {
-    this.number ++;
+    this.number += (this.number >= this.maxNumber) ? 0 : 1
   }
 
   remove() {
-    if (this.number > 0) { this.number --; }
+    this.number -= (this.number <= this.minNumber) ? 0 : 1
   }
 
 }

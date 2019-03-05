@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { currentEvent } from '../../consts';
+import { currentEvent } from '../settings/settings.page';
 
 @Component({
   selector: 'app-intro',

@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { xTBAauthKey } from '../../../app/credentials';
 import * as $ from 'jquery';
-import { curYear } from '../../consts';
+import { curYear } from '../../pages/settings/settings.page';
 
 @Injectable({
   providedIn: 'root'

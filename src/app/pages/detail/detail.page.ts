@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { Observable } from 'rxjs';
- ;
-import { currentEvent } from '../../consts';
+import { currentEvent } from '../settings/settings.page';
 
 @Component({
   selector: 'app-detail',

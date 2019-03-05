@@ -7,13 +7,17 @@
 <ion-content padding>
   <h1 text-center>Settings</h1>
   
-  Current Competition:
-  <ion-input text-start id="hi" placeholder="ID of Competition Being Scouted"></ion-input>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-2>Current Competition:</ion-col>
+      <ion-col col-2><ion-input text-start id="compInput" (ionInput)="changeEvent($event)" placeholder="Competition ID"></ion-input></ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
 
 <ion-footer>
   <ion-toolbar text-center>
-    <ion-button>Save Changes</ion-button>
+    <ion-button (click)="saveChanges()">Save Changes</ion-button>
   </ion-toolbar>
 </ion-footer>

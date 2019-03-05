@@ -19,6 +19,7 @@ import {HttpModule} from '@angular/http'
 import {IonicStorageModule} from '@ionic/Storage'
 import {PopoverPageModule} from './pages/popover/popover.module'
 import { FormsModule } from '@angular/forms';
+import { Network } from '@ionic-native/network/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     StatusBar,
     SplashScreen,
     BlueAllianceService,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
   ],
   bootstrap: [AppComponent]

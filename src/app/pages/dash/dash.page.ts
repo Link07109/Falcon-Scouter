@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
-import { currentEvent } from '../../consts';
+import { currentEvent } from '../settings/settings.page';
 
 @Component({
   selector: 'app-dash',

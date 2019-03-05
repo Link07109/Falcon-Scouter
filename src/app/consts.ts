@@ -1,9 +1,3 @@
-
-export let currentEvent = '2018nccmp'
-// 2019ncwak, 2019ncash, 2019nccmp
-
-export const curYear = 2019
-
 export const primaryMenuPages = [
   { icon: 'home', title: 'Intro', link: '/intro' },
   { icon: 'bookmarks', title: 'Matches', link: '/dash' },
@@ -25,9 +19,9 @@ export const themes = {
     light: '#222222'
   },
   light: {
-    primary: '#cdcdcd',
-    secondary: '#aea4bf',
-    tertiary: '#8f6593',
+    primary: '#ededdb',
+    secondary: '#8f6593',
+    tertiary: '#aea4bf',
     dark: '#6e4552',
     medium: '#BCE784',
     light: '#e3e4db'

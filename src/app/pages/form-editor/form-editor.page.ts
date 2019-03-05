@@ -4,6 +4,7 @@ import { FirestoreService } from '../../services/data/firestore.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import * as $ from 'jquery';
+import { AlertInput } from '@ionic/core';
 
 @Component({
   selector: 'app-form-editor',
@@ -40,69 +41,35 @@ export class FormEditorPage implements OnInit {
   ) { }
 
   addCargoToShip() {
-    this.cargoInShip += 1
-  }
-  
-  addCargoToLRocket() {
-    this.cargoInLRocket += 1
-  }
-
-  addCargoToMRocket() {
-    this.cargoInMRocket += 1
-  }
-
-  addCargoToHRocket() {
-    this.cargoInHRocket += 1
+    this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1
   }
 
   removeCargoToShip() {
-    this.cargoInShip -= 1
-  }
-  
-  removeCargoToLRocket() {
-    this.cargoInLRocket -= 1
+    this.cargoInShip -= (this.cargoInShip <= 0) ? 0 : 1
   }
 
-  removeCargoToMRocket() {
-    this.cargoInMRocket -= 1
+  addCargoToHRocket() {
+    this.cargoInHRocket += (this.cargoInHRocket >= 8) ? 0 : 1
   }
 
   removeCargoToHRocket() {
-    this.cargoInHRocket -= 1
+    this.cargoInHRocket -= (this.cargoInHRocket <= 0) ? 0 : 1
   }
-
 
   addHatchToShip() {
-    this.hatchInShip += 1
-  }
-
-  addHatchToLRocket() {
-    this.hatchInLRocket += 1
-  }
-
-  addHatchToMRocket() {
-    this.hatchInMRocket += 1
-  }
-
-  addHatchToHRocket() {
-    this.hatchInHRocket += 1
-    console.log(this.hatchInHRocket)
+    this.hatchInShip += (this.hatchInShip >= 8) ? 0 : 1
   }
 
   removeHatchToShip() {
-    this.hatchInShip -= 1
+    this.hatchInShip -= (this.hatchInShip <= 0) ? 0 : 1
   }
 
-  removeHatchToLRocket() {
-    this.hatchInLRocket -= 1
-  }
-
-  removeHatchToMRocket() {
-    this.hatchInMRocket -= 1
+  addHatchToHRocket() {
+    this.hatchInHRocket += (this.hatchInHRocket >= 8) ? 0 : 1
   }
 
   removeHatchToHRocket() {
-    this.hatchInHRocket -= 1
+    this.hatchInHRocket -= (this.hatchInHRocket <= 0) ? 0 : 1
   }
 
   ngOnInit() {
@@ -125,15 +92,12 @@ export class FormEditorPage implements OnInit {
   submitData() {
     this.formData.data = {
       cargoInShip: this.cargoInShip,
-      cargoInLRocket: this.cargoInLRocket,
-      cargoInMRocket: this.cargoInMRocket,
-      cargoInHRocket: this.cargoInHRocket,
-    
-      hatchInShip: this.hatchInShip,
-      hatchInLRocket: this.hatchInLRocket,
-      hatchInMRocket: this.hatchInMRocket,
-      hatchInHRocket: this.hatchInHRocket,
+      hatchesInShip: this.hatchInShip,      
+      cargoInRocket: this.cargoInHRocket,
+      hatchesInRocket: this.hatchInHRocket,
     }
+
+    console.log(this.formData)
 
     this.firestoreService
       .createMatch('2019ncwak', this.formData)
@@ -144,7 +108,6 @@ export class FormEditorPage implements OnInit {
         console.error(error);
         // add to a queue if offline and detect when its online -> and then push them all at once with a button somewhere else
       })
-
   }
 
   loadHTMLToEdit(element) {
@@ -158,36 +121,28 @@ export class FormEditorPage implements OnInit {
   }
 
   saveTemplate() {
-    const template = document.getElementById('divID').innerHTML // outerHTML
+    const template = document.getElementById('divID').innerHTML
+    console.log(template)
+
     this.inputAlert('Save Template', template)
   }
 
-  deelete(element: HTMLIonItemSlidingElement) {
-    // element.parentNode.removeChild(element)
-    document.getElementById('divID').removeChild(element)
-    console.log(document.getElementById('divID').children)
-  }
-
-  createElement(html, id) {
-    const elem = document.createElement('ion-item-sliding') //  (ionSwipe)="delete({{elem}})"
-    elem.setAttribute('id', id)
+  createElement(html) {
+    const elem = document.createElement('ion-item-sliding')
 
     elem.innerHTML = 
+      `
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1" style="margin-top: .75vh">
+            <ion-reorder></ion-reorder>
+          </ion-col>
+          <ion-col size="9">
+            ${html}
+          </ion-col>
+        </ion-row>
+      </ion-grid>   
     `
-    <ion-grid>
-      <ion-row>
-        <ion-col size="1">
-          <ion-reorder></ion-reorder>
-        </ion-col>
-        <ion-col size="9">
-          <ion-item-options side="start">
-            <ion-button (click)='deelete(elem)'>Delete</ion-button>
-          </ion-item-options>
-          ${html}
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-   `
 
     if (elem.childNodes.length > 0) {
       document.getElementById('divID').appendChild(elem)
@@ -199,6 +154,7 @@ export class FormEditorPage implements OnInit {
   async createComponent(componentName, html = '') {
     const alert = await this.alertController.create({
       header: `Create new ${componentName}`,
+      cssClass: `alertCSS`,
       inputs: [
         {
           name: 'labelName',
@@ -221,10 +177,10 @@ export class FormEditorPage implements OnInit {
 
             html = `<ion-item>
                       <ion-label color="dark">${name}</ion-label>
-                      <ion-${componentName} color="secondary" [(ngModel)]="formData.${name}" [ngModelOptions]="{standalone: true}" name="${name}">${html}</ion-${componentName}>
+                      <ion-${componentName} color="secondary" [(ngModel)]="formData.${name}" name="${name}">${html}</ion-${componentName}>
                     </ion-item>`
             
-            this.createElement(html, name)
+            this.createElement(html)
           }
         }
       ]
@@ -232,30 +188,17 @@ export class FormEditorPage implements OnInit {
     await alert.present()
   }
 
-  async selectorAlert() {
+  async questionSelectorAlert() {
     const alert = await this.alertController.create({
-      header: 'Create Selector',
+      header: 'Number of options',
+      cssClass: `alertCSS`,
       inputs: [
         {
-          name: 'labelName',
-          type: 'text',
-          placeholder: 'name'
-        },
-        {
-          name: 'Option 1 Name',
-          type: 'text',
-          placeholder: 'option 1'
-        },
-        {
-          name: 'Option 2 Name',
-          type: 'text',
-          placeholder: 'option 2'
-        },
-        {
-          name: 'Option 3 Name',
-          type: 'text',
-          placeholder: 'option 3'
-        },
+          name: 'optionNumber',
+          type: 'number',
+          min: 2,
+          max: 6
+        }
       ],
       buttons: [
         {
@@ -268,19 +211,60 @@ export class FormEditorPage implements OnInit {
         {
           text: 'Ok',
           handler: data => {
-            let stringg = ''
+            const number = data['optionNumber']
+            this.selectorAlert(number)
+          }
+        }
+      ]
+    })
+    await alert.present()
+  }
+
+  async selectorAlert(numberOfInputs: number) {    
+    const generatedNumberOfInputs: AlertInput[] = [
+      {
+        name: 'labelName',
+        type: 'text',
+        placeholder: 'Component Name'
+      },
+    ]
+
+    for (let i = 0; i < numberOfInputs; i++) {
+      const input: AlertInput = {
+        name: `${i + 1}`,
+        type:'text',
+        placeholder: `Option ${i + 1}`
+      }
+      generatedNumberOfInputs.push(input)
+    }
+
+    const alert = await this.alertController.create({
+      header: 'Create Selector',
+      cssClass: `alertCSS`,
+      inputs: generatedNumberOfInputs,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            let selectOptionsHTMLString: string
             const name = data['labelName']
 
             Object.entries(data).forEach(([key, value]) => {
               // skip the first one, which is just the name of the component
-              if (key == 'labelName') {
-                return
-              }
-              stringg += `<ion-select-option>${value}</ion-select-option>`
+              if (key == 'labelName') { return }
+              // if its not the first one, add them to the select
+              selectOptionsHTMLString += `<ion-select-option>${value}</ion-select-option>`
             })
 
-            const html = name + `<ion-item><ion-select [(ngModel)]="formData.${name}" name="${name}">${stringg}</ion-select></ion-item>`
-            this.createElement(html, name)
+            const html = `<ion-grid><ion-row><ion-col size="5" text-start>${name}</ion-col><ion-col size="5" text-center><ion-select interface="action-sheet" [(ngModel)]="formData.${name}" name="${name}">${selectOptionsHTMLString}</ion-select></ion-col></ion-row></ion-grid>`
+            this.createElement(html)
           }
         }
       ]
@@ -291,6 +275,7 @@ export class FormEditorPage implements OnInit {
   async inputAlert(title: string, template) {
     const alert = await this.alertController.create({
       header: title,
+      cssClass: `alertCSS`,
       inputs: [
         {
           name: 'Template Name',

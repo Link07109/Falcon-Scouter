@@ -6,7 +6,7 @@
 
 <ion-content padding>
 
-  <ion-card text-center color="primary" style="width: 95% !important; height: 4vh !important" routerLink="/teams"><b>View Teams</b></ion-card>
+  <ion-card color="primary" expand="full" routerLink="/teams"><ion-card-content text-center><b>View Teams</b></ion-card-content></ion-card>
   <ion-label text-center>Current Event: <b>{{ curComp }}</b></ion-label>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
