@@ -22,3 +22,51 @@ ion-fab-button[data-desc]::after {
   color: var(--ion-color-dark);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
+
+//some edit sliding crap that i wrote
+.editSlide {
+  position: absolute;
+}
+//close
+.editSlide.left {
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  left: -110.38px !important;
+  right: 100% !important;
+}
+//open
+.editSlide.right {
+  -webkit-transition: 0.8s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  left: 0% !important;
+  right: 100% !important;
+}
+
+.editScale {
+  position: relative;
+}
+//close
+.editScale.stretch {
+  -webkit-transition: 0.7s;
+  -moz-transition: 0.7s;
+  -ms-transition: 0.7s;
+  -o-transition: 0.7s;
+  transition: 0.7s;
+  margin-left: 10px !important;
+}
+
+//open
+.editScale.compress {
+  -webkit-transition: 0.70s;
+  -moz-transition: 0.70s;
+  -ms-transition: 0.70s;
+  -o-transition: 0.70s;
+  transition: 0.70s;
+  margin-left: 95.38px !important;
+}

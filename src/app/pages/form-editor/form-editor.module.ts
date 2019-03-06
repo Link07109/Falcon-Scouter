@@ -26,4 +26,5 @@ const routes: Routes = [
   ],
   declarations: [FormEditorPage]
 })
+
 export class FormEditorPageModule {}

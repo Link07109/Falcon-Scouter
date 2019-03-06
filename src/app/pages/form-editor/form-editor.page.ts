@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import * as $ from 'jquery';
 import { AlertInput } from '@ionic/core';
+import { delay } from 'q';
 
 @Component({
   selector: 'app-form-editor',
@@ -20,18 +21,25 @@ export class FormEditorPage implements OnInit {
   templateHTML
   hasChosenTemplate = false
   useTemplate = false
+  mainEditMode = false
   
+  //counter values
   cargoInShip = 0
   cargoInLRocket = 0
   cargoInMRocket = 0
   cargoInHRocket = 0
-  
   hatchInShip = 0
   hatchInLRocket = 0
   hatchInMRocket = 0
   hatchInHRocket = 0
 
   formData = { data: {} }
+
+  //sliding bullshit
+  loadSlideItems = document.getElementsByClassName('loadSlide')
+  editSlideItems = document.getElementsByClassName('editSlide')
+  editScaleItems = document.getElementsByClassName('editScale')
+  toggleSlide = false
 
   constructor(
     public sanitizer: DomSanitizer,
@@ -40,36 +48,91 @@ export class FormEditorPage implements OnInit {
     public alertController: AlertController,
   ) { }
 
-  addCargoToShip() {
-    this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1
+  addCargoToShip() {this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1}
+
+  removeCargoToShip() {this.cargoInShip -= (this.cargoInShip <= 0) ? 0 : 1}
+
+  addCargoToHRocket() {this.cargoInHRocket += (this.cargoInHRocket >= 12) ? 0 : 1}
+
+  removeCargoToHRocket() {this.cargoInHRocket -= (this.cargoInHRocket <= 0) ? 0 : 1}
+
+  addHatchToShip() {this.hatchInShip += (this.hatchInShip >= 8) ? 0 : 1}
+
+  removeHatchToShip() {this.hatchInShip -= (this.hatchInShip <= 0) ? 0 : 1}
+
+  addHatchToHRocket() {this.hatchInHRocket += (this.hatchInHRocket >= 8) ? 0 : 1}
+
+  removeHatchToHRocket() {this.hatchInHRocket -= (this.hatchInHRocket <= 0) ? 0 : 1}
+
+  // Lukes sliding bullshit that doesn't work
+  // nevermind it works now
+
+  async delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  removeCargoToShip() {
-    this.cargoInShip -= (this.cargoInShip <= 0) ? 0 : 1
+  async toggleEditMode() {
+
+    //OPEN
+    if(this.toggleSlide == false) 
+    { 
+      for(var i = 0; i < this.editSlideItems.length; i++)
+      {
+        var slideItem = this.editSlideItems[i]
+        var scaleItem = this.editScaleItems[i]
+        slideItem.classList.remove('left')
+        slideItem.classList.add('right')
+        scaleItem.classList.remove('stretch')
+        scaleItem.classList.add('compress')
+        await this.delay(100)
+      }
+    } 
+
+    //CLOSE
+    else 
+    {
+      for(var i = this.editSlideItems.length-1; i > -1; i--)
+      {
+        var slideItem = this.editSlideItems[i]
+        var scaleItem = this.editScaleItems[i]
+        slideItem.classList.remove('right')
+        slideItem.classList.add('left')
+        scaleItem.classList.remove('compress')
+        scaleItem.classList.add('stretch')
+        await this.delay(100)
+      }
+    }
+    if(this.toggleSlide == false){this.toggleSlide = true} else {this.toggleSlide = false}
+  }  
+
+  //More Sliding Bullshit
+  async slideOnLoad() {
+    await delay(1000)
+    for(var i = 0; i < this.loadSlideItems.length; i++)
+    {
+      var slideItem = this.loadSlideItems[i]
+      slideItem.classList.add('load')
+      await delay(100)
+    }
+  }
+  async slideOnClose() {
+    for(var i = 0; i < this.loadSlideItems.length; i++)
+    {
+      var slideItem = this.loadSlideItems[i]
+      slideItem.classList.remove('load')
+      var currentStyle = slideItem.getAttribute("style")
+      slideItem.setAttribute("style", currentStyle + "; left: -110%")
+    }
   }
 
-  addCargoToHRocket() {
-    this.cargoInHRocket += (this.cargoInHRocket >= 8) ? 0 : 1
+  ionViewWillLeave() {
+    console.log("goodbye")
+    this.slideOnClose()
   }
 
-  removeCargoToHRocket() {
-    this.cargoInHRocket -= (this.cargoInHRocket <= 0) ? 0 : 1
-  }
-
-  addHatchToShip() {
-    this.hatchInShip += (this.hatchInShip >= 8) ? 0 : 1
-  }
-
-  removeHatchToShip() {
-    this.hatchInShip -= (this.hatchInShip <= 0) ? 0 : 1
-  }
-
-  addHatchToHRocket() {
-    this.hatchInHRocket += (this.hatchInHRocket >= 8) ? 0 : 1
-  }
-
-  removeHatchToHRocket() {
-    this.hatchInHRocket -= (this.hatchInHRocket <= 0) ? 0 : 1
+  ionViewDidEnter() {
+    console.log("hello")
+    this.slideOnLoad()
   }
 
   ngOnInit() {
@@ -87,6 +150,12 @@ export class FormEditorPage implements OnInit {
 
   toggleChosenTemplateBool() {
     this.hasChosenTemplate = true
+  }
+
+  backButton() {
+    this.hasChosenTemplate = false
+    this.useTemplate = false
+    this.slideOnLoad()
   }
 
   submitData() {

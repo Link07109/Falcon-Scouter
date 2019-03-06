@@ -7,28 +7,59 @@
 </ion-header>
 
 <ion-content padding scroll="true">
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-3></ion-col>
+            <ion-col col-3>
+                <h1 style="margin-top: 0px" *ngIf="!hasChosenTemplate && !useTemplate">Templates</h1>
+                <h1 style="margin-top: 0px" *ngIf="hasChosenTemplate || useTemplate"> </h1>
+            </ion-col>
+            <ion-col col-3></ion-col>
+        </ion-row>
+    </ion-grid>
+
     <!-- This shows the list of templates from Firestore -->
     <div *ngIf="!hasChosenTemplate && !useTemplate">
         <ion-item *ngFor="let template of templatesArray">
-            <ion-card>
+            <ion-card text-center class="editSlide" style="width: 100.38px; margin: 0px; left: -110.38px">
+                <ion-button color="warning" (click)="loadHTMLToEdit(template)"><ion-icon size="small" name="trash"></ion-icon></ion-button>
+                <ion-button color="secondary" (click)="loadHTMLToEdit(template)"><ion-icon size="small" name="create"></ion-icon></ion-button>
+            </ion-card>
+            <ion-card class="loadSlide editScale" style="width: 100%; margin-left: 3px">
                 <ion-item>
-                    <ion-icon name="create" item-start color="dark"></ion-icon>
-                    <ion-label text-center color="dark" (click)="loadHTMLToUse(template)" [innerHTML]="template.name">
-                    </ion-label>
-                    <ion-button color="secondary" outline item-end (click)="loadHTMLToEdit(template)">Edit</ion-button>
+                    <ion-label text-center color="dark" (click)="loadHTMLToUse(template)" [innerHTML]="template.name"></ion-label>
                 </ion-item>
             </ion-card>
         </ion-item>
-        <ion-card ion-item (click)="toggleChosenTemplateBool()" color="primary">
-            <ion-item>
-                <ion-icon name="add" item-start color="dark"></ion-icon>
-                <ion-label text-center color="dark">Create Template</ion-label>
-            </ion-item>
-        </ion-card>
     </div>
 
-    <!-- These are the buttons that show up for adding components to forms -->
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="hasChosenTemplate && !useTemplate">
+    <!-- Button for showing edit buttons -->
+    <ion-fab vertical="top" horizontal="end" slot="fixed" style="position: fixed" *ngIf="!useTemplate">
+        <ion-fab-button (click)="toggleEditMode()">
+            <ion-icon color="dark" name="create"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <!-- Button for creating a new template -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="position: fixed" *ngIf="!hasChosenTemplate && !useTemplate">
+        <ion-fab-button (click)="toggleChosenTemplateBool()">
+            <ion-icon color="dark" name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <!-- ---------------- -->
+    <!-- TEMPLATE CREATOR -->
+    <!-- ---------------- -->
+
+    <!-- Back Button -->
+    <ion-fab vertical="top" horizontal="start" slot="fixed" style="position: fixed"  *ngIf="hasChosenTemplate && !useTemplate">
+        <ion-fab-button (click)="backButton()">
+            <ion-icon color="dark" name="return-left"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="position: fixed" *ngIf="hasChosenTemplate && !useTemplate">
         <!-- Add -->
         <ion-fab-button>
             <ion-icon color="dark" name="add"></ion-icon>
@@ -64,7 +95,7 @@
     </ion-fab>
 
     <!-- Button for saving templates to Firestore -->
-    <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="hasChosenTemplate">
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="position: fixed" *ngIf="hasChosenTemplate">
         <ion-fab-button (click)="saveTemplate()">
             <ion-icon color="dark" name="save"></ion-icon>
         </ion-fab-button>
@@ -87,11 +118,16 @@
         </ion-list>
     </ion-card>
 
-
-
     <!-- This is for using existing templates -->
     <div *ngIf="useTemplate" scroll="true">
         <!-- <div [innerHTML]="templateHTML"></div> -->
+
+        <!-- Back Button -->
+        <ion-fab vertical="top" horizontal="start" slot="fixed" style="position:fixed" *ngIf="!hasChosenTemplate && useTemplate">
+            <ion-fab-button (click)="backButton()">
+                <ion-icon color="dark" name="return-left"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
 
         <!-- Name of Current Template -->
         <h2 text-center>2019 Match Scouting</h2>
@@ -156,10 +192,10 @@
                     <ion-row>
                         <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Result</ion-label></ion-col>
                         <ion-col col-2> <ion-select interface="action-sheet" placeholder="Result" [(ngModel)]="formData.result" name="Placed Hatch">
-                            <ion-select-option role="option" id="ion-selopt-7" class="hydrated">None</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-7" class="hydrated">HAB Line</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-8" class="hydrated">Placed Cargo</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-6" class="hydrated">Placed Hatch</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-7" >None</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-7" >HAB Line</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-8" >Placed Cargo</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-6" >Placed Hatch</ion-select-option>
                             <input type="hidden" class="aux-input" name="Placed Hatch" value="None">
                         </ion-select> </ion-col>
                     </ion-row>
@@ -168,10 +204,10 @@
                     <ion-row>
                         <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Interference</ion-label></ion-col>
                         <ion-col col-2> <ion-select interface="action-sheet" placeholder="Interference" [(ngModel)]="formData.interference" name="Interference">
-                            <ion-select-option role="option" id="ion-selopt-12" class="hydrated">In Rocket Path</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-13" class="hydrated">In Ship Path</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-14" class="hydrated">Both</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-14" class="hydrated">Neither</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-12" >In Rocket Path</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-13" >In Ship Path</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-14" >Both</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-14" >Neither</ion-select-option>
                             <input type="hidden" class="aux-input" name="Interference" value="none">
                         </ion-select> </ion-col>
                     </ion-row>
@@ -198,33 +234,33 @@
                 <ion-grid>
                     <!-- Cargo in Ship -->
                     <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Ship</ion-label></ion-col>
+                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Cargo - Ship</ion-label></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="removeCargoToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="addCargoToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
                     </ion-row>
                     
                     <!-- Hatches in Ship -->
                     <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatches - Ship</ion-label></ion-col>
+                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Hatches - Ship</ion-label></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="removeHatchToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInShip" name="hatchesInShip" value="{{hatchInShip}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInShip" name="hatchesInShip" value="{{hatchInShip}}"></ion-input></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="addHatchToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
                     </ion-row>
 
                     <!-- Cargo in Rocket -->
                     <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Rocket</ion-label></ion-col>
+                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Cargo - Rocket</ion-label></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInRocket" name="cargoInHRocket" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInRocket" name="cargoInHRocket" value="{{cargoInHRocket}}"></ion-input></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
                     </ion-row>
                     
                     <!-- Hatches in Rocket -->
                     <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatches - Rocket</ion-label></ion-col>
+                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Hatches - Rocket</ion-label></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="removeHatchToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInRocket" name="hatchesInRocket" value="{{hatchInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInRocket" name="hatchesInRocket" value="{{hatchInHRocket}}"></ion-input></ion-col>
                         <ion-col size="2" text-center><ion-button (click)="addHatchToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
                     </ion-row>
                 </ion-grid>
@@ -241,42 +277,42 @@
 
                     <!-- Climb Level -->
                     <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Climb Level</ion-label></ion-col>
+                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Climb Level</ion-label></ion-col>
                         <ion-col col-2><ion-select interface="action-sheet" placeholder="Level" [(ngModel)]="formData.climb" name="Climb">
-                            <ion-select-option role="option" id="ion-selopt-22" class="hydrated">Level 1</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-23" class="hydrated">Level 2</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-24" class="hydrated">Level 3</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-22">Level 1</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-23">Level 2</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-24">Level 3</ion-select-option>
                             <input type="hidden" class="aux-input" name="Climb" value="Level 1">
                         </ion-select></ion-col>
                     </ion-row>
 
                     <!-- Stability of Robot -->
                     <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Stability of Robot</ion-label></ion-col>
+                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Stability of Robot</ion-label></ion-col>
                         <ion-col col-2><ion-select interface="action-sheet" placeholder="Stability" [(ngModel)]="formData.stability" name="Stability">
-                            <ion-select-option role="option" id="ion-selopt-25" class="hydrated">Good</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-26" class="hydrated">Bad</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-25">Good</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-26">Bad</ion-select-option>
                             <input type="hidden" class="aux-input" name="Stability" value="Good">
                         </ion-select></ion-col>
                     </ion-row>
 
                     <!-- Driver Quality -->
                     <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Driver Quality</ion-label></ion-col>
+                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Driver Quality</ion-label></ion-col>
                         <ion-col col-2><ion-select interface="action-sheet" placeholder="Quality" [(ngModel)]="formData.driver" name="Driver">
-                            <ion-select-option role="option" id="ion-selopt-27" class="hydrated">Good</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-28" class="hydrated">Bad</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-27" >Good</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-28" >Bad</ion-select-option>
                             <input type="hidden" class="aux-input" name="Driver" value="Good">
                         </ion-select></ion-col>
                     </ion-row>
 
                     <!-- Penalties -->
                     <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Penalties</ion-label></ion-col>
+                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Penalties</ion-label></ion-col>
                         <ion-col col-2><ion-select interface="action-sheet" placeholder="Penalties" [(ngModel)]="formData.penalties" [ngModelOptions]="{standalone: true}" name="Penalty">
-                            <ion-select-option role="option" id="ion-selopt-30" class="hydrated">None</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-31" class="hydrated">Some</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-32" class="hydrated">A lot</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-30" >None</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-31" >Some</ion-select-option>
+                            <ion-select-option role="option" id="ion-selopt-32" >A lot</ion-select-option>
                             <input type="hidden" class="aux-input" name="Penalty" value="None">
                         </ion-select></ion-col>
                     </ion-row>

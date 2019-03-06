@@ -16,7 +16,8 @@ export const themes = {
     tertiary: '#348AA7',
     dark: '#ffffff',
     medium: '#513B56',
-    light: '#222222'
+    light: '#222222',
+    warning: '#ff3d3d'
   },
   light: {
     primary: '#ededdb',
@@ -24,7 +25,8 @@ export const themes = {
     tertiary: '#aea4bf',
     dark: '#6e4552',
     medium: '#BCE784',
-    light: '#e3e4db'
+    light: '#e3e4db',
+    warning: '#ff3d3d'
   },
 }
 
