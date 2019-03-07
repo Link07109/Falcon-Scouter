@@ -17,7 +17,7 @@ export class FormEditorPage implements OnInit {
   private templates
   private templateName
   templatesArray = []
-  items = []
+  componentsArray = []
   templateHTML
   hasChosenTemplate = false
   useTemplate = false
@@ -76,10 +76,10 @@ export class FormEditorPage implements OnInit {
     //OPEN
     if(this.toggleSlide == false) 
     { 
-      for(var i = 0; i < this.editSlideItems.length; i++)
+      for(let i = 0; i < this.editSlideItems.length; i++)
       {
-        var slideItem = this.editSlideItems[i]
-        var scaleItem = this.editScaleItems[i]
+        let slideItem = this.editSlideItems[i]
+        let scaleItem = this.editScaleItems[i]
         slideItem.classList.remove('left')
         slideItem.classList.add('right')
         scaleItem.classList.remove('stretch')
@@ -91,10 +91,10 @@ export class FormEditorPage implements OnInit {
     //CLOSE
     else 
     {
-      for(var i = this.editSlideItems.length-1; i > -1; i--)
+      for(let i = this.editSlideItems.length-1; i > -1; i--)
       {
-        var slideItem = this.editSlideItems[i]
-        var scaleItem = this.editScaleItems[i]
+        let slideItem = this.editSlideItems[i]
+        let scaleItem = this.editScaleItems[i]
         slideItem.classList.remove('right')
         slideItem.classList.add('left')
         scaleItem.classList.remove('compress')
@@ -107,33 +107,27 @@ export class FormEditorPage implements OnInit {
 
   //More Sliding Bullshit
   async slideOnLoad() {
-    await delay(1000)
-    for(var i = 0; i < this.loadSlideItems.length; i++)
+    await delay(4000)
+    for(let i = 0; i < this.loadSlideItems.length; i++)
     {
-      var slideItem = this.loadSlideItems[i]
+      let slideItem = this.loadSlideItems[i]
       slideItem.classList.add('load')
       await delay(100)
     }
   }
   async slideOnClose() {
-    for(var i = 0; i < this.loadSlideItems.length; i++)
+    for(let i = 0; i < this.loadSlideItems.length; i++)
     {
-      var slideItem = this.loadSlideItems[i]
+      let slideItem = this.loadSlideItems[i]
       slideItem.classList.remove('load')
-      var currentStyle = slideItem.getAttribute("style")
+      let currentStyle = slideItem.getAttribute("style")
       slideItem.setAttribute("style", currentStyle + "; left: -110%")
     }
   }
 
-  ionViewWillLeave() {
-    console.log("goodbye")
-    this.slideOnClose()
-  }
+  ionViewWillLeave() {this.slideOnClose()}
 
-  ionViewDidEnter() {
-    console.log("hello")
-    this.slideOnLoad()
-  }
+  ionViewDidEnter() {this.slideOnLoad()}
 
   ngOnInit() {
     this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
@@ -142,15 +136,11 @@ export class FormEditorPage implements OnInit {
 
   setupArray() {
     this.templates.subscribe(data => {
-      data.forEach(element => {
-        this.templatesArray.push(element)
-      })
-    })
-  }
+    data.forEach(element => {
+    this.templatesArray.push(element)
+  })})}
 
-  toggleChosenTemplateBool() {
-    this.hasChosenTemplate = true
-  }
+  toggleChosenTemplateBool() {this.hasChosenTemplate = true}
 
   backButton() {
     this.hasChosenTemplate = false
@@ -180,123 +170,126 @@ export class FormEditorPage implements OnInit {
   }
 
   loadHTMLToEdit(element) {
+    console.log(element.name)
     this.templateHTML = this.sanitizer.bypassSecurityTrustHtml(element.templateHTML)
     this.hasChosenTemplate = true
   }
 
   loadHTMLToUse(element) {
+    console.log(element.name)
     this.templateHTML = this.sanitizer.bypassSecurityTrustHtml(element.templateHTML)
     this.useTemplate = true
   }
 
   saveTemplate() {
-    const template = document.getElementById('divID').innerHTML
-    console.log(template)
+    console.log(this.componentsArray)
 
-    this.inputAlert('Save Template', template)
+    this.inputAlert('Save Template', this.componentsArray)
   }
 
-  createElement(html) {
-    const elem = document.createElement('ion-item-sliding')
-
-    elem.innerHTML = 
-      `
-      <ion-grid>
-        <ion-row>
-          <ion-col size="1" style="margin-top: .75vh">
-            <ion-reorder></ion-reorder>
-          </ion-col>
-          <ion-col size="9">
-            ${html}
-          </ion-col>
-        </ion-row>
-      </ion-grid>   
-    `
-
-    if (elem.childNodes.length > 0) {
-      document.getElementById('divID').appendChild(elem)
-      this.items.push(elem)
-      return elem.childNodes[0]
-    }
-  }
-
-  async createComponent(componentName, html = '') {
-    const alert = await this.alertController.create({
-      header: `Create new ${componentName}`,
-      cssClass: `alertCSS`,
-      inputs: [
-        {
-          name: 'labelName',
-          type: 'text',
-          placeholder: 'placeholder'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Ok',
-          handler: data => {
-            const name = data['labelName']
-
-            html = `<ion-item>
-                      <ion-label color="dark">${name}</ion-label>
-                      <ion-${componentName} color="secondary" [(ngModel)]="formData.${name}" name="${name}">${html}</ion-${componentName}>
-                    </ion-item>`
+  // -------------------------------------------------- //
+  // Creates an Input component in the template creator //
+  // v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v- //
+  async createInput() {const alert = await this.alertController.create({
+    header: `Create new input box`, cssClass: `alertCSS`, 
+    inputs: [{name: 'inputName', type: 'text', placeholder: 'Name'},
+      {name: 'inputPlaceholder', type: 'text', placeholder: 'Placeholder'}], 
+    buttons: [{text: 'Cancel', role: 'cancel', cssClass: 'secondary', handler: () => {}},
+      {text: 'Ok', handler: data => {
+        const name = data['inputName']
+        const placeholder = data['inputPlaceholder']
+      
+        const html = 
+        `
+        <ion-grid>
+          <ion-row>
+            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">${name}</ion-label></ion-col>
+            <ion-col col-2><ion-input [(ngModel)]="formData.${name}" placeholder="${placeholder}" name="${name}"></ion-input></ion-col>
+          </ion-row>
+        </ion-grid>
+        `
             
-            this.createElement(html)
-          }
-        }
-      ]
-    })
+        this.componentsArray.push(this.sanitizer.bypassSecurityTrustHtml(html))
+        console.log(html)
+      }}]}) 
     await alert.present()
   }
 
-  async questionSelectorAlert() {
-    const alert = await this.alertController.create({
-      header: 'Number of options',
-      cssClass: `alertCSS`,
-      inputs: [
-        {
-          name: 'optionNumber',
-          type: 'number',
-          min: 2,
-          max: 6
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Ok',
-          handler: data => {
-            const number = data['optionNumber']
-            this.selectorAlert(number)
-          }
-        }
-      ]
-    })
+  // --------------------------------------------------- //
+  // Creates a Counter component in the template creator //
+  // v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v //
+  async createCounter() {const alert = await this.alertController.create({
+    header: `Create new counter box`, cssClass: `alertCSS`, 
+    inputs: [{name: 'counterName', type: 'text', placeholder: 'Name'},], 
+    buttons: [{text: 'Cancel', role: 'cancel', cssClass: 'secondary', handler: () => {}},
+      {text: 'Ok', handler: data => {
+        const name = data['counterName']
+      
+        const html = //ivan fix pls thx
+        ` 
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">${name}</ion-label></ion-col>
+            <ion-col size="2" text-center><ion-button                 ><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;"                ></ion-input></ion-col>
+            <ion-col size="2" text-center><ion-button                 ><ion-icon name="add"></ion-icon></ion-button></ion-col>
+          </ion-row>
+        </ion-grid>
+        `
+            
+        this.componentsArray.push(this.sanitizer.bypassSecurityTrustHtml(html))
+        console.log(html)
+      }}]}) 
+    await alert.present()
+  }
+
+  // -------------------------------------------------- //
+  // Creates a Toggle component in the template creator //
+  // v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v- //
+  async createToggle() {const alert = await this.alertController.create({
+    header: `Create new toggle box`, cssClass: `alertCSS`, 
+    inputs: [{name: 'toggleName', type: 'text', placeholder: 'Name'},
+      {name: 'toggleValue', type: 'text', placeholder: 'Value (on or off)'}], 
+    buttons: [{text: 'Cancel', role: 'cancel', cssClass: 'secondary', handler: () => {}},
+      {text: 'Ok', handler: data => {
+        const name = data['toggleName']
+        const value = data['toggleValue']
+      
+        const html =
+        ` 
+        <ion-grid>
+          <ion-row>
+            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">${name}</ion-label></ion-col>
+            <ion-col col-2> <ion-toggle color="secondary" [(ngModel)]="formData.${name}" name="${name}">
+              <input type="hidden" class="aux-input" name="${name}" value="${value}">
+            </ion-toggle></ion-col>
+          </ion-row>
+        </ion-grid>
+        `
+            
+        this.componentsArray.push(this.sanitizer.bypassSecurityTrustHtml(html))
+        console.log(html)
+      }}]}) 
+    await alert.present()
+  }
+
+  // ---------------------------------------------------- //
+  // Creates a Selector component in the template creator //
+  // v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v- //
+  async createSelectorElem() {const alert = await this.alertController.create({
+    header: 'Number of options', cssClass: `alertCSS`,
+    inputs: [{name: 'optionNumber', type: 'number', min: 2, max: 6}],
+    buttons: [{text: 'Cancel', role: 'cancel', cssClass: 'secondary', handler: () => {}},
+      {text: 'Ok', handler: data => {
+          const number = data['optionNumber']
+    this.selectorAlert(number)
+    }}]})
     await alert.present()
   }
 
   async selectorAlert(numberOfInputs: number) {    
-    const generatedNumberOfInputs: AlertInput[] = [
-      {
-        name: 'labelName',
-        type: 'text',
-        placeholder: 'Component Name'
-      },
-    ]
+    const generatedNumberOfInputs: AlertInput[] = [{name: 'labelName', type: 'text', placeholder: 'Selector Name'},
+      {name:'selPlaceholder', type: 'text', placeholder: 'Placeholder'}]
 
     for (let i = 0; i < numberOfInputs; i++) {
       const input: AlertInput = {
@@ -308,38 +301,36 @@ export class FormEditorPage implements OnInit {
     }
 
     const alert = await this.alertController.create({
-      header: 'Create Selector',
-      cssClass: `alertCSS`,
-      inputs: generatedNumberOfInputs,
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Ok',
-          handler: data => {
-            let selectOptionsHTMLString: string
-            const name = data['labelName']
+      header: 'Create Selector', cssClass: `alertCSS`, inputs: generatedNumberOfInputs,
+      buttons: [{text: 'Cancel', role: 'cancel', cssClass: 'secondary', handler: () => {}},
+        {text: 'Ok', handler: data => {
+          let selectOptionsHTMLString: string = "" 
+          const name = data['labelName']
+          const placeholder = data['selPlaceholder']
+          Object.entries(data).forEach(([key, value]) => {
+            // skip the first one, which is just the name of the component
+            if (key == 'labelName' || key == 'selPlaceholder') { return }
+            // if its not the first one, add them to the select
+            selectOptionsHTMLString += `<ion-select-option>${value}</ion-select-option>`
+          })
 
-            Object.entries(data).forEach(([key, value]) => {
-              // skip the first one, which is just the name of the component
-              if (key == 'labelName') { return }
-              // if its not the first one, add them to the select
-              selectOptionsHTMLString += `<ion-select-option>${value}</ion-select-option>`
-            })
+            const html = `
+              <ion-grid><ion-row>
+                <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">${name}</ion-label></ion-col>
+                <ion-col col-2><ion-select placeholder="${placeholder}" [(ngModel)]="formData.${name}" name="${name}">${selectOptionsHTMLString}</ion-select></ion-col>
+              </ion-row></ion-grid>
+              `
 
-            const html = `<ion-grid><ion-row><ion-col size="5" text-start>${name}</ion-col><ion-col size="5" text-center><ion-select interface="action-sheet" [(ngModel)]="formData.${name}" name="${name}">${selectOptionsHTMLString}</ion-select></ion-col></ion-row></ion-grid>`
-            this.createElement(html)
+            this.componentsArray.push(this.sanitizer.bypassSecurityTrustHtml(html))
+            console.log(html)
           }
         }
       ]
     })
     await alert.present()
   }
+  // ^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^-^- //
+  // ---------------------------------------------------- //
 
   async inputAlert(title: string, template) {
     const alert = await this.alertController.create({
