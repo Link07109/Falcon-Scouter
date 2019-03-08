@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { FirestoreService } from '../../services/data/firestore.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
@@ -42,6 +42,7 @@ export class FormEditorPage implements OnInit {
   toggleSlide = false
 
   constructor(
+    private platform: Platform,
     public sanitizer: DomSanitizer,
     private firestoreService: FirestoreService,
     private blueAllianceService: BlueAllianceService,
@@ -106,28 +107,32 @@ export class FormEditorPage implements OnInit {
   }  
 
   //More Sliding Bullshit
-  async slideOnLoad() {
-    await delay(4000)
-    for(let i = 0; i < this.loadSlideItems.length; i++)
-    {
-      let slideItem = this.loadSlideItems[i]
-      slideItem.classList.add('load')
-      await delay(100)
-    }
-  }
-  async slideOnClose() {
-    for(let i = 0; i < this.loadSlideItems.length; i++)
-    {
-      let slideItem = this.loadSlideItems[i]
-      slideItem.classList.remove('load')
-      let currentStyle = slideItem.getAttribute("style")
-      slideItem.setAttribute("style", currentStyle + "; left: -110%")
-    }
-  }
+  // async slideOnLoad() {
+  //   await delay(100)
+  //   for(let i = 0; i < this.loadSlideItems.length; i++)
+  //   {
+  //     let slideItem = this.loadSlideItems[i]
+  //     slideItem.classList.add('load')
+  //     await delay(100)
+  //   }
+  // }
+  // async slideOnClose() {
+  //   for(let i = 0; i < this.loadSlideItems.length; i++)
+  //   {
+  //     let slideItem = this.loadSlideItems[i]
+  //     slideItem.classList.remove('load')
+  //     let currentStyle = slideItem.getAttribute("style")
+  //     slideItem.setAttribute("style", currentStyle + "; left: -110%")
+  //   }
+  // }
 
-  ionViewWillLeave() {this.slideOnClose()}
+  // ionViewWillLeave() {this.slideOnClose()}
 
-  ionViewDidEnter() {this.slideOnLoad()}
+  // ionViewDidEnter() {this.slideOnLoad(); console.log("stupider")}
+
+  // ngAfterViewInit() {this.slideOnLoad(); console.log("stupid")}
+
+  // ngAfterContentInit() {this.slideOnLoad(); console.log("extra gay")}
 
   ngOnInit() {
     this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
@@ -145,7 +150,7 @@ export class FormEditorPage implements OnInit {
   backButton() {
     this.hasChosenTemplate = false
     this.useTemplate = false
-    this.slideOnLoad()
+    // this.slideOnLoad()
   }
 
   submitData() {
@@ -182,9 +187,82 @@ export class FormEditorPage implements OnInit {
   }
 
   saveTemplate() {
+    const template  = document.getElementById('divID').innerHTML
     console.log(this.componentsArray)
+    // const template = `
+    // <h2 text-center>2019 Pit Scouting</h2>
+    // <ion-card>
+    //   <ion-grid>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Drive Type</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Type" [(ngModel)]="formData.Drive Type" name="Drive Type">
+    //         <ion-select-option>Tank</ion-select-option>
+    //         <ion-select-option>Swerve</ion-select-option>
+    //         <ion-select-option>Other</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Drive Traction</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Type" [(ngModel)]="formData.Drive Traction" name="Drive Traction">
+    //         <ion-select-option>6 Traction</ion-select-option>
+    //         <ion-select-option>4 Traction</ion-select-option>
+    //         <ion-select-option>2 Traction</ion-select-option>
+    //         <ion-select-option>0 Traction</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Weight</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Weight" [(ngModel)]="formData.Weight" name="Weight">
+    //         <ion-select-option>100 -
+            
+    //         125</ion-select-option>
+    //         <ion-select-option>75 - 100</ion-select-option>
+    //         <ion-select-option>50 - 75</ion-select-option>
+    //         <ion-select-option>less than 50</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Streaming Camera</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Camera" [(ngModel)]="formData.Streaming Camera" name="Streaming Camera">
+    //         <ion-select-option>No</ion-select-option>
+    //         <ion-select-option>Yes</ion-select-option>
+    //         <ion-select-option>Need Help</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Sandstorm</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Objective" [(ngModel)]="formData.Sandstorm" name="Sandstorm">
+    //         <ion-select-option>None</ion-select-option>
+    //         <ion-select-option>HAB Line</ion-select-option>
+    //         <ion-select-option>Hatch Panel</ion-select-option>
+    //         <ion-select-option>Cargo</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Tele-Op</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Objective" [(ngModel)]="formData.Tele-Op" name="Tele-Op">
+    //         <ion-select-option>None</ion-select-option>
+    //         <ion-select-option>Hatch Panels</ion-select-option>
+    //         <ion-select-option>Cargo</ion-select-option>
+    //         <ion-select-option>Defend</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //       <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Climb</ion-label></ion-col>
+    //       <ion-col col-2><ion-select placeholder="Level" [(ngModel)]="formData.Climb" name="Climb">
+    //         <ion-select-option>L1</ion-select-option>
+    //         <ion-select-option>L2</ion-select-option>
+    //         <ion-select-option>L3</ion-select-option>
+    //       </ion-select></ion-col>
+    //     </ion-row>
+    //     <ion-row>
+    //         <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Comments</ion-label></ion-col>
+    //         <ion-col col-2><ion-input [(ngModel)]="formData.Comments" placeholder="Comments" name="Comments"></ion-input></ion-col>
+    //       </ion-row>
+    //   </ion-grid>
+    // </ion-card>`
 
-    this.inputAlert('Save Template', this.componentsArray)
+    this.inputAlert('Save Template', template)
   }
 
   // -------------------------------------------------- //
@@ -203,7 +281,7 @@ export class FormEditorPage implements OnInit {
         `
         <ion-grid>
           <ion-row>
-            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">${name}</ion-label></ion-col>
+            <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">${name}</ion-label></ion-col>
             <ion-col col-2><ion-input [(ngModel)]="formData.${name}" placeholder="${placeholder}" name="${name}"></ion-input></ion-col>
           </ion-row>
         </ion-grid>
@@ -317,7 +395,7 @@ export class FormEditorPage implements OnInit {
             const html = `
               <ion-grid><ion-row>
                 <ion-col col-2><ion-label vertical="middle" style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">${name}</ion-label></ion-col>
-                <ion-col col-2><ion-select placeholder="${placeholder}" [(ngModel)]="formData.${name}" name="${name}">${selectOptionsHTMLString}</ion-select></ion-col>
+                <ion-col col-2><ion-select style="width: 40%" placeholder="${placeholder}" [(ngModel)]="formData.${name}" name="${name}">${selectOptionsHTMLString}</ion-select></ion-col>
               </ion-row></ion-grid>
               `
 

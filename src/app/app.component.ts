@@ -9,6 +9,8 @@ import { timer } from 'rxjs';
 import { Network } from '@ionic-native/network/ngx';
 import { totalmem } from 'os';
 
+export let showSplash: boolean
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -71,6 +73,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault()
       this.splashScreen.hide()
+      console.log("kill me please")
 
       timer(3000).subscribe(() => this.showSplash = false)
     })

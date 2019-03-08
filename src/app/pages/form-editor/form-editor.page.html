@@ -97,10 +97,10 @@
 
     <!-- This is for editing a new template -->
     <div *ngIf="hasChosenTemplate && !useTemplate">
-        <ion-item *ngFor="let component of componentsArray">
+        <ion-item *ngFor="let component of componentsArray" id = "divID">
             <ion-card text-center class="editSlide" style="width: 100.38px; margin: 0px; left: -110.38px">
                 <ion-button color="warning" (click)="deleteComponent(component.name)"><ion-icon size="small" name="trash"></ion-icon></ion-button>
-                <ion-button color="secondary">-</ion-button>
+                <ion-button color="secondary">-S</ion-button>
             </ion-card>
             <ion-card class="editScale" style="width: 100%; margin-left: 3px" [innerHTML]="component">
             </ion-card>
