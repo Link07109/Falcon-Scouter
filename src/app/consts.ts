@@ -1,8 +1,8 @@
 export const primaryMenuPages = [
   // { icon: 'home', title: 'Intro', link: '/intro' },
-  { icon: 'bookmarks', title: 'Matches', link: '/dash' },
+  { icon: 'bookmarks', title: 'Match Schedule', link: '/dash' },
   { icon: 'people', title: 'Teams', link: '/teams' },
-  { icon: 'create', title: 'Scout', link: '/form_editor' },
+  { icon: 'create', title: 'Scouting', link: '/form_editor' },
 ]
 
 export const secondaryMenuPages = [

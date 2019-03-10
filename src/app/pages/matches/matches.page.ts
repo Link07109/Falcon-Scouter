@@ -19,14 +19,14 @@ export class MatchesPage implements OnInit {
   showStats = false
   showMatches = true
   showEvents = false
-  teamMatches = []
-  matchesArray = []
+  matches
   stats = statNames
   teamName: string
   teamWebsite: string
   averageStats = modifiedStatNames
   eventsObservable
   socialMediaObservable
+  event = currentEvent
 
   constructor(
     private firestoreService: FirestoreService,
@@ -38,19 +38,17 @@ export class MatchesPage implements OnInit {
   ngOnInit() {
     this.teamNumber = this.route.snapshot.paramMap.get('teamNumber');
     this.teamNUMBER = +this.teamNumber
+
     this.matchCollectionObservable = this.firestoreService.getMatchList(currentEvent, this.teamNumber).valueChanges();
+
     this.eventsObservable = this.blueAllianceService.getTeamEvents(`frc${this.teamNumber}`, curYear)
     this.socialMediaObservable = this.blueAllianceService.getSocialMedia(`frc${this.teamNumber}`)
-
     this.blueAllianceService.getTeamInformation(`frc${this.teamNumber}`).subscribe(data => {
       this.teamName = data.nickname
       this.teamWebsite = data.website
     })
 
-    this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent).subscribe(match => {
-      this.teamMatches.push(match)
-      console.log(this.teamMatches)
-    })
+    this.matches = this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent)
 
     this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', 2019)
   }
@@ -71,20 +69,6 @@ export class MatchesPage implements OnInit {
     this.showEvents = true
     this.showStats = false
     this.showMatches = false
-  }
-
-  // an attempt to make the html less gay
-  getMatchesArray(matchNumber) {
-    this.matchCollectionObservable.subscribe(match => {
-      match.forEach(stats => {
-        if (stats.matchNumber == matchNumber) {
-          Object.entries(stats).forEach(([key, value]) => {
-            this.matchesArray.push(value)
-            console.log(value)
-          })
-        }
-      })
-    })
   }
 
 }

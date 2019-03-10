@@ -12,35 +12,32 @@
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
   <ion-card *ngFor="let match of matchCollectionObservable | async">
-    <!-- <ion-card-content> -->
       <ion-grid>
         <ion-row>
-          <ion-col text-center size="2">
-            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }} {{ match.match_number }}</b></div>
+          <ion-col text-start size="1">
+            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
           </ion-col>
           <ion-col>
             <ion-grid>
               <ion-row style="background-color: #fdd !important">
-                <ion-col *ngFor="let team of match.alliances.red.team_keys">
-                  <p style="margin-top: 2.2vh" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</p>
+                <ion-col text-center *ngFor="let team of match.alliances.red.team_keys">
+                  <ion-label style="margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
                 </ion-col>
                 <ion-col>
-                  <h3 text-end>{{ match.alliances.red.score }}</h3>
+                  <h3 style="font-weight: 600" text-end>{{ match.alliances.red.score }}</h3>
                 </ion-col>
               </ion-row>
               <ion-row style="background-color: #ddf !important">
-                <ion-col *ngFor="let team of match.alliances.blue.team_keys">
-                  <p style="margin-top: 2.2vh" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</p>
+                <ion-col text-center *ngFor="let team of match.alliances.blue.team_keys">
+                  <ion-label style="margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
                 </ion-col>
                 <ion-col>
-                  <h3 text-end>{{ match.alliances.blue.score }}</h3>
+                  <h3 style="font-weight: 600" text-end>{{ match.alliances.blue.score }}</h3>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-col>
         </ion-row>
       </ion-grid>
-    <!-- </ion-card-content> -->
   </ion-card>
-
 </ion-content>
