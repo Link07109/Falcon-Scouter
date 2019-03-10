@@ -1,43 +1,46 @@
-<ion-header>
-  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
-  <ion-toolbar></ion-toolbar>
-</ion-header>
+<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css"
+  type="text/css">
+<app-custom-toolbar [title]="'Matches'"></app-custom-toolbar>
 
 <ion-content padding>
 
-  <ion-card color="primary" expand="full" routerLink="/teams"><ion-card-content text-center><b>View Teams</b></ion-card-content></ion-card>
+  <ion-card color="primary" expand="full" routerLink="/teams">
+    <ion-card-content text-center><b>View Teams</b></ion-card-content>
+  </ion-card>
   <ion-label text-center>Current Event: <b>{{ curComp }}</b></ion-label>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
-  <ion-card>
-    <ion-card-content>
-      <ion-grid *ngFor="let match of matchCollectionObservable | async">
+  <ion-card *ngFor="let match of matchCollectionObservable | async">
+    <!-- <ion-card-content> -->
+      <ion-grid>
         <ion-row>
-          <ion-col text-center size="2.5">
-            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }}{{ match.match_number }}</b></div>
+          <ion-col text-center size="2">
+            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }} {{ match.match_number }}</b></div>
           </ion-col>
-          <ion-col text-center>
-            <p text-center style="color:blue !important">Blue Alliance</p>
-            <ion-item *ngFor="let team of match.alliances.blue.team_keys">
-              <!-- <b style="color: '{{ (match.winning_alliance == 'red') ? 'var(--ion-color-danger)' : 'var(--ion-color-success)' }}'" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</b> -->
-              <ion-label text-center color="{{ (match.winning_alliance == 'red') ? 'danger' : 'success' }}" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col text-center>
-            <!-- <h2 class="center"><b style="color: green !important">1</b> - 0</h2> -->
-            <h2 class="hmm">{{ (match.winning_alliance == 'red') ? 0 : 1 }} - {{ (match.winning_alliance == 'red') ? 1 : 0 }}</h2>
-            <ion-button style="padding-top: 10vh;" href="https://www.thebluealliance.com/match/{{ curComp }}_{{ match.comp_level }}{{ match.match_number }}">Stats</ion-button>
-          </ion-col>
-          <ion-col text-center>
-            <p text-center style="color:crimson !important">Red Alliance</p>
-            <ion-item *ngFor="let team of match.alliances.red.team_keys">
-              <ion-label text-center routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
-            </ion-item>
+          <ion-col>
+            <ion-grid>
+              <ion-row style="background-color: #fdd !important">
+                <ion-col *ngFor="let team of match.alliances.red.team_keys">
+                  <p style="margin-top: 2.2vh" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</p>
+                </ion-col>
+                <ion-col>
+                  <h3 text-end>{{ match.alliances.red.score }}</h3>
+                </ion-col>
+              </ion-row>
+              <ion-row style="background-color: #ddf !important">
+                <ion-col *ngFor="let team of match.alliances.blue.team_keys">
+                  <p style="margin-top: 2.2vh" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</p>
+                </ion-col>
+                <ion-col>
+                  <h3 text-end>{{ match.alliances.blue.score }}</h3>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-card-content>
+    <!-- </ion-card-content> -->
   </ion-card>
 
 </ion-content>

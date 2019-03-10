@@ -35,7 +35,7 @@ export class TeamsPage implements OnInit {
     
     if (val && val.trim() !== '') {
       this.filteredArray = this.originalArray.filter(item => {
-        return item['teamNumber'].startsWith(val) // could also use .contains() if necessary
+        return item.key.substring(3).startsWith(val) // could also use .contains() if necessary
       })
     } else {
       this.filteredArray = this.originalArray

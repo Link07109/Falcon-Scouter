@@ -20,6 +20,7 @@ import {IonicStorageModule} from '@ionic/Storage'
 import {PopoverPageModule} from './pages/popover/popover.module'
 import { FormsModule } from '@angular/forms';
 import { Network } from '@ionic-native/network/ngx';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { Network } from '@ionic-native/network/ngx';
     AngularFirestoreModule,
     HttpModule,
     // IgxCategoryChartModule
+    ComponentsModule
   ],
   providers: [
     StatusBar,

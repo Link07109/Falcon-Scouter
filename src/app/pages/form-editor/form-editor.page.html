@@ -1,58 +1,43 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+<app-custom-toolbar [title]="'Scouting'"></app-custom-toolbar>
+<!-- <app-counter [name]="'HI'"></app-counter> -->
 
 <ion-content padding scroll="true">
-
-    <h1 text-center style="margin-top: 10px" *ngIf="!hasChosenTemplate && !useTemplate">Templates</h1>
-    <h1 style="margin-top: 10px" *ngIf="useTemplate"> </h1>
-    <h1 text-center style="margin-top: 10px" *ngIf="hasChosenTemplate">Template Editor</h1>
-
     <!-- This shows the list of templates from Firestore -->
     <div *ngIf="!hasChosenTemplate && !useTemplate">
         <ion-item *ngFor="let template of templatesArray">
-            <ion-card text-center class="editSlide" style="width: 100.38px; margin: 0px; left: -110.38px">
+            <!-- <ion-card text-center class="editSlide" style="width: 100.38px; margin: 0px; left: -110.38px">
                 <ion-button color="warning" (click)="deleteTemplate(template)"><ion-icon size="small" name="trash"></ion-icon></ion-button>
-                <ion-button color="secondary" (click)="loadHTMLToEdit(template)"><ion-icon size="small" name="create"></ion-icon></ion-button>
-            </ion-card>
-            <ion-card class="loadSlide editScale" style="width: 100%; margin-left: 3px">
+                <ion-button color="secondary" (click)="loadHTML(template, true)"><ion-icon size="small" name="create"></ion-icon></ion-button>
+            </ion-card> -->
+            <ion-card style="width: 100%; margin-left: 3px">
+            <!-- class="loadSlide editScale" -->
                 <ion-item>
-                    <ion-label text-center color="dark" (click)="loadHTMLToUse(template)" [innerHTML]="template.name"></ion-label>
+                    <ion-label text-center color="dark" (click)="loadHTML(template, false)" [innerHTML]="template.name"></ion-label>
                 </ion-item>
             </ion-card>
         </ion-item>
     </div>
 
     <!-- Button for showing edit buttons -->
-    <ion-fab vertical="top" horizontal="end" slot="fixed" style="position: fixed" *ngIf="!useTemplate">
+    <!-- <ion-fab vertical="top" horizontal="end" slot="fixed" style="position: fixed" *ngIf="!useTemplate">
         <ion-fab-button (click)="toggleEditMode()">
             <ion-icon color="dark" name="create"></ion-icon>
         </ion-fab-button>
-    </ion-fab>
-
-    <!-- Button for creating a new template -->
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="position: fixed" *ngIf="!hasChosenTemplate && !useTemplate">
-        <ion-fab-button (click)="toggleChosenTemplateBool()">
-            <ion-icon color="dark" name="add"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
+    </ion-fab> -->
 
     <!-- ---------------- -->
     <!-- TEMPLATE CREATOR -->
     <!-- ---------------- -->
 
-    <!-- Back Button -->
-    <ion-fab vertical="top" horizontal="start" slot="fixed" style="position: fixed"  *ngIf="hasChosenTemplate && !useTemplate">
+     <!-- Back Button -->
+    <ion-fab vertical="top" horizontal="start" slot="fixed" style="position: fixed" *ngIf="hasChosenTemplate || useTemplate">
         <ion-fab-button (click)="backButton()">
             <ion-icon color="dark" name="return-left"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="position: fixed" *ngIf="hasChosenTemplate && !useTemplate">
+    <!-- These are the buttons that show up for adding components to forms -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="hasChosenTemplate && !useTemplate">
         <!-- Add -->
         <ion-fab-button>
             <ion-icon color="dark" name="add"></ion-icon>
@@ -60,267 +45,272 @@
 
         <ion-fab-list side="top">
             <!-- Selector -->
-            <ion-fab-button (click)="createSelectorElem()" data-desc="Add item selector">
+            <ion-fab-button (click)="questionSelectorAlert()" data-desc="Add item selector">
                 <ion-icon name="options"></ion-icon>
             </ion-fab-button>
 
+            <!-- Checkbox -->
+            <ion-fab-button (click)="createComponent('checkbox')" data-desc="Add checkbox">
+                <ion-icon name="checkbox"></ion-icon>
+            </ion-fab-button>
+
             <!-- Toggle -->
-            <ion-fab-button (click)="createToggle()" data-desc="Add toggle">
+            <ion-fab-button (click)="createComponent('toggle')" data-desc="Add toggle">
                 <ion-icon name="switch"></ion-icon>
             </ion-fab-button>
 
             <!-- Counter -->
-            <ion-fab-button (click)="createCounter()" data-desc="Add counter">
-                <ion-icon name="calculator"></ion-icon>
-            </ion-fab-button>
+            <!-- <ion-fab-button color="secondary" (click)="createElement('<app-counter></app-counter>')"> -->
+            <!-- <ion-fab-button (click)="createComponent('', '<ion-button color=`secondary`>-</ion-button><ion-button color=`secondary`>+</ion-button>')" data-desc="Add counter"> -->
+                <!-- <ion-icon name="chatbubbles"></ion-icon> -->
+            <!-- </ion-fab-button> -->
 
             <!-- Input -->
-            <ion-fab-button (click)="createInput()" data-desc="Add input">
+            <ion-fab-button (click)="createComponent('input')" data-desc="Add input">
                 <ion-icon name="clipboard"></ion-icon>
             </ion-fab-button>
         </ion-fab-list>
     </ion-fab>
 
     <!-- Button for saving templates to Firestore -->
-    <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="position: fixed" *ngIf="hasChosenTemplate">
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="hasChosenTemplate">
         <ion-fab-button (click)="saveTemplate()">
             <ion-icon color="dark" name="save"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 
     <!-- This is for editing a new template -->
-    <!-- <ion-item *ngIf="hasChosenTemplate">
-        <ion-list>
-            <ion-item id="divID"></ion-item>
-        </ion-list>
-    </ion-item> -->
+    <ion-card *ngIf="hasChosenTemplate">
+        <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" id="divID">
+        </ion-reorder-group>
+    </ion-card>
 
-    <!-- This is for editing a new template -->
-    <div *ngIf="hasChosenTemplate && !useTemplate">
-        <ion-item *ngFor="let component of componentsArray" id = "divID">
-            <ion-card text-center class="editSlide" style="width: 100.38px; margin: 0px; left: -110.38px">
-                <ion-button color="warning" (click)="deleteComponent(component.name)"><ion-icon size="small" name="trash"></ion-icon></ion-button>
-                <ion-button color="secondary">-S</ion-button>
-            </ion-card>
-            <ion-card class="editScale" style="width: 100%; margin-left: 3px" [innerHTML]="component">
-            </ion-card>
-        </ion-item>
+    <!-- This is for editing existing templates -->
+    <div *ngIf="hasChosenTemplate">
+        <!-- The difference between this and the one above is that this one doesnt have the divID -->
+        <ion-reorder-group (ionItemReorder)="reorderItems($event)" [disabled]="false" [innerHTML]="templateHTML">
+        </ion-reorder-group>
     </div>
 
     <!-- This is for using existing templates -->
     <div *ngIf="useTemplate" scroll="true">
         <!-- <div [innerHTML]="templateHTML"></div> -->
 
-        <!-- Back Button -->
-        <ion-fab vertical="top" horizontal="start" slot="fixed" style="position:fixed" *ngIf="!hasChosenTemplate && useTemplate">
-            <ion-fab-button (click)="backButton()">
-                <ion-icon color="dark" name="return-left"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
-
         <!-- Name of Current Template -->
-        <h2 text-center>2019 Match Scouting</h2>
+        <h2 text-center>{{ templateName }}</h2>
 
         <form (ngSubmit)="submitData()">
+            <!-- ------------ -->
+            <!-- GENERAL INFO -->
+            <!-- ------------- -->
+            <ion-card>
+                <h2 text-center>General Information</h2>
+                <ion-card-content>
+                    <ion-grid>
+                        <!-- Match Number Input -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Match Number</ion-label></ion-col>
+                            <ion-col col-2><ion-input type="number" min="1" max="70" [(ngModel)]="formData.matchNumber" placeholder="Match Number" name="matchNumber"></ion-input></ion-col>
+                        </ion-row>
+                        <!-- Team Number Input -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Team Number</ion-label></ion-col>
+                            <ion-col col-2><ion-input type="number" min="435" max="7763" [(ngModel)]="formData.teamNumber" placeholder="Team Number" name="teamNumber"></ion-input></ion-col>
+                        </ion-row>
+                        <!-- Scout Name Input -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Scout Name</ion-label></ion-col>
+                            <ion-col col-2><ion-input [(ngModel)]="formData.scoutName" placeholder="Scout Name" name="scoutName"></ion-input></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
 
-        <!-- ------------ -->
-        <!-- GENERAL INFO -->
-        <!-- ------------- -->
-        <ion-card>
-            <h2 text-center>General Information</h2>
-            <ion-card-content>
-                <ion-grid>
-                    <!-- Match Number Input -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Match Number</ion-label></ion-col>
-                        <ion-col col-2><ion-input [(ngModel)]="formData.matchNumber" placeholder="Match Number" name="matchNumber"></ion-input></ion-col>
-                    </ion-row>
-                    <!-- Team Number Input -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Team Number</ion-label></ion-col>
-                        <ion-col col-2><ion-input [(ngModel)]="formData.teamNumber" placeholder="Team Number" name="teamNumber"></ion-input></ion-col>
-                    </ion-row>
-                    <!-- Scout Name Input -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Scout Name</ion-label></ion-col>
-                        <ion-col col-2><ion-input [(ngModel)]="formData.scoutName" placeholder="Scout Name" name="scoutName"></ion-input></ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
+            <!-- --------- -->
+            <!-- SANDSTORM -->
+            <!-- --------- -->
+            <ion-card>
+                <h2 text-center>Sandstorm</h2>
+                <ion-card-content>
+                    <ion-grid>
+                        <!-- Starting Point Dropdown -->
+                        <ion-row>
+                            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Starting Point</ion-label></ion-col>
+                            <ion-col col-2> <ion-select class="alertCSS" interface="action-sheet" placeholder="Location" [(ngModel)]="formData.startingPoint" name="Starting Point">
+                                <ion-select-option role="option" id="ion-selopt-0">Left</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-1">Right</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-2">Center</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Starting Point" value="Center">
+                            </ion-select> </ion-col>
+                        </ion-row>
 
-        <!-- --------- -->
-        <!-- SANDSTORM -->
-        <!-- --------- -->
-        <ion-card>
-            <h2 text-center>Sandstorm</h2>
-            <ion-card-content>
-                <ion-grid>
-                    <!-- Starting Point Dropdown -->
-                    <ion-row>
-                        <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Starting Point</ion-label></ion-col>
-                        <ion-col col-2> <ion-select class="alertCSS" interface="action-sheet" placeholder="Location" [(ngModel)]="formData.startingPoint" name="Starting Point">
-                            <ion-select-option role="option" id="ion-selopt-0"> Left </ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-1"> Right </ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-2"> Center </ion-select-option>
-                        </ion-select> </ion-col>
-                    </ion-row>
+                        <!-- HAB Level Dropdown -->
+                        <ion-row>
+                            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">HAB Level</ion-label></ion-col>
+                            <ion-col col-2> <ion-select interface="action-sheet" placeholder="Level" [(ngModel)]="formData.HABLevel" name="HAB Level">
+                                <ion-select-option role="option" id="ion-selopt-3">1</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-4">2</ion-select-option> 
+                                <input type="hidden" class="aux-input" name="HAB Level" value="1">
+                            </ion-select> </ion-col>
+                        </ion-row>
 
-                    <!-- HAB Level Dropdown -->
-                    <ion-row>
-                        <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">HAB Level</ion-label></ion-col>
-                        <ion-col col-2> <ion-select placeholder="Level" [(ngModel)]="formData.HABLevel" name="HAB Level">
-                            <ion-select-option role="option" id="ion-selopt-3">1</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-4">2</ion-select-option> 
-                        </ion-select> </ion-col>
-                    </ion-row>
+                        <!-- Result Dropdown -->
+                        <ion-row>
+                            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Result</ion-label></ion-col>
+                            <ion-col col-2> <ion-select interface="action-sheet" placeholder="Result" [(ngModel)]="formData.result" name="Placed Hatch">
+                                <ion-select-option role="option" id="ion-selopt-7" class="hydrated">None</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-7" class="hydrated">HAB Line</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-8" class="hydrated">Placed Cargo</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-6" class="hydrated">Placed Hatch</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Placed Hatch" value="None">
+                            </ion-select> </ion-col>
+                        </ion-row>
 
-                    <!-- Result Dropdown -->
-                    <ion-row>
-                        <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Result</ion-label></ion-col>
-                        <ion-col col-2> <ion-select interface="action-sheet" placeholder="Result" [(ngModel)]="formData.result" name="Placed Hatch">
-                            <ion-select-option role="option" id="ion-selopt-7" >None</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-7" >HAB Line</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-8" >Placed Cargo</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-6" >Placed Hatch</ion-select-option>
-                        </ion-select> </ion-col>
-                    </ion-row>
+                        <!-- Interference Dropdown -->
+                        <ion-row>
+                            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Interference</ion-label></ion-col>
+                            <ion-col col-2> <ion-select interface="action-sheet" placeholder="Interference" [(ngModel)]="formData.interference" name="Interference">
+                                <ion-select-option role="option" id="ion-selopt-12" class="hydrated">In Rocket Path</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-13" class="hydrated">In Ship Path</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-14" class="hydrated">Both</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-14" class="hydrated">Neither</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Interference" value="none">
+                            </ion-select> </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
 
-                    <!-- Interference Dropdown -->
-                    <ion-row>
-                        <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Interference</ion-label></ion-col>
-                        <ion-col col-2> <ion-select interface="action-sheet" placeholder="Interference" [(ngModel)]="formData.interference" name="Interference">
-                            <ion-select-option role="option" id="ion-selopt-12" >In Rocket Path</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-13" >In Ship Path</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-14" >Both</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-14" >Neither</ion-select-option>
-                        </ion-select> </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
+            <!-- ------- -->
+            <!-- TELE-OP -->
+            <!-- ------- -->
+            <ion-card>
+                <h2 text-center>Tele-Op</h2>
+                <ion-card-content>
+                    <ion-grid>
+                        <!-- Plays Defense Toggle -->
+                        <ion-row>
+                            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Plays Defense</ion-label></ion-col>
+                            <ion-col col-2> <ion-toggle color="secondary" [(ngModel)]="formData.playsDefense" name="Plays defense"><input type="hidden" class="aux-input" name="Plays defense" value="on"></ion-toggle></ion-col>
+                        </ion-row>
+                    </ion-grid>
 
-        <!-- ------- -->
-        <!-- TELE-OP -->
-        <!-- ------- -->
-        <ion-card>
-            <h2 text-center>Tele-Op</h2>
-            <ion-card-content>
-                <ion-grid>
-                    <!-- Plays Defense Toggle -->
-                    <ion-row>
-                        <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Plays Defense</ion-label></ion-col>
-                        <ion-col col-2> <ion-toggle color="secondary" [(ngModel)]="formData.playsDefense" name="Plays defense">
-                            <input type="hidden" class="aux-input" name="Plays defense" value="on"></ion-toggle>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+                    <!-- Cargo - Rocket Lower, Cargo - Rocket Middle, Cargo - Rocker Upper
+                    Hatch - Ship, Hatch - Rocket Lower, Hatch - Rocket Middle, Hatch - Rocker Upper -->
+                    <ion-grid>
+                        <!-- Cargo in Ship -->
+                        <ion-row>
+                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Ship</ion-label></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="removeCargoToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="addCargoToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                        </ion-row>
+                        
+                        <!-- Hatches in Ship -->
+                        <ion-row>
+                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatches - Ship</ion-label></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="removeHatchToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInShip" name="hatchesInShip" value="{{hatchInShip}}"></ion-input></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="addHatchToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                        </ion-row>
 
-                <!-- Cargo - Rocket Lower, Cargo - Rocket Middle, Cargo - Rocker Upper
-                Hatch - Ship, Hatch - Rocket Lower, Hatch - Rocket Middle, Hatch - Rocker Upper -->
-                <ion-grid>
-                    <!-- Cargo in Ship -->
-                    <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Cargo - Ship</ion-label></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="removeCargoToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInShip" name="cargoInShip" value="{{cargoInShip}}"></ion-input></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="addCargoToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
-                    </ion-row>
-                    
-                    <!-- Hatches in Ship -->
-                    <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Hatches - Ship</ion-label></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="removeHatchToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInShip" name="hatchesInShip" value="{{hatchInShip}}"></ion-input></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="addHatchToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
-                    </ion-row>
+                        <!-- Cargo in Rocket -->
+                        <ion-row>
+                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Rocket</ion-label></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInRocket" name="cargoInHRocket" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                        </ion-row>
+                        
+                        <!-- Hatches in Rocket -->
+                        <ion-row>
+                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatches - Rocket</ion-label></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="removeHatchToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInRocket" name="hatchesInRocket" value="{{hatchInHRocket}}"></ion-input></ion-col>
+                            <ion-col size="2" text-center><ion-button (click)="addHatchToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
 
-                    <!-- Cargo in Rocket -->
-                    <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Cargo - Rocket</ion-label></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoInRocket" name="cargoInHRocket" value="{{cargoInHRocket}}"></ion-input></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
-                    </ion-row>
-                    
-                    <!-- Hatches in Rocket -->
-                    <ion-row>
-                        <ion-col size="6"><ion-label style="margin-top: 8px; margin-bottom: 0px; margin-right: 0px; font-size: 1.3em">Hatches - Rocket</ion-label></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="removeHatchToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="margin-left: 6px; font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesInRocket" name="hatchesInRocket" value="{{hatchInHRocket}}"></ion-input></ion-col>
-                        <ion-col size="2" text-center><ion-button (click)="addHatchToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
+            <!-- --------- -->
+            <!-- END-GAME -->
+            <!-- --------- -->
+            <ion-card>
+                <h2 text-center>End-Game</h2>
+                <ion-card-content>
+                    <ion-grid>
 
-        <!-- --------- -->
-        <!-- END-GAME -->
-        <!-- --------- -->
-        <ion-card>
-            <h2 text-center>End-Game</h2>
-            <ion-card-content>
-                <ion-grid>
+                        <!-- Climb Level -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Climb Level</ion-label></ion-col>
+                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Level" [(ngModel)]="formData.climb" name="Climb">
+                                <ion-select-option role="option" id="ion-selopt-22" class="hydrated">Level 1</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-23" class="hydrated">Level 2</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-24" class="hydrated">Level 3</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Climb" value="Level 1">
+                            </ion-select></ion-col>
+                        </ion-row>
 
-                    <!-- Climb Level -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Climb Level</ion-label></ion-col>
-                        <ion-col col-2><ion-select interface="action-sheet" placeholder="Level" [(ngModel)]="formData.climb" name="Climb">
-                            <ion-select-option role="option" id="ion-selopt-22">Level 1</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-23">Level 2</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-24">Level 3</ion-select-option>
-                            <input type="hidden" class="aux-input" name="Climb" value="Level 1">
-                        </ion-select></ion-col>
-                    </ion-row>
+                        <!-- Stability of Robot -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Stability of Robot</ion-label></ion-col>
+                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Stability" [(ngModel)]="formData.stability" name="Stability">
+                                <ion-select-option role="option" id="ion-selopt-25" class="hydrated">Good</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-26" class="hydrated">Bad</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Stability" value="Good">
+                            </ion-select></ion-col>
+                        </ion-row>
 
-                    <!-- Stability of Robot -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Stability of Robot</ion-label></ion-col>
-                        <ion-col col-2><ion-select interface="action-sheet" placeholder="Stability" [(ngModel)]="formData.stability" name="Stability">
-                            <ion-select-option role="option" id="ion-selopt-25">Good</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-26">Bad</ion-select-option>
-                            <input type="hidden" class="aux-input" name="Stability" value="Good">
-                        </ion-select></ion-col>
-                    </ion-row>
+                        <!-- Driver Quality -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Driver Quality</ion-label></ion-col>
+                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Quality" [(ngModel)]="formData.driver" name="Driver">
+                                <ion-select-option role="option" id="ion-selopt-27" class="hydrated">Good</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-28" class="hydrated">Bad</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Driver" value="Good">
+                            </ion-select></ion-col>
+                        </ion-row>
 
-                    <!-- Driver Quality -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Driver Quality</ion-label></ion-col>
-                        <ion-col col-2><ion-select interface="action-sheet" placeholder="Quality" [(ngModel)]="formData.driver" name="Driver">
-                            <ion-select-option role="option" id="ion-selopt-27" >Good</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-28" >Bad</ion-select-option>
-                            <input type="hidden" class="aux-input" name="Driver" value="Good">
-                        </ion-select></ion-col>
-                    </ion-row>
+                        <!-- Penalties -->
+                        <ion-row>
+                            <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Penalties</ion-label></ion-col>
+                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Penalties" [(ngModel)]="formData.penalties" [ngModelOptions]="{standalone: true}" name="Penalty">
+                                <ion-select-option role="option" id="ion-selopt-30" class="hydrated">None</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-31" class="hydrated">Some</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-32" class="hydrated">A lot</ion-select-option>
+                                <input type="hidden" class="aux-input" name="Penalty" value="None">
+                            </ion-select></ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
 
-                    <!-- Penalties -->
-                    <ion-row>
-                        <ion-col col-2><ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Penalties</ion-label></ion-col>
-                        <ion-col col-2><ion-select interface="action-sheet" placeholder="Penalties" [(ngModel)]="formData.penalties" [ngModelOptions]="{standalone: true}" name="Penalty">
-                            <ion-select-option role="option" id="ion-selopt-30" >None</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-31" >Some</ion-select-option>
-                            <ion-select-option role="option" id="ion-selopt-32" >A lot</ion-select-option>
-                            <input type="hidden" class="aux-input" name="Penalty" value="None">
-                        </ion-select></ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card-content>
-        </ion-card>
+            <!-- ----------->
+            <!-- Comments -->
+            <!-- ----------->
+            <ion-card>
+                <h2 text-center>Comments</h2>
+                <ion-card-content>    
+                    <ion-textarea rows="6" cols="12" [(ngModel)]="formData.comments" placeholder="Comments" name="comments"></ion-textarea>
+                </ion-card-content>
+            </ion-card>
 
-        <!-- ----------->
-        <!-- Comments -->
-        <!-- ----------->
-        <ion-card>
-            <h2 text-center>Comments</h2>
-            <ion-card-content>    
-                <ion-textarea rows="6" cols="12" [(ngModel)]="formData.comments" placeholder="Comments" name="comments"></ion-textarea>
-            </ion-card-content>
-        </ion-card>
-
-        <div text-center>
-            <ion-button type="submit">Submit</ion-button>
-        </div>
+            <div text-center>
+                <ion-button expand="full" type="submit">Submit</ion-button>
+            </div>
 
         </form>
     </div>
 </ion-content>
+
+<!-- <ion-footer *ngIf="!hasChosenTemplate && !useTemplate">
+    <ion-toolbar>
+        <ion-card ion-item (click)="hasChosenTemplate = true" color="primary">
+            <ion-item>
+                <ion-icon name="add" item-start color="dark"></ion-icon>
+                <ion-label text-center color="dark">Create Template</ion-label>
+            </ion-item>
+        </ion-card>
+    </ion-toolbar>
+</ion-footer> -->

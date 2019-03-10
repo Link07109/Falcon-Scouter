@@ -11,28 +11,47 @@ import { curYear } from '../../pages/settings/settings.page';
 export class BlueAllianceService {
 
   baseUrl = 'https://www.thebluealliance.com/api/v3'
-  sheetsUrl = 'https://script.google.com/macros/s/AKfycbwz580srBLDEkRADXlks_aDfydvGC4L0PWaAUUP2o0hJJn4HFnm/exec?'
+  sheetsUrl = 'https://script.google.com/macros/s/AKfycbzxu_K5x1WRH6EpX8_I6VUWUgQ4jVVBjHZQWTGL8EPB2MGWUQlU/exec?test=TEST HERE'
+  cors_api_url = 'https://cors-anywhere.herokuapp.com/'
 
   constructor(private http: Http) { }
 
-  postDataToSpreadsheet(sheetId: string, matchData: any) {
-    const json = {
-      id: sheetId,
-      matchData: matchData
+  doCORSRequest(options, printResult) {
+    const x = new XMLHttpRequest()
+    x.open(options.method, this.cors_api_url + options.url)
+    x.onload = x.onerror = function () {
+      printResult(
+        options.method + ' ' + options.url + '\n' +
+        x.status + ' ' + x.statusText + '\n\n' +
+        (x.responseText || '')
+      )
     }
+    if (/^POST/i.test(options.method)) { x.setRequestHeader('Content-Type', 'application/json'); x.send(options.data) } // x-www-form-urlencoded
+  }
 
-    return this.http.post(this.sheetsUrl, json)
+  postDataToSpreadsheet(matchData: any) {
+    // this.http.post(this.sheetsUrl + 'id=' + matchData['id'], matchData)
+
+    this.doCORSRequest({
+      method: 'POST',
+      url: this.sheetsUrl, //  + 'id=' + matchData['id']
+      data: matchData
+    }, function(data) {
+      console.log(data)
+    })
   }
 
   // eventKey = year + event_code
   // teamKey = frc + team_number
 
-  getTeamIcon(teamNumber: number, imgID: string) {
-    $.get('https://api.allorigins.ml/get?method=raw&url=' + encodeURIComponent(`https://thebluealliance.com/team/${teamNumber}/${curYear}`) + '&callback=?', function (data) {
+  getTeamIcon(teamNumber: number, imgID: string, year) {
+    $.get('https://api.allorigins.win/raw?url=' + encodeURIComponent(`https://thebluealliance.com/team/${teamNumber}/${year}`) + '&callback=?', function (data) {
       const OOF = $.parseHTML(data)[73]['innerHTML']
       const OOFindex = OOF.indexOf('data:image/png')
+      const finalOOF = OOF.slice(OOFindex, -OOFindex).substring(0, OOF.indexOf('=">') - OOFindex + 1)
 
-      $(`#${imgID}`).attr('src', OOF.slice(OOFindex, -OOFindex).substring(0, OOF.indexOf('=">') - OOFindex + 1))
+      console.log(finalOOF)
+      $(`#${imgID}`).attr('src', finalOOF)
     })
   }
 

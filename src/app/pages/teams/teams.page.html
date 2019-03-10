@@ -1,35 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <div style="margin-top: 7vh"></div>
-    <ion-searchbar text-start showCancelButton animated (ionInput)="getItems($event)" placeholder="Search teams"></ion-searchbar>
-  </ion-toolbar>
-</ion-header>
+<app-custom-toolbar [title]="'Teams'"></app-custom-toolbar>
+<div style="background-color: var(--ion-color-primary)">
+  <ion-searchbar text-start showCancelButton (ionInput)="getItems($event)" placeholder="Search for teams..."></ion-searchbar>
+</div>
 
 <ion-content padding>
-
   <ion-scroll scrollX="true">
 
     <ion-grid>
-      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{team.teamNumber}}">
-        <ion-col text-center size="2">
-          <ion-item>
-            <!-- {{ blueAllianceService.getTeamIcon(team.teamNumber, team.teamNumber) }} -->
-            <!-- <img id="{{team.teamNumber}}" width="5vh" height="5vh"> -->
-          </ion-item>
-        </ion-col>
-        <ion-col text-center>
-          <ion-item>
-            <ion-label>{{ team.key.substring(3) }}</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col text-center size="8">
-          <ion-item>
-            <ion-label>{{ team.nickname }}</ion-label>
+      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{ team.key.substring(3) }}">
+        <ion-col>
+          <ion-item>            
+            <!-- {{ blueAllianceService.getTeamIcon(team.key.substring(3), team.key.substring(3), 2019) }} -->
+            <ion-avatar slot="start">
+              <img id="{{ team.key.substring(3) }}">
+              <!-- width="25vh" height="25vh" -->
+            </ion-avatar>
+            <ion-label>
+              <h1>{{ team.key.substring(3) }}</h1>
+              <h2>{{ team.nickname }}</h2>
+            </ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
 
   </ion-scroll>
-
 </ion-content>

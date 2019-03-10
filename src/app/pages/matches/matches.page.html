@@ -1,42 +1,71 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title text-center>Matches</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-custom-toolbar [title]="teamNumber"></app-custom-toolbar>
 
 <ion-content padding>
-
   <div text-center>
-    <!-- {{ blueAllianceService.getTeamIcon(teamNUMBER, 'image') }}
-    <img id="image" width="10vh" height="10vh"> -->
+    <img id="image" width="75vh" height="75vh">
   </div>
 
-  <div style="height: 35%;" text-center>
-    <h2>{{ teamNumber }}</h2>
-    <ion-label>{{ teamName }}</ion-label>
+  <div style="height: 25%;" text-center>
+    <h2>{{ teamName }}</h2>
     <ion-button href="{{ teamWebsite }}">Website</ion-button>
 
-    <ion-button href="https://{{ social.type.slice(0, -8) }}.com/{{ social.foreign_key }}"
-      *ngFor="let social of socialMediaObservable | async">{{ social.type.slice(0, -8) }}</ion-button>
+    <ion-button icon-only href="https://{{ social.type.slice(0, -8) }}.com/{{ social.foreign_key }}" *ngFor="let social of socialMediaObservable | async">
+      <ion-icon name="logo-{{ social.type.slice(0, -8) }}"></ion-icon>
+    </ion-button>
   </div>
 
   <div text-center>
-    <ion-button>Pit Data</ion-button>
+    <!-- <ion-button>Pit Data</ion-button> -->
+    <ion-button (click)="toggleMatches()">Matches</ion-button>
     <ion-button (click)="toggleMatchData()">Match Data</ion-button>
     <ion-button (click)="toggleEvents()">Events</ion-button>
   </div>
+
+  <!-- Back Button -->
+  <ion-fab vertical="top" horizontal="start" slot="fixed" style="position: fixed">
+    <ion-fab-button routerLink="/teams">
+        <ion-icon color="dark" name="return-left"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <ion-scroll scroll=”true” style="white-space: nowrap; overflow: scroll; height: 65%; position: relative; bottom: 0;">
 
     <div *ngIf="showEvents">
       <ion-card text-center style="min-height: 9vh !important;" *ngFor="let event of eventsObservable | async">
         <h2>{{ event.name }}</h2>
-        <ion-button href="https://www.thebluealliance.com/event/2018{{ event.event_code }}">View Event</ion-button>
+        <ion-button color="secondary" href="https://www.thebluealliance.com/event/{{ event.year }}{{ event.event_code }}">View Event</ion-button>
       </ion-card>
     </div>
+
+    <ion-card *ngFor="let match of teamMatches">
+      <ion-grid *ngIf="showMatches">
+        <ion-row>
+          <ion-col text-center size="2">
+            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }} {{ match.match_number }}</b></div>
+          </ion-col>
+          <ion-col>
+            <ion-grid>
+              <ion-row style="background-color: #fdd !important">
+                <ion-col *ngFor="let team of match.alliances.red.team_keys">
+                  <p style="margin-top: 2.2vh" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</p>
+                </ion-col>
+                <ion-col>
+                  <h3 text-end>{{ match.alliances.red.score }}</h3>
+                </ion-col>
+              </ion-row>
+              <ion-row style="background-color: #ddf !important">
+                <ion-col *ngFor="let team of match.alliances.blue.team_keys">
+                  <p style="margin-top: 2.2vh" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</p>
+                </ion-col>
+                <ion-col>
+                  <h3 text-end>{{ match.alliances.blue.score }}</h3>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
 
     <ion-grid *ngIf="showStats" style="position: relative; bottom: 0; min-height: 50vh">
       <ion-row nowrap>
@@ -52,20 +81,12 @@
         </ion-col>
       </ion-row>
 
-      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async"
-        routerLink="/detail/{{teamNumber}} {{match.matchNumber}}">
+      <ion-row nowrap *ngFor="let match of matchCollectionObservable | async">
+        <!-- routerLink="/detail/{{teamNumber}} {{match.matchNumber}}"" -->
 
-        <ion-col>
+        <ion-col text-center>
           <b>{{ match.matchNumber }}</b>
         </ion-col>
-
-        <!-- <ion-col *ngFor="let stat of matchesArray">
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ stat }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>  -->
 
         <!-- make this not so cancerous pls kthx -->
         <ion-col>
@@ -78,77 +99,63 @@
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.startingPosition }}</ion-label>
+              <ion-label color="dark">{{ match.startingPoint }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.autoRun }}</ion-label>
+              <ion-label color="dark">{{ match.HABLevel }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.autoSwitch }}</ion-label>
+              <ion-label color="dark">{{ match.result }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.autoSwitchCubes }}</ion-label>
+              <ion-label color="dark">{{ match.interference }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.autoScale }}</ion-label>
+              <ion-label color="dark">{{ match.playsDefense }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.autoScaleCubes }}</ion-label>
+              <ion-label color="dark">{{ match.data.cargoInShip }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.cubesSwitch }}</ion-label>
+              <ion-label color="dark">{{ match.data.cargoInRocket }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.failedSwitch }}</ion-label>
+              <ion-label color="dark">{{ match.data.hatchesInShip }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.cubesScale }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ match.failedScale }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ match.cubesExchange }}</ion-label>
+              <ion-label color="dark">{{ match.data.hatchesInRocket }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -162,7 +169,21 @@
         <ion-col>
           <ion-card>
             <ion-card-content>
-              <ion-label color="dark">{{ match.cards }}</ion-label>
+              <ion-label color="dark">{{ match.driver }}</ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              <ion-label color="dark">{{ match.stability }}</ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card>
+            <ion-card-content>
+              <ion-label color="dark">{{ match.penalties }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>

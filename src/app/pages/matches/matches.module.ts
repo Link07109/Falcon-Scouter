@@ -6,9 +6,11 @@ import { RouterModule } from '@angular/router';
 import { IgxCategoryChartModule } from 'igniteui-angular-charts/ES5/igx-category-chart-module';
 
 import { MatchesPage } from './matches.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule,
     FormsModule,
     IonicModule,

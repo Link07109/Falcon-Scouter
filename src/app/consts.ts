@@ -1,12 +1,12 @@
 export const primaryMenuPages = [
-  { icon: 'home', title: 'Intro', link: '/intro' },
+  // { icon: 'home', title: 'Intro', link: '/intro' },
   { icon: 'bookmarks', title: 'Matches', link: '/dash' },
   { icon: 'people', title: 'Teams', link: '/teams' },
   { icon: 'create', title: 'Scout', link: '/form_editor' },
 ]
 
 export const secondaryMenuPages = [
-  { icon: 'settings', title: 'Settings', link: '/settings' },
+  // { icon: 'settings', title: 'Settings', link: '/settings' },
 ]
 
 export const themes = {
@@ -21,8 +21,8 @@ export const themes = {
   },
   light: {
     primary: '#ededdb',
-    secondary: '#8f6593',
-    tertiary: '#aea4bf',
+    secondary: '#aea4bf',
+    tertiary: '#8f6593',
     dark: '#6e4552',
     medium: '#BCE784',
     light: '#e3e4db',
@@ -33,33 +33,19 @@ export const themes = {
 export const statNames = [
   'Match',
   'Scout<br/>Name',
-  'Starting<br/>Position',
-  'Auto<br/>Run',
-  'Auto<br/>Switch',
-  'Auto<br/>Switch<br/>Cubes',
-  'Auto<br/>Scale',
-  'Auto<br/>Scale<br/>Cubes',
-  'Switch',
-  'Switch<br/>Failed',
-  'Scale',
-  'Scale<br/>Failed',
-  'Exchange',
+  'Starting<br/>Point',
+  'HAB<br/>Level',
+  'Result',
+  'Interference',
+  'Plays<br/>Defense',
+  'Cargo<br/>Ship',
+  'Cargo<br/>Rocket',
+  'Hatches<br/>Ship',
+  'Hatches<br/>Rocket',
   'Climb',
-  'Cards'
-];
+  'Driver',
+  'Stability',
+  'Penalties'
+]
 
-export const modifiedStatNames = [
-  'Team',
-  // 'Starting<br/>Position',
-  'Auto<br/>Run',
-  'Auto<br/>Switch',
-  'Auto<br/>Switch<br/>Cubes',
-  'Auto<br/>Scale',
-  'Auto<br/>Scale<br/>Cubes',
-  'Switch',
-  'Switch<br/>Failed',
-  'Scale',
-  'Scale<br/>Failed',
-  'Exchange',
-  'Climb',
-];
+export const modifiedStatNames = [ ]

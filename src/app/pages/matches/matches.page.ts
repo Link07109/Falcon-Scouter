@@ -16,8 +16,10 @@ export class MatchesPage implements OnInit {
   matchCollectionObservable
   teamNumber: string
   teamNUMBER: number
-  showStats = true
-  showEvents = true
+  showStats = false
+  showMatches = true
+  showEvents = false
+  teamMatches = []
   matchesArray = []
   stats = statNames
   teamName: string
@@ -44,14 +46,31 @@ export class MatchesPage implements OnInit {
       this.teamName = data.nickname
       this.teamWebsite = data.website
     })
+
+    this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent).subscribe(match => {
+      this.teamMatches.push(match)
+      console.log(this.teamMatches)
+    })
+
+    this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', 2019)
   }
 
   toggleMatchData() {
-    this.showStats = !this.showStats
+    this.showStats = true
+    this.showEvents = false
+    this.showMatches = false
+  }
+
+  toggleMatches() {
+    this.showMatches = true
+    this.showEvents = false
+    this.showStats = false 
   }
 
   toggleEvents() {
-    this.showEvents = ! this.showEvents
+    this.showEvents = true
+    this.showStats = false
+    this.showMatches = false
   }
 
   // an attempt to make the html less gay
