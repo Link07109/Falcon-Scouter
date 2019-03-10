@@ -40,7 +40,7 @@ There is also a web version as a progressive web app [here](https://falconscouta
   - Go to <https://console.firebase.google.com/u/0/> and create a new project - name it whatever you want.
   - Click on "Add Firebase to your web app" and paste the config into the file.
 - TBA v3 HTTP API key
-  - Go to <https://www.thebluealliance.com/account> and add a new Read API Key called "X-TBA-Auth-Key" and paste it's value into the file.
+  - Go to <https://www.thebluealliance.com/account> and add a new Read API Key called "X-TBA-Auth-Key" and paste its value into the file.
 
 ### Running the app
 
