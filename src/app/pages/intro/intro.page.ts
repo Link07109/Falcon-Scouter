@@ -8,6 +8,12 @@ import { currentEvent } from '../settings/settings.page';
 })
 export class IntroPage implements OnInit {
 
+  sliderConfig = {
+    navigation: {
+      nextEl: '.hi'
+    }
+  }
+
   constructor() { }
 
   ngOnInit() { }

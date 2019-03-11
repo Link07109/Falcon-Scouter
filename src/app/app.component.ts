@@ -53,7 +53,7 @@ export class AppComponent {
     })
 
     this.statusBar.overlaysWebView(false)
-    this.router.navigateByUrl('/form_editor')
+    this.router.navigateByUrl('/dash')
   }
 
   changeThemeHMMM(name) {

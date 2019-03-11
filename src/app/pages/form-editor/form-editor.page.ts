@@ -72,13 +72,13 @@ export class FormEditorPage implements OnInit {
     private network: Network,
     public toast: ToastController
   ) { 
-    this.network.onConnect().subscribe(() => {
-      this.showToast()
-    })
+    // this.network.onConnect().subscribe(() => {
+    //   this.showToast()
+    // })
 
-    this.network.onDisconnect().subscribe(() => {
-      this.showToast('Network Disconnected')
-    })
+    // this.network.onDisconnect().subscribe(() => {
+    //   this.showToast('Network Disconnected')
+    // })
   }
 
   async showToast(message: string = 'Network Connected', duration: number = 3000) {

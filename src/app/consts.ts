@@ -6,7 +6,7 @@ export const primaryMenuPages = [
 ]
 
 export const secondaryMenuPages = [
-  // { icon: 'settings', title: 'Settings', link: '/settings' },
+  { icon: 'settings', title: 'Settings', link: '/settings' },
 ]
 
 export const themes = {

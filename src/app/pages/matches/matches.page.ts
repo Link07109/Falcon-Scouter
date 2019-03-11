@@ -22,6 +22,7 @@ export class MatchesPage implements OnInit {
   matches
   stats = statNames
   teamName: string
+  teamNumberName
   teamWebsite: string
   averageStats = modifiedStatNames
   eventsObservable
@@ -45,12 +46,11 @@ export class MatchesPage implements OnInit {
     this.socialMediaObservable = this.blueAllianceService.getSocialMedia(`frc${this.teamNumber}`)
     this.blueAllianceService.getTeamInformation(`frc${this.teamNumber}`).subscribe(data => {
       this.teamName = data.nickname
+      this.teamNumberName = this.teamNumber + ' - ' + this.teamName
       this.teamWebsite = data.website
     })
-
     this.matches = this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent)
-
-    this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', 2019)
+    this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', curYear)
   }
 
   toggleMatchData() {
