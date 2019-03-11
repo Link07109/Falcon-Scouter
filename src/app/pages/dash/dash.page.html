@@ -1,10 +1,9 @@
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css"
-  type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
+
 <app-custom-toolbar [title]="'Match Schedule'"></app-custom-toolbar>
 
 <ion-content padding>
-
   <ion-card color="primary" expand="full" routerLink="/teams">
     <ion-card-content text-center><b>View Teams</b></ion-card-content>
   </ion-card>
@@ -12,13 +11,13 @@
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
   <ion-card *ngFor="let match of matchCollectionObservable | async">
-      <ion-grid>
+      <ion-grid style="padding: 0 0 0 0 !important">
         <ion-row>
-          <ion-col text-start size="1">
-            <div class="circle center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
+          <ion-col text-center size="1">
+            <div class="center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
           </ion-col>
-          <ion-col>
-            <ion-grid>
+          <ion-col style="padding: 0 0 0 0 !important">
+            <ion-grid style="padding: 0 0 0 0 !important">
               <ion-row style="background-color: #fdd !important">
                 <ion-col text-center *ngFor="let team of match.alliances.red.team_keys">
                   <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>

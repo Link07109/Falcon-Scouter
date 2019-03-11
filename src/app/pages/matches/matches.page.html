@@ -31,7 +31,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-scroll scroll=”true” style="white-space: nowrap; overflow-x: scroll; height: 65%; position: relative; bottom: 0;">
+  <ion-scroll scroll=”true” style="white-space: nowrap; overflow-x: scroll; height: 75%; position: relative; bottom: 0;">
 
     <div *ngIf="showEvents">
       <ion-card text-center style="min-height: 9vh !important;" *ngFor="let event of eventsObservable | async">
@@ -42,14 +42,14 @@
     </div>
 
     <div *ngIf="showMatches">
-      <ion-card *ngFor="let match of matches | async">
-        <ion-grid>
+      <ion-card *ngFor="let match of matches | async" style="margin-bottom: 10px !important">
+        <ion-grid style="padding: 0 0 0 0 !important">
           <ion-row>
-            <ion-col text-start size="1" style="min-width: 3vh !important">
+            <ion-col text-center size="1" style="min-width: 3vh !important">
               <div class="center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
             </ion-col>
-            <ion-col size="11">
-              <ion-grid>
+            <ion-col size="11" style="padding: 0 0 0 0 !important">
+              <ion-grid style="padding: 0 0 0 0 !important">
                 <ion-row style="background-color: #fdd !important">
                   <ion-col col-5 style="min-width: 3vh !important" text-center *ngFor="let team of match.alliances.red.team_keys">
                     <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
@@ -90,8 +90,12 @@
       <ion-row nowrap *ngFor="let match of matchCollectionObservable | async">
         <!-- routerLink="/detail/{{teamNumber}} {{match.matchNumber}}"" -->
 
-        <ion-col text-center>
-          <b>{{ match.matchNumber }}</b>
+        <ion-col>
+          <ion-card>
+            <ion-card-content text-center>
+              <ion-label>{{ match.matchNumber }}</ion-label>
+            </ion-card-content>
+          </ion-card>
         </ion-col>
 
         <!-- make this not so cancerous pls kthx -->
@@ -104,14 +108,14 @@
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.startingPoint }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.HABLevel }}</ion-label>
             </ion-card-content>
           </ion-card>
@@ -132,63 +136,63 @@
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.playsDefense }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.data.cargoInShip }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.data.cargoInRocket }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.data.hatchesInShip }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.data.hatchesInRocket }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.climb }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.driver }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.stability }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
         <ion-col>
           <ion-card>
-            <ion-card-content>
+            <ion-card-content text-center>
               <ion-label color="dark">{{ match.penalties }}</ion-label>
             </ion-card-content>
           </ion-card>

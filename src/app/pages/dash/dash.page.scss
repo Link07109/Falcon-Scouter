@@ -1,22 +1,7 @@
-.circle {
-  width: 6vh;
-  height: 6vh;
-  border-radius: 50%;
-  font-size: 1.75vh;
-  color: var(--ion-color-light);
-  line-height: 6vh;
-  text-align: center;
-  background: var(--ion-color-primary);
-}
-
 .center {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.hmm {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 45%;
+  transform: translateY(-45%);
+  right: 50%;
+  transform: translateX(50%);
 }
