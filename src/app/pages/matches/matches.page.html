@@ -34,7 +34,7 @@
   <ion-scroll scroll=”true” style="white-space: nowrap; overflow-x: scroll; height: 75%; position: relative; bottom: 0;">
 
     <div *ngIf="showEvents">
-      <ion-card text-center style="min-height: 9vh !important;" *ngFor="let event of eventsObservable | async">
+      <ion-card text-center style="margin-bottom: 10px !important; min-height: 9vh !important;" *ngFor="let event of eventsObservable | async">
         <h2>{{ event.name }}</h2>
         <ion-button color="secondary"
           href="https://www.thebluealliance.com/event/{{ event.year }}{{ event.event_code }}">View Event</ion-button>
