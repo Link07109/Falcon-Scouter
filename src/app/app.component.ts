@@ -19,6 +19,7 @@ export class AppComponent {
   pages2 = secondaryMenuPages
   shouldShowSearchbar = false
   showSplash = true
+  themeIcon
 
   constructor(
     private platform: Platform,
@@ -34,8 +35,9 @@ export class AppComponent {
     // TODO
   }
 
-  toggleThemeStlye() {
+  toggleThemeStyle() {
     this.currentThemeStyle = (this.currentThemeStyle == 'dark') ? 'light' : 'dark'
+    this.themeIcon = (this.currentThemeStyle == 'dark') ? 'sunny' : 'moon'
     this.changeThemeHMMM(this.currentThemeStyle)
   }
 
@@ -50,6 +52,7 @@ export class AppComponent {
     this.theme.getTheme().then((cssText: string) => {
       this.currentThemeStyle = (cssText.includes('#6e4552')) ? 'light' : 'dark'
       this.changeThemeHMMM(this.currentThemeStyle)
+      this.themeIcon = (this.currentThemeStyle == 'dark') ? 'sunny' : 'moon'
     })
 
     this.statusBar.overlaysWebView(false)

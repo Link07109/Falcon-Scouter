@@ -52,7 +52,7 @@
               <ion-grid style="padding: 0 0 0 0 !important">
                 <ion-row style="background-color: #fdd !important">
                   <ion-col col-5 style="min-width: 3vh !important" text-center *ngFor="let team of match.alliances.red.team_keys">
-                    <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
+                    <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
                   </ion-col>
                   <ion-col col-5 style="min-width: 3vh !important">
                     <h3 style="color: #6e4552; font-weight: 600" text-end>{{ match.alliances.red.score }}</h3>
@@ -60,7 +60,7 @@
                 </ion-row>
                 <ion-row style="background-color: #ddf !important">
                   <ion-col col-5 style="min-width: 3vh !important" text-center *ngFor="let team of match.alliances.blue.team_keys">
-                    <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../matches/{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
+                    <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>
                   </ion-col>
                   <ion-col col-5 style="min-width: 3vh !important">
                     <h3 style="color: #6e4552; font-weight: 600" text-end>{{ match.alliances.blue.score }}</h3>

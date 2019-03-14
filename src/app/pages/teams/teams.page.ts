@@ -20,6 +20,13 @@ export class TeamsPage implements OnInit {
   ) { }
   
   ngOnInit() {
+    this.setup(null)
+  }
+  
+  setup(ev) {
+    this.originalArray = []
+    this.filteredArray = []
+
     this.teamCollectionObservable = this.blueAllianceService.getEventTeams(currentEvent)
     
     this.teamCollectionObservable.subscribe(element => {
@@ -29,7 +36,7 @@ export class TeamsPage implements OnInit {
     })
     this.filteredArray = this.originalArray
   }
-  
+
   getItems(ev) {
     const val = ev.target.value
     

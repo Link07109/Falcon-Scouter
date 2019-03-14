@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PopoverPage } from '../../pages/popover/popover.page';
 import { PopoverController } from '@ionic/angular';
 
@@ -9,10 +9,24 @@ import { PopoverController } from '@ionic/angular';
 })
 export class CustomToolbarComponent {
 
-  constructor(private popoverController: PopoverController,) { }
+  constructor(private popoverController: PopoverController, ) { }
 
   @Input()
   title: string
+
+  @Input()
+  icon = 'more'
+
+  @Output()
+  notify = new EventEmitter()
+
+  emitClick() {
+    if (this.icon == 'more') {
+      this.presentPopover(event)
+      return
+    }
+    this.notify.emit()
+  }
 
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({

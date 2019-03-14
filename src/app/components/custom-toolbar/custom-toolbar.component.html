@@ -1,14 +1,14 @@
 <ion-header text-center>
   <ion-toolbar>
-    <b >{{ title }}</b>
+    <b>{{ title }}</b>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       <!-- <ion-back-button></ion-back-button> -->
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button (click)="presentPopover($event)">
-        <ion-icon slot="icon-only" name="more"></ion-icon>
+      <ion-button (click)="emitClick()">
+        <ion-icon slot="icon-only" name="{{ icon }}"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

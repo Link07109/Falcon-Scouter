@@ -13,13 +13,18 @@ export class DashPage implements OnInit {
   socialMediaObservable
   accountName = ''
   match
-  curComp = currentEvent
+  curComp
 
   constructor(
     private blueAllianceService: BlueAllianceService,
   ) { }
 
   ngOnInit() {
+    this.refresh(null)
+  }
+
+  refresh(ev) {
+    this.curComp = currentEvent
     this.matchCollectionObservable = this.blueAllianceService.getEventMatches(currentEvent)
   }
 

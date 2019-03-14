@@ -7,29 +7,30 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CounterComponent {
 
-  minNumber = 0
-  maxNumber = 8
   numberToChange = 0
-
-  @Input()
-  data: number
 
   @Input()
   name: string
 
+  @Input()
+  lower: number
+
+  @Input()
+  upper: number
+
   @Output()
-  something = new EventEmitter()
+  value = new EventEmitter()
 
   constructor() { }
 
   add() {
-    this.numberToChange += (this.numberToChange >= this.maxNumber) ? 0 : 1
-    this.something.emit({value: this.data})
+    this.numberToChange += (this.numberToChange >= this.upper) ? 0 : 1
+    this.value.emit(this.numberToChange)
   }
 
   remove() {
-    this.numberToChange -= (this.numberToChange <= this.minNumber) ? 0 : 1
-    this.something.emit({value: this.data})
+    this.numberToChange -= (this.numberToChange <= this.lower) ? 0 : 1
+    this.value.emit(this.numberToChange)
   }
 
 }

@@ -89,6 +89,10 @@ export class FormEditorPage implements OnInit {
     await toat.present()
   }
 
+  hmm(ev) {
+    console.log(ev)
+  }
+
   addCargoToShip() { this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1 }
   removeCargoToShip() { this.cargoInShip -= (this.cargoInShip <= 0) ? 0 : 1 }
 

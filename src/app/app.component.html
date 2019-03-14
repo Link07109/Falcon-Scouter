@@ -26,10 +26,9 @@
           <ion-icon name="refresh" style="margin-right: 10%"></ion-icon>
           <b>Sync</b>
         </ion-item> -->
-        <ion-item>
-          <ion-icon name="moon" style="margin-right: 10%"></ion-icon>
-          <b>Night mode</b>
-          <ion-toggle color="secondary" (ionChange)="toggleThemeStlye()"></ion-toggle>
+        <ion-item (click)="toggleThemeStyle()">
+          <ion-icon name="{{ themeIcon }}" style="margin-right: 10%"></ion-icon>
+          <b>Change Theme</b>
         </ion-item>
         <ion-menu-toggle auto-hide="false" text-start *ngFor="let page of pages2" routerLink="{{ page.link }}">
           <ion-item>

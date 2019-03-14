@@ -27,9 +27,12 @@ export class SettingsPage implements OnInit {
       this.newEvent = currentEvent
     }
   }
+
   saveChanges() {
+    // alert saying changes have been saved and then auto put them to the previous page
+    // or
+    // toast saying changes have been saved and thats it
     currentEvent = this.newEvent
-    console.log(currentEvent)
     curYear = +currentEvent.substring(0, 4)
   }
 
