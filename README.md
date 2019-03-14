@@ -1,4 +1,4 @@
-# FalconScoutApp
+# Falcon Scouter
 
 ## About
 
