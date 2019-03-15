@@ -12,10 +12,10 @@
   <ion-card *ngFor="let match of matchCollectionObservable | async">
       <ion-grid style="padding: 0 0 0 0 !important">
         <ion-row>
-          <ion-col text-center size="1">
+          <ion-col text-center size="2.4">
             <div class="center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
           </ion-col>
-          <ion-col style="padding: 0 0 0 0 !important">
+          <ion-col size="9.6" style="padding: 0 0 0 0 !important">
             <ion-grid style="padding: 0 0 0 0 !important">
               <ion-row style="background-color: #fdd !important">
                 <ion-col text-center *ngFor="let team of match.alliances.red.team_keys">

@@ -16,7 +16,6 @@ import { delay } from 'q';
 export class FormEditorPage implements OnInit {
 
   templatesArray = []
-  matchDataArray = []
   items = []
   formsInQueue = []
 
@@ -30,34 +29,40 @@ export class FormEditorPage implements OnInit {
   toggleSlide = false
 
   cargoInShip = 0
-  cargoInLRocket = 0
-  cargoInMRocket = 0
   cargoInHRocket = 0
   hatchInShip = 0
-  hatchInLRocket = 0
-  hatchInMRocket = 0
   hatchInHRocket = 0
   // for testing
   // spreadsheetID = '1KbRLPUCyk51VJRRFVsv3k7XX__P1w4qW_ec2afk80W8'
 
-  // actual one
-  spreadsheetID = '1_7OBGwGLoxHWSPlTTdQtneQRnVCnl9cNL5A4YTv9_uA'
+  // 2019 Wake Event
+  // spreadsheetID = '1_7OBGwGLoxHWSPlTTdQtneQRnVCnl9cNL5A4YTv9_uA'
 
-  formData = { 
-    id: this.spreadsheetID,
-    data: {},
+  // 2019 Guilford Event
+  spreadsheetID ='1d_vdwRXIKutgItSAvgrRxNBUjVp9HeoN1SHdylIgQxY'
+
+  // 2019 Asheville Event
+  // spreadsheetID ='1PiujiszPRpMOcgIsVx64JudI3a2iSOZP04Z-aw1NwJ0'
+
+  formData = {
     matchNumber: 0,
     teamNumber: 0,
+    driverStation: 'Center',
     startingPoint: 'Center',
     HABLevel: '1',
     result: 'None',
     interference: 'Neither',
     playsDefense: false,
+    cargoLeft: 0,
+    hatchesLeft: 0,
+    cargoRight: 0,
+    hatchesRight: 0,
     climb: 'Level 1',
     stability: 'Good',
     driver: 'Good',
     penalties: 'None',
-    comments: ''
+    comments: '',
+    id: this.spreadsheetID,
   }
 
   loadSlideItems = document.getElementsByClassName('loadSlide')
@@ -178,12 +183,11 @@ export class FormEditorPage implements OnInit {
   }
 
   submitData() {
-    this.formData.data = {
-      cargoInShip: this.cargoInShip,
-      hatchesInShip: this.hatchInShip,
-      cargoInRocket: this.cargoInHRocket,
-      hatchesInRocket: this.hatchInHRocket,
-    }
+    this.formData.cargoLeft = this.cargoInShip
+    this.formData.hatchesLeft = this.hatchInShip
+    this.formData.cargoRight = this.cargoInHRocket
+    this.formData.hatchesRight = this.hatchInHRocket
+
     const stringData = JSON.stringify(this.formData)
     console.log(stringData)
 
@@ -414,21 +418,30 @@ export class FormEditorPage implements OnInit {
           text: 'Ok',
           handler: () => {
             document.forms[0].reset()
+            this.cargoInShip = 0
+            this.cargoInHRocket = 0
+            this.hatchInShip = 0
+            this.hatchInHRocket = 0
+
             this.formData = {
-              id: this.spreadsheetID,
-              data: {},
               matchNumber: 0,
               teamNumber: 0,
+              driverStation: 'Center',
               startingPoint: 'Center',
               HABLevel: '1',
               result: 'None',
               interference: 'Neither',
               playsDefense: false,
+              cargoLeft: 0,
+              hatchesLeft: 0,
+              cargoRight: 0,
+              hatchesRight: 0,
               climb: 'Level 1',
               stability: 'Good',
               driver: 'Good',
               penalties: 'None',
-              comments: ''
+              comments: '',
+              id: this.spreadsheetID,
             }
             this.backButton()
           }
