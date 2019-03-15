@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 
 export let currentEvent = '2019ncwak'
 // 2019ncwak, 2019ncash, 2019nccmp
 export let curYear = 2019
+export let eventName = ''
 
 @Component({
   selector: 'app-settings',
@@ -14,7 +16,7 @@ export class SettingsPage implements OnInit {
 
   newEvent: string
 
-  constructor() { }
+  constructor(private blueAllianceService: BlueAllianceService) { }
 
   ngOnInit() { }
 
@@ -34,6 +36,11 @@ export class SettingsPage implements OnInit {
     // toast saying changes have been saved and thats it
     currentEvent = this.newEvent
     curYear = +currentEvent.substring(0, 4)
+
+    this.blueAllianceService.getEventInformation(currentEvent).subscribe(element => {
+      eventName = element.name.slice(element.name.indexOf('t ') + 1)
+      console.log(element.name)
+    })
   }
 
 }

@@ -4,6 +4,7 @@ import { FirestoreService } from '../../services/data/firestore.service';
 import { statNames, modifiedStatNames } from '../../consts';
 import { currentEvent, curYear } from '../settings/settings.page';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
+import * as $ from 'jquery'
 
 @Component({
   selector: 'app-matches',
@@ -37,10 +38,14 @@ export class MatchesPage implements OnInit {
 
   // ionViewDidLoad() {
   ngOnInit() {
+    this.setup(null)
+  }
+
+  setup(ev) {
     this.teamNumber = this.route.snapshot.paramMap.get('teamNumber');
     this.teamNUMBER = +this.teamNumber
 
-    this.matchCollectionObservable = this.firestoreService.getMatchList(currentEvent, this.teamNumber).valueChanges();
+    this.matchCollectionObservable = this.firestoreService.getMatchList(currentEvent, this.teamNumber)
 
     this.eventsObservable = this.blueAllianceService.getTeamEvents(`frc${this.teamNumber}`, curYear)
     this.socialMediaObservable = this.blueAllianceService.getSocialMedia(`frc${this.teamNumber}`)
@@ -50,7 +55,7 @@ export class MatchesPage implements OnInit {
       this.teamWebsite = data.website
     })
     this.matches = this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent)
-    this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', curYear)
+    this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', curYear).then(image => $(`#image`).attr('src', image))
   }
 
   toggleMatchData() {

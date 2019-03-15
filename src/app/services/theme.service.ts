@@ -14,7 +14,7 @@ export class ThemeService {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private storage: Storage
-  ) { 
+  ) {
     storage.get('theme').then(cssText => {
       this.setGlobalCSS(cssText)
     })

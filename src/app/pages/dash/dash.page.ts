@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
-import { currentEvent } from '../settings/settings.page';
+import {currentEvent, eventName} from '../settings/settings.page'
 
 @Component({
   selector: 'app-dash',
@@ -11,7 +11,7 @@ export class DashPage implements OnInit {
 
   matchCollectionObservable
   socialMediaObservable
-  accountName = ''
+  event
   match
   curComp
 
@@ -25,6 +25,7 @@ export class DashPage implements OnInit {
 
   refresh(ev) {
     this.curComp = currentEvent
+    this.event = eventName
     this.matchCollectionObservable = this.blueAllianceService.getEventMatches(currentEvent)
   }
 

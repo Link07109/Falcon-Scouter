@@ -1,13 +1,12 @@
 <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
 
-<app-custom-toolbar [title]="'Match Schedule'" [icon]="'refresh'" (notify)="refresh($event)"></app-custom-toolbar>
+<app-custom-toolbar [title]="event + ' Schedule'" [icon]="'refresh'" (notify)="refresh($event)"></app-custom-toolbar>
 
 <ion-content padding>
   <ion-card color="primary" expand="full" routerLink="/teams">
     <ion-card-content text-center><b>View Teams</b></ion-card-content>
   </ion-card>
-  <ion-label text-center>Current Event: <b>{{ curComp }}</b></ion-label>
   <ion-searchbar (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 
   <ion-card *ngFor="let match of matchCollectionObservable | async">

@@ -5,7 +5,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
 import { timer } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,6 @@ export class AppComponent {
   currentThemeStyle = ''
   pages = primaryMenuPages
   pages2 = secondaryMenuPages
-  shouldShowSearchbar = false
   showSplash = true
   themeIcon
 
@@ -26,7 +24,6 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private theme: ThemeService,
     private statusBar: StatusBar,
-    private router: Router
   ) {
     this.initializeApp()
   }
@@ -46,9 +43,10 @@ export class AppComponent {
       this.statusBar.styleDefault()
       this.splashScreen.hide()
 
-      timer(2000).subscribe(() => this.showSplash = false)
+      timer(1500).subscribe(() => this.showSplash = false)
     })
 
+    this.changeThemeHMMM('light')
     this.theme.getTheme().then((cssText: string) => {
       this.currentThemeStyle = (cssText.includes('#6e4552')) ? 'light' : 'dark'
       this.changeThemeHMMM(this.currentThemeStyle)
@@ -56,7 +54,7 @@ export class AppComponent {
     })
 
     this.statusBar.overlaysWebView(false)
-    this.router.navigateByUrl('/dash')
+    // this.router.navigateByUrl('/dash')
   }
 
   changeThemeHMMM(name) {

@@ -168,7 +168,7 @@ export class FormEditorPage implements OnInit {
   setupArray() {
     this.templates = []
     this.templatesArray = []
-    this.templates = this.firestoreService.getAllScoutingTemplates().valueChanges()
+    this.templates = this.firestoreService.getAllScoutingTemplates()
 
     this.templates.subscribe(data => {
       data.forEach(element => {

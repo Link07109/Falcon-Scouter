@@ -10,17 +10,17 @@ import { currentEvent } from '../settings/settings.page';
   styleUrls: ['./detail.page.scss'],
 })
 export class DetailPage implements OnInit {
-  public match: Observable<any>;
-  public team;
+  public match: Observable<any>
+  public team
 
   constructor(
     private firestoreService: FirestoreService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.team = this.route.snapshot.paramMap.get('number').split(' ')[0];
-    const matchNumber = this.route.snapshot.paramMap.get('number').split(' ')[1];
-    this.match = this.firestoreService.getMatchDetail(currentEvent, this.team, matchNumber).valueChanges();
+    this.team = this.route.snapshot.paramMap.get('number').split(' ')[0]
+    const matchNumber = this.route.snapshot.paramMap.get('number').split(' ')[1]
+    this.match = this.firestoreService.getMatchDetail(currentEvent, this.team, matchNumber)
   }
 }

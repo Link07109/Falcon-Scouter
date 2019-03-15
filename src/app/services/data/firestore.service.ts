@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore'
+import { Observable } from 'rxjs';
  
 
 @Injectable({
@@ -13,18 +14,18 @@ export class FirestoreService {
     return this.firestore.doc(`events/${event}/teams/${match.teamNumber}/matches/${match.matchNumber}`).set(match)
   }
 
-  getTeamList(event: string): AngularFirestoreCollection {
+  getTeamList(event: string) {
     return this.firestore.collection(`events/${event}/teams`)
   }
 
-  getMatchList(event: string, teamNumber: any): AngularFirestoreCollection<any> {
-    return this.firestore.collection(`events/${event}/teams/${teamNumber}/matches`)
+  getMatchList(event: string, teamNumber: any): Observable<any> {
+    return this.firestore.collection(`events/${event}/teams/${teamNumber}/matches`).valueChanges()
+    // return this.firestore.collection(
   }
 
-  getMatchDetail(event: string, teamNumber: any, matchNumber: any): AngularFirestoreDocument<any> {
-    return this.firestore.doc(`events/${event}/teams/${teamNumber}/matches/${matchNumber}`)
+  getMatchDetail(event: string, teamNumber: any, matchNumber: any): Observable<any> {
+    return this.firestore.doc(`events/${event}/teams/${teamNumber}/matches/${matchNumber}`).valueChanges()
   }
-
 
   saveScoutingTemplate(templateName: string, html: string) {
     this.firestore.doc(`templates/${templateName}`).set({ name: templateName, templateHTML: html })
@@ -39,7 +40,7 @@ export class FirestoreService {
   }
 
   getAllScoutingTemplates() {
-    return this.firestore.collection(`templates`)
+    return this.firestore.collection(`templates`).valueChanges()
   }
 
 }
