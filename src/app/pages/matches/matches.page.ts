@@ -21,6 +21,7 @@ export class MatchesPage implements OnInit {
   showMatches = true
   showEvents = false
   matches
+  matchesArray = []
   stats = STAT_NAMES
   teamName: string
   teamNumberName
@@ -53,8 +54,16 @@ export class MatchesPage implements OnInit {
       this.teamNumberName = this.teamNumber + ' - ' + this.teamName
       this.teamWebsite = data.website
     })
-    this.matches = this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent)
     this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', curYear).then(image => $(`#image`).attr('src', image))
+
+    this.matches = this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent)
+    this.matches.subscribe(element => {
+      element.forEach(el => {
+        this.matchesArray.push(el)
+      })
+      this.matchesArray = this.matchesArray.sort((a, b) => a.predicted_time - b.predicted_time)
+    })
+
   }
 
   toggleMatchData() {

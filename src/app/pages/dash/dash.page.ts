@@ -11,7 +11,7 @@ export class DashPage implements OnInit {
 
   matchCollectionObservable
   matchCollectionArray = []
-  filteredArray= []
+  filteredArray = []
   socialMediaObservable
   event
   curComp
@@ -31,10 +31,9 @@ export class DashPage implements OnInit {
 
     this.matchCollectionObservable.subscribe(element => {
       element.forEach(el => {
-        console.log(el)
         this.matchCollectionArray.push(el)
       })
-      this.filteredArray = this.matchCollectionArray.sort((a, b) => (a.comp_level < b.comp_level) ? 1 : -1)// .sort((a, b) => (a.match_number - b.match_number))
+      this.filteredArray = this.matchCollectionArray.sort((a, b) => a.predicted_time - b.predicted_time)
     })
   }
 
@@ -42,7 +41,7 @@ export class DashPage implements OnInit {
     const val = ev.target.value;
 
     if (val && val.trim() !== '') {
-      this.filteredArray = this.matchCollectionArray.filter(item => {
+      this.filteredArray = this.matchCollectionArray.sort((a, b) => a.actual_time - b.actual_time).filter(item => {
         // return String(item.match_number).startsWith(val) // this only lets you search with the number of the match, regardless of comp_level
         return String(item.key.slice(item.key.indexOf('_') + 1)).startsWith(val) // this lets you search with the comp_level
       })

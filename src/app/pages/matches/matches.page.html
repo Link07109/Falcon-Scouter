@@ -58,7 +58,7 @@
     </div>
 
     <div *ngIf="showMatches">
-      <ion-card *ngFor="let match of matches | async" style="margin-bottom: 10px !important">
+      <ion-card *ngFor="let match of matchesArray" style="margin-bottom: 10px !important">
         <ion-grid class="noPadding">
           <ion-row>
             <ion-col text-center size="2.4" style="min-width: 3vh !important">
