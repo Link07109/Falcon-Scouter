@@ -47,6 +47,11 @@ ion-icon,
   color: var(--ion-color-dark) !important;
 }
 
+ion-searchbar {
+  --color: var(--ion-color-secondary) !important;
+  --placeholder-color: var(--ion-color-primary) !important;
+}
+
 ion-toolbar {
   --background: var(--ion-color-light);
   --ion-color-base: var(--ion-color-light) !important;
@@ -68,5 +73,5 @@ ion-card {
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
-  left: 0% !important;
+  left: 0 !important;
 }

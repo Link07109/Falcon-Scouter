@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 
-export let currentEvent = '2019ncwak'
+export let currentEvent = '2019ncgui'
 // 2019ncwak, 2019ncash, 2019nccmp
 export let curYear = 2019
 export let eventName = ''

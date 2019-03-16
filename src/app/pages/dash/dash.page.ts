@@ -45,6 +45,8 @@ export class DashPage implements OnInit {
         // return String(item.match_number).startsWith(val) // this only lets you search with the number of the match, regardless of comp_level
         return String(item.key.slice(item.key.indexOf('_') + 1)).startsWith(val) // this lets you search with the comp_level
       })
+    } else {
+      this.filteredArray = this.matchCollectionArray.sort((a, b) => a.actual_time - b.actual_time)
     }
   }
 
