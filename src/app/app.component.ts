@@ -3,7 +3,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
-import { themes, primaryMenuPages, secondaryMenuPages } from './consts';
+import { THEMES, PRIMARY_MENU_PAGES, SECONDARY_MENU_PAGES } from './consts';
 import { timer } from 'rxjs';
 
 @Component({
@@ -14,8 +14,8 @@ import { timer } from 'rxjs';
 export class AppComponent {
 
   currentThemeStyle = ''
-  pages = primaryMenuPages
-  pages2 = secondaryMenuPages
+  pages = PRIMARY_MENU_PAGES
+  pages2 = SECONDARY_MENU_PAGES
   showSplash = true
   themeIcon
 
@@ -58,7 +58,7 @@ export class AppComponent {
   }
 
   changeThemeHMMM(name) {
-    const theme = themes[name]
+    const theme = THEMES[name]
     this.theme.setTheme(theme)
     this.statusBar.backgroundColorByHexString(theme['light'])
     if (name == 'dark') {

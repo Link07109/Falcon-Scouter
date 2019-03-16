@@ -1,5 +1,10 @@
 <app-custom-toolbar [title]="'Scouting'"></app-custom-toolbar>
 <!--<app-counter [name]="'counter test'" [lower]="0" [upper]="8" (value)="hmm($event)"></app-counter>-->
+<!--<app-custom-selector [name]="'hiya'" [options]="[0, 1, 2]"></app-custom-selector>-->
+
+<ion-button (click)="createTestComponent('app-custom-selector', 'select')">click to create selector</ion-button>
+<ion-button (click)="createTestComponent('app-custom-counter', 'count')">click to create counter</ion-button>
+<div id="testing"></div>
 
 <ion-content padding scroll="true">
     <!-- This shows the list of templates from Firestore -->
@@ -60,10 +65,10 @@
             </ion-fab-button>
 
             <!-- Counter -->
-            <!-- <ion-fab-button color="secondary" (click)="createElement('<app-counter></app-counter>')"> -->
-            <!-- <ion-fab-button (click)="createComponent('', '<ion-button color=`secondary`>-</ion-button><ion-button color=`secondary`>+</ion-button>')" data-desc="Add counter"> -->
-                <!-- <ion-icon name="chatbubbles"></ion-icon> -->
-            <!-- </ion-fab-button> -->
+             <ion-fab-button color="secondary" (click)="createElement('<app-counter></app-counter>')"></ion-fab-button>
+            <!--<ion-fab-button (click)="createComponent('', '<>')" data-desc="Add counter"> -->
+                 <!--<ion-icon name="chatbubbles"></ion-icon> -->
+             <!--</ion-fab-button> -->
 
             <!-- Input -->
             <ion-fab-button (click)="createComponent('input')" data-desc="Add input">

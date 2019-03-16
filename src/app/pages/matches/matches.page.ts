@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/data/firestore.service';
-import { statNames, modifiedStatNames } from '../../consts';
+import { STAT_NAMES, modifiedStatNames } from '../../consts';
 import { currentEvent, curYear } from '../settings/settings.page';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import * as $ from 'jquery'
@@ -21,7 +21,7 @@ export class MatchesPage implements OnInit {
   showMatches = true
   showEvents = false
   matches
-  stats = statNames
+  stats = STAT_NAMES
   teamName: string
   teamNumberName
   teamWebsite: string

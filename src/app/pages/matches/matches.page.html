@@ -59,13 +59,13 @@
 
     <div *ngIf="showMatches">
       <ion-card *ngFor="let match of matches | async" style="margin-bottom: 10px !important">
-        <ion-grid style="padding: 0 0 0 0 !important">
+        <ion-grid class="noPadding">
           <ion-row>
             <ion-col text-center size="2.4" style="min-width: 3vh !important">
               <div class="center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
             </ion-col>
-            <ion-col size="9.6" style="padding: 0 0 0 0 !important">
-              <ion-grid style="padding: 0 0 0 0 !important">
+            <ion-col size="9.6" class="noPadding">
+              <ion-grid class="noPadding">
                 <ion-row style="background-color: #fdd !important">
                   <ion-col col-5 style="min-width: 3vh !important" text-center *ngFor="let team of match.alliances.red.team_keys">
                     <ion-label style="color: #6e4552; margin-top: 2.2vh; font-weight: 500; font-size: 1.2em" routerLink="../{{ team.substring(3) }}">{{ team.substring(3) }}</ion-label>

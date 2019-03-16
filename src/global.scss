@@ -10,6 +10,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.noPadding {
+  padding: 0 0 0 0 !important;
+}
+
 .alertCSS {
   color: var(--ion-color-dark) !important;
   // background-color: var(--ion-color-dark) !important; // alert modal page bg color. Warning this will remove the alert transparency

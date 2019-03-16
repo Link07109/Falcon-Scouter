@@ -1,22 +1,22 @@
-export const primaryMenuPages = [
+export const PRIMARY_MENU_PAGES = [
   // { icon: 'home', title: 'Intro', link: '/intro' },
   { icon: 'bookmarks', title: 'Match Schedule', link: '/dash' },
   { icon: 'people', title: 'Teams', link: '/teams' },
   { icon: 'create', title: 'Scouting', link: '/form_editor' },
 ]
 
-export const secondaryMenuPages = [
+export const SECONDARY_MENU_PAGES = [
   { icon: 'settings', title: 'Settings', link: '/settings' },
 ]
 
-export const themes = {
+export const THEMES = {
   dark: {
-    primary: '#2b2a2a',
+    primary: '#2F3136',
     secondary: '#5DD39E',
     tertiary: '#348AA7',
     dark: '#ffffff',
     medium: '#513B56',
-    light: '#222222',
+    light: '#202225',
     warning: '#ff3d3d'
   },
   light: {
@@ -30,22 +30,21 @@ export const themes = {
   },
 }
 
-export const statNames = [
+export const STAT_NAMES = [
   'Match',
   'Scout<br/>Name',
+  'Driver<br/>Station',
   'Starting<br/>Point',
   'HAB<br/>Level',
   'Result',
   'Interference',
   'Plays<br/>Defense',
-  'Cargo<br/>Ship',
-  'Cargo<br/>Rocket',
-  'Hatches<br/>Ship',
-  'Hatches<br/>Rocket',
+  'Cargo<br/>Left',
+  'Cargo<br/>Right',
+  'Hatches<br/>Left',
+  'Hatches<br/>Right',
   'Climb',
   'Driver',
   'Stability',
   'Penalties'
 ]
-
-export const modifiedStatNames = [ ]

@@ -2,14 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import * as Color from 'color';
 import { Storage } from '@ionic/Storage';
-import { themes } from '../consts';
+import { THEMES } from '../consts';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
 
-  defaults = themes.light
+  defaults = THEMES.light
 
   constructor(
     @Inject(DOCUMENT) private document: Document,

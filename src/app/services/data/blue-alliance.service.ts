@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
-import { xTBAauthKey } from '../../credentials';
+import { X_TBA_AUTH_KEY } from '../../credentials';
 import * as $ from 'jquery';
 
 @Injectable({
@@ -54,43 +54,43 @@ export class BlueAllianceService {
   }
 
   getTeamEvents(teamKey: string, year: number) {
-    return this.http.get(`${this.baseUrl}/team/${teamKey}/events/${year}?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/team/${teamKey}/events/${year}?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getEventInformation(eventKey: string) {
-    return this.http.get(`${this.baseUrl}/event/${eventKey}?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/event/${eventKey}?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getEventTeams(eventKey: string) {
-    return this.http.get(`${this.baseUrl}/event/${eventKey}/teams/simple?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/event/${eventKey}/teams/simple?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getEventMatches(eventKey: string) {
-    return this.http.get(`${this.baseUrl}/event/${eventKey}/matches/simple?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/event/${eventKey}/matches/simple?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getTeamInformation(teamKey: string) {
-    return this.http.get(`${this.baseUrl}/team/${teamKey}?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/team/${teamKey}?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getTeamMatches(teamKey: string, eventKey: string) {
-    return this.http.get(`${this.baseUrl}/team/${teamKey}/event/${eventKey}/matches/simple?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/team/${teamKey}/event/${eventKey}/matches/simple?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getMatch(matchKey: string) { // eventKey + '_' + comp_level + matchNumber
     // comp levels:  qm, qf, sf, f
-    return this.http.get(`${this.baseUrl}/match/${matchKey}?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/match/${matchKey}?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 
   getSocialMedia(teamKey: string) {
-    return this.http.get(`${this.baseUrl}/team/${teamKey}/social_media?X-TBA-Auth-Key=${xTBAauthKey}`)
+    return this.http.get(`${this.baseUrl}/team/${teamKey}/social_media?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 

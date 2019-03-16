@@ -36,33 +36,34 @@ export class TeamsPage implements OnInit {
       element.forEach(el => {
         const iconn = this.blueAllianceService.getTeamIcon(el.team_number, 'image', curYear)
         this.originalArray.push({ team: el, icon: iconn })
-        this.depress(el.team_number, iconn)
       })
+      this.sortFilteredArray()
     })
-    this.filteredArray = this.originalArray
   }
 
-  depress(teamNumber, iconn) {
+  setImages(teamNumber, iconn) {
     iconn.then(image => $(`#${teamNumber}`).attr('src', image))
-    console.log(teamNumber + '\'s pfp should be loaded')
+  }
+
+  sortFilteredArray() {
+    this.filteredArray = this.originalArray.sort((a, b) => a.team.team_number - b.team.team_number)
+    this.filteredArray.sort((a, b) => a.team.team_number - b.team.team_number).forEach(el => {
+      this.setImages(el.team.team_number, el.icon)
+    })
   }
 
   getItems(ev) {
     const val = ev.target.value
     
     if (val && val.trim() !== '') {
-      this.filteredArray = this.originalArray.filter(item => {
+      this.filteredArray = this.originalArray.sort((a, b) => a.team.team_number - b.team.team_number).filter(item => {
         const teamNum = item.team.team_number
-        this.depress(teamNum, item.icon)
+        this.setImages(teamNum, item.icon)
+
         return String(teamNum).startsWith(val) // could also use .contains() if necessary
       })
     } else {
-      this.filteredArray = this.originalArray
-
-      this.filteredArray.forEach(el => {
-        console.log(el.team.team_number)
-        this.depress(el.team.team_number, el.icon)
-      })
+      this.sortFilteredArray()
     }
   }
   

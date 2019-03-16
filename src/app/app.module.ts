@@ -11,7 +11,7 @@ import {AppRoutingModule} from './app-routing.module'
 
 import {AngularFireModule} from 'angularfire2'
 import {AngularFirestoreModule} from 'angularfire2/firestore'
-import {firebaseConfig} from './credentials'
+import {FIREBASE_CONFIG} from './credentials'
 import {BlueAllianceService} from './services/data/blue-alliance.service'
 import {HttpModule} from '@angular/http'
 // import { IgxCategoryChartModule } from 'igniteui-angular-charts/ES5/igx-category-chart-module';
@@ -33,7 +33,7 @@ import { ComponentsModule } from './components/components.module';
     IonicModule.forRoot(),
     // IgxGridModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFirestoreModule,
     HttpModule,
     // IgxCategoryChartModule

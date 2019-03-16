@@ -8,7 +8,7 @@ FRC Team 5190's custom scouting app. Written in web technologies using Ionic 4, 
 
 - Uses `Cloud Firestore` for the storage of all scouting data.
 - Uses `The Blue Alliance v3 HTTP API` for retrieval of event and team specific information.
-- Uses `Google Apps Scripts` for posting scouting data to an external Google Sheets page.
+- Uses `Google Apps Scripts` for posting scouting data to an external `Google Sheets` page.
 
 ## For Users
 
@@ -30,9 +30,9 @@ There is also a web version as a progressive web app [here](https://falconscouta
 - Create `src/app/credentials.ts` to house your Firebase and TBA keys using this as a template:
 
   ```ts
-  export const xTBAauthKey = 'your-tba-api-key-goes-here';
+  export const X_TBA_AUTH_KEY = 'your-tba-api-key-here';
 
-  export const firebaseConfig = {
+  export const FIREBASE_CONFIG = {
       // firebase config info goes in here
   };
 
@@ -45,6 +45,6 @@ There is also a web version as a progressive web app [here](https://falconscouta
 ### Running the app
 
 - In a brower through a local development server
-  - Open a terminal window in the root directory and run `ionic serve --lab`.
+  - Open a terminal window in the root directory and run `ionic serve` or `ionic serve --lab`.
 - On a physical device
   - Ionic docs concerning running ionic apps on physical devices: <https://ionicframework.com/docs/intro/deploying/>
