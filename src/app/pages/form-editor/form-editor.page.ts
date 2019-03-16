@@ -87,17 +87,17 @@ export class FormEditorPage implements OnInit {
   }
 
   createTestComponent(componentType, name) {
-    const elem = document.createElement(componentType)
-    console.log(elem)
+    // const elem = ViewContainerRef.createComponent()(componentType)
+    // console.log(elem)
 
-    elem.setAttribute('[name]', name)
+    // elem.setAttribute('[name]', name)
 
 
-    if (elem.childNodes.length > 0) {
-      document.getElementById('testing').appendChild(elem)
-      this.items.push(elem)
-      return elem.childNodes[0]
-    }
+    // if (elem.childNodes.length > 0) {
+    //   document.getElementById('testing').appendChild(elem)
+    //   this.items.push(elem)
+    //   return elem.childNodes[0]
+    // }
   }
 
   async showToast(message: string = 'Network Connected', duration: number = 3000) {

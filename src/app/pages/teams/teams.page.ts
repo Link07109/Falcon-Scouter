@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core'
-import { modifiedStatNames} from '../../consts'
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import {currentEvent, curYear, eventName} from '../settings/settings.page'
 import * as $ from 'jquery'
@@ -14,7 +13,6 @@ export class TeamsPage implements OnInit {
   filteredArray = []
   originalArray = []
   team: any
-  stats = modifiedStatNames
   event
   
   constructor(
