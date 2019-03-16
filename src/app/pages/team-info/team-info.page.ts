@@ -8,11 +8,11 @@ import * as $ from 'jquery'
 
 @Component({
   selector: 'app-matches',
-  templateUrl: 'matches.page.html',
-  styleUrls: ['matches.page.scss'],
+  templateUrl: 'team-info.page.html',
+  styleUrls: ['team-info.page.scss'],
 })
 
-export class MatchesPage implements OnInit {
+export class TeamInfoPage implements OnInit {
 
   matchCollectionObservable
   teamNumber: string

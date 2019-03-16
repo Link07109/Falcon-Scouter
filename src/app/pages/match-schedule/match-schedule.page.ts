@@ -4,10 +4,10 @@ import {currentEvent, eventName} from '../settings/settings.page'
 
 @Component({
   selector: 'app-dash',
-  templateUrl: './dash.page.html',
-  styleUrls: ['./dash.page.scss'],
+  templateUrl: './match-schedule.page.html',
+  styleUrls: ['./match-schedule.page.scss'],
 })
-export class DashPage implements OnInit {
+export class MatchSchedulePage implements OnInit {
 
   matchCollectionObservable
   matchCollectionArray = []

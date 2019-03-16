@@ -10,10 +10,10 @@ import { delay } from 'q';
 
 @Component({
   selector: 'app-form-editor',
-  templateUrl: './form-editor.page.html',
-  styleUrls: ['./form-editor.page.scss'],
+  templateUrl: './scouting.page.html',
+  styleUrls: ['./scouting.page.scss'],
 })
-export class FormEditorPage implements OnInit {
+export class ScoutingPage implements OnInit {
 
   templatesArray = []
   items = []

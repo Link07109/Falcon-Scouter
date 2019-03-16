@@ -8,7 +8,7 @@
   <ion-scroll scrollX="true">
 
     <ion-grid>
-      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/matches/{{ team.team.team_number }}">
+      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/team-info/{{ team.team.team_number }}">
         <ion-col>
           <ion-item>
             <ion-avatar slot="start">

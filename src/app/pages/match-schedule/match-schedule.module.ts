@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashPage } from './dash.page';
+import { MatchSchedulePage } from './match-schedule.page';
 import { ComponentsModule } from '../../components/components.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashPage
+    component: MatchSchedulePage
   }
 ];
 
@@ -23,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DashPage]
+  declarations: [MatchSchedulePage]
 })
-export class DashPageModule {}
+export class MatchSchedulePageModule {}
