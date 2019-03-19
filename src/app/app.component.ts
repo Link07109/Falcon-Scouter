@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { THEMES, PRIMARY_MENU_PAGES, SECONDARY_MENU_PAGES } from './consts';
 import { timer } from 'rxjs';
+import {FirestoreService} from './services/data/firestore.service'
 
 @Component({
   selector: 'app-root',

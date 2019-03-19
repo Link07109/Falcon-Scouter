@@ -10,6 +10,9 @@ const routes: Routes = [
   { path: 'match-schedule', loadChildren: './pages/match-schedule/match-schedule.module#MatchSchedulePageModule' },
   { path: 'scouting', loadChildren: './pages/scouting/scouting.module#ScoutingPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
+  { path: 'event-rankings', loadChildren: './pages/event-rankings/event-rankings.module#EventRankingsPageModule' },
+  { path: 'district-rankings', loadChildren: './pages/district-rankings/district-rankings.module#DistrictRankingsPageModule' },
+
 ];
 
 @NgModule({

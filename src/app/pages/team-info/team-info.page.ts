@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FirestoreService } from '../../services/data/firestore.service';
-import { STAT_NAMES } from '../../consts';
-import { currentEvent, curYear } from '../settings/settings.page';
-import { BlueAllianceService } from '../../services/data/blue-alliance.service';
+import {Component, OnInit} from '@angular/core'
+import {ActivatedRoute} from '@angular/router'
+import {FirestoreService} from '../../services/data/firestore.service'
+import {STAT_NAMES} from '../../consts'
+import {currentEvent, curYear, eventName} from '../settings/settings.page'
+import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 import * as $ from 'jquery'
 
 @Component({
@@ -14,21 +14,25 @@ import * as $ from 'jquery'
 
 export class TeamInfoPage implements OnInit {
 
-  matchCollectionObservable
   teamNumber: string
   teamNUMBER: number
+  teamName: string
+  teamRanking
+
   showStats = false
   showMatches = true
   showEvents = false
+
+  event = eventName
+  eventsObservable
+
+  matchCollectionObservable
   matches
   matchesArray = []
+
   stats = STAT_NAMES
-  teamName: string
-  teamNumberName
   teamWebsite: string
-  eventsObservable
   socialMediaObservable
-  event = currentEvent
 
   constructor(
     private firestoreService: FirestoreService,
@@ -36,27 +40,32 @@ export class TeamInfoPage implements OnInit {
     public blueAllianceService: BlueAllianceService,
   ) { }
 
-  // ionViewDidLoad() {
   ngOnInit() {
     this.setup(null)
   }
 
   setup(ev) {
-    this.teamNumber = this.route.snapshot.paramMap.get('teamNumber');
+    this.teamNumber = this.route.snapshot.paramMap.get('teamNumber')
     this.teamNUMBER = +this.teamNumber
+    const teamKey = `frc${this.teamNumber}`
 
     this.matchCollectionObservable = this.firestoreService.getMatchList(currentEvent, this.teamNumber)
 
-    this.eventsObservable = this.blueAllianceService.getTeamEvents(`frc${this.teamNumber}`, curYear)
-    this.socialMediaObservable = this.blueAllianceService.getSocialMedia(`frc${this.teamNumber}`)
-    this.blueAllianceService.getTeamInformation(`frc${this.teamNumber}`).subscribe(data => {
-      this.teamName = data.nickname
-      this.teamNumberName = this.teamNumber + ' - ' + this.teamName
-      this.teamWebsite = data.website
-    })
+    this.eventsObservable = this.blueAllianceService.getTeamEvents(teamKey, curYear)
+
+    this.socialMediaObservable = this.blueAllianceService.getTeamSocialMedia(teamKey)
     this.blueAllianceService.getTeamIcon(this.teamNUMBER, 'image', curYear).then(image => $(`#image`).attr('src', image))
 
-    this.matches = this.blueAllianceService.getTeamMatches(`frc${this.teamNumber}`, currentEvent)
+    this.blueAllianceService.getTeamInformation(`frc${this.teamNumber}`).subscribe(data => {
+      this.teamName = data.nickname
+      this.teamWebsite = data.website
+    })
+
+    this.blueAllianceService.getEventStatusOfTeam(teamKey, currentEvent).subscribe(el => {
+      this.teamRanking = el.qual.ranking.rank
+    })
+
+    this.matches = this.blueAllianceService.getTeamMatches(teamKey, currentEvent)
     this.matches.subscribe(element => {
       element.forEach(el => {
         this.matchesArray.push(el)
@@ -75,7 +84,7 @@ export class TeamInfoPage implements OnInit {
   toggleMatches() {
     this.showMatches = true
     this.showEvents = false
-    this.showStats = false 
+    this.showStats = false
   }
 
   toggleEvents() {

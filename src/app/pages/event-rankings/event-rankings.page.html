@@ -1,0 +1,13 @@
+<app-custom-toolbar [title]="'Event Rankings ' + '(' + event + ')'" [icon]="'refresh'"></app-custom-toolbar>
+
+<ion-content padding>
+  <ion-item *ngFor="let team of rankingArray">
+    <ion-chip color="secondary">
+      <ion-label color="medium" style="font-weight: 600">{{ team[0].team_key.substring(3) }}</ion-label>
+    </ion-chip>
+    <ion-label style="margin-left: 2vh">
+      <h2>#{{ team[0].rank + '. ' + team[1] }}</h2>
+      <p>Record: {{ team[0].record.wins + '-' + team[0].record.losses + '-' + team[0].record.ties }}</p>
+    </ion-label>
+  </ion-item>
+</ion-content>

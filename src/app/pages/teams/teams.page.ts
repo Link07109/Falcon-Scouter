@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core'
-import { BlueAllianceService } from '../../services/data/blue-alliance.service';
-import {currentEvent, curYear, eventName} from '../settings/settings.page'
+import {BlueAllianceService} from '../../services/data/blue-alliance.service'
+import {eventName, eventTeamsArray} from '../settings/settings.page'
 import * as $ from 'jquery'
+import {FirestoreService} from '../../services/data/firestore.service'
 
 @Component({
   selector: 'app-teams',
@@ -9,60 +10,56 @@ import * as $ from 'jquery'
   styleUrls: ['./teams.page.scss'],
 })
 export class TeamsPage implements OnInit {
-  teamCollectionObservable
   filteredArray = []
-  originalArray = []
   team: any
   event
-  
+  eventTeams = []
+
   constructor(
-    public blueAllianceService: BlueAllianceService
+    public blueAllianceService: BlueAllianceService,
   ) { }
-  
+
   ngOnInit() {
     this.setup(null)
   }
 
-  setup(ev) {
-    this.originalArray = []
-    this.filteredArray = []
-
+  setup(ev = event) {
     this.event = eventName
-    this.teamCollectionObservable = this.blueAllianceService.getEventTeams(currentEvent)
+    this.eventTeams = []
 
-    this.teamCollectionObservable.subscribe(element => {
-      element.forEach(el => {
-        const iconn = this.blueAllianceService.getTeamIcon(el.team_number, 'image', curYear)
-        this.originalArray.push({ team: el, icon: iconn })
-      })
-      this.sortFilteredArray()
+    eventTeamsArray.forEach(element => {
+      this.eventTeams.push(element)
     })
+    this.setImages()
   }
 
-  setImages(teamNumber, iconn) {
-    iconn.then(image => $(`#${teamNumber}`).attr('src', image))
-  }
-
-  sortFilteredArray() {
-    this.filteredArray = this.originalArray.sort((a, b) => a.team.team_number - b.team.team_number)
-    this.filteredArray.sort((a, b) => a.team.team_number - b.team.team_number).forEach(el => {
-      this.setImages(el.team.team_number, el.icon)
+  setImages() {
+    this.filteredArray = this.eventTeams
+    this.filteredArray.forEach(el => {
+      el.icon.then(image => $(`#${el.team.team_number}`).attr('src', image))
     })
   }
 
   getItems(ev) {
     const val = ev.target.value
-    
-    if (val && val.trim() !== '') {
-      this.filteredArray = this.originalArray.sort((a, b) => a.team.team_number - b.team.team_number).filter(item => {
-        const teamNum = item.team.team_number
-        this.setImages(teamNum, item.icon)
 
-        return String(teamNum).startsWith(val) // could also use .contains() if necessary
-      })
+    if (val && val.trim() !== '') {
+      if (/\d/.test(val)) { // check if it contains a number
+        this.filteredArray = this.eventTeams.filter(item => {
+          const teamNum = item.team.team_number
+          this.setImages()
+          return String(teamNum).includes(val) // includes  or  startsWith
+        })
+      } else { //  if it doesn't contain a number, search for the team name
+        this.filteredArray = this.eventTeams.filter(item => {
+          const teamName = item.team.nickname.toUpperCase()
+          this.setImages()
+          return teamName.includes(val.toUpperCase()) // includes  or  startsWith
+        })
+      }
     } else {
-      this.sortFilteredArray()
+      this.setImages()
     }
   }
-  
+
 }

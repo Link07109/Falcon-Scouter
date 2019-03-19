@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
+import {FirestoreService} from '../../services/data/firestore.service'
+import * as $ from 'jquery'
+
+export let curYear = 2019
+
+export let currentDistrict = '2019fnc'
+export let districtName = 'FIRST North Carolina'
 
 export let currentEvent = '2019ncgui'
-// 2019ncwak, 2019ncash, 2019nccmp
-export let curYear = 2019
-export let eventName = ''
+export let eventName = 'Guilford County'
+
+export let eventTeamsArray = []
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +23,9 @@ export class SettingsPage implements OnInit {
 
   newEvent: string
 
-  constructor(private blueAllianceService: BlueAllianceService) { }
+  constructor(
+    private blueAllianceService: BlueAllianceService,
+  ) { }
 
   ngOnInit() { }
 
@@ -33,13 +42,27 @@ export class SettingsPage implements OnInit {
   saveChanges() {
     // alert saying changes have been saved and then auto put them to the previous page
     // or
-    // toast saying changes have been saved and thats it
+    // toast saying changes have been saved
     currentEvent = this.newEvent
     curYear = +currentEvent.substring(0, 4)
 
     this.blueAllianceService.getEventInformation(currentEvent).subscribe(element => {
-      eventName = element.name.slice(element.name.indexOf('t ') + 1)
+      eventName = element.short_name
+      currentDistrict = element.district.key
+      districtName = element.district.display_name
+
+      console.log(element)
       console.log(element.name)
+      console.log(element.district.display_name)
+    })
+
+    eventTeamsArray = []
+
+    this.blueAllianceService.getEventTeams(currentEvent).subscribe(element => {
+      element.forEach(el => {
+        eventTeamsArray.push({ team: el, icon: this.blueAllianceService.getTeamIcon(el.team_number, 'image', curYear) })
+      })
+      eventTeamsArray = eventTeamsArray.sort((a, b) => a.team.team_number - b.team.team_number)
     })
   }
 

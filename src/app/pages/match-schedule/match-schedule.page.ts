@@ -14,7 +14,6 @@ export class MatchSchedulePage implements OnInit {
   filteredArray = []
   socialMediaObservable
   event
-  curComp
 
   constructor(
     private blueAllianceService: BlueAllianceService,
@@ -25,9 +24,9 @@ export class MatchSchedulePage implements OnInit {
   }
 
   refresh(ev) {
-    this.curComp = currentEvent
     this.event = eventName
     this.matchCollectionObservable = this.blueAllianceService.getEventMatches(currentEvent)
+    this.matchCollectionArray = []
 
     this.matchCollectionObservable.subscribe(element => {
       element.forEach(el => {

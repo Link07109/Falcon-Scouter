@@ -53,6 +53,11 @@ export class BlueAllianceService {
     return finalOOF
   }
 
+  getEventStatusOfTeam(teamKey: string, eventKey: string) {
+    return this.http.get(`${this.baseUrl}/team/${teamKey}/event/${eventKey}/status?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
+      .pipe(map(res => res.json()))
+  }
+
   getTeamEvents(teamKey: string, year: number) {
     return this.http.get(`${this.baseUrl}/team/${teamKey}/events/${year}?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
@@ -73,6 +78,11 @@ export class BlueAllianceService {
       .pipe(map(res => res.json()))
   }
 
+  getEventRankings(eventKey: string) {
+    return this.http.get(`${this.baseUrl}/event/${eventKey}/rankings?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
+      .pipe(map(res => res.json()))
+  }
+
   getTeamInformation(teamKey: string) {
     return this.http.get(`${this.baseUrl}/team/${teamKey}?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
@@ -89,8 +99,13 @@ export class BlueAllianceService {
       .pipe(map(res => res.json()))
   }
 
-  getSocialMedia(teamKey: string) {
+  getTeamSocialMedia(teamKey: string) {
     return this.http.get(`${this.baseUrl}/team/${teamKey}/social_media?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
+      .pipe(map(res => res.json()))
+  }
+
+  getDistrictRankings(districtKey: string) {
+    return this.http.get(`${this.baseUrl}/district/${districtKey}/rankings?X-TBA-Auth-Key=${X_TBA_AUTH_KEY}`)
       .pipe(map(res => res.json()))
   }
 

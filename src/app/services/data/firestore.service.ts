@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore'
+import { AngularFirestore } from 'angularfire2/firestore'
 import { Observable } from 'rxjs';
  
 
@@ -14,6 +14,8 @@ export class FirestoreService {
     return this.firestore.doc(`events/${event}/teams/${match.teamNumber}/matches/${match.matchNumber}`).set(match)
   }
 
+  // use this for offline viewing and putting teams into firestore
+  // create a set version of this as well and use in settings page
   getTeamList(event: string) {
     return this.firestore.collection(`events/${event}/teams`)
   }

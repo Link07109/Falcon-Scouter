@@ -1,4 +1,4 @@
-<app-custom-toolbar [title]="event + ' Teams'" [icon]="'refresh'" (notify)="setup($event)"></app-custom-toolbar>
+<app-custom-toolbar [title]="'Teams ' + '(' + event + ')'" [icon]="'refresh'" (notify)="setup($event)"></app-custom-toolbar>
 
 <div style="background-color: var(--ion-color-primary)">
   <ion-searchbar text-start showCancelButton (ionInput)="getItems($event)" placeholder="Search for teams..."></ion-searchbar>

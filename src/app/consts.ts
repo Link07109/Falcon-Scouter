@@ -1,8 +1,10 @@
 export const PRIMARY_MENU_PAGES = [
   // { icon: 'home', title: 'Intro', link: '/intro' },
-  { icon: 'bookmarks', title: 'Match Schedule', link: '/match-schedule' },
   { icon: 'people', title: 'Teams', link: '/teams' },
-  { icon: 'create', title: 'Scouting', link: '/scouting' },
+  { icon: 'calendar', title: 'Match Schedule', link: '/match-schedule' },
+  { icon: 'list', title: 'Event Rankings', link: '/event-rankings' },
+  { icon: 'list-BOX', title: 'District Rankings', link: '/district-rankings' },
+  { icon: 'clipboard', title: 'Scouting', link: '/scouting' },
 ]
 
 export const SECONDARY_MENU_PAGES = [
@@ -11,12 +13,12 @@ export const SECONDARY_MENU_PAGES = [
 
 export const THEMES = {
   dark: {
-    primary: '#2F3136',
+    primary: '#36393F', // 2F3136
     secondary: '#5DD39E',
     tertiary: '#348AA7',
     dark: '#ffffff',
     medium: '#513B56',
-    light: '#202225',
+    light: '#2F3136', // 2B2C31
     warning: '#ff3d3d'
   },
   light: {
