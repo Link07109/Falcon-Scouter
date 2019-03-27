@@ -1,14 +1,38 @@
 <app-custom-toolbar [title]="'District Rankings ' + '(' + district + ')'" [icon]="'refresh'" (notify)="refreshList()"></app-custom-toolbar>
 
-<ion-content padding>
-  <ion-item *ngFor="let team of rankingArray">
-    <ion-chip color="tertiary">
-      <ion-label color="medium" style="font-weight: 600">{{ team[0].team_key.substring(3) }}</ion-label>
-    </ion-chip>
-    <ion-label style="margin-left: 2vh">
-      <h2>#{{ team[0].rank + '. ' + team[1] }}</h2>
-      <p>Total Points: {{ team[0].point_total }}</p>
-      <p>Events Attended: {{ team[0].event_points.length }}</p>
+<ion-content>
+  <ion-item *ngFor="let team of rankingArray" routerLink="/team-info/{{ team[0].team_key.substring(3) }}" style="margin-left: 0; border-bottom: 1px solid var(--ion-color-primary)">
+    <ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="max-width: 12vh !important">
+            <ion-chip color="secondary" text-center style="width: 100%; height: 100% !important; margin-left: 0; padding: 0 0 0 0">
+              <ion-label color="light" style="font-weight: 600; font-size: 10pt">
+                {{ team[0].rank + '. ' }}
+              </ion-label>
+            </ion-chip>
+          </ion-col>
+          <ion-col size="10">
+            <h2>{{ team[0].team_key.substring(3) }} - {{ team[1] }}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Point Total: {{ team[0].point_total }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Rookie Bonus: {{ team[0].rookie_bonus }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Event 1: {{ (team[0].event_points[0] != null) ? team[0].event_points[0].total : 'N/A' }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Event 2: {{ (team[0].event_points[1] != null) ? team[0].event_points[1].total : 'N/A'  }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-label>
   </ion-item>
 </ion-content>

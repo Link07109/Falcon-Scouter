@@ -1,13 +1,92 @@
-<app-custom-toolbar [title]="'Event Rankings ' + '(' + event + ')'" [icon]="'refresh'"></app-custom-toolbar>
+<app-custom-toolbar [title]="'Event Rankings ' + '(' + event + ')'" [icon]="'refresh'" (notify)="refresh()"></app-custom-toolbar>
 
-<ion-content padding>
-  <ion-item *ngFor="let team of rankingArray">
-    <ion-chip color="secondary">
-      <ion-label color="medium" style="font-weight: 600">{{ team[0].team_key.substring(3) }}</ion-label>
-    </ion-chip>
-    <ion-label style="margin-left: 2vh">
-      <h2>#{{ team[0].rank + '. ' + team[1] }}</h2>
-      <p>Record: {{ team[0].record.wins + '-' + team[0].record.losses + '-' + team[0].record.ties }}</p>
+<ion-content>
+  <ion-item *ngFor="let team of rankingArray" routerLink="/team-info/{{ team[0].team_key.substring(3) }}" style="margin-left: 0; border-bottom: 1px solid var(--ion-color-primary)">
+    <ion-label>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="max-width: 12vh !important">
+            <ion-chip color="secondary" text-center style="width: 100%; height: 100% !important; margin-left: 0; padding: 0 0 0 0">
+              <ion-label color="light" style="font-weight: 600; font-size: 10pt">
+                {{ team[0].rank + '. ' }}
+              </ion-label>
+            </ion-chip>
+          </ion-col>
+          <ion-col size="10">
+            <h2>{{ team[0].team_key.substring(3) }} - {{ team[1] }}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Ranking Score: {{ team[0].sort_orders[0] }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Record: {{ team[0].record.wins }}-{{ team[0].record.losses }}-{{ team[0].record.ties }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Cargo: {{ team[0].sort_orders[1] }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Hatch Panel: {{ team[0].sort_orders[2] }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>HAB Climb: {{ team[0].sort_orders[3] }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Sandstorm Bonus: {{ team[0].sort_orders[4] }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>DQ: {{ team[0].dq }}</p>
+          </ion-col>
+          <ion-col>
+            <p>Played: {{ team[0].matches_played }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-label>
   </ion-item>
+  <!--<div>-->
+    <!--<ion-item *ngFor="let team of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]">-->
+      <!--<ion-chip color="secondary">-->
+        <!--<ion-label>-->
+          <!--<ion-skeleton-text width="100%"></ion-skeleton-text>-->
+        <!--</ion-label>-->
+      <!--</ion-chip>-->
+      <!--<ion-label style="margin-left: 2vh">-->
+        <!--<ion-grid>-->
+          <!--<ion-row>-->
+            <!--<ion-col>-->
+              <!--<p><ion-skeleton-text width="100%"></ion-skeleton-text></p>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<p><ion-skeleton-text width="100%"></ion-skeleton-text></p>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+          <!--<ion-row>-->
+            <!--<ion-col>-->
+              <!--<p><ion-skeleton-text width="100%"></ion-skeleton-text></p>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<p><ion-skeleton-text width="100%"></ion-skeleton-text></p>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+          <!--<ion-row>-->
+            <!--<ion-col>-->
+              <!--<p><ion-skeleton-text width="100%"></ion-skeleton-text></p>-->
+            <!--</ion-col>-->
+            <!--<ion-col>-->
+              <!--<p><ion-skeleton-text width="100%"></ion-skeleton-text></p>-->
+            <!--</ion-col>-->
+          <!--</ion-row>-->
+        <!--</ion-grid>-->
+      <!--</ion-label>-->
+    <!--</ion-item>-->
+  <!--</div>-->
+
 </ion-content>

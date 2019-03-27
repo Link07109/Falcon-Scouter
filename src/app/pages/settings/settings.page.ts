@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
-import {FirestoreService} from '../../services/data/firestore.service'
-import * as $ from 'jquery'
 
 export let curYear = 2019
 
 export let currentDistrict = '2019fnc'
 export let districtName = 'FIRST North Carolina'
 
-export let currentEvent = '2019ncgui'
-export let eventName = 'Guilford County'
+export let currentEvent = '2019ncash'
+export let eventName = 'UNC Asheville'
 
 export let eventTeamsArray = []
+export function setArray(someArray: Array<any>) {
+    eventTeamsArray = someArray
+}
 
 @Component({
   selector: 'app-settings',

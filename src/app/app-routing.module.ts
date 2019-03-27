@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'intro', pathMatch: 'full' },
+  { path: '', redirectTo: 'scouting', pathMatch: 'full' },
   { path: 'team-info/:teamNumber', loadChildren: './pages/team-info/team-info.module#TeamInfoPageModule' },
   { path: 'detail/:number', loadChildren: './pages/detail/detail.module#DetailPageModule' },
   { path: 'teams', loadChildren: './pages/teams/teams.module#TeamsPageModule' },
@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
   { path: 'event-rankings', loadChildren: './pages/event-rankings/event-rankings.module#EventRankingsPageModule' },
   { path: 'district-rankings', loadChildren: './pages/district-rankings/district-rankings.module#DistrictRankingsPageModule' },
-
 ];
 
 @NgModule({

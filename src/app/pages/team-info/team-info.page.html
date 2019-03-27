@@ -1,25 +1,34 @@
 <app-custom-toolbar [title]="teamNumber + ' - ' + teamName + ' - ' + ' Rank #' + teamRanking + ' (' + event + ')'" [icon]="'refresh'" (notify)="setup($event)"></app-custom-toolbar>
 
-<ion-content padding>
-
+<ion-content>
   <div text-center>
     <ion-grid>
       <ion-row>
         <ion-col text-end>
-          <img id="image" width="75vh" height="75vh" style="margin-top: 1.5vh">
+          <ion-button href="{{ teamWebsite }}" style="margin-top: 3vh;">Web</ion-button>
         </ion-col>
-        <ion-col>
-          <ion-grid>
-            <ion-row>
-              <ion-button href="{{ teamWebsite }}">Web</ion-button>
-            </ion-row>
-            <ion-row>
-              <ion-button href="https://www.thebluealliance.com/team/{{ teamNumber }}/2019">
-                <img src="https://www.thebluealliance.com/images/tba_lamp.svg" class="tbaIcon">
-              </ion-button>
-            </ion-row>
-          </ion-grid>
+        <ion-col text-center>
+          <ion-avatar text-end style="width:9vh !important; height:9vh !important; margin-top: 1.5vh; margin-left: 7vw">
+            <img id="image">
+          </ion-avatar>
         </ion-col>
+        <ion-col text-start>
+          <ion-button href="https://www.thebluealliance.com/team/{{ teamNumber }}/2019" style="margin-top: 3vh;">
+            <img src="https://www.thebluealliance.com/images/tba_lamp.svg" class="tbaIcon">
+          </ion-button>
+        </ion-col>
+        <!--<ion-col>-->
+          <!--<ion-grid>-->
+            <!--<ion-row>-->
+              <!--<ion-button href="{{ teamWebsite }}">Web</ion-button>-->
+            <!--</ion-row>-->
+            <!--<ion-row>-->
+              <!--<ion-button href="https://www.thebluealliance.com/team/{{ teamNumber }}/2019">-->
+                <!--<img src="https://www.thebluealliance.com/images/tba_lamp.svg" class="tbaIcon">-->
+              <!--</ion-button>-->
+            <!--</ion-row>-->
+          <!--</ion-grid>-->
+        <!--</ion-col>-->
       </ion-row>
     </ion-grid>
   </div>

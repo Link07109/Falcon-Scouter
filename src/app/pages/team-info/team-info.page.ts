@@ -45,6 +45,8 @@ export class TeamInfoPage implements OnInit {
   }
 
   setup(ev) {
+    this.matchesArray = []
+
     this.teamNumber = this.route.snapshot.paramMap.get('teamNumber')
     this.teamNUMBER = +this.teamNumber
     const teamKey = `frc${this.teamNumber}`

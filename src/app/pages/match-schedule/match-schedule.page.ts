@@ -27,6 +27,7 @@ export class MatchSchedulePage implements OnInit {
     this.event = eventName
     this.matchCollectionObservable = this.blueAllianceService.getEventMatches(currentEvent)
     this.matchCollectionArray = []
+    this.filteredArray = []
 
     this.matchCollectionObservable.subscribe(element => {
       element.forEach(el => {

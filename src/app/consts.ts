@@ -3,22 +3,22 @@ export const PRIMARY_MENU_PAGES = [
   { icon: 'people', title: 'Teams', link: '/teams' },
   { icon: 'calendar', title: 'Match Schedule', link: '/match-schedule' },
   { icon: 'list', title: 'Event Rankings', link: '/event-rankings' },
-  { icon: 'list-BOX', title: 'District Rankings', link: '/district-rankings' },
+  { icon: 'list-box', title: 'District Rankings', link: '/district-rankings' },
   { icon: 'clipboard', title: 'Scouting', link: '/scouting' },
 ]
 
 export const SECONDARY_MENU_PAGES = [
-  { icon: 'settings', title: 'Settings', link: '/settings' },
+  // { icon: 'settings', title: 'Settings', link: '/settings' },
 ]
 
 export const THEMES = {
   dark: {
-    primary: '#36393F', // 2F3136
+    primary: '#484C52',
     secondary: '#5DD39E',
     tertiary: '#348AA7',
     dark: '#ffffff',
     medium: '#513B56',
-    light: '#2F3136', // 2B2C31
+    light: '#36393F',
     warning: '#ff3d3d'
   },
   light: {
@@ -30,6 +30,15 @@ export const THEMES = {
     light: '#e3e4db',
     warning: '#ff3d3d'
   },
+  amoled: {
+    primary: '#36393F',
+    secondary: '#348AA7',
+    tertiary: '#5DD39E',
+    dark: '#ffffff',
+    medium: '#484C52',
+    light: '#000000',
+    warning: '#ff3d3d'
+  }
 }
 
 export const STAT_NAMES = [

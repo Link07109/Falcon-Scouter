@@ -39,12 +39,17 @@ export class ScoutingPage implements OnInit {
   // spreadsheetID = '1_7OBGwGLoxHWSPlTTdQtneQRnVCnl9cNL5A4YTv9_uA'
 
   // 2019 Guilford Event
-  spreadsheetID ='1d_vdwRXIKutgItSAvgrRxNBUjVp9HeoN1SHdylIgQxY'
+  // spreadsheetID ='1d_vdwRXIKutgItSAvgrRxNBUjVp9HeoN1SHdylIgQxY'
 
   // 2019 Asheville Event
-  // spreadsheetID ='1PiujiszPRpMOcgIsVx64JudI3a2iSOZP04Z-aw1NwJ0'
+  spreadsheetID ='1PiujiszPRpMOcgIsVx64JudI3a2iSOZP04Z-aw1NwJ0'
+
+  dataaa = { 
+    hi: ''
+  }
 
   formData = {
+    scoutName: '',
     matchNumber: 0,
     teamNumber: 0,
     driverStation: 'Center',
@@ -106,10 +111,6 @@ export class ScoutingPage implements OnInit {
       duration: duration
     })
     await toat.present()
-  }
-
-  hmm(ev) {
-    console.log(ev)
   }
 
   addCargoToShip() { this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1 }
@@ -438,6 +439,7 @@ export class ScoutingPage implements OnInit {
             this.hatchInHRocket = 0
 
             this.formData = {
+              scoutName: '',
               matchNumber: 0,
               teamNumber: 0,
               driverStation: 'Center',

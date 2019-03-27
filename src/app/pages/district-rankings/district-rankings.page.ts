@@ -28,6 +28,7 @@ export class DistrictRankingsPage implements OnInit {
         console.log(el)
         this.blueAllianceService.getTeamInformation(el.team_key).subscribe(ell => {
           this.rankingArray.push([el, ell.nickname])
+          console.log(el)
           this.rankingArray = this.rankingArray.sort((a, b) => a[0].rank - b[0].rank)
         })
       })

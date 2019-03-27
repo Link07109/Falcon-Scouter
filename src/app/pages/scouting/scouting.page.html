@@ -1,12 +1,10 @@
 <app-custom-toolbar [title]="'Scouting'"></app-custom-toolbar>
-<!--<app-counter [name]="'counter test'" [lower]="0" [upper]="8" (value)="hmm($event)"></app-counter>-->
-<!--<app-custom-selector [name]="'hiya'" [options]="[0, 1, 2]"></app-custom-selector>-->
+<!--<app-counter [name]="'counter test'" [lower]="0" [upper]="8" [modelObj]="dataaa"></app-counter>-->
+<!--<app-custom-selector [name]="'hiya'" [options]="[0, 1, 2]" [modelObj]="dataaa"></app-custom-selector>-->
 
-<!--<ion-button (click)="createTestComponent('app-custom-selector', 'select')">click to create selector</ion-button>-->
-<!--<ion-button (click)="createTestComponent('app-custom-counter', 'count')">click to create counter</ion-button>-->
 <!--<div id="testing"></div>-->
 
-<ion-content padding scroll="true">
+<ion-content scroll="true">
     <!-- This shows the list of templates from Firestore -->
     <div *ngIf="!hasChosenTemplate && !useTemplate">
         <ion-item *ngFor="let template of templatesArray">
@@ -14,7 +12,7 @@
                 <ion-button color="warning" (click)="deleteTemplate(template)"><ion-icon size="small" name="trash"></ion-icon></ion-button>
                 <ion-button color="secondary" (click)="loadHTML(template, true)"><ion-icon size="small" name="create"></ion-icon></ion-button>
             </ion-card> -->
-            <ion-card style="width: 100%; margin-left: 3px">
+            <ion-card style="width: 100%">
             <!-- class="loadSlide editScale" -->
                 <ion-item>
                     <ion-label text-center color="dark" (click)="loadHTML(template, false)" [innerHTML]="template.name"></ion-label>
@@ -141,7 +139,7 @@
                         <!-- Driver Station Dropdown -->
                         <ion-row>
                           <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Driver Station</ion-label></ion-col>
-                          <ion-col col-2> <ion-select class="alertCSS" interface="action-sheet" placeholder="Location" [(ngModel)]="formData.driverStation" name="Driver Station">
+                          <ion-col col-2> <ion-select [interfaceOptions]="{mode:'ios'}" class="alertCSS" interface="action-sheet" placeholder="Location" [(ngModel)]="formData.driverStation" name="Driver Station">
                             <ion-select-option role="option" id="ion-selopt-20">Left</ion-select-option>
                             <ion-select-option role="option" id="ion-selopt-21">Center</ion-select-option>
                             <ion-select-option role="option" id="ion-selopt-33">Right</ion-select-option>
@@ -152,7 +150,7 @@
                         <!-- Starting Point Dropdown -->
                         <ion-row>
                             <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Starting Point</ion-label></ion-col>
-                            <ion-col col-2> <ion-select class="alertCSS" interface="action-sheet" placeholder="Location" [(ngModel)]="formData.startingPoint" name="Starting Point">
+                            <ion-col col-2> <ion-select [interfaceOptions]="{mode:'ios'}"class="alertCSS" interface="action-sheet" placeholder="Location" [(ngModel)]="formData.startingPoint" name="Starting Point">
                                 <ion-select-option role="option" id="ion-selopt-0">Left</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-1">Center</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-2">Right</ion-select-option>
@@ -163,7 +161,7 @@
                         <!-- HAB Level Dropdown -->
                         <ion-row>
                             <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">HAB Level</ion-label></ion-col>
-                            <ion-col col-2> <ion-select interface="action-sheet" placeholder="Level" [(ngModel)]="formData.HABLevel" name="HAB Level">
+                            <ion-col col-2> <ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Level" [(ngModel)]="formData.HABLevel" name="HAB Level">
                                 <ion-select-option role="option" id="ion-selopt-3">1</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-4">2</ion-select-option>
                                 <input type="hidden" class="aux-input" name="HAB Level" value="1">
@@ -173,7 +171,7 @@
                         <!-- Result Dropdown -->
                         <ion-row>
                             <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Result</ion-label></ion-col>
-                            <ion-col col-2> <ion-select interface="action-sheet" placeholder="Result" [(ngModel)]="formData.result" name="Placed Hatch">
+                            <ion-col col-2> <ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Result" [(ngModel)]="formData.result" name="Placed Hatch">
                                 <ion-select-option role="option" id="ion-selopt-5" class="hydrated">None</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-7" class="hydrated">HAB Line</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-8" class="hydrated">Placed Cargo</ion-select-option>
@@ -185,7 +183,7 @@
                         <!-- Interference Dropdown -->
                         <ion-row>
                             <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Interference</ion-label></ion-col>
-                            <ion-col col-2> <ion-select interface="action-sheet" placeholder="Interference" [(ngModel)]="formData.interference" name="Interference">
+                            <ion-col col-2> <ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Interference" [(ngModel)]="formData.interference" name="Interference">
                                 <ion-select-option role="option" id="ion-selopt-12" class="hydrated">In Rocket Path</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-13" class="hydrated">In Ship Path</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-9" class="hydrated">Both</ion-select-option>
@@ -260,7 +258,7 @@
                         <!-- Climb Level -->
                         <ion-row>
                             <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Climb Level</ion-label></ion-col>
-                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Level" [(ngModel)]="formData.climb" name="Climb">
+                            <ion-col col-2><ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Level" [(ngModel)]="formData.climb" name="Climb">
                                 <ion-select-option role="option" id="ion-selopt-22" class="hydrated">Level 1</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-23" class="hydrated">Level 2</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-24" class="hydrated">Level 3</ion-select-option>
@@ -271,7 +269,7 @@
                         <!-- Stability of Robot -->
                         <ion-row>
                             <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Stability of Robot</ion-label></ion-col>
-                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Stability" [(ngModel)]="formData.stability" name="Stability">
+                            <ion-col col-2><ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Stability" [(ngModel)]="formData.stability" name="Stability">
                                 <ion-select-option role="option" id="ion-selopt-25" class="hydrated">Good</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-26" class="hydrated">Bad</ion-select-option>
                                 <input type="hidden" class="aux-input" name="Stability" value="Good">
@@ -281,7 +279,7 @@
                         <!-- Driver Quality -->
                         <ion-row>
                             <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Driver Quality</ion-label></ion-col>
-                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Quality" [(ngModel)]="formData.driver" name="Driver">
+                            <ion-col col-2><ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Quality" [(ngModel)]="formData.driver" name="Driver">
                                 <ion-select-option role="option" id="ion-selopt-27" class="hydrated">Good</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-28" class="hydrated">Bad</ion-select-option>
                                 <input type="hidden" class="aux-input" name="Driver" value="Good">
@@ -291,7 +289,7 @@
                         <!-- Penalties -->
                         <ion-row>
                             <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Penalties</ion-label></ion-col>
-                            <ion-col col-2><ion-select interface="action-sheet" placeholder="Penalties" [(ngModel)]="formData.penalties" [ngModelOptions]="{standalone: true}" name="Penalty">
+                            <ion-col col-2><ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Penalties" [(ngModel)]="formData.penalties" [ngModelOptions]="{standalone: true}" name="Penalty">
                                 <ion-select-option role="option" id="ion-selopt-30" class="hydrated">None</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-31" class="hydrated">Some</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-32" class="hydrated">A lot</ion-select-option>

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
-import {eventName, eventTeamsArray} from '../settings/settings.page'
+import {currentEvent, curYear, eventName, eventTeamsArray, setArray} from '../settings/settings.page'
 import * as $ from 'jquery'
-import {FirestoreService} from '../../services/data/firestore.service'
 
 @Component({
   selector: 'app-teams',
@@ -23,12 +22,21 @@ export class TeamsPage implements OnInit {
     this.setup(null)
   }
 
-  setup(ev = event) {
-    this.event = eventName
-    this.eventTeams = []
+  setup(ev) {
+    this.blueAllianceService.getEventTeams(currentEvent).subscribe(element => {
+      setArray([])
+      element.forEach(el => {
+        eventTeamsArray.push({ team: el, icon: this.blueAllianceService.getTeamIcon(el.team_number, 'image', curYear) })
+      })
+      setArray(eventTeamsArray.sort((a, b) => a.team.team_number - b.team.team_number))
 
-    eventTeamsArray.forEach(element => {
-      this.eventTeams.push(element)
+      this.event = eventName
+      this.eventTeams = []
+
+      eventTeamsArray.forEach(el => {
+          this.eventTeams.push(el)
+      })
+      this.setImages()
     })
     this.setImages()
   }

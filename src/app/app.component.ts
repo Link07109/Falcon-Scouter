@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import {NavController, Platform} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { THEMES, PRIMARY_MENU_PAGES, SECONDARY_MENU_PAGES } from './consts';
 import { timer } from 'rxjs';
-import {FirestoreService} from './services/data/firestore.service'
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,8 @@ export class AppComponent {
   currentThemeStyle = ''
   pages = PRIMARY_MENU_PAGES
   pages2 = SECONDARY_MENU_PAGES
-  showSplash = true
+  // showSplash = true
+  showSplash = false
   themeIcon
 
   constructor(
@@ -25,6 +25,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private theme: ThemeService,
     private statusBar: StatusBar,
+    private router: NavController
   ) {
     this.initializeApp()
   }
@@ -44,7 +45,7 @@ export class AppComponent {
       this.statusBar.styleDefault()
       this.splashScreen.hide()
 
-      timer(1500).subscribe(() => this.showSplash = false)
+      // timer(1500).subscribe(() => this.showSplash = false)
     })
 
     this.changeThemeHMMM('light')
@@ -55,7 +56,7 @@ export class AppComponent {
     })
 
     this.statusBar.overlaysWebView(false)
-    // this.router.navigateByUrl('/dash')
+    // this.router.goForward('/scouting')
   }
 
   changeThemeHMMM(name) {

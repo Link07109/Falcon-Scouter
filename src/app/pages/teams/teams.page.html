@@ -4,11 +4,10 @@
   <ion-searchbar text-start showCancelButton (ionInput)="getItems($event)" placeholder="Search for teams..."></ion-searchbar>
 </div>
 
-<ion-content padding>
+<ion-content>
   <ion-scroll scrollX="true">
-
     <ion-grid>
-      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/team-info/{{ team.team.team_number }}">
+      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/team-info/{{ team.team.team_number }}" style="border-bottom: 1px var(--ion-color-dark)">
         <ion-col>
           <ion-item>
             <ion-avatar slot="start">
@@ -22,6 +21,5 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </ion-scroll>
 </ion-content>

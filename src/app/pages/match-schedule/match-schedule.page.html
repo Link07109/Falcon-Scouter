@@ -7,7 +7,7 @@
   <ion-searchbar text-start showCancelButton (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>
 </div>
 
-<ion-content padding>
+<ion-content>
   <ion-card *ngFor="let match of filteredArray">
       <ion-grid class="noPadding">
         <ion-row class="noPadding">

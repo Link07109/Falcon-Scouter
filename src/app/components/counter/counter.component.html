@@ -2,7 +2,7 @@
     <ion-row>
         <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">{{ name }}</ion-label></ion-col>
         <ion-col size="2" text-center><ion-button (click)="remove()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" name="{{ name }}" value="{{ numberToChange }}"></ion-input></ion-col>
+        <ion-col size="2" text-center><ion-input (ionChange)="onChange($event)" text-center readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" name="{{ name }}" value="{{ numberToChange }}" [(ngModel)]="numberToChange"></ion-input></ion-col>
         <ion-col size="2" text-center><ion-button (click)="add()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
     </ion-row>
 </ion-grid>
