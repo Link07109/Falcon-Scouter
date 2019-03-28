@@ -35,18 +35,12 @@ export class ScoutingPage implements OnInit {
   // for testing
   // spreadsheetID = '1KbRLPUCyk51VJRRFVsv3k7XX__P1w4qW_ec2afk80W8'
 
-  // 2019 Wake Event
-  // spreadsheetID = '1_7OBGwGLoxHWSPlTTdQtneQRnVCnl9cNL5A4YTv9_uA'
+  // 2019 State Championship Event
+  spreadsheetID ='1BMlEPqBLSg6ofJy-q55S8mil2V6zktdp0EkOfEp34jM'
 
-  // 2019 Guilford Event
-  // spreadsheetID ='1d_vdwRXIKutgItSAvgrRxNBUjVp9HeoN1SHdylIgQxY'
-
-  // 2019 Asheville Event
-  spreadsheetID ='1PiujiszPRpMOcgIsVx64JudI3a2iSOZP04Z-aw1NwJ0'
-
-  dataaa = { 
-    hi: ''
-  }
+  // dataaa = {
+  //   hi: ''
+  // }
 
   formData = {
     scoutName: '',

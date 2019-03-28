@@ -209,38 +209,73 @@
                         </ion-row>
                     </ion-grid>
 
-                    <!-- Cargo - Rocket Lower, Cargo - Rocket Middle, Cargo - Rocker Upper
-                    Hatch - Ship, Hatch - Rocket Lower, Hatch - Rocket Middle, Hatch - Rocker Upper -->
                     <ion-grid>
-                        <!-- Cargo Left -->
+                        <!-- Cargo - Ship -->
                         <ion-row>
-                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Left</ion-label></ion-col>
-                            <ion-col size="2" text-center><ion-button (click)="removeCargoToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoLeft" name="cargoLeft" value="{{cargoInShip}}"></ion-input></ion-col>
-                            <ion-col size="2" text-center><ion-button (click)="addCargoToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
-                        </ion-row>
-
-                        <!-- Hatches Left -->
-                        <ion-row>
-                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatches - Left</ion-label></ion-col>
-                            <ion-col size="2" text-center><ion-button (click)="removeHatchToShip()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesLeft" name="hatchesLeft" value="{{hatchInShip}}"></ion-input></ion-col>
-                            <ion-col size="2" text-center><ion-button (click)="addHatchToShip()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
-                        </ion-row>
-
-                        <!-- Cargo Right -->
-                        <ion-row>
-                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Right</ion-label></ion-col>
+                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - Ship</ion-label></ion-col>
                             <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.cargoRight" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.cargoShip" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
                             <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
                         </ion-row>
 
-                        <!-- Hatches Right -->
+                      <!-- Hatch - Ship-->
+                      <ion-row>
+                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatch - Ship</ion-label></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchShip" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                      </ion-row>
+
+                      <br/>
+                      <!-- Cargo - Rocket 1-->
+                      <ion-row>
+                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - R1</ion-label></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.cargoRocket1" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                      </ion-row>
+
+                      <!-- Hatch- Rocket 1-->
+                      <ion-row>
+                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatch - R1</ion-label></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.hatchesRocket1" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                      </ion-row>
+
+                      <br/>
+
+                      <!-- Cargo - Rocket 2-->
+                      <ion-row>
+                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - R2</ion-label></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.cargoRocket2" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                      </ion-row>
+
+                      <!-- Hatch - Rocket 2-->
+                      <ion-row>
+                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatch - R2</ion-label></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.hatchesRocket2" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                      </ion-row>
+
+                      <br/>
+
+                      <!-- Cargo - Rocket 3-->
+                      <ion-row>
+                        <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Cargo - R3</ion-label></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="removeCargoToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
+                        <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.cargoRocket3" name="cargoRight" value="{{cargoInHRocket}}"></ion-input></ion-col>
+                        <ion-col size="2" text-center><ion-button (click)="addCargoToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
+                      </ion-row>
+
+                      <!-- Hatch - Rocket 3-->
                         <ion-row>
-                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatches - Right</ion-label></ion-col>
+                            <ion-col size="6"><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.3em">Hatch - R3</ion-label></ion-col>
                             <ion-col size="2" text-center><ion-button (click)="removeHatchToHRocket()"><ion-icon name="remove"></ion-icon></ion-button></ion-col>
-                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 850;" [(ngModel)]="formData.hatchesRight" name="hatchesRight" value="{{hatchInHRocket}}"></ion-input></ion-col>
+                            <ion-col size="2" text-center><ion-input readonly placeholder='0' style="font-size: 1.3em; font-weight: 800;" [(ngModel)]="formData.hatchesRocket3" name="hatchesRight" value="{{hatchInHRocket}}"></ion-input></ion-col>
                             <ion-col size="2" text-center><ion-button (click)="addHatchToHRocket()"><ion-icon name="add"></ion-icon></ion-button></ion-col>
                         </ion-row>
                     </ion-grid>
@@ -271,7 +306,8 @@
                             <ion-col col-2><ion-label style="margin-top: 0px; margin-bottom: 0px; font-size: 1.25em">Stability of Robot</ion-label></ion-col>
                             <ion-col col-2><ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Stability" [(ngModel)]="formData.stability" name="Stability">
                                 <ion-select-option role="option" id="ion-selopt-25" class="hydrated">Good</ion-select-option>
-                                <ion-select-option role="option" id="ion-selopt-26" class="hydrated">Bad</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-62" class="hydrated">Broke</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-65" class="hydrated">Disabled</ion-select-option>
                                 <input type="hidden" class="aux-input" name="Stability" value="Good">
                             </ion-select></ion-col>
                         </ion-row>
@@ -293,6 +329,8 @@
                                 <ion-select-option role="option" id="ion-selopt-30" class="hydrated">None</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-31" class="hydrated">Some</ion-select-option>
                                 <ion-select-option role="option" id="ion-selopt-32" class="hydrated">A lot</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-63" class="hydrated">Yellow Card</ion-select-option>
+                                <ion-select-option role="option" id="ion-selopt-44" class="hydrated">Red Card</ion-select-option>
                                 <input type="hidden" class="aux-input" name="Penalty" value="None">
                             </ion-select></ion-col>
                         </ion-row>
@@ -311,7 +349,7 @@
             </ion-card>
 
             <div text-center>
-                <ion-button expand="full" type="submit">Submit</ion-button>
+                <ion-button expand="full" type="submit" style="font-weight: 800;">Submit</ion-button>
             </div>
 
         </form>

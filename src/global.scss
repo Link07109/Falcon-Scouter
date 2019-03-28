@@ -3,7 +3,6 @@
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
 @import "~@ionic/angular/css/colors.css";
-
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";
@@ -48,8 +47,8 @@ h2,
 .sc-ion-card-md-s,
 ion-icon,
 .button, .button-md, .button-solid, .button-solid-md
-// .hydrated
- {
+  // .hydrated
+{
   color: var(--ion-color-dark) !important;
 }
 
@@ -64,7 +63,6 @@ ion-searchbar {
 .searchbar-input, .sc-ion-searchbar-md {
   color: var(--ion-color-dark) !important;
 }
-
 
 ion-toolbar {
   --background: var(--ion-color-light);
