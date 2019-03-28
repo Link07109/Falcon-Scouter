@@ -10,7 +10,7 @@ import * as $ from 'jquery';
 export class BlueAllianceService {
 
   baseUrl = 'https://www.thebluealliance.com/api/v3'
-  sheetsUrl = 'https://script.google.com/macros/s/AKfycbzxu_K5x1WRH6EpX8_I6VUWUgQ4jVVBjHZQWTGL8EPB2MGWUQlU/exec?test=TEST HERE'
+  sheetsUrl = 'https://script.google.com/macros/s/AKfycbzxu_K5x1WRH6EpX8_I6VUWUgQ4jVVBjHZQWTGL8EPB2MGWUQlU/exec'
   cors_api_url = 'https://cors-anywhere.herokuapp.com/'
 
   constructor(private http: Http) { }

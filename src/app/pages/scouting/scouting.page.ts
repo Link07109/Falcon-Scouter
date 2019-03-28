@@ -5,7 +5,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import { AlertInput } from '@ionic/core';
 import { currentEvent } from '../settings/settings.page';
-import { Network } from '@ionic-native/network/ngx';
 import { delay } from 'q';
 
 @Component({
@@ -25,22 +24,26 @@ export class ScoutingPage implements OnInit {
 
   hasChosenTemplate = false
   useTemplate = false
-  mainEditMode = false
+  // mainEditMode = false
   toggleSlide = false
 
   cargoInShip = 0
-  cargoInHRocket = 0
-  hatchInShip = 0
-  hatchInHRocket = 0
+  hatchesInShip = 0
+
+  cargoInR1 = 0
+  hatchesInR1 = 0
+
+  cargoInR2 = 0
+  hatchesInR2 = 0
+
+  cargoInR3 = 0
+  hatchesInR3 = 0
+
   // for testing
   // spreadsheetID = '1KbRLPUCyk51VJRRFVsv3k7XX__P1w4qW_ec2afk80W8'
 
   // 2019 State Championship Event
   spreadsheetID ='1BMlEPqBLSg6ofJy-q55S8mil2V6zktdp0EkOfEp34jM'
-
-  // dataaa = {
-  //   hi: ''
-  // }
 
   formData = {
     scoutName: '',
@@ -52,10 +55,14 @@ export class ScoutingPage implements OnInit {
     result: 'None',
     interference: 'Neither',
     playsDefense: false,
-    cargoLeft: 0,
-    hatchesLeft: 0,
-    cargoRight: 0,
-    hatchesRight: 0,
+    cargoInShip: 0,
+    hatchesInShip: 0,
+    cargoInR1: 0,
+    hatchesInR1: 0,
+    cargoInR2: 0,
+    hatchesInR2: 0,
+    cargoInR3: 0,
+    hatchesInR3: 0,
     climb: 'Level 1',
     stability: 'Good',
     driver: 'Good',
@@ -73,79 +80,62 @@ export class ScoutingPage implements OnInit {
     private firestoreService: FirestoreService,
     private blueAllianceService: BlueAllianceService,
     public alertController: AlertController,
-    private network: Network,
     public toast: ToastController
-  ) { 
-    // this.network.onConnect().subscribe(() => {
-    //   this.showToast()
-    // })
-
-    // this.network.onDisconnect().subscribe(() => {
-    //   this.showToast('Network Disconnected')
-    // })
-  }
-
-  createTestComponent(componentType, name) {
-    // const elem = ViewContainerRef.createComponent()(componentType)
-    // console.log(elem)
-
-    // elem.setAttribute('[name]', name)
-
-
-    // if (elem.childNodes.length > 0) {
-    //   document.getElementById('testing').appendChild(elem)
-    //   this.items.push(elem)
-    //   return elem.childNodes[0]
-    // }
-  }
-
-  async showToast(message: string = 'Network Connected', duration: number = 3000) {
-    const toat = await this.toast.create({
-      message: message,
-      duration: duration
-    })
-    await toat.present()
-  }
+  ) { }
 
   addCargoToShip() { this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1 }
   removeCargoToShip() { this.cargoInShip -= (this.cargoInShip <= 0) ? 0 : 1 }
 
-  addCargoToHRocket() { this.cargoInHRocket += (this.cargoInHRocket >= 12) ? 0 : 1 }
-  removeCargoToHRocket() { this.cargoInHRocket -= (this.cargoInHRocket <= 0) ? 0 : 1 }
+  addHatchToShip() { this.hatchesInShip += (this.hatchesInShip >= 8) ? 0 : 1 }
+  removeHatchToShip() { this.hatchesInShip -= (this.hatchesInShip <= 0) ? 0 : 1 }
 
 
-  addHatchToShip() { this.hatchInShip += (this.hatchInShip >= 8) ? 0 : 1 }
-  removeHatchToShip() { this.hatchInShip -= (this.hatchInShip <= 0) ? 0 : 1 }
+  addCargoToR1() { this.cargoInR1 += (this.cargoInR1 >= 12) ? 0 : 1 }
+  removeCargoToR1() { this.cargoInR1 -= (this.cargoInR1 <= 0) ? 0 : 1 }
 
-  addHatchToHRocket() { this.hatchInHRocket += (this.hatchInHRocket >= 12) ? 0 : 1 }
-  removeHatchToHRocket() { this.hatchInHRocket -= (this.hatchInHRocket <= 0) ? 0 : 1 }
+  addHatchToR1() { this.hatchesInR1 += (this.hatchesInR1 >= 12) ? 0 : 1 }
+  removeHatchToR1() { this.hatchesInR1 -= (this.hatchesInR1 <= 0) ? 0 : 1 }
+
+
+  addCargoToR2() { this.cargoInR2 += (this.cargoInR2 >= 12) ? 0 : 1 }
+  removeCargoToR2() { this.cargoInR2 -= (this.cargoInR2 <= 0) ? 0 : 1 }
+
+  addHatchToR2() { this.hatchesInR2 += (this.hatchesInR2 >= 12) ? 0 : 1 }
+  removeHatchToR2() { this.hatchesInR2 -= (this.hatchesInR2 <= 0) ? 0 : 1 }
+
+
+  addCargoToR3() { this.cargoInR3 += (this.cargoInR3 >= 12) ? 0 : 1 }
+  removeCargoToR3() { this.cargoInR3 -= (this.cargoInR3 <= 0) ? 0 : 1 }
+
+  addHatchToR3() { this.hatchesInR3 += (this.hatchesInR3 >= 12) ? 0 : 1 }
+  removeHatchToR3() { this.hatchesInR3 -= (this.hatchesInR3 <= 0) ? 0 : 1 }
 
   async delay(ms: number) { return new Promise(resolve => setTimeout(resolve, ms)) }
 
-  async toggleEditMode() {
-    if (!this.toggleSlide) { // OPEN
-      for (let i = 0; i < this.editSlideItems.length; i++) {
-        const slideItem = this.editSlideItems[i]
-        const scaleItem = this.editScaleItems[i]
-        slideItem.classList.remove('left')
-        slideItem.classList.add('right')
-        scaleItem.classList.remove('stretch')
-        scaleItem.classList.add('compress')
-        await this.delay(100)
-      }
-    } else { // CLOSE
-      for (let i = this.editSlideItems.length - 1; i > -1; i--) {
-        const slideItem = this.editSlideItems[i]
-        const scaleItem = this.editScaleItems[i]
-        slideItem.classList.remove('right')
-        slideItem.classList.add('left')
-        scaleItem.classList.remove('compress')
-        scaleItem.classList.add('stretch')
-        await this.delay(100)
-      }
-    }
-    this.toggleSlide = !this.toggleSlide
-  }
+  // async toggleEditMode() {
+  //   if (!this.toggleSlide) { // OPEN
+  //     for (let i = 0; i < this.editSlideItems.length; i++) {
+  //       const slideItem = this.editSlideItems[i]
+  //       const scaleItem = this.editScaleItems[i]
+  //       slideItem.classList.remove('left')
+  //       slideItem.classList.add('right')
+  //       scaleItem.classList.remove('stretch')
+  //       scaleItem.classList.add('compress')
+  //       await this.delay(100)
+  //     }
+  //   } else { // CLOSE
+  //     for (let i = this.editSlideItems.length - 1; i > -1; i--) {
+  //       const slideItem = this.editSlideItems[i]
+  //       const scaleItem = this.editScaleItems[i]
+  //       slideItem.classList.remove('right')
+  //       slideItem.classList.add('left')
+  //       scaleItem.classList.remove('compress')
+  //       scaleItem.classList.add('stretch')
+  //       await this.delay(100)
+  //     }
+  //   }
+  //   this.toggleSlide = !this.toggleSlide
+  // }
 
   async slideOnLoad() {
     await delay(1000)
@@ -192,10 +182,14 @@ export class ScoutingPage implements OnInit {
   }
 
   submitData() {
-    this.formData.cargoLeft = this.cargoInShip
-    this.formData.hatchesLeft = this.hatchInShip
-    this.formData.cargoRight = this.cargoInHRocket
-    this.formData.hatchesRight = this.hatchInHRocket
+    this.formData.cargoInShip = this.cargoInShip
+    this.formData.hatchesInShip = this.hatchesInShip
+    this.formData.cargoInR1 = this.cargoInR1
+    this.formData.hatchesInR1 = this.hatchesInR1
+    this.formData.cargoInR2 = this.cargoInR2
+    this.formData.hatchesInR2 = this.hatchesInR2
+    this.formData.cargoInR3 = this.cargoInR3
+    this.formData.hatchesInR3 = this.hatchesInR3
 
     const stringData = JSON.stringify(this.formData)
     console.log(stringData)
@@ -228,13 +222,13 @@ export class ScoutingPage implements OnInit {
     this.inputAlert('Save Template', template)
   }
 
-  deleteTemplate(template) {
-    this.firestoreService.deleteScoutingTemplate(template.name).then(() => {
-      this.setupArray()
-
-      this.presentAlert('Success!', `Deleted Template "${template.name}".`)
-    })
-  }
+  // deleteTemplate(template) {
+  //   this.firestoreService.deleteScoutingTemplate(template.name).then(() => {
+  //     this.setupArray()
+  //
+  //     this.presentAlert('Success!', `Deleted Template "${template.name}".`)
+  //   })
+  // }
 
   createElement(html) {
     const elem = document.createElement('div') // ion-grid
@@ -260,6 +254,7 @@ export class ScoutingPage implements OnInit {
 
   async createComponent(componentName, html = '') {
     const alert = await this.alertController.create({
+      mode: 'ios',
       header: `Create new ${componentName}`,
       cssClass: `alertCSS`,
       enableBackdropDismiss: false,
@@ -299,6 +294,7 @@ export class ScoutingPage implements OnInit {
 
   async questionSelectorAlert() {
     const alert = await this.alertController.create({
+      mode: 'ios',
       header: 'Number of options',
       cssClass: `alertCSS`,
       enableBackdropDismiss: false,
@@ -349,6 +345,7 @@ export class ScoutingPage implements OnInit {
     }
 
     const alert = await this.alertController.create({
+      mode: 'ios',
       header: 'Create Selector',
       cssClass: `alertCSS`,
       enableBackdropDismiss: false,
@@ -385,6 +382,7 @@ export class ScoutingPage implements OnInit {
 
   async inputAlert(title: string, template) {
     const alert = await this.alertController.create({
+      mode: 'ios',
       header: title,
       cssClass: `alertCSS`,
       enableBackdropDismiss: false,
@@ -418,6 +416,7 @@ export class ScoutingPage implements OnInit {
 
   async presentAlert(title: string, message?: string) {
     const alert = await this.alertController.create({
+      mode: 'ios',
       header: title,
       message: message,
       cssClass: `alertCSS`,
@@ -428,9 +427,13 @@ export class ScoutingPage implements OnInit {
           handler: () => {
             document.forms[0].reset()
             this.cargoInShip = 0
-            this.cargoInHRocket = 0
-            this.hatchInShip = 0
-            this.hatchInHRocket = 0
+            this.hatchesInShip = 0
+            this.cargoInR1 = 0
+            this.hatchesInR1 = 0
+            this.cargoInR2 = 0
+            this.hatchesInR2 = 0
+            this.cargoInR3 = 0
+            this.hatchesInR3 = 0
 
             this.formData = {
               scoutName: '',
@@ -442,10 +445,14 @@ export class ScoutingPage implements OnInit {
               result: 'None',
               interference: 'Neither',
               playsDefense: false,
-              cargoLeft: 0,
-              hatchesLeft: 0,
-              cargoRight: 0,
-              hatchesRight: 0,
+              cargoInShip: 0,
+              hatchesInShip: 0,
+              cargoInR1: 0,
+              hatchesInR1: 0,
+              cargoInR2: 0,
+              hatchesInR2: 0,
+              cargoInR3: 0,
+              hatchesInR3: 0,
               climb: 'Level 1',
               stability: 'Good',
               driver: 'Good',
