@@ -257,7 +257,6 @@ export class ScoutingPage implements OnInit {
       mode: 'ios',
       header: `Create new ${componentName}`,
       cssClass: `alertCSS`,
-      enableBackdropDismiss: false,
       inputs: [
         {
           name: 'labelName',
@@ -297,7 +296,6 @@ export class ScoutingPage implements OnInit {
       mode: 'ios',
       header: 'Number of options',
       cssClass: `alertCSS`,
-      enableBackdropDismiss: false,
       inputs: [
         {
           name: 'optionNumber',
@@ -348,7 +346,6 @@ export class ScoutingPage implements OnInit {
       mode: 'ios',
       header: 'Create Selector',
       cssClass: `alertCSS`,
-      enableBackdropDismiss: false,
       inputs: generatedNumberOfInputs,
       buttons: [
         {
@@ -385,7 +382,6 @@ export class ScoutingPage implements OnInit {
       mode: 'ios',
       header: title,
       cssClass: `alertCSS`,
-      enableBackdropDismiss: false,
       inputs: [
         {
           name: 'Template Name',
@@ -420,7 +416,6 @@ export class ScoutingPage implements OnInit {
       header: title,
       message: message,
       cssClass: `alertCSS`,
-      enableBackdropDismiss: false,
       buttons: [
         {
           text: 'Ok',

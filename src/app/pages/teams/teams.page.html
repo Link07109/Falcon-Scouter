@@ -1,25 +1,23 @@
-<app-custom-toolbar [title]="'Teams ' + '(' + event + ')'" [icon]="'refresh'" (notify)="setup($event)"></app-custom-toolbar>
+<app-custom-toolbar [title]="'Teams ' + '(' + event + ')'" [startIcon]="'settings'" (startClicked)="settings()" [endIcon]="'refresh'" (endClicked)="setup($event)"></app-custom-toolbar>
 
 <div style="background-color: var(--ion-color-primary)">
   <ion-searchbar text-start showCancelButton (ionInput)="getItems($event)" placeholder="Search for teams..."></ion-searchbar>
 </div>
 
-<ion-content>
-  <ion-scroll scrollX="true">
-    <ion-grid>
-      <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/team-info/{{ team.team.team_number }}" style="border-bottom: 1px var(--ion-color-dark)">
-        <ion-col>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img id="{{ team.team.team_number }}">
-            </ion-avatar>
-            <ion-label>
-              <h2>{{ team.team.team_number }}</h2>
-              <p>{{ team.team.nickname }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-scroll>
+<ion-content scrollX="true">
+  <ion-grid>
+    <ion-row nowrap *ngFor="let team of filteredArray" routerLink="/team-info/{{ team.team.team_number }}" style="border-bottom: 1px var(--ion-color-dark)">
+      <ion-col>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img id="{{ team.team.team_number }}">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ team.team.team_number }}</h2>
+            <p>{{ team.team.nickname }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

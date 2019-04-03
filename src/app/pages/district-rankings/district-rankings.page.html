@@ -1,4 +1,4 @@
-<app-custom-toolbar [title]="'District Rankings ' + '(' + district + ')'" [icon]="'refresh'" (notify)="refreshList()"></app-custom-toolbar>
+<app-custom-toolbar [title]="'District Rankings ' + '(' + district + ')'" [startIcon]="'settings'" (startClicked)="settings()" [endIcon]="'refresh'" (endClicked)="refreshList()"></app-custom-toolbar>
 
 <ion-content>
   <ion-item *ngFor="let team of rankingArray" routerLink="/team-info/{{ team[0].team_key.substring(3) }}" style="margin-left: 0; border-bottom: 1px solid var(--ion-color-primary)">
@@ -6,7 +6,7 @@
       <ion-grid>
         <ion-row>
           <ion-col style="max-width: 12vh !important">
-            <ion-chip color="secondary" text-center style="width: 100%; height: 100% !important; margin-left: 0; padding: 0 0 0 0">
+            <ion-chip color="secondary" text-center style="width: 50%; height: 100% !important; margin-left: 30; padding: 0 0 0 0">
               <ion-label color="light" style="font-weight: 600; font-size: 10pt">
                 {{ team[0].rank + '. ' }}
               </ion-label>

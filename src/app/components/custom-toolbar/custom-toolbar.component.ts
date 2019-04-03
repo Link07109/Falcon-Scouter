@@ -15,17 +15,31 @@ export class CustomToolbarComponent {
   title: string
 
   @Input()
-  icon = 'more'
+  startIcon = 'more'
+
+  @Input()
+  endIcon = 'more'
 
   @Output()
-  notify = new EventEmitter()
+  startClicked = new EventEmitter()
 
-  emitClick() {
-    if (this.icon == 'more') {
+  @Output()
+  endClicked = new EventEmitter()
+
+  startClick() {
+    if (this.startIcon == 'more') {
       this.presentPopover(event)
       return
     }
-    this.notify.emit()
+    this.startClicked.emit()
+  }
+
+  endClick() {
+    if (this.endIcon == 'more') {
+      this.presentPopover(event)
+      return
+    }
+    this.endClicked.emit()
   }
 
   async presentPopover(ev: any) {
