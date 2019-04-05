@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {currentEvent, eventName} from '../settings/settings.page'
+import {currentEvent, eventName, AppComponent} from '../../app.component'
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 
 @Component({
@@ -13,7 +13,8 @@ export class EventRankingsPage implements OnInit {
   rankingArray = []
 
   constructor(
-    private blueAllianceService: BlueAllianceService
+    private blueAllianceService: BlueAllianceService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {

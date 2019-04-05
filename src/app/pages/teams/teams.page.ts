@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
-import {currentEvent, curYear, eventName, eventTeamsArray, setArray} from '../settings/settings.page'
+import {currentEvent, curYear, eventName, eventTeamsArray, setArray, AppComponent} from '../../app.component'
 import * as $ from 'jquery'
 
 @Component({
@@ -16,6 +16,7 @@ export class TeamsPage implements OnInit {
 
   constructor(
     public blueAllianceService: BlueAllianceService,
+    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
