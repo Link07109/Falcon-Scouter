@@ -4,42 +4,15 @@
   </div>
 
   <ion-tabs>
+
     <ion-tab-bar slot="bottom">
       <ion-tab-button *ngFor="let page of pages" routerLink="{{ page.link }}">
         <ion-icon name="{{ page.icon }}"></ion-icon>
         <ion-label>{{ page.title }}</ion-label>
       </ion-tab-button>
     </ion-tab-bar>
+  
   </ion-tabs>
-
-  <ion-card style="left: 5% !important; right: 5% !important;" class="settings">
-    <h2 text-center>Settings</h2>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item (click)="toggleThemeStyle()">
-            <ion-icon name="{{ themeIcon }}" style="margin-right: 10%"></ion-icon>
-            <b>Change Theme</b>
-          </ion-item>
-        </ion-col> 
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Current Competition:</ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-input text-start id="compInput" (ionInput)="changeEvent($event)" placeholder="Competition ID"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-toolbar style="position: absolute; bottom: 0;" text-center>
-      <ion-button (click)="saveChanges()">Save Changes</ion-button>
-    </ion-toolbar>
-  </ion-card>
 
   <!-- <ion-split-pane>
     <ion-menu type="overlay">

@@ -81,63 +81,10 @@ ion-card {
 }
 
 .loadSlide.load {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
   left: 0 !important;
-}
-
-.settings {
-  position: fixed;
-  top: 130% !important;
-  bottom: -100% !important;
-}
-
-.settings.open {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
-  top: 10% !important;
-  bottom: 10% !important;
-}
-
-.settings.close {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
-  top: 130% !important;
-  bottom: -100% !important;
-}
-
-.options {
-  position: fixed;
-  left: 5% !important;
-  right: 5% !important;
-  top: 130% !important;
-  bottom: -100% !important;
-}
-
-.options.show {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
-  top: 10% !important;
-  bottom: 10% !important;
-}
-
-.options.hidden {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
-  top: 130% !important;
-  bottom: -100% !important;
-}
-
-.options.left {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
-  left: -100% !important;
-  right: 130% !important;
-}
-
-.options.right {
-  -webkit-transition: 0.5s; -moz-transition: 0.5s; -ms-transition: 0.5s; -o-transition: 0.5s; transition: 0.5s;
-  left: 130% !important;
-  right: -100% !important;
-}
-
-.options.reset {
-  left: 5% !important;
-  right: 5% !important;
-  top: 130% !important;
-  bottom: -100% !important;
 }

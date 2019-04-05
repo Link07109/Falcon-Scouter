@@ -1,4 +1,4 @@
-<app-custom-toolbar [title]="'Schedule ' + '(' + event + ')'" [startIcon]="'settings'" (startClicked)="this.appComponent.toggleSettings()" [endIcon]="'refresh'" (endClicked)="refresh($event)"></app-custom-toolbar>
+<app-custom-toolbar [title]="'Schedule ' + '(' + event + ')'" [startIcon]="'settings'" (startClicked)="settings()" [endIcon]="'refresh'" (endClicked)="refresh($event)"></app-custom-toolbar>
 
 <div style="background-color: var(--ion-color-primary)">
   <ion-searchbar text-start showCancelButton (ionInput)="getItems($event)" placeholder="Search for match..."></ion-searchbar>

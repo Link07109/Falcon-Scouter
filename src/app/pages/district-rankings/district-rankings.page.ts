@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
-import { AppComponent, currentDistrict, districtName } from '../../app.component'
+import {currentDistrict, districtName} from '../settings/settings.page'
 
 @Component({
   selector: 'app-district-rankings',
@@ -13,8 +13,7 @@ export class DistrictRankingsPage implements OnInit {
   district = districtName
 
   constructor(
-    private blueAllianceService: BlueAllianceService,
-    private appComponent: AppComponent
+    private blueAllianceService: BlueAllianceService
   ) { }
 
   ngOnInit() {

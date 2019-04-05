@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
-import {currentEvent, eventName, AppComponent} from '../../app.component'
+import {currentEvent, eventName} from '../settings/settings.page'
 
 @Component({
   selector: 'app-dash',
@@ -17,7 +17,6 @@ export class MatchSchedulePage implements OnInit {
 
   constructor(
     private blueAllianceService: BlueAllianceService,
-    private appComponent: AppComponent
   ) { }
 
   ngOnInit() {
