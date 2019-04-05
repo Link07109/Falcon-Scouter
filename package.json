@@ -1,7 +1,7 @@
 {
   "name": "falcon_scouter",
   "version": "0.0.1",
-  "author": "Ivan Valadez",
+  "author": "Ivan Valadez and Luke Taylor",
   "homepage": "https://github.com/Link07109/FalconScoutApp",
   "scripts": {
     "ng": "ng",
@@ -51,6 +51,7 @@
     "igniteui-angular": "^7.0.0",
     "igniteui-angular-charts": "^6.1.1",
     "igniteui-angular-core": "^6.1.1",
+    "ionic-native": "^2.9.0",
     "jquery": "^3.3.1",
     "node-sass": "^4.11.0",
     "rxjs": "^6.4.0",

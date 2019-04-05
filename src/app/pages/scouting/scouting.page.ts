@@ -4,7 +4,7 @@ import { FirestoreService } from '../../services/data/firestore.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BlueAllianceService } from '../../services/data/blue-alliance.service';
 import { AlertInput } from '@ionic/core';
-import { currentEvent } from '../settings/settings.page';
+import { currentEvent, AppComponent } from '../../app.component';
 import { delay } from 'q';
 
 @Component({
@@ -80,7 +80,8 @@ export class ScoutingPage implements OnInit {
     private firestoreService: FirestoreService,
     private blueAllianceService: BlueAllianceService,
     public alertController: AlertController,
-    public toast: ToastController
+    public toast: ToastController,
+    public appComponent: AppComponent
   ) { }
 
   addCargoToShip() { this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1 }
