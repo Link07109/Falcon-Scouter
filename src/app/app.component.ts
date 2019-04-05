@@ -4,7 +4,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
 import { THEMES, PRIMARY_MENU_PAGES, SECONDARY_MENU_PAGES } from './consts';
-import { timer } from 'rxjs';
 import { BlueAllianceService } from './services/data/blue-alliance.service';
 
 export let curYear = 2019
@@ -12,12 +11,12 @@ export let curYear = 2019
 export let currentDistrict = '2019fnc'
 export let districtName = 'FIRST North Carolina'
 
-export let currentEvent = '2019ncash'
-export let eventName = 'UNC Asheville'
+export let currentEvent = '2019nccmp'
+export let eventName = 'FIRST North Carolina State Championship'
 
 export let eventTeamsArray = []
 export function setArray(someArray: Array<any>) {
-    eventTeamsArray = someArray
+  eventTeamsArray = someArray
 }
 
 @Component({
@@ -35,7 +34,7 @@ export class AppComponent {
   themeIcon
 
   settingsToggle = false
-  settingsItem = document.getElementsByClassName("settings")
+  settingsItem = document.getElementsByClassName('settings')
 
   newEvent: string
 
@@ -47,6 +46,7 @@ export class AppComponent {
     private router: NavController,
     private blueAllianceService: BlueAllianceService
   ) {
+    this.changeThemeHMMM('light')
     this.initializeApp()
   }
 
@@ -119,10 +119,8 @@ export class AppComponent {
       this.statusBar.styleDefault()
       this.splashScreen.hide()
 
-      // timer(1500).subscribe(() => this.showSplash = false)
     })
 
-    this.changeThemeHMMM('light')
     this.theme.getTheme().then((cssText: string) => {
       this.currentThemeStyle = (cssText.includes('#6e4552')) ? 'light' : 'dark'
       this.changeThemeHMMM(this.currentThemeStyle)
@@ -130,7 +128,7 @@ export class AppComponent {
     })
 
     this.statusBar.overlaysWebView(false)
-    // this.router.goForward('/scouting')
+    this.router.navigateForward('/scouting')
   }
 
   changeThemeHMMM(name) {
