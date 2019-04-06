@@ -6,8 +6,8 @@ export let curYear = 2019
 export let currentDistrict = '2019fnc'
 export let districtName = 'FIRST North Carolina'
 
-export let currentEvent = '2019ncash'
-export let eventName = 'UNC Asheville'
+export let currentEvent = '2019nccmp'
+export let eventName = 'FIRST North Carolina State Championship'
 
 export let eventTeamsArray = []
 export function setArray(someArray: Array<any>) {

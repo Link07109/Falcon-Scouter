@@ -27,17 +27,14 @@ export class ScoutingPage implements OnInit {
   // mainEditMode = false
   toggleSlide = false
 
-  cargoInShip = 0
-  hatchesInShip = 0
+  cargoInL1 = 0
+  hatchesInL1 = 0
 
-  cargoInR1 = 0
-  hatchesInR1 = 0
+  cargoInL2 = 0
+  hatchesInL2 = 0
 
-  cargoInR2 = 0
-  hatchesInR2 = 0
-
-  cargoInR3 = 0
-  hatchesInR3 = 0
+  cargoInL3 = 0
+  hatchesInL3 = 0
 
   // for testing
   // spreadsheetID = '1KbRLPUCyk51VJRRFVsv3k7XX__P1w4qW_ec2afk80W8'
@@ -54,18 +51,14 @@ export class ScoutingPage implements OnInit {
     HABLevel: '1',
     result: 'None',
     interference: 'Neither',
-    playsDefense: false,
-    cargoInShip: 0,
-    hatchesInShip: 0,
-    cargoInR1: 0,
-    hatchesInR1: 0,
-    cargoInR2: 0,
-    hatchesInR2: 0,
-    cargoInR3: 0,
-    hatchesInR3: 0,
+    defense: 'None',
+    cargoInL1: 0,
+    hatchesInL1: 0,
+    cargoInL2: 0,
+    hatchesInL2: 0,
+    cargoInL3: 0,
+    hatchesInL3: 0,
     climb: 'Level 1',
-    stability: 'Good',
-    driver: 'Good',
     penalties: 'None',
     comments: '',
     id: this.spreadsheetID,
@@ -84,32 +77,25 @@ export class ScoutingPage implements OnInit {
     public appComponent: AppComponent
   ) { }
 
-  addCargoToShip() { this.cargoInShip += (this.cargoInShip >= 8) ? 0 : 1 }
-  removeCargoToShip() { this.cargoInShip -= (this.cargoInShip <= 0) ? 0 : 1 }
+  addCargoToL1() { this.cargoInL1 += (this.cargoInL1 >= 12) ? 0 : 1 }
+  removeCargoToL1() { this.cargoInL1 -= (this.cargoInL1 <= 0) ? 0 : 1 }
 
-  addHatchToShip() { this.hatchesInShip += (this.hatchesInShip >= 8) ? 0 : 1 }
-  removeHatchToShip() { this.hatchesInShip -= (this.hatchesInShip <= 0) ? 0 : 1 }
-
-
-  addCargoToR1() { this.cargoInR1 += (this.cargoInR1 >= 12) ? 0 : 1 }
-  removeCargoToR1() { this.cargoInR1 -= (this.cargoInR1 <= 0) ? 0 : 1 }
-
-  addHatchToR1() { this.hatchesInR1 += (this.hatchesInR1 >= 12) ? 0 : 1 }
-  removeHatchToR1() { this.hatchesInR1 -= (this.hatchesInR1 <= 0) ? 0 : 1 }
+  addHatchToL1() { this.hatchesInL1 += (this.hatchesInL1 >= 12) ? 0 : 1 }
+  removeHatchToL1() { this.hatchesInL1 -= (this.hatchesInL1 <= 0) ? 0 : 1 }
 
 
-  addCargoToR2() { this.cargoInR2 += (this.cargoInR2 >= 12) ? 0 : 1 }
-  removeCargoToR2() { this.cargoInR2 -= (this.cargoInR2 <= 0) ? 0 : 1 }
+  addCargoToL2() { this.cargoInL2 += (this.cargoInL2 >= 12) ? 0 : 1 }
+  removeCargoToL2() { this.cargoInL2 -= (this.cargoInL2 <= 0) ? 0 : 1 }
 
-  addHatchToR2() { this.hatchesInR2 += (this.hatchesInR2 >= 12) ? 0 : 1 }
-  removeHatchToR2() { this.hatchesInR2 -= (this.hatchesInR2 <= 0) ? 0 : 1 }
+  addHatchToL2() { this.hatchesInL2 += (this.hatchesInL2 >= 12) ? 0 : 1 }
+  removeHatchToL2() { this.hatchesInL2 -= (this.hatchesInL2 <= 0) ? 0 : 1 }
 
 
-  addCargoToR3() { this.cargoInR3 += (this.cargoInR3 >= 12) ? 0 : 1 }
-  removeCargoToR3() { this.cargoInR3 -= (this.cargoInR3 <= 0) ? 0 : 1 }
+  addCargoToL3() { this.cargoInL3 += (this.cargoInL3 >= 12) ? 0 : 1 }
+  removeCargoToL3() { this.cargoInL3 -= (this.cargoInL3 <= 0) ? 0 : 1 }
 
-  addHatchToR3() { this.hatchesInR3 += (this.hatchesInR3 >= 12) ? 0 : 1 }
-  removeHatchToR3() { this.hatchesInR3 -= (this.hatchesInR3 <= 0) ? 0 : 1 }
+  addHatchToL3() { this.hatchesInL3 += (this.hatchesInL3 >= 12) ? 0 : 1 }
+  removeHatchToL3() { this.hatchesInL3 -= (this.hatchesInL3 <= 0) ? 0 : 1 }
 
   async delay(ms: number) { return new Promise(resolve => setTimeout(resolve, ms)) }
 
@@ -183,14 +169,12 @@ export class ScoutingPage implements OnInit {
   }
 
   submitData() {
-    this.formData.cargoInShip = this.cargoInShip
-    this.formData.hatchesInShip = this.hatchesInShip
-    this.formData.cargoInR1 = this.cargoInR1
-    this.formData.hatchesInR1 = this.hatchesInR1
-    this.formData.cargoInR2 = this.cargoInR2
-    this.formData.hatchesInR2 = this.hatchesInR2
-    this.formData.cargoInR3 = this.cargoInR3
-    this.formData.hatchesInR3 = this.hatchesInR3
+    this.formData.cargoInL1 = this.cargoInL1
+    this.formData.hatchesInL1 = this.hatchesInL1
+    this.formData.cargoInL2 = this.cargoInL2
+    this.formData.hatchesInL2 = this.hatchesInL2
+    this.formData.cargoInL3 = this.cargoInL3
+    this.formData.hatchesInL3 = this.hatchesInL3
 
     const stringData = JSON.stringify(this.formData)
     console.log(stringData)
@@ -422,14 +406,12 @@ export class ScoutingPage implements OnInit {
           text: 'Ok',
           handler: () => {
             document.forms[0].reset()
-            this.cargoInShip = 0
-            this.hatchesInShip = 0
-            this.cargoInR1 = 0
-            this.hatchesInR1 = 0
-            this.cargoInR2 = 0
-            this.hatchesInR2 = 0
-            this.cargoInR3 = 0
-            this.hatchesInR3 = 0
+            this.cargoInL1 = 0
+            this.hatchesInL1 = 0
+            this.cargoInL2 = 0
+            this.hatchesInL2 = 0
+            this.cargoInL3 = 0
+            this.hatchesInL3 = 0
 
             this.formData = {
               scoutName: '',
@@ -440,18 +422,14 @@ export class ScoutingPage implements OnInit {
               HABLevel: '1',
               result: 'None',
               interference: 'Neither',
-              playsDefense: false,
-              cargoInShip: 0,
-              hatchesInShip: 0,
-              cargoInR1: 0,
-              hatchesInR1: 0,
-              cargoInR2: 0,
-              hatchesInR2: 0,
-              cargoInR3: 0,
-              hatchesInR3: 0,
+              defense: 'None',
+              cargoInL1: 0,
+              hatchesInL1: 0,
+              cargoInL2: 0,
+              hatchesInL2: 0,
+              cargoInL3: 0,
+              hatchesInL3: 0,
               climb: 'Level 1',
-              stability: 'Good',
-              driver: 'Good',
               penalties: 'None',
               comments: '',
               id: this.spreadsheetID,

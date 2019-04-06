@@ -17,7 +17,7 @@ export class TeamInfoPage implements OnInit {
   teamNumber: string
   teamNUMBER: number
   teamName: string
-  teamRanking
+  teamRanking = 'N/A'
 
   showStats = false
   showMatches = true
@@ -64,7 +64,9 @@ export class TeamInfoPage implements OnInit {
     })
 
     this.blueAllianceService.getEventStatusOfTeam(teamKey, currentEvent).subscribe(el => {
-      this.teamRanking = el.qual.ranking.rank
+      if (el.qual != null) {
+        this.teamRanking = el.qual.ranking.rank
+      }
     })
 
     this.matches = this.blueAllianceService.getTeamMatches(teamKey, currentEvent)
