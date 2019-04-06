@@ -16,7 +16,7 @@ export class TeamsPage implements OnInit {
 
   constructor(
     public blueAllianceService: BlueAllianceService,
-    private appComponent: AppComponent
+    public appComponent: AppComponent
   ) { }
 
   ngOnInit() {

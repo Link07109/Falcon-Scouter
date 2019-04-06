@@ -14,7 +14,7 @@ export class EventRankingsPage implements OnInit {
 
   constructor(
     private blueAllianceService: BlueAllianceService,
-    private appComponent: AppComponent
+    public appComponent: AppComponent
   ) { }
 
   ngOnInit() {
