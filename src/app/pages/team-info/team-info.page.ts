@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute} from '@angular/router'
 import {FirestoreService} from '../../services/data/firestore.service'
 import {STAT_NAMES} from '../../consts'
-import {currentEvent, curYear, eventName} from '../settings/settings.page'
+import {currentEvent, curYear, AppComponent} from '../../app.component'
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 import * as $ from 'jquery'
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-matches',
@@ -17,13 +18,12 @@ export class TeamInfoPage implements OnInit {
   teamNumber: string
   teamNUMBER: number
   teamName: string
-  teamRanking = 'N/A'
+  teamRanking = ''
 
   showStats = false
   showMatches = true
   showEvents = false
 
-  event = eventName
   eventsObservable
 
   matchCollectionObservable
@@ -38,10 +38,16 @@ export class TeamInfoPage implements OnInit {
     private firestoreService: FirestoreService,
     private route: ActivatedRoute,
     public blueAllianceService: BlueAllianceService,
+    public appComponent: AppComponent,
+    private router: NavController
   ) { }
 
   ngOnInit() {
     this.setup(null)
+  }
+
+  goBack(ev) {
+    this.router.navigateForward('/teams')
   }
 
   setup(ev) {
@@ -64,8 +70,10 @@ export class TeamInfoPage implements OnInit {
     })
 
     this.blueAllianceService.getEventStatusOfTeam(teamKey, currentEvent).subscribe(el => {
-      if (el.qual != null) {
-        this.teamRanking = el.qual.ranking.rank
+      if (el != null) {
+        if (el.qual != null) {
+          this.teamRanking = 'Rank ' + el.qual.ranking.rank
+        }
       }
     })
 

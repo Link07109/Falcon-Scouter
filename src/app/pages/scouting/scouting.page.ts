@@ -40,7 +40,10 @@ export class ScoutingPage implements OnInit {
   // spreadsheetID = '1KbRLPUCyk51VJRRFVsv3k7XX__P1w4qW_ec2afk80W8'
 
   // 2019 State Championship Event
-  spreadsheetID ='1BMlEPqBLSg6ofJy-q55S8mil2V6zktdp0EkOfEp34jM'
+  // spreadsheetID ='1BMlEPqBLSg6ofJy-q55S8mil2V6zktdp0EkOfEp34jM'
+
+  // 2019 Pre-Houston
+  spreadsheetID = '1UBvadJHpvjZlRf7ppek6v9RzJ_PnQhry52Tu49iL9lg'
 
   formData = {
     scoutName: '',
@@ -50,7 +53,6 @@ export class ScoutingPage implements OnInit {
     startingPoint: 'Center',
     HABLevel: '1',
     result: 'None',
-    interference: 'Neither',
     defense: 'None',
     cargoInL1: 0,
     hatchesInL1: 0,
@@ -421,7 +423,6 @@ export class ScoutingPage implements OnInit {
               startingPoint: 'Center',
               HABLevel: '1',
               result: 'None',
-              interference: 'Neither',
               defense: 'None',
               cargoInL1: 0,
               hatchesInL1: 0,

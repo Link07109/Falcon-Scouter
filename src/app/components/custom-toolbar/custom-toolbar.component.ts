@@ -1,6 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { PopoverPage } from '../../pages/popover/popover.page';
-import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-custom-toolbar',
@@ -9,16 +7,16 @@ import { PopoverController } from '@ionic/angular';
 })
 export class CustomToolbarComponent {
 
-  constructor(private popoverController: PopoverController, ) { }
+  constructor() { }
 
   @Input()
   title: string
 
   @Input()
-  startIcon = 'more'
+  startIcon: string
 
   @Input()
-  endIcon = 'more'
+  endIcon: string
 
   @Output()
   startClicked = new EventEmitter()
@@ -27,27 +25,11 @@ export class CustomToolbarComponent {
   endClicked = new EventEmitter()
 
   startClick() {
-    if (this.startIcon == 'more') {
-      this.presentPopover(event)
-      return
-    }
     this.startClicked.emit()
   }
 
   endClick() {
-    if (this.endIcon == 'more') {
-      this.presentPopover(event)
-      return
-    }
     this.endClicked.emit()
   }
 
-  async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
-      component: PopoverPage,
-      event: ev,
-      translucent: true
-    })
-    popover.present()
-  }
 }

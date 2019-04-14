@@ -179,20 +179,6 @@
                             </ion-select> </ion-col>
                         </ion-row>
 
-                        <!-- Interference Dropdown -->
-                        <ion-row>
-                            <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Interference</ion-label></ion-col>
-                            <ion-col col-2> <ion-select [interfaceOptions]="{mode:'ios'}"interface="action-sheet" placeholder="Interference" [(ngModel)]="formData.interference" name="Interference">
-                                <ion-select-option role="option" id="ion-selopt-12" class="hydrated">In Rocket Path</ion-select-option>
-                                <ion-select-option role="option" id="ion-selopt-13" class="hydrated">In Ship Path</ion-select-option>
-                                <ion-select-option role="option" id="ion-selopt-9" class="hydrated">Both</ion-select-option>
-                                <ion-select-option role="option" id="ion-selopt-14" class="hydrated">Neither</ion-select-option>
-                                <input type="hidden" class="aux-input" name="Interference" value="none">
-                            </ion-select> </ion-col>
-                        </ion-row>
-
-                        <br/>
-
                         <!-- Defense Dropdown -->
                         <ion-row>
                             <ion-col col-2> <ion-label style="margin-top: 8px; margin-bottom: 0px; font-size: 1.25em">Defense</ion-label></ion-col>
@@ -204,6 +190,8 @@
                                 <input type="hidden" class="aux-input" name="Defense" value="none">
                             </ion-select> </ion-col>
                         </ion-row>
+
+                        <br/>
                     
                       <!-- Cargo - L 1-->
                       <ion-row>

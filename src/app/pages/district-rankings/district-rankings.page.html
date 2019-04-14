@@ -1,4 +1,4 @@
-<app-custom-toolbar [title]="'District Rankings ' + '(' + district + ')'" [startIcon]="'settings'" (startClicked)="this.appComponent.toggleSettings()" [endIcon]="'refresh'" (endClicked)="refreshList()"></app-custom-toolbar>
+<app-custom-toolbar [title]="'District Rankings ' + '(' + appComponent.districtName + ')'" [startIcon]="'settings'" (startClicked)="this.appComponent.toggleSettings()" [endIcon]="'refresh'" (endClicked)="refreshList()"></app-custom-toolbar>
 
 <ion-content>
   <ion-item *ngFor="let team of rankingArray" routerLink="/team-info/{{ team[0].team_key.substring(3) }}" style="margin-left: 0; border-bottom: 1px solid var(--ion-color-primary)">

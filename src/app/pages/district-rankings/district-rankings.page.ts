@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
-import { AppComponent, currentDistrict, districtName } from '../../app.component'
+import { AppComponent, currentDistrict } from '../../app.component'
 
 @Component({
   selector: 'app-district-rankings',
@@ -10,7 +10,6 @@ import { AppComponent, currentDistrict, districtName } from '../../app.component
 export class DistrictRankingsPage implements OnInit {
 
   rankingArray = []
-  district = districtName
 
   constructor(
     private blueAllianceService: BlueAllianceService,

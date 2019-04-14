@@ -1,4 +1,4 @@
-<app-custom-toolbar [title]="teamNumber + ' - ' + teamName + ' - ' + ' Rank #' + teamRanking + ' (' + event + ')'" [startIcon]="'return-left'" (startClicked)="'goback()'" [endIcon]="'refresh'" (endClicked)="setup($event)"></app-custom-toolbar>
+<app-custom-toolbar [title]="teamNumber + ' `' + teamName + '` ' + teamRanking + ' (' + appComponent.eventName + ')'" [startIcon]="'return-left'" (startClicked)="goBack($event)" [endIcon]="'refresh'" (endClicked)="setup($event)"></app-custom-toolbar>
 
 <ion-content>
   <div text-center>
@@ -17,18 +17,6 @@
             <img src="https://www.thebluealliance.com/images/tba_lamp.svg" class="tbaIcon">
           </ion-button>
         </ion-col>
-        <!--<ion-col>-->
-          <!--<ion-grid>-->
-            <!--<ion-row>-->
-              <!--<ion-button href="{{ teamWebsite }}">Web</ion-button>-->
-            <!--</ion-row>-->
-            <!--<ion-row>-->
-              <!--<ion-button href="https://www.thebluealliance.com/team/{{ teamNumber }}/2019">-->
-                <!--<img src="https://www.thebluealliance.com/images/tba_lamp.svg" class="tbaIcon">-->
-              <!--</ion-button>-->
-            <!--</ion-row>-->
-          <!--</ion-grid>-->
-        <!--</ion-col>-->
       </ion-row>
     </ion-grid>
   </div>
@@ -39,19 +27,11 @@
     </ion-button>
   </div>
 
-  <div text-center>
+  <div text-center class="noPadding">
     <ion-button (click)="toggleEvents()">Events</ion-button>
     <ion-button (click)="toggleMatches()">Schedule</ion-button>
-    <!--<ion-button (click)="toggleMatchData()">Match Data</ion-button>-->
     <!-- <ion-button (click)="togglePitData()">Pit Data</ion-button> -->
   </div>
-
-  <!-- Back Button -->
-  <ion-fab vertical="top" horizontal="start" slot="fixed" style="position: fixed">
-    <ion-fab-button routerLink="/teams">
-      <ion-icon color="dark" name="return-left"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 
   <ion-content scrollY=”true” style="white-space: nowrap; overflow-x: scroll; height: 69%; position: relative; bottom: 0;">
 
@@ -70,7 +50,7 @@
             <ion-col class="noPadding" text-center size="2.4" style="min-width: 3vh !important">
               <div class="center"><b>{{ match.comp_level.toUpperCase() }}-{{ match.match_number }}</b></div>
             </ion-col>
-            <ion-col class="noPadding" size="9.6" class="noPadding">
+            <ion-col size="9.6" class="noPadding">
               <ion-grid class="noPadding">
                 <ion-row class="noPadding" style="background-color: #fdd !important">
                   <ion-col class="noPadding" col-5 style="min-width: 3vh !important" text-center *ngFor="let team of match.alliances.red.team_keys">
@@ -86,6 +66,34 @@
                   </ion-col>
                   <ion-col class="noPadding" col-5 style="min-width: 3vh !important">
                     <h3 style="color: #6e4552; font-weight: 600; vertical-align: middle !important; margin-top: 10px; margin-bottom: 0px; margin-right: 10px" text-end>{{ match.alliances.blue.score }}</h3>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </div>
+
+    <div *ngIf="matchesArray.length < 1 && showMatches">
+      <ion-card *ngFor="let match of [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]" style="height: 7.05vh; margin-bottom: 10px !important">
+        <ion-grid class="noPadding" style="height: 100%">
+          <ion-row class="noPadding" style="max-height: 13.7vh">
+            <ion-col class="noPadding" text-center size="2.4" style="min-width: 3vh !important">
+              <div class="center">
+                <ion-spinner></ion-spinner>
+              </div>
+            </ion-col>
+            <ion-col size="9.6" class="noPadding">
+              <ion-grid class="noPadding" style="height: 100%">
+                <ion-row class="noPadding" style="background-color: #fdd !important">
+                  <ion-col>
+                    <ion-label text-center style="width: 100%; height: 100%"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-label>
+                  </ion-col>
+                </ion-row>
+                <ion-row class="noPadding" style="background-color: #ddf !important">
+                  <ion-col>
+                    <ion-label text-center style="width: 100%; height: 100%"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-label>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -129,114 +137,6 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-
-        <!-- make this not so cancerous pls kthx -->
-        <!-- <ion-col>
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ match.scoutName }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.startingPoint }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.HABLevel }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ match.result }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ match.interference }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.playsDefense }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.data.cargoInShip }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.data.cargoInRocket }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.data.hatchesInShip }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.data.hatchesInRocket }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.climb }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.driver }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.stability }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col>
-          <ion-card>
-            <ion-card-content text-center>
-              <ion-label color="dark">{{ match.penalties }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <ion-col comment>
-          <ion-card>
-            <ion-card-content>
-              <ion-label color="dark">{{ match.comments }}</ion-label>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-        <hr /> -->
       </ion-row>
     </ion-grid>
   </ion-content>

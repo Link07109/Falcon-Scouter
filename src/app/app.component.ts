@@ -3,20 +3,16 @@ import {NavController, Platform} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ThemeService } from './services/theme.service';
-import { THEMES, PRIMARY_MENU_PAGES, SECONDARY_MENU_PAGES } from './consts';
+import {THEMES, PRIMARY_MENU_PAGES, SECONDARY_MENU_PAGES} from './consts'
 import { BlueAllianceService } from './services/data/blue-alliance.service';
 
 export let curYear = 2019
-
 export let currentDistrict = '2019fnc'
-export let districtName = 'FIRST North Carolina'
-
-export let currentEvent = '2019nccmp'
-export let eventName = 'FIRST North Carolina State Championship'
+export let currentEvent = '2019roe'
 
 export let eventTeamsArray = []
-export function setArray(someArray: Array<any>) {
-  eventTeamsArray = someArray
+export function setArray(newArray) {
+  eventTeamsArray = newArray
 }
 
 @Component({
@@ -25,7 +21,8 @@ export function setArray(someArray: Array<any>) {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
+  districtName = ''
+  eventName = 'Roebling'
   currentThemeStyle = ''
   pages = PRIMARY_MENU_PAGES
   pages2 = SECONDARY_MENU_PAGES
@@ -44,9 +41,9 @@ export class AppComponent {
     private theme: ThemeService,
     private statusBar: StatusBar,
     private router: NavController,
-    private blueAllianceService: BlueAllianceService
+    private blueAllianceService: BlueAllianceService,
   ) {
-    this.changeThemeHMMM('light')
+    this.changeTheme('dark')
     this.initializeApp()
   }
 
@@ -62,12 +59,12 @@ export class AppComponent {
     } else {
       this.newEvent = currentEvent
     }
+
+    this.arayy()
   }
 
   saveChanges() {
-    // alert saying changes have been saved and then auto put them to the previous page
-    // or
-    // toast saying changes have been saved
+    // alert or toast saying changes have been saved
 
     this.toggleSettings()
 
@@ -75,23 +72,16 @@ export class AppComponent {
     curYear = +currentEvent.substring(0, 4)
 
     this.blueAllianceService.getEventInformation(currentEvent).subscribe(element => {
-      eventName = element.short_name
+      this.eventName = element.short_name
       currentDistrict = element.district.key
-      districtName = element.district.display_name
+      this.districtName = element.district.display_name
 
       console.log(element)
       console.log(element.name)
       console.log(element.district.display_name)
     })
 
-    eventTeamsArray = []
-
-    this.blueAllianceService.getEventTeams(currentEvent).subscribe(element => {
-      element.forEach(el => {
-        eventTeamsArray.push({ team: el, icon: this.blueAllianceService.getTeamIcon(el.team_number, 'image', curYear) })
-      })
-      eventTeamsArray = eventTeamsArray.sort((a, b) => a.team.team_number - b.team.team_number)
-    })
+    this.arayy()
   }
 
   toggleSettings() {
@@ -107,31 +97,46 @@ export class AppComponent {
     this.settingsToggle = !this.settingsToggle
   }
 
-
   toggleThemeStyle() {
     this.currentThemeStyle = (this.currentThemeStyle == 'dark') ? 'light' : 'dark'
     this.themeIcon = (this.currentThemeStyle == 'dark') ? 'sunny' : 'moon'
-    this.changeThemeHMMM(this.currentThemeStyle)
+    this.changeTheme(this.currentThemeStyle)
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault()
       this.splashScreen.hide()
-
     })
 
     this.theme.getTheme().then((cssText: string) => {
       this.currentThemeStyle = (cssText.includes('#6e4552')) ? 'light' : 'dark'
-      this.changeThemeHMMM(this.currentThemeStyle)
+      this.changeTheme(this.currentThemeStyle)
       this.themeIcon = (this.currentThemeStyle == 'dark') ? 'sunny' : 'moon'
     })
 
-    this.statusBar.overlaysWebView(false)
+    this.statusBar.overlaysWebView(true) // false
     this.router.navigateForward('/scouting')
+    this.arayy()
   }
 
-  changeThemeHMMM(name) {
+  arayy() {
+    this.blueAllianceService.getEventTeams(currentEvent).subscribe(element => {
+      eventTeamsArray = []
+
+      element.forEach(el => {
+        this.blueAllianceService.getTeamIcon(el.team_number, 'image', curYear).then(image => {
+          eventTeamsArray.push({team: el, icon: image})
+        })
+      })
+      
+      eventTeamsArray = eventTeamsArray.filter((v,i) => eventTeamsArray.indexOf(v) === i)
+        .sort((a, b) => a.team.team_number - b.team.team_number)
+      console.log(eventTeamsArray)
+    })
+  }
+
+  changeTheme(name) {
     const theme = THEMES[name]
     this.theme.setTheme(theme)
     this.statusBar.backgroundColorByHexString(theme['light'])

@@ -17,7 +17,6 @@ import {HttpModule} from '@angular/http'
 // import { IgxCategoryChartModule } from 'igniteui-angular-charts/ES5/igx-category-chart-module';
 // import { IgxGridModule } from 'igniteui-angular';
 import {IonicStorageModule} from '@ionic/Storage'
-import {PopoverPageModule} from './pages/popover/popover.module'
 import { FormsModule } from '@angular/forms';
 import { Network } from '@ionic-native/network/ngx';
 import { ComponentsModule } from './components/components.module';
@@ -26,7 +25,6 @@ import { ComponentsModule } from './components/components.module';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    PopoverPageModule,
     IonicStorageModule.forRoot(),
     BrowserModule,
     FormsModule,

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
-import {currentEvent, curYear, eventName, eventTeamsArray, setArray, AppComponent} from '../../app.component'
+import {currentEvent, curYear, eventTeamsArray, setArray, AppComponent} from '../../app.component'
 import * as $ from 'jquery'
 
 @Component({
@@ -31,7 +31,7 @@ export class TeamsPage implements OnInit {
       })
       setArray(eventTeamsArray.sort((a, b) => a.team.team_number - b.team.team_number))
 
-      this.event = eventName
+      this.event = this.appComponent.eventName
       this.eventTeams = []
 
       eventTeamsArray.forEach(el => {

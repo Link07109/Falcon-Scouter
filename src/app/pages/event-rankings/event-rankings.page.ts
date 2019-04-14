@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {currentEvent, eventName, AppComponent} from '../../app.component'
+import {currentEvent, AppComponent} from '../../app.component'
 import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 
 @Component({
@@ -9,7 +9,6 @@ import {BlueAllianceService} from '../../services/data/blue-alliance.service'
 })
 export class EventRankingsPage implements OnInit {
 
-  event = eventName
   rankingArray = []
 
   constructor(
@@ -25,13 +24,15 @@ export class EventRankingsPage implements OnInit {
     this.rankingArray = []
 
     this.blueAllianceService.getEventRankings(currentEvent).subscribe(element => {
-      element.rankings.forEach(el => {
-        this.blueAllianceService.getTeamInformation(el.team_key).subscribe(ell => {
-          console.log(el)
-          this.rankingArray.push([el, ell.nickname, el.qual_average])
-          this.rankingArray = this.rankingArray.sort((a, b) => a[0].rank - b[0].rank)
+      if (element != null) { 
+        element.rankings.forEach(el => {
+          this.blueAllianceService.getTeamInformation(el.team_key).subscribe(ell => {
+            console.log(el)
+            this.rankingArray.push([el, ell.nickname, el.qual_average])
+            this.rankingArray = this.rankingArray.sort((a, b) => a[0].rank - b[0].rank)
+          })
         })
-      })
+      }
     })
   }
 

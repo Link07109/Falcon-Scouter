@@ -3,7 +3,7 @@ export const PRIMARY_MENU_PAGES = [
   { icon: 'people', title: 'Teams', link: '/teams' },
   { icon: 'calendar', title: 'Matches', link: '/match-schedule' },
   { icon: 'list', title: 'Event', link: '/event-rankings' },
-  { icon: 'list-box', title: 'District', link: '/district-rankings' },
+  // { icon: 'list-box', title: 'District', link: '/district-rankings' },
   { icon: 'clipboard', title: 'Scouting', link: '/scouting' },
 ]
 
