@@ -39,11 +39,7 @@ export class ScoutingPage implements OnInit {
   // for testing
   // spreadsheetID = '1KbRLPUCyk51VJRRFVsv3k7XX__P1w4qW_ec2afk80W8'
 
-  // 2019 State Championship Event
-  // spreadsheetID ='1BMlEPqBLSg6ofJy-q55S8mil2V6zktdp0EkOfEp34jM'
-
-  // 2019 Pre-Houston
-  spreadsheetID = '1UBvadJHpvjZlRf7ppek6v9RzJ_PnQhry52Tu49iL9lg'
+  spreadsheetID = '1MmLnB0bXpcGzfSLzwJTBtleM2lQEEsl34YN1roBAplM'
 
   formData = {
     scoutName: '',
