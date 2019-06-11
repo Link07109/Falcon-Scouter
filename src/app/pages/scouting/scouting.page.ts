@@ -43,8 +43,8 @@ export class ScoutingPage implements OnInit {
 
   formData = {
     scoutName: '',
-    matchNumber: 0,
-    teamNumber: 0,
+    matchNumber: 1,
+    teamNumber: 1,
     driverStation: 'Center',
     startingPoint: 'Center',
     HABLevel: '1',
@@ -56,7 +56,7 @@ export class ScoutingPage implements OnInit {
     hatchesInL2: 0,
     cargoInL3: 0,
     hatchesInL3: 0,
-    climb: 'Level 1',
+    climb: 'None',
     penalties: 'None',
     comments: '',
     id: this.spreadsheetID,
