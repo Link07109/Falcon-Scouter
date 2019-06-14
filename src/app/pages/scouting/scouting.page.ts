@@ -43,8 +43,8 @@ export class ScoutingPage implements OnInit {
 
   formData = {
     scoutName: '',
-    matchNumber: 0,
-    teamNumber: 1,
+    matchNumber: '',
+    teamNumber: '',
     driverStation: 'Center',
     startingPoint: 'Center',
     HABLevel: '1',
