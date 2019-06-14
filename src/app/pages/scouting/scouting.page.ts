@@ -43,7 +43,7 @@ export class ScoutingPage implements OnInit {
 
   formData = {
     scoutName: '',
-    matchNumber: 1,
+    matchNumber: 0,
     teamNumber: 1,
     driverStation: 'Center',
     startingPoint: 'Center',
